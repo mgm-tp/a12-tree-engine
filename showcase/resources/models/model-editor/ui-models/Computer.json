@@ -1,0 +1,184 @@
+{
+	"header": {
+		"id": "Computer",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Computer"
+			},
+			{
+				"locale": "de",
+				"text": "Computer"
+			}
+		],
+		"annotations": [
+			{
+				"name": "bindingConfiguration",
+				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"ComputerDrive\",\"targetRole\":\"Drive\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"DriveCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"ComputerDrive_Drive_LinkOverview-overview\",\"use\":\"link\"}]}]},\"elementId\":\"section-tu5y5\"}]"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainComputer"
+			},
+			{
+				"alias": "DriveCandidates-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "DriveCandidates-overview"
+			},
+			{
+				"alias": "ComputerDrive_Drive_LinkOverview-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "ComputerDrive_Drive_LinkOverview-overview"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-4ee99",
+						"name": "CancelButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Abbrechen"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY",
+							"destructive": true
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-16df5",
+						"name": "SaveButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Speichern"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_save",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "MultiColumnSection",
+						"id": "multicolumnsection-d3421",
+						"name": "information",
+						"layout": {
+							"lg": "12"
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-dded8",
+								"name": "Basic",
+								"layout": {
+									"lg": "6-3-3"
+								},
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-7440f",
+										"name": "FirstRow",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-b88aa",
+												"elementRef": "include_2d437_field_35d81"
+											},
+											{
+												"type": "Control",
+												"id": "control-54a64",
+												"elementRef": "include_2d437_field_84648"
+											},
+											{
+												"type": "Control",
+												"id": "control-e1ee3",
+												"elementRef": "include_2d437_field_2e453"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					},
+					{
+						"type": "CustomScreenElement",
+						"id": "section-tu5y5",
+						"name": "ComputerDrive.json",
+						"annotations": [
+							{
+								"name": "relationship"
+							}
+						],
+						"height": 328
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

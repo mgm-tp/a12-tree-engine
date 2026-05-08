@@ -1,0 +1,157 @@
+{
+	"header": {
+		"id": "DomainAbstractGroup",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "DomainAbstractGroup"
+			},
+			{
+				"locale": "de",
+				"text": "DomainAbstractGroup"
+			}
+		],
+		"annotations": [
+			{
+				"name": "abstract",
+				"value": "true"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainAbstractGroup",
+			"immutable": false
+		},
+		"modelConfig": {
+			"timeZone": "UTC",
+			"decimalSeparator": ".",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"type": "Group",
+					"id": "group_08f1e",
+					"name": "Element",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"type": "Group",
+								"id": "group_b62e3",
+								"name": "GeneralInformation",
+								"Group": {
+									"repeatability": 1,
+									"elements": [
+										{
+											"type": "Field",
+											"id": "field_91a2c",
+											"name": "Name",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Name"
+													},
+													{
+														"locale": "de",
+														"text": "Name"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_60604",
+											"name": "Description",
+											"Field": {
+												"fieldType": {
+													"type": "StringType",
+													"StringType": {
+														"lineBreaksPermitted": true
+													}
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Description"
+													},
+													{
+														"locale": "de",
+														"text": "Beschreibung"
+													}
+												]
+											}
+										}
+									]
+								}
+							},
+							{
+								"type": "Group",
+								"id": "group_93341",
+								"name": "Group",
+								"Group": {
+									"repeatability": 1,
+									"elements": [
+										{
+											"type": "Field",
+											"id": "field_67e4f",
+											"name": "Repeatability",
+											"Field": {
+												"fieldType": {
+													"type": "NumberType",
+													"NumberType": {
+														"zeroNotAllowed": true,
+														"minValue": 1,
+														"trait": "amount"
+													}
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Repeatability"
+													},
+													{
+														"locale": "de",
+														"text": "Wiederholbarkeit"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,847 @@
+{
+	"header": {
+		"id": "custom-a12-teams-tree",
+		"modelType": "tree",
+		"modelVersion": "10.2.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "A12 Teams"
+			},
+			{
+				"locale": "de",
+				"text": "A12 der Teams"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM1",
+				"reference": "DomainTeam"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM2",
+				"reference": "DomainPerson"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM1",
+				"reference": "TeamPerson"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM2",
+				"reference": "TeamTeam"
+			}
+		]
+	},
+	"content": {
+		"configuration": {
+			"multiSelection": {
+				"collapseOption": "non_collapsible",
+				"counterOption": "none"
+			},
+			"rootRef": "crc-cfae1d",
+			"hierarchicalColumnRef": "column-23eade",
+			"labelHidden": true,
+			"expansionStrategy": {
+				"type": "level_by_level"
+			},
+			"virtualRoot": {
+				"label": [
+					{
+						"locale": "en",
+						"text": "Model"
+					},
+					{
+						"locale": "de",
+						"text": "Model"
+					}
+				],
+				"actions": [],
+				"contextMenu": {
+					"groups": [
+						{
+							"name": "groupAdd",
+							"type": "add",
+							"actions": [
+								{
+									"type": "insert",
+									"documentModelRef": "DomainTeam",
+									"useGlobalIcon": true,
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": true
+								}
+							]
+						}
+					]
+				}
+			}
+		},
+		"subHeaderBox": {
+			"majorElements": [],
+			"minorElements": [
+				{
+					"type": "multi_selection"
+				},
+				{
+					"label": [
+						{
+							"locale": "en",
+							"text": "Edit icon button"
+						},
+						{
+							"locale": "de",
+							"text": "Bearbeiten ohne Symbol"
+						}
+					],
+					"icon": {
+						"name": "edit"
+					},
+					"id": "button-chnbr",
+					"event": "event_engine_edit",
+					"labelHidden": true,
+					"type": "button",
+					"destructive": false,
+					"primary": false
+				},
+				{
+					"label": [
+						{
+							"locale": "en",
+							"text": "Edit"
+						},
+						{
+							"locale": "de",
+							"text": "Edit"
+						}
+					],
+					"id": "button-bafda",
+					"event": "event_engine_edit",
+					"type": "button",
+					"destructive": false,
+					"primary": false
+				}
+			]
+		},
+		"footerBox": {
+			"majorElements": [
+				{
+					"icon": {
+						"name": "autorenew"
+					},
+					"confirmation": {
+						"title": [
+							{
+								"locale": "en",
+								"text": "Confirmation"
+							},
+							{
+								"locale": "de",
+								"text": "Bestätigung"
+							}
+						],
+						"message": [
+							{
+								"locale": "en",
+								"text": "This button will do nothing beside testing purpose. Do you really wish to proceed?"
+							},
+							{
+								"locale": "de",
+								"text": "Diese Schaltfläche bewirkt nichts anderes als Testzwecke. Möchten Sie wirklich fortfahren?"
+							}
+						]
+					},
+					"id": "button-ec3fb",
+					"event": "event_renew",
+					"type": "button",
+					"destructive": false,
+					"primary": false
+				}
+			],
+			"minorElements": [
+				{
+					"icon": {
+						"name": "add"
+					},
+					"id": "button-ed2312",
+					"label": [
+						{
+							"locale": "en",
+							"text": "Add a root node"
+						},
+						{
+							"locale": "de",
+							"text": "Fügen Sie einen Wurzelknoten hinzu"
+						}
+					],
+					"event": "event_add_root_node",
+					"labelHidden": true,
+					"type": "button",
+					"destructive": false,
+					"primary": false
+				},
+				{
+					"label": [
+						{
+							"locale": "en",
+							"text": "Test annotation"
+						},
+						{
+							"locale": "de",
+							"text": "Testen von Anmerkungen"
+						}
+					],
+					"icon": {
+						"name": "message"
+					},
+					"confirmation": {
+						"title": [
+							{
+								"locale": "en",
+								"text": "Confirmation"
+							},
+							{
+								"locale": "de",
+								"text": "Bestätigung"
+							}
+						],
+						"message": [
+							{
+								"locale": "en",
+								"text": "This button will do nothing beside testing annotations. Do you really wish to proceed?"
+							},
+							{
+								"locale": "de",
+								"text": "Diese Schaltfläche bewirkt nichts anderes als das Testen von Anmerkungen. Möchten Sie wirklich fortfahren?"
+							}
+						]
+					},
+					"id": "button-71303",
+					"event": "test_annotation",
+					"annotations": [
+						{
+							"name": "message",
+							"value": "This is an example for using annotations"
+						}
+					],
+					"type": "button",
+					"destructive": false,
+					"primary": false
+				}
+			]
+		},
+		"columns": [
+			{
+				"id": "column-d29e42",
+				"name": "Photo",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Photo"
+					},
+					{
+						"locale": "de",
+						"text": "Foto"
+					}
+				],
+				"width": 1,
+				"pinDirection": "left",
+				"alignment": {
+					"header": {
+						"horizontal": "center",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "center",
+						"vertical": "middle"
+					}
+				},
+				"fixedWidth": false
+			},
+			{
+				"id": "column-23eade",
+				"name": "Name",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Name"
+					},
+					{
+						"locale": "de",
+						"text": "Name"
+					}
+				],
+				"width": 2.5,
+				"fixedWidth": true,
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"id": "column-esd312",
+				"name": "Position",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Position"
+					},
+					{
+						"locale": "de",
+						"text": "Position"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"alignment": {
+					"header": {
+						"horizontal": "center",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "center",
+						"vertical": "middle"
+					}
+				},
+				"labelHidden": true
+			},
+			{
+				"id": "column-2d231s",
+				"name": "Location",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Location (the city or country where the team is located)"
+					},
+					{
+						"locale": "de",
+						"text": "Lage"
+					}
+				],
+				"width": 0.8,
+				"fixedWidth": false,
+				"alignment": {
+					"header": {
+						"horizontal": "right",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "right",
+						"vertical": "middle"
+					}
+				},
+				"icon": {
+					"name": "location_on",
+					"theme": "outlined"
+				}
+			},
+			{
+				"id": "column-29eff",
+				"name": "Expertise",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Expertise"
+					},
+					{
+						"locale": "de",
+						"text": "Sachverstand"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"id": "column-2997c",
+				"name": "Married",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Married"
+					},
+					{
+						"locale": "de",
+						"text": "Verheiratet"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"alignment": {
+					"header": {
+						"horizontal": "right",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "right",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"id": "column-9bd15",
+				"name": "Confirm",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Confirm"
+					},
+					{
+						"locale": "de",
+						"text": "Bestätigen"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			}
+		],
+		"nodes": [
+			{
+				"id": "node-12feda",
+				"documentModelRef": "DomainTeam",
+				"columns": [
+					{
+						"columnRef": "column-23eade",
+						"elementRef": "field_c9ad3"
+					},
+					{
+						"columnRef": "column-2d231s",
+						"elementRef": "field_c2497"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-d29e42",
+						"columns": [
+							{
+								"columnRef": "column-esd312",
+								"elementRef": "field_04443"
+							}
+						],
+						"relationshipModelRef": "TeamPerson",
+						"parentRole": "Team"
+					},
+					{
+						"id": "crc-cfae1d",
+						"relationshipModelRef": "TeamTeam",
+						"parentRole": "Parent"
+					}
+				],
+				"icon": {
+					"name": "supervisor_account"
+				},
+				"actions": [
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "insert",
+						"position": "as_child",
+						"icon": {
+							"name": "insert_as_child",
+							"theme": "custom"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie ein Kind ein"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_add_link",
+						"icon": {
+							"name": "link"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Add link"
+							},
+							{
+								"locale": "de",
+								"text": "Link hinzufügen"
+							}
+						]
+					},
+					{
+						"annotations": [
+							{
+								"value": "If this action is confirmed, the team and it's relationships will all be removed. Do you want to proceed ?",
+								"name": "message"
+							}
+						],
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete team"
+							},
+							{
+								"locale": "de",
+								"text": "Team löschen"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to delete this team?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie dieses Team löschen?"
+								}
+							]
+						}
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_delete_link",
+						"icon": {
+							"name": "link_off"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Remove team"
+							},
+							{
+								"locale": "de",
+								"text": "Team entfernen"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to remove this team?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie dieses Team entfernen?"
+								}
+							]
+						}
+					}
+				],
+				"contextMenu": {
+					"groups": [
+						{
+							"name": "main",
+							"title": [
+								{
+									"locale": "en",
+									"text": "Others"
+								}
+							],
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_copy",
+									"icon": {
+										"name": "file_copy"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Copy this team"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_node_info",
+									"label": [
+										{
+											"locale": "en",
+											"text": "Info"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Info"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				"configuration": {
+					"dnd": false
+				}
+			},
+			{
+				"id": "node-3d8f9s",
+				"documentModelRef": "DomainPerson",
+				"columns": [
+					{
+						"columnRef": "column-d29e42",
+						"elementRef": "group_05909",
+						"configuration": {
+							"attachmentDisplayMode": "icon_with_file_name"
+						}
+					},
+					{
+						"columnRef": "column-23eade",
+						"elementRef": "F3"
+					},
+					{
+						"columnRef": "column-2997c",
+						"elementRef": "field_91ebf"
+					},
+					{
+						"columnRef": "column-29eff",
+						"elementRef": "group_03437",
+						"configuration": {
+							"multiSelectDisplayMode": "default"
+						}
+					},
+					{
+						"columnRef": "column-9bd15",
+						"elementRef": "field_ee316"
+					}
+				],
+				"childRelationshipConfigurations": [],
+				"actions": [
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_node_edit",
+						"label": [
+							{
+								"locale": "en",
+								"text": "Edit"
+							},
+							{
+								"locale": "de",
+								"text": "Edieren"
+							}
+						]
+					},
+					{
+						"annotations": [
+							{
+								"name": "hint",
+								"value": "If this action is confirmed, the person and it's relationships will all be removed"
+							}
+						],
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete person"
+							},
+							{
+								"locale": "de",
+								"text": "Person löschen"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to delete this person?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie diese Person löschen?"
+								}
+							]
+						}
+					},
+					{
+						"annotations": [],
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_delete_link",
+						"icon": {
+							"name": "link_off"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Remove person"
+							},
+							{
+								"locale": "de",
+								"text": "Person entfernen"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to remove this person?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie diese Person entfernen?"
+								}
+							]
+						}
+					}
+				],
+				"defaultRowAction": {
+					"custom": true,
+					"event": "selectPerson"
+				},
+				"configuration": {
+					"dnd": false
+				},
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Test group with no-label-items"
+								},
+								{
+									"locale": "de",
+									"text": "Test group with no-label-items [de]"
+								}
+							],
+							"name": "testGroup",
+							"actions": [
+								{
+									"type": "event",
+									"event": "check",
+									"icon": {
+										"name": "check_dashed",
+										"theme": "custom"
+									},
+									"description": [
+										{
+											"locale": "en",
+											"text": "Check"
+										},
+										{
+											"locale": "de",
+											"text": "Check [de]"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			}
+		]
+	}
+}

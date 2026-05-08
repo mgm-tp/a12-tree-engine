@@ -1,0 +1,64 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#error-handling]
+
+=== Error Handling
+
+==== Error System
+
+To manage the exceptions, Tree Engine uses a semantic error system which is extended from native Javascript `Error` and `Activity.Error.Base` interface.
+Therefore, besides the typical properties of Javascript Error, every Tree Engine error, which is an instance of link:./assets/generated/typedoc/classes/core_error.TreeEngineError.html[TreeEngineError], also contains some helpful fields such as:
+
+ - *errorCode*: `TreeEngineErrorCode` enum value to describe and identify the error.
+ - *details?.subError*: The nested error if exists.
+ - *details?.causeAction*: The `Redux` action causes the error.
+
+They can be categorized into three groups:
+
+ - *Generic errors*: are thrown from missing (`NotFoundError`) or invalid  (`TypeError`) entities - activities, data holders, or Tree-specific entities, etc.
+ - *Loading/saving operation errors*: are caused from end-user actions such as `ExpandNodeError`, `CopyNodeError`, etc.
+ - *ServerError*: are come from the server-side and contains an extra `errors` field - the list of A12 DataService's `JsonRpc2ResponseError` instances.
+
+All relevant classes, instances and typings/type guards are hosted by link:./assets/generated/typedoc/modules/core_error.TreeEngineError.html[TreeEngineError namespace] along with the link:./typedoc/enums/core_error.TreeEngineErrorCode.html[TreeEngineErrorCode enumeration].
+
+==== Error Catching
+
+In order to handle errors dispatched from Tree Engine activities, registering a saga that listens to `ActivityActions.Error` action which is dispatched for every error occurred.
+Since every public Tree-specific error also attaches an `isInstance` type guard, so we can handle distinct errors in different ways, such as pushing a notification, displaying a message box, etc.
+
+In the following example, notifications will be dispatched whenever Tree Engine errors are caught.
+
+[source,typescript,options="nowrap",title="src/sagas/handleErrorSaga.tsx"]
+--
+include::assets/generated/typescript/showcase/sagas/handle-error-saga.ts[tags="handleErrorSaga"]
+--
+
+Then, putting it in the `customSagas` when calling `createApplicationSetup` in order to register the saga.
+
+[source,typescript,options="nowrap",title="src/appsetup.ts"]
+--
+config = ApplicationFactories.createApplicationSetup({
+    ...
+    customSagas: [
+        handleErrorSaga, // your error handling saga should be put here.
+        ...
+    ],
+    ...
+});
+--
+

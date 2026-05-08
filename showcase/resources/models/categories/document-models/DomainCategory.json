@@ -1,0 +1,105 @@
+{
+	"header": {
+		"id": "DomainCategory",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainCategory"
+			},
+			{
+				"locale": "en",
+				"text": "DomainCategory"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainCategory",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"id": "group_10911",
+					"type": "Group",
+					"name": "Category",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"id": "field_04d07",
+								"type": "Field",
+								"name": "Name",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Name"
+										},
+										{
+											"locale": "de",
+											"text": "Name"
+										}
+									],
+									"fieldType": {
+										"type": "StringType"
+									},
+									"requirednessConfig": {
+										"mode": "absoluteOrRelativeToNextRepAncestor"
+									}
+								}
+							},
+							{
+								"id": "field_d1da3",
+								"type": "Field",
+								"name": "Description",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Description"
+										},
+										{
+											"locale": "de",
+											"text": "Beschreibung"
+										}
+									],
+									"fieldType": {
+										"type": "StringType",
+										"StringType": {
+											"lineBreaksPermitted": true
+										}
+									}
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

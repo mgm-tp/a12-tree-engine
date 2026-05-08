@@ -1,0 +1,103 @@
+{
+	"header": {
+		"id": "FormModelFileScreen",
+		"modelType": "relationship",
+		"modelVersion": "3.0.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "Document model",
+				"modelType": "document",
+				"alias": "File",
+				"reference": "DomainFile"
+			},
+			{
+				"purpose": "Document model",
+				"modelType": "document",
+				"alias": "RootScreen",
+				"reference": "DomainScreen"
+			}
+		]
+	},
+	"content": {
+		"duplicatesAllowed": false,
+		"associationType": "SHARED",
+		"storage": "EXTERNAL",
+		"linkDocumentModel": null,
+		"embeddedGroupPath": null,
+		"labels": [
+			{
+				"locale": "en",
+				"text": null
+			},
+			{
+				"locale": "de",
+				"text": null
+			}
+		],
+		"entityCharacteristics": [
+			{
+				"role": "File",
+				"documentModel": "DomainFile",
+				"ordered": true,
+				"navigable": true,
+				"linkConstraints": {
+					"multiplicity": {
+						"lowerLimit": 0,
+						"unbounded": false,
+						"upperLimit": 1
+					}
+				},
+				"candidateConstraints": null,
+				"labels": [
+					{
+						"locale": "en",
+						"text": "File"
+					},
+					{
+						"locale": "de",
+						"text": "Datei"
+					}
+				]
+			},
+			{
+				"role": "RootScreen",
+				"documentModel": "DomainScreen",
+				"ordered": false,
+				"navigable": true,
+				"linkConstraints": {
+					"multiplicity": {
+						"lowerLimit": 0,
+						"unbounded": true,
+						"upperLimit": null
+					}
+				},
+				"candidateConstraints": null,
+				"labels": [
+					{
+						"locale": "en",
+						"text": "Screen"
+					},
+					{
+						"locale": "de",
+						"text": "Screen"
+					}
+				]
+			}
+		]
+	}
+}

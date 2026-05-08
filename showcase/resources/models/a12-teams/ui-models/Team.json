@@ -1,0 +1,209 @@
+{
+	"header": {
+		"id": "Team",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Team"
+			},
+			{
+				"locale": "de",
+				"text": "Team"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainTeam"
+			},
+			{
+				"alias": "TeamCandidates-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "TeamCandidates-overview"
+			},
+			{
+				"alias": "TeamTeam_Child_LinkOverview-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "TeamTeam_Child_LinkOverview-overview"
+			},
+			{
+				"alias": "PersonCandidates-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "PersonCandidates-overview"
+			},
+			{
+				"alias": "TeamPerson_Person_LinkOverview-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "TeamPerson_Person_LinkOverview-overview"
+			},
+			{
+				"alias": "TeamPerson_LinkForm",
+				"modelType": "form",
+				"purpose": "bindingReference",
+				"reference": "TeamPerson_LinkForm"
+			}
+		],
+		"annotations": [
+			{
+				"name": "bindingConfiguration",
+				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"TeamTeam\",\"targetRole\":\"Child\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"TeamCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"TeamTeam_Child_LinkOverview-overview\",\"use\":\"link\"}],\"props\":{\"availableItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"Candidate sub teams\"},{\"locale\":\"de\",\"text\":\"Kandidaten-Subteams\"}]},\"selectedItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"Sub teams\"},{\"locale\":\"de\",\"text\":\"Subteams\"}]}}}]},\"elementId\":\"section-02460\"},{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"TeamPerson\",\"targetRole\":\"Person\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":10,\"models\":[{\"name\":\"PersonCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"TeamPerson_Person_LinkOverview-overview\",\"use\":\"link\"},{\"name\":\"TeamPerson_LinkForm\",\"use\":\"link\"}],\"props\":{\"availableItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"Available people\"},{\"locale\":\"de\",\"text\":\"Verfügbare Personen\"}]},\"selectedItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"Team includes\"},{\"locale\":\"de\",\"text\":\"Team beinhaltet\"}]}}}]},\"elementId\":\"section-nbh8s\"}]"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"minorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-413af",
+						"name": "Cancel",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Abbrechen"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY",
+							"destructive": true
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			},
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-51388",
+						"name": "Save",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Speichern"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_save",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "Section",
+						"id": "section-19ae4",
+						"name": "details",
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-d6695",
+								"name": "cg1",
+								"layout": {
+									"lg": "6-6"
+								},
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-34f42",
+										"name": "r1",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-f67b2",
+												"elementRef": "field_c9ad3"
+											},
+											{
+												"type": "Control",
+												"id": "control-d4d28",
+												"elementRef": "field_c2497"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					},
+					{
+						"type": "CustomScreenElement",
+						"id": "section-02460",
+						"name": "DualpaneParentTeam",
+						"annotations": [
+							{
+								"name": "relationship"
+							}
+						],
+						"height": 328
+					},
+					{
+						"type": "CustomScreenElement",
+						"id": "section-nbh8s",
+						"name": "DualpanePeople",
+						"annotations": [
+							{
+								"name": "relationship"
+							}
+						],
+						"height": 328
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

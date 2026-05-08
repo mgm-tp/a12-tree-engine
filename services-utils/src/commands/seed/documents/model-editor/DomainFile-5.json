@@ -1,0 +1,13 @@
+{
+	"File": {
+		"Basic": {
+			"Name": "autostart.bat",
+			"Owner": "admin",
+			"Group": "admin"
+		},
+		"Size": 4711,
+		"Extension": "bat",
+		"FileType": "application",
+		"Readonly": false
+	}
+}

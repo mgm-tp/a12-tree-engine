@@ -1,0 +1,155 @@
+{
+	"header": {
+		"id": "DomainProduct",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainProduct"
+			},
+			{
+				"locale": "en",
+				"text": "DomainProduct"
+			}
+		],
+		"annotations": [
+			{
+				"name": "subTypes",
+				"value": "DomainBundle"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainProduct",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"id": "group_91557",
+					"type": "Group",
+					"name": "Properties",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"id": "field_e19c8",
+								"type": "Field",
+								"name": "Name",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Name"
+										},
+										{
+											"locale": "de",
+											"text": "Name"
+										}
+									],
+									"fieldType": {
+										"type": "StringType"
+									},
+									"requirednessConfig": {
+										"mode": "absoluteOrRelativeToNextRepAncestor"
+									}
+								}
+							},
+							{
+								"id": "field_0b769",
+								"type": "Field",
+								"name": "Description",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Description"
+										},
+										{
+											"locale": "de",
+											"text": "Beschreibung"
+										}
+									],
+									"fieldType": {
+										"type": "StringType",
+										"StringType": {
+											"lineBreaksPermitted": true
+										}
+									}
+								}
+							},
+							{
+								"id": "field_c3aa2",
+								"type": "Field",
+								"name": "Price",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Price"
+										},
+										{
+											"locale": "de",
+											"text": "Preis"
+										}
+									],
+									"fieldType": {
+										"type": "NumberType",
+										"NumberType": {
+											"zeroNotAllowed": true
+										}
+									}
+								}
+							},
+							{
+								"id": "field_07572",
+								"type": "Field",
+								"name": "ReleaseDate",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Release Date"
+										},
+										{
+											"locale": "de",
+											"text": "Veröffentlichungsdatum"
+										}
+									],
+									"fieldType": {
+										"type": "DateType",
+										"DateType": {
+											"format": "yyyy-MM-dd"
+										}
+									}
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

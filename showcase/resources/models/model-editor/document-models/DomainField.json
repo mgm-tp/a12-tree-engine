@@ -1,0 +1,655 @@
+{
+	"header": {
+		"id": "DomainField",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainField"
+			},
+			{
+				"locale": "en",
+				"text": "DomainField"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainField",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"type": "Group",
+					"id": "group_36d30",
+					"name": "Element",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"type": "Group",
+								"id": "group_b62e3",
+								"name": "GeneralInformation",
+								"Group": {
+									"repeatability": 1,
+									"elements": [
+										{
+											"type": "Field",
+											"id": "field_91a2c",
+											"name": "Name",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Name"
+													},
+													{
+														"locale": "de",
+														"text": "Name"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_60604",
+											"name": "Description",
+											"Field": {
+												"fieldType": {
+													"type": "StringType",
+													"StringType": {
+														"lineBreaksPermitted": true
+													}
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Description"
+													},
+													{
+														"locale": "de",
+														"text": "Beschreibung"
+													}
+												]
+											}
+										}
+									]
+								}
+							},
+							{
+								"type": "Group",
+								"id": "group_477dc",
+								"name": "Field",
+								"Group": {
+									"repeatability": 1,
+									"elements": [
+										{
+											"type": "Field",
+											"id": "field_511e8",
+											"name": "Type",
+											"Field": {
+												"fieldType": {
+													"type": "EnumerationType",
+													"EnumerationType": {
+														"values": [
+															{
+																"value": "STRING",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "String"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "String"
+																	}
+																]
+															},
+															{
+																"value": "NUMBER",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Number"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Number"
+																	}
+																]
+															},
+															{
+																"value": "BOOLEAN",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Boolean"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Boolean"
+																	}
+																]
+															},
+															{
+																"value": "DATE",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Date"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Date"
+																	}
+																]
+															},
+															{
+																"value": "DATE_TIME",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Date Time"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Date time"
+																	}
+																]
+															},
+															{
+																"value": "TIME",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Time"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Time"
+																	}
+																]
+															},
+															{
+																"value": "ENUMERATION",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Enumeration"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Enumeration"
+																	}
+																]
+															},
+															{
+																"value": "CONFIRM",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Confirm"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Confirm"
+																	}
+																]
+															}
+														]
+													}
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Type"
+													},
+													{
+														"locale": "de",
+														"text": "Typ"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_ed670",
+											"name": "Required",
+											"Field": {
+												"fieldType": {
+													"type": "BooleanType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Required"
+													},
+													{
+														"locale": "de",
+														"text": "Erforderlich"
+													}
+												]
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_e939f",
+											"name": "Global",
+											"Field": {
+												"fieldType": {
+													"type": "BooleanType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Global"
+													},
+													{
+														"locale": "de",
+														"text": "Global"
+													}
+												]
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_0ae58",
+											"name": "Transient",
+											"Field": {
+												"fieldType": {
+													"type": "BooleanType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Transient"
+													},
+													{
+														"locale": "de",
+														"text": "Vorübergehend"
+													}
+												]
+											}
+										},
+										{
+											"type": "Group",
+											"id": "group_44ff3",
+											"name": "DataTypeSpecification",
+											"Group": {
+												"repeatability": 1,
+												"elements": [
+													{
+														"type": "Field",
+														"id": "field_767fc",
+														"name": "Pattern",
+														"Field": {
+															"fieldType": {
+																"type": "StringType"
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Pattern (RegExp)"
+																},
+																{
+																	"locale": "de",
+																	"text": "Musterung (RegExp)"
+																}
+															]
+														}
+													},
+													{
+														"type": "Field",
+														"id": "field_d1c67",
+														"name": "MinLength",
+														"Field": {
+															"fieldType": {
+																"type": "NumberType"
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Min. Length"
+																},
+																{
+																	"locale": "de",
+																	"text": "Min. Länge"
+																}
+															]
+														}
+													},
+													{
+														"type": "Field",
+														"id": "field_297db",
+														"name": "MaxLength",
+														"Field": {
+															"fieldType": {
+																"type": "NumberType"
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Max. Length"
+																},
+																{
+																	"locale": "de",
+																	"text": "Max. Länge"
+																}
+															]
+														}
+													},
+													{
+														"type": "Field",
+														"id": "field_dd067",
+														"name": "LineBreaksPermitted",
+														"Field": {
+															"fieldType": {
+																"type": "BooleanType"
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Line Breaks Permitted"
+																},
+																{
+																	"locale": "de",
+																	"text": "Zeilenumbrüche Zulässig"
+																}
+															]
+														}
+													},
+													{
+														"type": "Field",
+														"id": "field_e8974",
+														"name": "DecimalPlaceType",
+														"Field": {
+															"fieldType": {
+																"type": "EnumerationType",
+																"EnumerationType": {
+																	"values": [
+																		{
+																			"value": "NONE",
+																			"label": [
+																				{
+																					"locale": "en",
+																					"text": "None"
+																				},
+																				{
+																					"locale": "de",
+																					"text": "Keiner"
+																				}
+																			]
+																		},
+																		{
+																			"value": "FIXED",
+																			"label": [
+																				{
+																					"locale": "en",
+																					"text": "Fixed"
+																				},
+																				{
+																					"locale": "de",
+																					"text": "Fix"
+																				}
+																			]
+																		},
+																		{
+																			"value": "RANGED",
+																			"label": [
+																				{
+																					"locale": "en",
+																					"text": "Ranged"
+																				},
+																				{
+																					"locale": "de",
+																					"text": "Reichen"
+																				}
+																			]
+																		}
+																	]
+																}
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Decimal Place Type"
+																},
+																{
+																	"locale": "de",
+																	"text": "Dezimalstellenart"
+																}
+															]
+														}
+													},
+													{
+														"type": "Field",
+														"id": "field_54792",
+														"name": "ZeroAllowed",
+														"Field": {
+															"fieldType": {
+																"type": "BooleanType"
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Zero Allowed"
+																},
+																{
+																	"locale": "de",
+																	"text": "Null Erlaubt"
+																}
+															]
+														}
+													},
+													{
+														"type": "Field",
+														"id": "field_a167b",
+														"name": "MinimumValue",
+														"Field": {
+															"fieldType": {
+																"type": "NumberType"
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Min. Value"
+																},
+																{
+																	"locale": "de",
+																	"text": "Min. Wert"
+																}
+															]
+														}
+													},
+													{
+														"type": "Field",
+														"id": "field_89675",
+														"name": "MaximumValue",
+														"Field": {
+															"fieldType": {
+																"type": "NumberType"
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Max. Value"
+																},
+																{
+																	"locale": "de",
+																	"text": "Max. Wert"
+																}
+															]
+														}
+													},
+													{
+														"type": "Field",
+														"id": "field_309f3",
+														"name": "Unit",
+														"Field": {
+															"fieldType": {
+																"type": "EnumerationType",
+																"EnumerationType": {
+																	"values": [
+																		{
+																			"value": "NONE",
+																			"label": [
+																				{
+																					"locale": "en",
+																					"text": "None"
+																				},
+																				{
+																					"locale": "de",
+																					"text": "Keiner"
+																				}
+																			]
+																		},
+																		{
+																			"value": "AMOUNT",
+																			"label": [
+																				{
+																					"locale": "en",
+																					"text": "Amount"
+																				},
+																				{
+																					"locale": "de",
+																					"text": "Menge"
+																				}
+																			]
+																		},
+																		{
+																			"value": "PERCENT",
+																			"label": [
+																				{
+																					"locale": "en",
+																					"text": "Percent"
+																				},
+																				{
+																					"locale": "de",
+																					"text": "Prozent"
+																				}
+																			]
+																		},
+																		{
+																			"value": "PERMILLE",
+																			"label": [
+																				{
+																					"locale": "en",
+																					"text": "Permille"
+																				},
+																				{
+																					"locale": "de",
+																					"text": "Permille"
+																				}
+																			]
+																		}
+																	]
+																}
+															},
+															"label": [
+																{
+																	"locale": "en",
+																	"text": "Unit"
+																},
+																{
+																	"locale": "de",
+																	"text": "Einheit"
+																}
+															]
+														}
+													},
+													{
+														"type": "Group",
+														"id": "group_40e28",
+														"name": "Enumerations",
+														"Group": {
+															"repeatability": 9999,
+															"elements": [
+																{
+																	"type": "Field",
+																	"id": "field_b6407",
+																	"name": "Value",
+																	"Field": {
+																		"fieldType": {
+																			"type": "StringType"
+																		},
+																		"label": [
+																			{
+																				"locale": "en",
+																				"text": "Value"
+																			},
+																			{
+																				"locale": "de",
+																				"text": "Wert"
+																			}
+																		]
+																	}
+																},
+																{
+																	"type": "Field",
+																	"id": "field_db15e",
+																	"name": "Text",
+																	"Field": {
+																		"fieldType": {
+																			"type": "StringType"
+																		},
+																		"label": [
+																			{
+																				"locale": "en",
+																				"text": "Text"
+																			},
+																			{
+																				"locale": "de",
+																				"text": "Text"
+																			}
+																		]
+																	}
+																}
+															]
+														}
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

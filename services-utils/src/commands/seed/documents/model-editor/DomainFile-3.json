@@ -1,0 +1,13 @@
+{
+	"File": {
+		"Basic": {
+			"Name": "node.exe",
+			"Owner": "admin",
+			"Group": "admin"
+		},
+		"Size": 22054040,
+		"Extension": "exe",
+		"FileType": "application",
+		"Readonly": true
+	}
+}

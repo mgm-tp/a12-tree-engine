@@ -1,0 +1,6 @@
+generated/**
+package.json
+pnpm-lock.yaml
+*.api.md
+schema.json
+**/steps/index.ts

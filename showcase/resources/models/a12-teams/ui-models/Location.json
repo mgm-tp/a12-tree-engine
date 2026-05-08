@@ -1,0 +1,228 @@
+{
+	"header": {
+		"id": "Location",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Location"
+			},
+			{
+				"locale": "de",
+				"text": "Location"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DomainLocation",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainLocation"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox"
+		},
+		"footerBox": {
+			"id": "footerBox",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button_810a2",
+						"name": "Submit",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Submit"
+										},
+										{
+											"locale": "de",
+											"text": "Submit"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_submit",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button_6aa2c",
+						"name": "Cancel",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Cancel"
+										}
+									]
+								}
+							}
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "Screen_for_group_f69ee",
+				"name": "Location",
+				"title": {
+					"type": "Multilingual",
+					"multilingualText": {
+						"text": [
+							{
+								"locale": "en",
+								"text": "Location"
+							},
+							{
+								"locale": "de",
+								"text": "Location"
+							}
+						]
+					}
+				},
+				"screenElements": [
+					{
+						"type": "ControlGrid",
+						"id": "ControlGrid_for_group_f69ee",
+						"name": "Location_Controls",
+						"layout": {
+							"lg": "6-6"
+						},
+						"row": [
+							{
+								"type": "Row",
+								"id": "Row_for_field_048f2",
+								"cell": [
+									{
+										"type": "Control",
+										"id": "Control_for_field_048f2",
+										"label": {
+											"type": "Multilingual",
+											"multilingualText": {
+												"text": [
+													{
+														"locale": "en",
+														"text": "Name"
+													},
+													{
+														"locale": "de",
+														"text": "Name"
+													}
+												]
+											}
+										},
+										"elementRef": "field_048f2"
+									},
+									{
+										"type": "Control",
+										"id": "Control_for_field_a78a9",
+										"label": {
+											"type": "Multilingual",
+											"multilingualText": {
+												"text": [
+													{
+														"locale": "en",
+														"text": "Type"
+													},
+													{
+														"locale": "de",
+														"text": "Type"
+													}
+												]
+											}
+										},
+										"elementRef": "field_a78a9"
+									}
+								]
+							},
+							{
+								"type": "Row",
+								"id": "Row_for_field_84f77",
+								"cell": [
+									{
+										"type": "Control",
+										"id": "Control_for_field_84f77",
+										"label": {
+											"type": "Multilingual",
+											"multilingualText": {
+												"text": [
+													{
+														"locale": "en",
+														"text": "Lattitude"
+													},
+													{
+														"locale": "de",
+														"text": "Lattitude"
+													}
+												]
+											}
+										},
+										"elementRef": "field_84f77"
+									},
+									{
+										"type": "Control",
+										"id": "Control_for_field_4174c",
+										"label": {
+											"type": "Multilingual",
+											"multilingualText": {
+												"text": [
+													{
+														"locale": "en",
+														"text": "Longtitude"
+													},
+													{
+														"locale": "de",
+														"text": "Longtitude"
+													}
+												]
+											}
+										},
+										"elementRef": "field_4174c"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

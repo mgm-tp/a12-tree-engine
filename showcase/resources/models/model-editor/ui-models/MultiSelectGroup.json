@@ -1,0 +1,207 @@
+{
+	"header": {
+		"id": "MultiSelectGroup",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "MultiSelectGroup"
+			},
+			{
+				"locale": "de",
+				"text": "Mehrfachauswahlgruppe"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainMultiSelectGroup"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-85d79",
+						"name": "CancelButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Abbrechen"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY",
+							"destructive": true
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-74df9",
+						"name": "SaveButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Speichern"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_save",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "Section",
+						"id": "section-881ba",
+						"name": "GeneralInformation",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "General Information"
+									},
+									{
+										"locale": "de",
+										"text": "Allgemeine Information"
+									}
+								]
+							}
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-96638",
+								"name": "ControlGrid",
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-f4498",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-d9ba0",
+												"elementRef": "include_d2456_field_91a2c"
+											}
+										]
+									},
+									{
+										"type": "Row",
+										"id": "row-d1ab1",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-5e0a9",
+												"elementRef": "include_d2456_field_60604"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					},
+					{
+						"type": "Section",
+						"id": "section-4b34b",
+						"name": "Group",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "Group"
+									},
+									{
+										"locale": "de",
+										"text": "Gruppe"
+									}
+								]
+							}
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-d34e6",
+								"name": "ControlGrid",
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-ab959",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-1ee67",
+												"elementRef": "include_d2456_field_67e4f"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"Element": {
+		"GeneralInformation": {
+			"Name": "Detach Repeat Screen"
+		},
+		"DetachedRepeat": {
+			"Repeatability": 1
+		}
+	}
+}

@@ -1,0 +1,146 @@
+{
+	"header": {
+		"id": "DomainAbstractDrive",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "DomainDrive"
+			},
+			{
+				"locale": "de",
+				"text": "DomainDrive"
+			}
+		],
+		"annotations": [
+			{
+				"name": "abstract",
+				"value": "true"
+			},
+			{
+				"name": "subTypes",
+				"value": "DomainDrive"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainAbstractDrive",
+			"immutable": false
+		},
+		"modelConfig": {
+			"timeZone": "UTC",
+			"decimalSeparator": ".",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"type": "Group",
+					"id": "group_9f3c6",
+					"name": "Drive",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"type": "Group",
+								"id": "group_0ff47",
+								"name": "Basic",
+								"Group": {
+									"repeatability": 1,
+									"elements": [
+										{
+											"type": "Field",
+											"id": "field_35d81",
+											"name": "Name",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Name"
+													},
+													{
+														"locale": "de",
+														"text": "Name"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_84648",
+											"name": "Owner",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Owner"
+													},
+													{
+														"locale": "de",
+														"text": "Besitzer"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_2e453",
+											"name": "Group",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Group"
+													},
+													{
+														"locale": "de",
+														"text": "Gruppe"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

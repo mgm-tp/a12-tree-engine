@@ -1,0 +1,13 @@
+{
+	"File": {
+		"Basic": {
+			"Name": "DomainPerson.json",
+			"Owner": "admin",
+			"Group": "admin"
+		},
+		"Extension": "json",
+		"Size": 5671,
+		"FileType": "document_model",
+		"Readonly": false
+	}
+}

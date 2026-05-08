@@ -1,0 +1,157 @@
+{
+	"header": {
+		"id": "DomainTeamPerson_AdditionalFieldsModel",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainTeamPerson_AdditionalFieldsModel"
+			},
+			{
+				"locale": "en",
+				"text": "DomainTeamPerson_AdditionalFieldsModel"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainTeamPerson_AdditionalFieldsModel",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"id": "group_88e30",
+					"type": "Group",
+					"name": "grp1",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"id": "field_04443",
+								"type": "Field",
+								"name": "Position",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Position"
+										},
+										{
+											"locale": "de",
+											"text": "Position"
+										}
+									],
+									"fieldType": {
+										"type": "StringType"
+									}
+								}
+							},
+							{
+								"type": "Group",
+								"id": "group_3901a",
+								"name": "Skill",
+								"Group": {
+									"repeatability": 3,
+									"usageType": "multi-select",
+									"elements": [
+										{
+											"type": "Field",
+											"id": "field_a04de",
+											"name": "value",
+											"Field": {
+												"fieldType": {
+													"type": "EnumerationType",
+													"EnumerationType": {
+														"values": [
+															{
+																"value": "1",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Java"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Java"
+																	}
+																]
+															},
+															{
+																"value": "2",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Javascript"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Javascript"
+																	}
+																]
+															},
+															{
+																"value": "3",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Typescript"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Typescript"
+																	}
+																]
+															}
+														],
+														"categories": []
+													}
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Skill"
+													},
+													{
+														"locale": "de",
+														"text": "Können"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

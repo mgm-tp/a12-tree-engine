@@ -1,0 +1,1296 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`@com.mgmtp.a12.tree-model-migration.steps > v9.0.0.json 1`] = `
+"{
+  "header": {
+    "id": "Metadata_TM",
+    "modelType": "tree",
+    "modelVersion": "10.0.0-pre.1",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "tester,reviewer"
+      }
+    ],
+    "modelReferences": [
+      {
+        "purpose": "document-model-for-tree",
+        "modelType": "document",
+        "alias": "DM1",
+        "reference": "Metadata_DM"
+      },
+      {
+        "purpose": "document-model-for-tree",
+        "modelType": "document",
+        "alias": "DM2",
+        "reference": "ChildRole_DM"
+      },
+      {
+        "purpose": "relationship-model-for-tree",
+        "modelType": "relationship",
+        "alias": "RM1",
+        "reference": "MetadataChildRole"
+      }
+    ]
+  },
+  "content": {
+    "configuration": {
+      "initialExpansion": {
+        "type": "all_levels"
+      },
+      "hierarchicalColumnRef": "column-e0c52",
+      "rootRef": "crc-d69f9",
+      "enableVirtualScroll": true,
+      "actionColumnWidth": 1,
+      "rowHeight": 50
+    },
+    "subHeaderBox": {
+      "majorElements": [],
+      "minorElements": [
+        {
+          "label": [
+            {
+              "locale": "en",
+              "text": "add"
+            },
+            {
+              "locale": "de",
+              "text": "add"
+            }
+          ],
+          "id": "button-d4a55",
+          "event": "event_add_root_node",
+          "type": "button",
+          "destructive": false,
+          "primary": false
+        }
+      ]
+    },
+    "footerBox": {
+      "majorElements": [],
+      "minorElements": []
+    },
+    "columns": [
+      {
+        "label": [
+          {
+            "locale": "en",
+            "text": "Not a metadata field"
+          },
+          {
+            "locale": "de",
+            "text": "Not a metadata field"
+          }
+        ],
+        "width": 3,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-e0c52",
+        "name": "NonMetadata",
+        "alignment": {
+          "header": {
+            "vertical": "middle"
+          },
+          "content": {
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "label": [
+          {
+            "locale": "en",
+            "text": "Document Reference"
+          },
+          {
+            "locale": "de",
+            "text": "Document Reference"
+          }
+        ],
+        "width": 1,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-bd941",
+        "name": "Document Reference",
+        "alignment": {
+          "header": {
+            "vertical": "middle"
+          },
+          "content": {
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "label": [
+          {
+            "locale": "en",
+            "text": "Document Model Reference"
+          },
+          {
+            "locale": "de",
+            "text": "Document Model Reference"
+          }
+        ],
+        "width": 1,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-718d3",
+        "name": "Document Model Reference",
+        "alignment": {
+          "header": {
+            "vertical": "middle"
+          },
+          "content": {
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "label": [
+          {
+            "locale": "en",
+            "text": "Model Version"
+          },
+          {
+            "locale": "de",
+            "text": "Model Version"
+          }
+        ],
+        "width": 1,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-72caf",
+        "name": "Model Version",
+        "alignment": {
+          "header": {
+            "vertical": "middle"
+          },
+          "content": {
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "width": 1,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-f7ea9",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Creator"
+          },
+          {
+            "locale": "de",
+            "text": "Creator"
+          }
+        ],
+        "name": "Creator"
+      },
+      {
+        "width": 1,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-e0f15",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Created At"
+          },
+          {
+            "locale": "de",
+            "text": "Created At"
+          }
+        ],
+        "name": "CreatedAt"
+      },
+      {
+        "width": 1,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-29264",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Modifier"
+          },
+          {
+            "locale": "de",
+            "text": "Modifier"
+          }
+        ],
+        "name": "Modifier"
+      },
+      {
+        "width": 1,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-9109d",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Modified At"
+          },
+          {
+            "locale": "de",
+            "text": "Modified At"
+          }
+        ],
+        "name": "ModifiedAt"
+      }
+    ],
+    "nodes": [
+      {
+        "configuration": {
+          "inherit": {}
+        },
+        "id": "node-ecae3",
+        "documentModelRef": "Metadata_DM",
+        "columns": [
+          {
+            "columnRef": "column-e0c52",
+            "elementRef": "field_e84d9"
+          },
+          {
+            "columnRef": "column-bd941",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_1169c"
+          },
+          {
+            "columnRef": "column-718d3",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_cfb40"
+          },
+          {
+            "columnRef": "column-72caf",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_17e3b"
+          },
+          {
+            "columnRef": "column-f7ea9",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_cdaf9"
+          },
+          {
+            "columnRef": "column-e0f15",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_65672"
+          },
+          {
+            "columnRef": "column-29264",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_1fa32"
+          },
+          {
+            "columnRef": "column-9109d",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_5cd66"
+          }
+        ],
+        "actions": [],
+        "contextMenu": {
+          "groups": [
+            {
+              "name": "Add_Node",
+              "actions": [
+                {
+                  "type": "insert",
+                  "position": "as_child",
+                  "documentModelRef": "ChildRole_DM",
+                  "icon": {
+                    "name": "add"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Add City"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Stadt hinzufügen"
+                    }
+                  ]
+                }
+              ],
+              "type": "add"
+            },
+            {
+              "name": "Change_Data",
+              "actions": [
+                {
+                  "type": "event",
+                  "event": "event_copy_node_and_children",
+                  "icon": {
+                    "name": "content_copy"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Copy"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Kopieren"
+                    }
+                  ]
+                },
+                {
+                  "type": "event",
+                  "event": "event_cut_node",
+                  "icon": {
+                    "name": "content_cut"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Cut"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Ausschneiden"
+                    }
+                  ]
+                },
+                {
+                  "type": "event",
+                  "event": "event_paste",
+                  "icon": {
+                    "name": "content_paste"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Paste"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Einfügen"
+                    }
+                  ]
+                },
+                {
+                  "type": "event",
+                  "event": "event_delete_node",
+                  "icon": {
+                    "name": "delete"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Delete"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Löschen"
+                    }
+                  ],
+                  "confirmation": {
+                    "title": [
+                      {
+                        "locale": "en",
+                        "text": "Confirm deletion"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Löschen bestätigen"
+                      }
+                    ],
+                    "message": [
+                      {
+                        "locale": "en",
+                        "text": "Are you sure you want to delete the selected item?"
+                      },
+                      {
+                        "locale": "de",
+                        "text": "Soll der ausgewählte Eintrag wirklich gelöscht werden?"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "childRelationshipConfigurations": [
+          {
+            "id": "crc-d69f9",
+            "relationshipModelRef": "MetadataChildRole",
+            "parentRole": "Metadata"
+          }
+        ]
+      },
+      {
+        "configuration": {
+          "inherit": {}
+        },
+        "id": "node-87cd5",
+        "documentModelRef": "ChildRole_DM",
+        "columns": [
+          {
+            "columnRef": "column-e0c52",
+            "elementRef": "field_11f0f"
+          },
+          {
+            "columnRef": "column-bd941",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_1169c"
+          },
+          {
+            "columnRef": "column-718d3",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_cfb40"
+          },
+          {
+            "columnRef": "column-72caf",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_17e3b"
+          },
+          {
+            "columnRef": "column-f7ea9",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_cdaf9"
+          },
+          {
+            "columnRef": "column-e0f15",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_65672"
+          },
+          {
+            "columnRef": "column-29264",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_1fa32"
+          },
+          {
+            "columnRef": "column-9109d",
+            "elementRef": "abc6a6767a60488754aace2accb73824_field_5cd66"
+          }
+        ],
+        "actions": [],
+        "childRelationshipConfigurations": []
+      }
+    ]
+  }
+}
+"
+`;
+
+exports[`@com.mgmtp.a12.tree-model-migration.steps > v10.0.0-pre.2.json 1`] = `
+"{
+  "header": {
+    "id": "a12-teams-tree",
+    "modelType": "tree",
+    "modelVersion": "10.0.0-pre.3",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [
+      {
+        "locale": "en",
+        "text": "A12 Teams"
+      },
+      {
+        "locale": "de",
+        "text": "A12 der Teams"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "anonymous"
+      }
+    ],
+    "modelReferences": [
+      {
+        "purpose": "document-model-for-tree",
+        "modelType": "document",
+        "alias": "DM1",
+        "reference": "DomainTeam"
+      },
+      {
+        "purpose": "document-model-for-tree",
+        "modelType": "document",
+        "alias": "DM2",
+        "reference": "DomainPerson"
+      },
+      {
+        "purpose": "relationship-model-for-tree",
+        "modelType": "relationship",
+        "alias": "RM1",
+        "reference": "TeamPerson"
+      },
+      {
+        "purpose": "relationship-model-for-tree",
+        "modelType": "relationship",
+        "alias": "RM2",
+        "reference": "TeamTeam"
+      }
+    ]
+  },
+  "content": {
+    "configuration": {
+      "multiSelection": {
+        "clearConfirmation": {
+          "enabled": true
+        },
+        "collapseOption": "collapsible_collapsed",
+        "counterOption": "simple",
+        "buttons": [
+          {
+            "label": [
+              {
+                "locale": "en",
+                "text": "Share"
+              },
+              {
+                "locale": "de",
+                "text": "Teilen"
+              }
+            ],
+            "icon": {
+              "name": "share"
+            },
+            "id": "button-f71fb",
+            "event": "event_share_nodes",
+            "description": [
+              {
+                "locale": "en",
+                "text": "Share"
+              },
+              {
+                "locale": "de",
+                "text": "Teilen"
+              }
+            ],
+            "primary": false
+          }
+        ]
+      },
+      "dnd": {
+        "onDrag": {
+          "expandHoveredNode": true
+        }
+      },
+      "rootRef": "crc-cfae1d",
+      "hierarchicalColumnRef": "column-23eade",
+      "enableColumnsResize": true,
+      "subtitle": [
+        {
+          "locale": "en",
+          "text": "A12 Enterprise Low Code Platform"
+        },
+        {
+          "locale": "de",
+          "text": "Enterprise Low Code Plattform A12"
+        }
+      ],
+      "wholeTreeExpansion": true,
+      "expansionStrategy": {
+        "type": "level_by_level",
+        "initialExpansion": {
+          "type": "level_limit",
+          "level": 1,
+          "affectedNodeRefs": [
+            "node-12feda"
+          ]
+        }
+      }
+    },
+    "subHeaderBox": {
+      "majorElements": [],
+      "minorElements": [
+        {
+          "type": "multi_selection"
+        },
+        {
+          "type": "expand_all_popup"
+        },
+        {
+          "label": [
+            {
+              "locale": "en",
+              "text": "Add team"
+            },
+            {
+              "locale": "de",
+              "text": "Add Team"
+            }
+          ],
+          "destructive": false,
+          "icon": {
+            "name": "add"
+          },
+          "id": "button-bafda",
+          "event": "event_add_root_node",
+          "type": "button",
+          "primary": false
+        },
+        {
+          "label": [
+            {
+              "locale": "en",
+              "text": "Reveal target node"
+            },
+            {
+              "locale": "de",
+              "text": "Reveal target node"
+            }
+          ],
+          "destructive": false,
+          "icon": {
+            "name": "my_location"
+          },
+          "id": "button-def42",
+          "event": "event_node_reveal_target",
+          "type": "button",
+          "primary": false
+        }
+      ]
+    },
+    "footerBox": {
+      "majorElements": [
+        {
+          "icon": {
+            "name": "autorenew"
+          },
+          "confirmation": {
+            "title": [
+              {
+                "locale": "en",
+                "text": "Confirmation"
+              },
+              {
+                "locale": "de",
+                "text": "Bestätigung"
+              }
+            ],
+            "message": [
+              {
+                "locale": "en",
+                "text": "This button will do nothing beside testing purpose. Do you really wish to proceed?"
+              },
+              {
+                "locale": "de",
+                "text": "Diese Schaltfläche bewirkt nichts anderes als Testzwecke. Möchten Sie wirklich fortfahren?"
+              }
+            ]
+          },
+          "id": "button-ec3fb",
+          "event": "event_renew",
+          "type": "button",
+          "primary": false
+        }
+      ],
+      "minorElements": []
+    },
+    "columns": [
+      {
+        "id": "column-d29e42",
+        "name": "Attachment",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Attachment"
+          },
+          {
+            "locale": "de",
+            "text": "Anhang"
+          }
+        ],
+        "width": 1,
+        "fixedWidth": false,
+        "pinDirection": "left",
+        "alignment": {
+          "header": {
+            "horizontal": "center",
+            "vertical": "middle"
+          },
+          "content": {
+            "horizontal": "center",
+            "vertical": "middle"
+          }
+        },
+        "icon": {
+          "name": "attachment",
+          "theme": "outlined"
+        }
+      },
+      {
+        "id": "column-23eade",
+        "name": "Name",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Name"
+          },
+          {
+            "locale": "de",
+            "text": "Name"
+          }
+        ],
+        "width": 2.5,
+        "fixedWidth": true,
+        "alignment": {
+          "header": {
+            "horizontal": "left",
+            "vertical": "middle"
+          },
+          "content": {
+            "horizontal": "left",
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "id": "column-esd312",
+        "name": "Position",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Position"
+          },
+          {
+            "locale": "de",
+            "text": "Position"
+          }
+        ],
+        "width": 1,
+        "fixedWidth": false,
+        "alignment": {
+          "header": {
+            "horizontal": "left",
+            "vertical": "middle"
+          },
+          "content": {
+            "horizontal": "left",
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "id": "column-2em45w",
+        "name": "Email",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Email"
+          },
+          {
+            "locale": "de",
+            "text": "Email"
+          }
+        ],
+        "width": 2.5,
+        "fixedWidth": true,
+        "alignment": {
+          "header": {
+            "horizontal": "left",
+            "vertical": "middle"
+          },
+          "content": {
+            "horizontal": "left",
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "id": "column-2d231s",
+        "name": "Location",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Location"
+          },
+          {
+            "locale": "de",
+            "text": "Lage"
+          }
+        ],
+        "width": 1,
+        "fixedWidth": false,
+        "alignment": {
+          "header": {
+            "horizontal": "left",
+            "vertical": "middle"
+          },
+          "content": {
+            "horizontal": "left",
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "label": [
+          {
+            "locale": "en",
+            "text": "Expertise"
+          },
+          {
+            "locale": "de",
+            "text": "Sachverstand"
+          }
+        ],
+        "width": 1,
+        "fixedWidth": false,
+        "id": "column-def67",
+        "name": "Expertise",
+        "alignment": {
+          "header": {
+            "horizontal": "left",
+            "vertical": "middle"
+          },
+          "content": {
+            "horizontal": "left",
+            "vertical": "middle"
+          }
+        }
+      },
+      {
+        "label": [
+          {
+            "locale": "en",
+            "text": "Annual leave"
+          },
+          {
+            "locale": "de",
+            "text": "Jahresurlaub"
+          }
+        ],
+        "width": 1,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-af547",
+        "name": "AnnualLeave"
+      },
+      {
+        "width": 2,
+        "fixedWidth": false,
+        "styles": {},
+        "id": "column-590a8",
+        "label": [
+          {
+            "locale": "en",
+            "text": "Skill"
+          },
+          {
+            "locale": "de",
+            "text": "Können"
+          }
+        ],
+        "name": "Skill"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "node-12feda",
+        "documentModelRef": "DomainTeam",
+        "columns": [
+          {
+            "columnRef": "column-23eade",
+            "elementRef": "field_c9ad3"
+          },
+          {
+            "columnRef": "column-2d231s",
+            "elementRef": "field_c2497"
+          }
+        ],
+        "childRelationshipConfigurations": [
+          {
+            "id": "crc-d29e42",
+            "columns": [
+              {
+                "columnRef": "column-esd312",
+                "elementRef": "field_04443"
+              },
+              {
+                "columnRef": "column-590a8",
+                "elementRef": "group_3901a",
+                "configuration": {
+                  "multiSelectDisplayMode": "comma_separated"
+                }
+              }
+            ],
+            "relationshipModelRef": "TeamPerson",
+            "parentRole": "Team"
+          },
+          {
+            "id": "crc-cfae1d",
+            "relationshipModelRef": "TeamTeam",
+            "parentRole": "Parent"
+          }
+        ],
+        "icon": {
+          "name": "supervisor_account"
+        },
+        "actions": [
+          {
+            "primary": false,
+            "type": "insert",
+            "position": "as_child",
+            "icon": {
+              "name": "insert_as_child",
+              "theme": "custom"
+            },
+            "description": [
+              {
+                "locale": "en",
+                "text": "Insert a child"
+              },
+              {
+                "locale": "de",
+                "text": "Fügen Sie ein Kind ein"
+              }
+            ]
+          },
+          {
+            "primary": false,
+            "type": "insert",
+            "position": "below",
+            "documentModelRef": "DomainTeam",
+            "icon": {
+              "name": "insert_below",
+              "theme": "custom"
+            },
+            "useLabelFromDocumentModel": false,
+            "useTitleFromDocumentModel": false,
+            "description": [
+              {
+                "locale": "en",
+                "text": "Insert a Team below"
+              },
+              {
+                "locale": "de",
+                "text": "Insert a Team below [de]"
+              }
+            ]
+          },
+          {
+            "primary": false,
+            "type": "event",
+            "event": "event_add_link",
+            "icon": {
+              "name": "link"
+            },
+            "description": [
+              {
+                "locale": "en",
+                "text": "Add link"
+              },
+              {
+                "locale": "de",
+                "text": "Link hinzufügen"
+              }
+            ]
+          },
+          {
+            "primary": false,
+            "type": "event",
+            "event": "event_delete_node",
+            "icon": {
+              "name": "delete"
+            },
+            "description": [
+              {
+                "locale": "en",
+                "text": "Delete team"
+              },
+              {
+                "locale": "de",
+                "text": "Team löschen"
+              }
+            ],
+            "confirmation": {
+              "title": [
+                {
+                  "locale": "en",
+                  "text": "Confirmation"
+                },
+                {
+                  "locale": "de",
+                  "text": "Bestätigung"
+                }
+              ],
+              "message": [
+                {
+                  "locale": "en",
+                  "text": "Do you want to delete this team?"
+                },
+                {
+                  "locale": "de",
+                  "text": "Möchten Sie dieses Team löschen?"
+                }
+              ]
+            }
+          },
+          {
+            "primary": false,
+            "type": "event",
+            "event": "event_delete_link",
+            "icon": {
+              "name": "link_off"
+            },
+            "description": [
+              {
+                "locale": "en",
+                "text": "Remove team"
+              },
+              {
+                "locale": "de",
+                "text": "Team entfernen"
+              }
+            ],
+            "confirmation": {
+              "title": [
+                {
+                  "locale": "en",
+                  "text": "Confirmation"
+                },
+                {
+                  "locale": "de",
+                  "text": "Bestätigung"
+                }
+              ],
+              "message": [
+                {
+                  "locale": "en",
+                  "text": "Do you want to remove this team?"
+                },
+                {
+                  "locale": "de",
+                  "text": "Möchten Sie dieses Team entfernen?"
+                }
+              ]
+            }
+          },
+          {
+            "primary": false,
+            "type": "event",
+            "event": "event_node_mark_as_target",
+            "icon": {
+              "name": "add_location"
+            },
+            "description": [
+              {
+                "locale": "en",
+                "text": "Mark as target node"
+              },
+              {
+                "locale": "de",
+                "text": "Mark as target node"
+              }
+            ]
+          }
+        ],
+        "contextMenu": {
+          "groups": [
+            {
+              "actions": [
+                {
+                  "type": "event",
+                  "event": "event_expand_sub_tree",
+                  "icon": {
+                    "name": "unfold_more"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Expand All"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Alles aufklappen"
+                    }
+                  ]
+                },
+                {
+                  "type": "event",
+                  "event": "event_collapse_sub_tree",
+                  "icon": {
+                    "name": "unfold_less"
+                  },
+                  "label": [
+                    {
+                      "locale": "en",
+                      "text": "Collapse All"
+                    },
+                    {
+                      "locale": "de",
+                      "text": "Alles zuklappen"
+                    }
+                  ]
+                }
+              ],
+              "name": "ExpandCollapseSubTree"
+            }
+          ]
+        },
+        "configuration": {
+          "dnd": true
+        },
+        "rowTitle": [
+          {
+            "locale": "en",
+            "text": "Edit team"
+          },
+          {
+            "locale": "de",
+            "text": "Team bearbeiten"
+          }
+        ]
+      },
+      {
+        "id": "node-3d8f9s",
+        "documentModelRef": "DomainPerson",
+        "columns": [
+          {
+            "columnRef": "column-d29e42",
+            "elementRef": "group_05909",
+            "configuration": {
+              "attachmentDisplayMode": "preview"
+            }
+          },
+          {
+            "columnRef": "column-23eade",
+            "elementRef": "F3"
+          },
+          {
+            "columnRef": "column-def67",
+            "elementRef": "group_03437",
+            "configuration": {
+              "multiSelectDisplayMode": "comma_separated"
+            }
+          },
+          {
+            "columnRef": "column-2em45w",
+            "elementRef": "F5"
+          },
+          {
+            "columnRef": "column-af547",
+            "elementRef": "field_6d99c"
+          }
+        ],
+        "childRelationshipConfigurations": [],
+        "actions": [
+          {
+            "primary": false,
+            "type": "insert",
+            "position": "below",
+            "documentModelRef": "DomainPerson",
+            "icon": {
+              "name": "insert_below",
+              "theme": "custom"
+            },
+            "useLabelFromDocumentModel": false,
+            "useTitleFromDocumentModel": false,
+            "description": [
+              {
+                "locale": "en",
+                "text": "Insert a person below"
+              },
+              {
+                "locale": "de",
+                "text": "Insert a person below [de]"
+              }
+            ]
+          },
+          {
+            "primary": false,
+            "type": "event",
+            "event": "event_delete_node",
+            "icon": {
+              "name": "delete"
+            },
+            "description": [
+              {
+                "locale": "en",
+                "text": "Delete person"
+              },
+              {
+                "locale": "de",
+                "text": "Person löschen"
+              }
+            ],
+            "confirmation": {
+              "title": [
+                {
+                  "locale": "en",
+                  "text": "Confirmation"
+                },
+                {
+                  "locale": "de",
+                  "text": "Bestätigung"
+                }
+              ],
+              "message": [
+                {
+                  "locale": "en",
+                  "text": "Do you want to delete this person?"
+                },
+                {
+                  "locale": "de",
+                  "text": "Möchten Sie diese Person löschen?"
+                }
+              ]
+            }
+          },
+          {
+            "primary": false,
+            "type": "event",
+            "event": "event_delete_link",
+            "icon": {
+              "name": "link_off"
+            },
+            "description": [
+              {
+                "locale": "en",
+                "text": "Remove person"
+              },
+              {
+                "locale": "de",
+                "text": "Person entfernen"
+              }
+            ],
+            "confirmation": {
+              "title": [
+                {
+                  "locale": "en",
+                  "text": "Confirmation"
+                },
+                {
+                  "locale": "de",
+                  "text": "Bestätigung"
+                }
+              ],
+              "message": [
+                {
+                  "locale": "en",
+                  "text": "Do you want to remove this person?"
+                },
+                {
+                  "locale": "de",
+                  "text": "Möchten Sie diese Person entfernen?"
+                }
+              ]
+            }
+          }
+        ],
+        "configuration": {
+          "dnd": true
+        },
+        "rowTitle": [
+          {
+            "locale": "en",
+            "text": "Edit pers2222on"
+          },
+          {
+            "locale": "de",
+            "text": "Person bearbeiten"
+          }
+        ]
+      }
+    ]
+  }
+}
+"
+`;

@@ -1,0 +1,225 @@
+{
+	"header": {
+		"id": "Drive",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Drive"
+			},
+			{
+				"locale": "de",
+				"text": "Fahrt"
+			}
+		],
+		"annotations": [
+			{
+				"name": "bindingConfiguration",
+				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"DriveDirectory.json\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"DriveDirectory\",\"targetRole\":\"Directory\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"DirectoryCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"DriveDirectory_Directory_LinkOverview-overview\",\"use\":\"link\"}]}]},\"elementId\":\"section-p772o\"},{\"type\":\"relationship\",\"details\":{\"name\":\"DriveFile.json\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"DriveFile\",\"targetRole\":\"File\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"FileCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"DriveFile_File_SelectedItemsOverview\",\"use\":\"link\"}]}]},\"elementId\":\"section-morm4\"}]"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainDrive"
+			},
+			{
+				"alias": "DirectoryCandidates-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "DirectoryCandidates-overview"
+			},
+			{
+				"alias": "DriveDirectory_Directory_LinkOverview-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "DriveDirectory_Directory_LinkOverview-overview"
+			},
+			{
+				"alias": "FileCandidates-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "FileCandidates-overview"
+			},
+			{
+				"alias": "DriveFile_File_SelectedItemsOverview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "DriveFile_File_SelectedItemsOverview"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-f0c55",
+						"name": "CancelButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Abbrechen"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY",
+							"destructive": true
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-faf5d",
+						"name": "SaveButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Speichern"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_save",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "MultiColumnSection",
+						"id": "multicolumnsection-46ea9",
+						"name": "Information",
+						"layout": {
+							"lg": "12"
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-6089d",
+								"name": "Basic",
+								"layout": {
+									"lg": "6-3-3"
+								},
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-88306",
+										"name": "FirstRow",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-298bb",
+												"elementRef": "field_35d81"
+											},
+											{
+												"type": "Control",
+												"id": "control-740e2",
+												"elementRef": "field_84648"
+											},
+											{
+												"type": "Control",
+												"id": "control-9e107",
+												"elementRef": "field_2e453"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					},
+					{
+						"type": "CustomScreenElement",
+						"id": "section-p772o",
+						"name": "DriveDirectory.json",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "DriveDirectory.json"
+									},
+									{
+										"locale": "de",
+										"text": "DriveDirectory.json"
+									}
+								]
+							}
+						}
+					},
+					{
+						"type": "CustomScreenElement",
+						"id": "section-morm4",
+						"name": "DriveFile.json",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "DriveFile.json"
+									},
+									{
+										"locale": "de",
+										"text": "DriveFile.json"
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

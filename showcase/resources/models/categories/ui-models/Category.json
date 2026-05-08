@@ -1,0 +1,208 @@
+{
+	"header": {
+		"id": "Category",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Category"
+			},
+			{
+				"locale": "de",
+				"text": "Kategorie"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainCategory"
+			},
+			{
+				"alias": "CategoryCandidates-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "CategoryCandidates-overview"
+			},
+			{
+				"alias": "CategoryCategory_Child_LinkOverview-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "CategoryCategory_Child_LinkOverview-overview"
+			},
+			{
+				"alias": "ProductCandidates-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "ProductCandidates-overview"
+			},
+			{
+				"alias": "ProductCategory_Product_Link_Overview-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "ProductCategory_Product_Link_Overview-overview"
+			},
+			{
+				"alias": "ProductCategory_LinkForm",
+				"modelType": "form",
+				"purpose": "bindingReference",
+				"reference": "ProductCategory_LinkForm"
+			}
+		],
+		"annotations": [
+			{
+				"name": "bindingConfiguration",
+				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"CategoryCategory\",\"targetRole\":\"Child\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"CategoryCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"CategoryCategory_Child_LinkOverview-overview\",\"use\":\"link\"}],\"props\":{\"availableItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"Candidate categories\"},{\"locale\":\"de\",\"text\":\"Candidate categories [de]\"}]},\"selectedItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"Sub categories\"},{\"locale\":\"de\",\"text\":\"Sub categories [de]\"}]}}}]},\"elementId\":\"section-95934\"},{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"ProductCategory\",\"targetRole\":\"Product\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"ProductCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"ProductCategory_Product_Link_Overview-overview\",\"use\":\"link\"},{\"name\":\"ProductCategory_LinkForm\",\"use\":\"link\"}]}]},\"elementId\":\"section-bu198\"}]"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-e79dc",
+						"name": "CancelButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Abbrechen"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY",
+							"destructive": true
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-872d2",
+						"name": "SaveButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Speichern"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_save",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "MultiColumnSection",
+						"id": "multicolumnsection-594bc",
+						"name": "Basic",
+						"layout": {
+							"lg": "12"
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-9cadf",
+								"name": "Information",
+								"layout": {
+									"lg": "6-6"
+								},
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-3ec9b",
+										"name": "Row_1",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-ec30c",
+												"elementRef": "field_04d07"
+											},
+											{
+												"type": "Control",
+												"id": "control-53e44",
+												"elementRef": "field_d1da3"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					},
+					{
+						"type": "CustomScreenElement",
+						"id": "section-95934",
+						"name": "CategoryCategory.json",
+						"annotations": [
+							{
+								"name": "relationship"
+							}
+						],
+						"height": 328
+					},
+					{
+						"type": "CustomScreenElement",
+						"id": "section-bu198",
+						"name": "ProductCategory.json",
+						"annotations": [
+							{
+								"name": "relationship"
+							}
+						],
+						"height": 328
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

@@ -1,0 +1,95 @@
+{
+	"header": {
+		"id": "LocationLocation",
+		"modelType": "relationship",
+		"modelVersion": "3.0.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "Document model",
+				"modelType": "document",
+				"alias": "Parent",
+				"reference": "DomainLocation"
+			},
+			{
+				"purpose": "Document model",
+				"modelType": "document",
+				"alias": "Child",
+				"reference": "DomainLocation"
+			}
+		]
+	},
+	"content": {
+		"duplicatesAllowed": false,
+		"associationType": "SHARED",
+		"storage": "EXTERNAL",
+		"labels": [
+			{
+				"locale": "en"
+			},
+			{
+				"locale": "de"
+			}
+		],
+		"entityCharacteristics": [
+			{
+				"ordered": true,
+				"navigable": true,
+				"linkConstraints": {
+					"multiplicity": {
+						"lowerLimit": 0,
+						"unbounded": false,
+						"upperLimit": 1
+					}
+				},
+				"candidateConstraints": {},
+				"labels": [
+					{
+						"locale": "en"
+					},
+					{
+						"locale": "de"
+					}
+				],
+				"role": "Parent",
+				"documentModel": "DomainLocation"
+			},
+			{
+				"ordered": false,
+				"navigable": true,
+				"linkConstraints": {
+					"multiplicity": {
+						"lowerLimit": 0,
+						"unbounded": false,
+						"upperLimit": 5
+					}
+				},
+				"candidateConstraints": {},
+				"labels": [
+					{
+						"locale": "en"
+					},
+					{
+						"locale": "de"
+					}
+				],
+				"role": "Child",
+				"documentModel": "DomainLocation"
+			}
+		]
+	}
+}

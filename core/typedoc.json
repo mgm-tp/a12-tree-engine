@@ -1,0 +1,20 @@
+{
+	"name": "Tree Engine API Documentation",
+	"theme": "default",
+	"out": "../documentation/src/assets/generated/typedoc",
+	"entryPoints": [
+		"./src/core/error",
+		"./src/core/models",
+		"./src/core/services/multi-select",
+		"./src/core/services/localization",
+		"./src/core/store",
+		"./src/core/view",
+		"./src/extensions/client",
+		"./src/extensions/server-connector",
+		"./src/main"
+	],
+	"exclude": ["**/test/**/*"],
+	"plugin": ["typedoc-plugin-missing-exports"],
+	"collapseInternalModule": true,
+	"compilerOptions": {}
+}

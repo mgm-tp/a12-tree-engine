@@ -1,0 +1,9 @@
+{
+	"Computer": {
+		"Basic": {
+			"Name": "My Computer",
+			"Owner": "admin",
+			"Group": "admin"
+		}
+	}
+}

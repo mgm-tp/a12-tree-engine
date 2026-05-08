@@ -1,0 +1,70 @@
+{
+	"header": {
+		"id": "TeamCandidates-overview",
+		"modelType": "overview",
+		"modelVersion": "38.3.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-overview",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "DomainTeam"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"majorElements": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
+		"columns": [
+			{
+				"id": "column-f43fa",
+				"elementRef": "field_c9ad3",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-49c6d",
+				"elementRef": "field_c2497",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": []
+		},
+		"configuration": {
+			"pagingSize": 10,
+			"showFullTextSearch": true,
+			"enableFilter": true,
+			"filterConfiguration": {
+				"showFilterButton": true,
+				"showFilterBar": true,
+				"filterMode": "all"
+			}
+		}
+	}
+}

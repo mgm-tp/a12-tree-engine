@@ -1,0 +1,31 @@
+{
+	"Element": {
+		"Field": {
+			"Type": "ENUMERATION",
+			"Global": true,
+			"Required": true,
+			"Transient": true,
+			"DataTypeSpecification": {
+				"DecimalPlaceType": "NONE",
+				"Unit": "NONE",
+				"Enumerations": [
+					{
+						"Value": "MALE",
+						"Text": "Male"
+					},
+					{
+						"Value": "FEMALE",
+						"Text": "Female"
+					},
+					{
+						"Value": "UNKNOWN",
+						"Text": "Unkown"
+					}
+				]
+			}
+		},
+		"GeneralInformation": {
+			"Name": "Gender"
+		}
+	}
+}

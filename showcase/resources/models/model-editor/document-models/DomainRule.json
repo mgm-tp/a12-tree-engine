@@ -1,0 +1,270 @@
+{
+	"header": {
+		"id": "DomainRule",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainRule"
+			},
+			{
+				"locale": "en",
+				"text": "DomainRule"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainRule",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"type": "Group",
+					"id": "group_4eef0",
+					"name": "Element",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"type": "Group",
+								"id": "group_b62e3",
+								"name": "GeneralInformation",
+								"Group": {
+									"repeatability": 1,
+									"elements": [
+										{
+											"type": "Field",
+											"id": "field_91a2c",
+											"name": "Name",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Name"
+													},
+													{
+														"locale": "de",
+														"text": "Name"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_60604",
+											"name": "Description",
+											"Field": {
+												"fieldType": {
+													"type": "StringType",
+													"StringType": {
+														"lineBreaksPermitted": true
+													}
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Description"
+													},
+													{
+														"locale": "de",
+														"text": "Beschreibung"
+													}
+												]
+											}
+										}
+									]
+								}
+							},
+							{
+								"type": "Group",
+								"id": "group_76d99",
+								"name": "Rule",
+								"Group": {
+									"repeatability": 1,
+									"elements": [
+										{
+											"type": "Field",
+											"id": "field_c48f5",
+											"name": "ErrorField",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Error Field"
+													},
+													{
+														"locale": "de",
+														"text": "Fehlerfeld"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_72f84",
+											"name": "ErrorCode",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Error Code"
+													},
+													{
+														"locale": "de",
+														"text": "Fehlercode"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_6a04d",
+											"name": "ErrorCondition",
+											"Field": {
+												"fieldType": {
+													"type": "StringType",
+													"StringType": {
+														"lineBreaksPermitted": true
+													}
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Error Condition"
+													},
+													{
+														"locale": "de",
+														"text": "Fehlerbedingung"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_5995e",
+											"name": "Level",
+											"Field": {
+												"fieldType": {
+													"type": "EnumerationType",
+													"EnumerationType": {
+														"values": [
+															{
+																"value": "ERROR",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Error"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Error"
+																	}
+																]
+															},
+															{
+																"value": "WARNING",
+																"label": [
+																	{
+																		"locale": "en",
+																		"text": "Warning"
+																	},
+																	{
+																		"locale": "de",
+																		"text": "Warnung"
+																	}
+																]
+															}
+														]
+													}
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Level"
+													},
+													{
+														"locale": "de",
+														"text": "Niveau"
+													}
+												],
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"type": "Field",
+											"id": "field_44a11",
+											"name": "ErrorMessage",
+											"Field": {
+												"fieldType": {
+													"type": "StringType"
+												},
+												"label": [
+													{
+														"locale": "en",
+														"text": "Error Message"
+													},
+													{
+														"locale": "de",
+														"text": "Fehlermeldung"
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

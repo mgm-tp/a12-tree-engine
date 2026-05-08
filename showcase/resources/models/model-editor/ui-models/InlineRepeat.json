@@ -1,0 +1,258 @@
+{
+	"header": {
+		"id": "InlineRepeat",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "InlineRepeat"
+			},
+			{
+				"locale": "de",
+				"text": "InlineRepeat"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainInlineRepeat"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-f613f",
+						"name": "Cancel",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Cancel"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY"
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-5d16f",
+						"name": "Save",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Save"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_submit",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen-9ba08",
+				"name": "Element_(Generated)",
+				"screenElements": [
+					{
+						"type": "Section",
+						"id": "section-edc4a",
+						"name": "GeneralInformation",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "General Information"
+									},
+									{
+										"locale": "de",
+										"text": "General Information"
+									}
+								]
+							}
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-ed7ce",
+								"name": "GeneralInformation_Controls",
+								"layout": {
+									"lg": "12"
+								},
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-3c235",
+										"name": "row-3c235",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-fafb8",
+												"label": {
+													"type": "Multilingual",
+													"multilingualText": {
+														"text": [
+															{
+																"locale": "en",
+																"text": "Name"
+															},
+															{
+																"locale": "de",
+																"text": "Name"
+															}
+														]
+													}
+												},
+												"elementRef": "field_6a08f"
+											}
+										]
+									},
+									{
+										"type": "Row",
+										"id": "row-e3033",
+										"name": "row-e3033",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-38b0a",
+												"label": {
+													"type": "Multilingual",
+													"multilingualText": {
+														"text": [
+															{
+																"locale": "en",
+																"text": "Description"
+															},
+															{
+																"locale": "de",
+																"text": "Description"
+															}
+														]
+													}
+												},
+												"elementRef": "field_8e414"
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "Section",
+						"id": "section-73551",
+						"name": "InlineRepeat",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "Inline Repeat"
+									},
+									{
+										"locale": "de",
+										"text": "Inline Repeat"
+									}
+								]
+							}
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-c469f",
+								"name": "InlineRepeat_Controls",
+								"layout": {
+									"lg": "12"
+								},
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-e006b",
+										"name": "row-e006b",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-8577a",
+												"label": {
+													"type": "Multilingual",
+													"multilingualText": {
+														"text": [
+															{
+																"locale": "en",
+																"text": "Repeatability"
+															},
+															{
+																"locale": "de",
+																"text": "Repeatability"
+															}
+														]
+													}
+												},
+												"elementRef": "field_33da7"
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

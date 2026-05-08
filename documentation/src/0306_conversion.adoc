@@ -1,0 +1,44 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#conversion]
+=== Conversion
+
+The Tree Engine utilizes the Conversion API from the utils-localization package to format value from document data to
+rendered UI values, considering the current locale and data formats.
+
+The utils-localization `ValueConversion` interface has two methods but:
+
+- `parseValue` (not used by Tree Engine): converts the rendered UI value to the document value.
+- `formatValue`: converts the document value to the rendered UI value.
+
+When formatting a document value, the Tree Engine calls the `formatValue` method of the contextual `conversion`,
+which implements the `ValueConversion` interface and is extracted from `LocalizerContext`.
+This method is provided with the value to be converted, along with relevant information such as
+the Document Model name and the model path to the field or group.
+Depending on the element type, additional information may be passed,
+such as `minFractionalDigits` for `NumberType` elements and `format` for `DateType` elements.
+
+For more details, please refer to the utils-localization link:/docs/utils_localization/utils-localization-documentation-bundle/index.html#_valueconversion[documentation].
+
+To customize the conversion logic, a custom implementation of the Conversion API can be provided.
+For example, to customize the format of a `DateType` field named `DateOfBirth` in the `PersonDM` Document Model:
+
+[source,typescript,title="Conversion customization"]
+----
+include::assets/typescript/features/conversion.tsx[tags="main"]
+----

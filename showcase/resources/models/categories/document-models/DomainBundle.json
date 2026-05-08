@@ -1,0 +1,146 @@
+{
+	"header": {
+		"id": "DomainBundle",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "de"
+			},
+			{
+				"code": "en"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainBundle"
+			},
+			{
+				"locale": "en",
+				"text": "DomainBundle"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainBundle",
+			"immutable": false,
+			"comment": "Bundle"
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"id": "G7",
+					"type": "Group",
+					"name": "Properties",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"id": "F1",
+								"type": "Field",
+								"name": "Name",
+								"Field": {
+									"label": [
+										{
+											"locale": "de",
+											"text": "Name"
+										},
+										{
+											"locale": "en",
+											"text": "Name"
+										}
+									],
+									"fieldType": {
+										"type": "StringType"
+									}
+								}
+							},
+							{
+								"id": "F2",
+								"type": "Field",
+								"name": "Price",
+								"Field": {
+									"label": [
+										{
+											"locale": "de",
+											"text": "Preis"
+										},
+										{
+											"locale": "en",
+											"text": "Price"
+										}
+									],
+									"fieldType": {
+										"type": "NumberType"
+									}
+								}
+							},
+							{
+								"id": "field_d4c4b",
+								"type": "Field",
+								"name": "ReleaseDate",
+								"Field": {
+									"label": [
+										{
+											"locale": "de",
+											"text": "Erscheinungsdatum"
+										},
+										{
+											"locale": "en",
+											"text": "Release Date"
+										}
+									],
+									"fieldType": {
+										"type": "DateType",
+										"DateType": {
+											"format": "yyyy-MM-dd"
+										}
+									}
+								}
+							},
+							{
+								"id": "F3",
+								"type": "Field",
+								"name": "BundleDescription",
+								"Field": {
+									"label": [
+										{
+											"locale": "de",
+											"text": "Beschreibung"
+										},
+										{
+											"locale": "en",
+											"text": "Description"
+										}
+									],
+									"fieldType": {
+										"type": "StringType",
+										"StringType": {
+											"lineBreaksPermitted": true
+										}
+									}
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

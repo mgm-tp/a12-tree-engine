@@ -1,0 +1,13 @@
+{
+	"File": {
+		"Basic": {
+			"Name": "Person.json",
+			"Owner": "admin",
+			"Group": "admin"
+		},
+		"Extension": "json",
+		"Size": 23244,
+		"FileType": "form_model",
+		"Readonly": false
+	}
+}

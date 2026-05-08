@@ -1,0 +1,177 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#view-customization]
+=== View Customization
+
+Tree Engine supports a way to override the rendering logic in most components to adapt to business requirements.
+It is necessary to understand how Container Factory works in Client to start with.
+
+Then create a custom React component that returns the default view link:./assets/generated/typedoc/variables/extensions_client.TreeEngineFactories.ViewComponent.html[TreeEngineFactories.ViewComponent].
+As from now, the custom ComponentMap, WidgetMap or row action state getter can be passed as props to this component.
+
+[#view-customization/initial-ui-state]
+==== Initialize UI State
+
+Tree Engine provides a way to initialize the UI state of the engine. This is useful when you want to restore the UI state from a previous session or set a initial UI state for the engine.
+
+[source,typescript,options="nowrap",title="initial-tree-engine-with-customized-ui-state.example.ts"]
+--
+
+import { TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/extensions/client/index.js";
+
+const activityPushAction = TreeEngineActions.createActivity(
+    { activityDescriptor: {
+        // The desired activity descriptor
+     } },
+    { readonly: true, initialExpansion: { type: "all_levels" } }
+);
+
+store.dispatch(activityPushAction)
+--
+
+[#view-customization/component-map]
+==== Customize Component Map
+
+Component Map is a list of components provided by Tree Engine. Most of these components focus on the logic of Tree Engine, not the UI logic.
+
+Below is an example of customizing the Component Map.
+
+[source,typescript,options="nowrap",title="src/views/custom-a12-team-tree-engine.tsx"]
+--
+function View(props) {
+  ...
+include::assets/generated/typescript/showcase/views/custom-a12-team-tree-engine.tsx[tags="CustomA12TeamTreeEngineComponentMap"]
+  ...
+
+  return <TreeEngineFactories.ViewComponent {...props} componentMap={componentMap}/>
+}
+--
+
+TIP: Spread the `DefaultComponentMap` on the custom `ComponentMap` to avoid re-write everything from scratch.
+
+TIP: See link:./assets/generated/typedoc/interfaces/core_view.ComponentMap.html[ComponentMap] interface in the Typedoc to find out supported components.
+
+After that, <<installation/register-container-factory,register a new container>> to Container Factory with a name that <<application-model, Application Model>> can later reference.
+
+The above example is applied to Tree Engine showcase application - A12 Team Tree example.
+
+[#view-customization/widget-map]
+==== Customize Widget Map
+
+Widget Map is a list of Widgets components that Tree Engine uses (e.g. Content Box, Button Group, Tree Table...). Most of these components focus on the UI logic.
+
+Customizing Widget Map is similar to Component Map. For example:
+
+[source,typescript,options="nowrap",title="src/views/custom-a12-team-tree-engine.tsx"]
+--
+function View(props) {
+  ...
+include::assets/generated/typescript/showcase/views/custom-a12-team-tree-engine.tsx[tags="CustomA12TeamTreeEngineWidgetMap"]
+  ...
+
+  return <TreeEngineFactories.ViewComponent {...props} widgetMap={widgetMap}/>
+}
+--
+
+TIP: Spread the `DefaultWidgetMap` on the custom `WidgetMap` to avoid re-write everything from scratch.
+
+TIP: See link:./assets/generated/typedoc/interfaces/core_view.WidgetMap.html[WidgetMap] interface in the Typedoc to find out supported components.
+
+[#_customize_row_action_state_getter]
+==== Customize Row Action State Getter
+
+Row Action State Getter is a callback used by Tree Engine to query the state of a specific row action. It receives an object parameter containing the row action and the row rendering that row action. Based on that, the callback should return an object of `IndividualRowActionState` type, which applies to the row action.
+
+link:./assets/generated/typedoc/interfaces/core_view.IndividualRowActionState.html[IndividualRowActionState] type provides the visibility and disability settings for row actions. For example:
+
+[source,typescript,options="nowrap",title="src/views/custom-a12-team-tree-engine.tsx"]
+--
+function View(props) {
+  ...
+include::assets/generated/typescript/showcase/views/custom-a12-team-tree-engine.tsx[tags="CustomA12TeamTreeEngineRowActionStateGetter"]
+  ...
+
+  return <TreeEngineFactories.ViewComponent {...props} rowActionStateGetter={rowActionStateGetter}/>
+}
+--
+
+[#_uiIdPrefix]
+==== Engine Id Prefix
+
+At the moment, model name, set in Tree Model header details, is used as id for different components (e.g. tree table, button...).
+
+In case there are many engines of the same model on a screen, this leads to incorrect component identification. Since version 7.2.0, the introduction of `uiIdPrefix` property allows a flexible way to add a prefix to the engine id, which could eliminate the above issue.
+
+[#_customize_row_styling]
+==== Customize Row Styling
+
+Row styling is a callback used by Tree Engine to query the style of a specific row. It receives an object parameter that contains the row that would be rendered. Based on that, the callback should return an object of `TreeTableRowStyles` type, which applies to the row.
+
+`TreeTableRowStyles`, which belongs to Widgets library, has the following structure:
+
+[source,typescript,options="nowrap",title="TreeTableRowStyles interface"]
+--
+export interface TreeTableRowStyles extends RowStyles {
+	/**
+	 * Whether the tree node is collapsed.
+	 */
+	collapsed?: boolean;
+}
+
+/**
+ * Collections of style values for the row
+ */
+export interface RowStyles extends Styleable {
+	title?: string;
+	selected?: boolean;
+	interactive?: boolean;
+	disabled?: boolean;
+	highlightVariant?: TableTemplateProps.TableHighlightVariant;
+	highlighted?: boolean;
+	disabledRightClickContextMenu?: boolean;
+}
+
+export interface Styleable {
+	/**
+	 * Additional css class names.
+	 */
+	readonly className?: string;
+
+	/**
+	 * Additional style.
+	 */
+	readonly style?: React.CSSProperties;
+}
+--
+
+The following example demonstrates how to set interactive status of specific rows.
+
+[source,typescript,options="nowrap",title="src/views/custom-a12-team-tree-engine.tsx"]
+--
+function View(props) {
+  ...
+include::assets/generated/typescript/showcase/views/custom-a12-team-tree-engine.tsx[tags="CustomA12TeamTreeEngineRowStyling"]
+  ...
+
+  return <TreeEngineFactories.ViewComponent {...props} rowStyling={rowStyling}/>
+}
+--
+
+==== Tips
+
+It is recommended to pass the memorized props that only re-initiate when their dependencies are changed (`useMemo/useCallback` is a perfect fit for this case). Since we pass `ComponentMap`, `WidgetMap` and `RowActionStateGetter` to every component in Tree Engine, re-initiate a new instance every render may cause unnecessary re-render. See https://reactjs.org/docs/hooks-faq.html#how-to-memoize-calculations[How to memoize calculations?].

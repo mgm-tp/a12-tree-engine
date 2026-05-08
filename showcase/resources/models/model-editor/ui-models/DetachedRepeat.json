@@ -1,0 +1,215 @@
+{
+	"header": {
+		"id": "DetachedRepeat",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "DetachedRepeat"
+			},
+			{
+				"locale": "de",
+				"text": "DetachedRepeat"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainDetachedRepeat"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-c72a2",
+						"name": "Cancel",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Cancel"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY"
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-b4de8",
+						"name": "Save",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Save"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY"
+						},
+						"event": "event_submit",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE",
+						"enablement": "DISABLED"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "Section",
+						"id": "section-60dc2",
+						"name": "DetachedRepeat",
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-c1d5e",
+								"name": "Grid",
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-1e110",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-6f1c7",
+												"label": {
+													"type": "Multilingual",
+													"multilingualText": {
+														"text": [
+															{
+																"locale": "en",
+																"text": "Name"
+															},
+															{
+																"locale": "de",
+																"text": "Name"
+															}
+														]
+													}
+												},
+												"elementRef": "field_6a08f"
+											}
+										]
+									},
+									{
+										"type": "Row",
+										"id": "row-63e71",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-40797",
+												"label": {
+													"type": "Multilingual",
+													"multilingualText": {
+														"text": [
+															{
+																"locale": "en",
+																"text": "Description"
+															},
+															{
+																"locale": "de",
+																"text": "Description"
+															}
+														]
+													}
+												},
+												"elementRef": "field_8e414"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "TOP"
+							},
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-f49db",
+								"name": "Grid-2",
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-7cc7c",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-4aeab",
+												"label": {
+													"type": "Multilingual",
+													"multilingualText": {
+														"text": [
+															{
+																"locale": "en",
+																"text": "Repetability"
+															},
+															{
+																"locale": "de",
+																"text": "Repetability"
+															}
+														]
+													}
+												},
+												"elementRef": "field_33da7"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "TOP"
+							}
+						]
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

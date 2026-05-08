@@ -1,0 +1,85 @@
+{
+	"header": {
+		"id": "ProductCategory_Product_Link_Overview-overview",
+		"modelType": "overview",
+		"modelVersion": "38.3.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Products"
+			},
+			{
+				"locale": "de",
+				"text": "Produkte"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-overview",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "ProductCategory_Product____generated"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"majorElements": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
+		"columns": [
+			{
+				"id": "column-62424",
+				"elementRef": "I4_field_e19c8",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-8ba1d",
+				"elementRef": "I4_field_c3aa2",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-471f4",
+				"elementRef": "I5_field_c4320",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": []
+		},
+		"configuration": {
+			"pagingSize": 10,
+			"showFullTextSearch": true,
+			"enableFilter": true,
+			"filterConfiguration": {
+				"showFilterButton": true,
+				"showFilterBar": true,
+				"filterMode": "all"
+			}
+		}
+	}
+}

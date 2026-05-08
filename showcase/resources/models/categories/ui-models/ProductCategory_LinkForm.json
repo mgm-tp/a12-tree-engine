@@ -1,0 +1,149 @@
+{
+	"header": {
+		"id": "ProductCategory_LinkForm",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Link product with category"
+			},
+			{
+				"locale": "de",
+				"text": "Produkt mit Kategorie verknüpfen"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainProductCategory_AdditionalFieldsModel"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-f4f10",
+						"name": "ok",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "OK"
+										},
+										{
+											"locale": "de",
+											"text": "OK"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_submit",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-9c826",
+						"name": "Cancel",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Abbrechen"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY",
+							"destructive": true
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "Section",
+						"id": "section-50f1a",
+						"name": "S1",
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-49be7",
+								"name": "CG1",
+								"layout": {
+									"lg": "6-6"
+								},
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-1d5a9",
+										"name": "R1",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-58b07",
+												"elementRef": "field_c4320"
+											},
+											{
+												"type": "Control",
+												"id": "control-b36d6",
+												"elementRef": "field_52d82"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

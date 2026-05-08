@@ -1,0 +1,13 @@
+{
+	"File": {
+		"Basic": {
+			"Name": "javaws.exe",
+			"Owner": "admin",
+			"Group": "admin"
+		},
+		"Size": 341536,
+		"Extension": "exe",
+		"FileType": "application",
+		"Readonly": true
+	}
+}

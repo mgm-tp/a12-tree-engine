@@ -1,0 +1,10 @@
+{
+	"extends": "../tsconfig",
+	"include": ["src"],
+	"compilerOptions": {
+		"rootDir": "src",
+		"types": ["vitest/globals"],
+		"outDir": "lib",
+		"tsBuildInfoFile": "target/tsconfig.tsbuildinfo"
+	}
+}

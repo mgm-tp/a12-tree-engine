@@ -1,0 +1,138 @@
+{
+	"header": {
+		"id": "DomainAbstractComputer",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainComputer"
+			},
+			{
+				"locale": "en",
+				"text": "DomainComputer"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainAbstractComputer",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"id": "group_a70eb",
+					"type": "Group",
+					"name": "Computer",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"id": "group_0ff47",
+								"type": "Group",
+								"name": "Basic",
+								"Group": {
+									"repeatability": 1,
+									"elements": [
+										{
+											"id": "field_35d81",
+											"type": "Field",
+											"name": "Name",
+											"Field": {
+												"label": [
+													{
+														"locale": "en",
+														"text": "Name"
+													},
+													{
+														"locale": "de",
+														"text": "Name"
+													}
+												],
+												"fieldType": {
+													"type": "StringType"
+												},
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"id": "field_84648",
+											"type": "Field",
+											"name": "Owner",
+											"Field": {
+												"label": [
+													{
+														"locale": "en",
+														"text": "Owner"
+													},
+													{
+														"locale": "de",
+														"text": "Besitzer"
+													}
+												],
+												"fieldType": {
+													"type": "StringType"
+												},
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										},
+										{
+											"id": "field_2e453",
+											"type": "Field",
+											"name": "Group",
+											"Field": {
+												"label": [
+													{
+														"locale": "en",
+														"text": "Group"
+													},
+													{
+														"locale": "de",
+														"text": "Gruppe"
+													}
+												],
+												"fieldType": {
+													"type": "StringType"
+												},
+												"requirednessConfig": {
+													"mode": "absoluteOrRelativeToNextRepAncestor"
+												}
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

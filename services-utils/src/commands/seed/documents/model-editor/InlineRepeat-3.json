@@ -1,0 +1,10 @@
+{
+	"Element": {
+		"GeneralInformation": {
+			"Name": "Nested Inline Repeat"
+		},
+		"InlineRepeat": {
+			"Repeatability": 2
+		}
+	}
+}

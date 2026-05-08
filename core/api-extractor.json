@@ -1,0 +1,41 @@
+{
+	"$schema": "../node_modules/@microsoft/api-extractor/lib/schemas/api-extractor.schema.json",
+	"mainEntryPointFilePath": "<projectFolder>/lib/index.d.ts",
+	"newlineKind": "lf",
+	"apiReport": {
+		"enabled": true,
+		"reportFolder": "<projectFolder>",
+		"reportFileName": "treeengine-core",
+		"reportTempFolder": "<projectFolder>/target/api"
+	},
+	"compiler": {
+		"tsconfigFilePath": "tsconfig.json"
+	},
+	"tsdocMetadata": {
+		"enabled": false
+	},
+	"dtsRollup": {
+		"enabled": false
+	},
+	"docModel": {
+		"enabled": false
+	},
+	"messages": {
+		"extractorMessageReporting": {
+			"default": {
+				"logLevel": "error"
+			},
+			"ae-missing-release-tag": {
+				"logLevel": "none"
+			},
+			"ae-unresolved-link": {
+				"logLevel": "none"
+			}
+		},
+		"tsdocMessageReporting": {
+			"default": {
+				"logLevel": "none"
+			}
+		}
+	}
+}

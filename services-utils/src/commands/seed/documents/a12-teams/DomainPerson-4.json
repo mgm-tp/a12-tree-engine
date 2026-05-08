@@ -1,0 +1,26 @@
+{
+	"Person": {
+		"PersonalData": {
+			"FirstName": "Leonard",
+			"LastName": "Hermann",
+			"Email": "leo.hermann12@gmail.com",
+			"Married": false,
+			"Confirm": null,
+			"Photo": {
+				"internal_filename": "video_file.mov",
+				"original_filename": "video_file.mov",
+				"content": "data:video/quicktime;base64,abcxyz",
+				"size": 19375,
+				"mime_type": "video/quicktime"
+			},
+			"Expertise": [
+				{
+					"expertise": "5"
+				}
+			]
+		},
+		"Work": {
+			"AnnualLeave": "2020-10-15/2020-10-16"
+		}
+	}
+}

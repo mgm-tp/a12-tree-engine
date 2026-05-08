@@ -1,0 +1,73 @@
+{
+	"header": {
+		"id": "DomainElement-GM",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainElement"
+			},
+			{
+				"locale": "en",
+				"text": "DomainElement"
+			}
+		],
+		"annotations": [
+			{
+				"name": "abstract",
+				"value": "true"
+			},
+			{
+				"name": "subTypes",
+				"value": "DomainField,DomainGroup-GM,DomainRule"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DomainElement",
+				"modelType": "document",
+				"purpose": "include",
+				"reference": "DomainElement"
+			}
+		]
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainElement-GM",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"type": "Group",
+					"id": "include_10b06",
+					"name": "Element",
+					"Group": {
+						"repeatability": 1,
+						"modelAlias": "DomainElement"
+					}
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"File": {
+		"Basic": {
+			"Name": "java.exe",
+			"Owner": "admin",
+			"Group": "admin"
+		},
+		"Size": 206880,
+		"Extension": "exe",
+		"FileType": "application",
+		"Readonly": true
+	}
+}

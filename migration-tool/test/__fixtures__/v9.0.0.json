@@ -1,0 +1,467 @@
+{
+	"header": {
+		"id": "Metadata_TM",
+		"modelType": "tree",
+		"modelVersion": "9.0.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "tester,reviewer"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM1",
+				"reference": "Metadata_DM"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM2",
+				"reference": "ChildRole_DM"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM1",
+				"reference": "MetadataChildRole"
+			}
+		]
+	},
+	"content": {
+		"configuration": {
+			"initialExpansion": {
+				"type": "all_levels"
+			},
+			"hierarchicalColumnRef": "column-e0c52",
+			"rootRef": "crc-d69f9",
+			"enableVirtualScroll": true,
+			"actionColumnWidth": 1,
+			"rowHeight": 50
+		},
+		"subHeaderBox": {
+			"majorElements": [],
+			"minorElements": [
+				{
+					"label": [
+						{
+							"locale": "en",
+							"text": "add"
+						},
+						{
+							"locale": "de",
+							"text": "add"
+						}
+					],
+					"id": "button-d4a55",
+					"event": "event_add_root_node",
+					"type": "button",
+					"destructive": false,
+					"primary": false
+				}
+			]
+		},
+		"footerBox": {
+			"majorElements": [],
+			"minorElements": []
+		},
+		"columns": [
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Not a metadata field"
+					},
+					{
+						"locale": "de",
+						"text": "Not a metadata field"
+					}
+				],
+				"width": 3,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-e0c52",
+				"name": "NonMetadata",
+				"alignment": {
+					"header": {
+						"vertical": "middle"
+					},
+					"content": {
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Document Reference"
+					},
+					{
+						"locale": "de",
+						"text": "Document Reference"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-bd941",
+				"name": "Document Reference",
+				"alignment": {
+					"header": {
+						"vertical": "middle"
+					},
+					"content": {
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Document Model Reference"
+					},
+					{
+						"locale": "de",
+						"text": "Document Model Reference"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-718d3",
+				"name": "Document Model Reference",
+				"alignment": {
+					"header": {
+						"vertical": "middle"
+					},
+					"content": {
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Model Version"
+					},
+					{
+						"locale": "de",
+						"text": "Model Version"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-72caf",
+				"name": "Model Version",
+				"alignment": {
+					"header": {
+						"vertical": "middle"
+					},
+					"content": {
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"width": 1,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-f7ea9",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Creator"
+					},
+					{
+						"locale": "de",
+						"text": "Creator"
+					}
+				],
+				"name": "Creator"
+			},
+			{
+				"width": 1,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-e0f15",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Created At"
+					},
+					{
+						"locale": "de",
+						"text": "Created At"
+					}
+				],
+				"name": "CreatedAt"
+			},
+			{
+				"width": 1,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-29264",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Modifier"
+					},
+					{
+						"locale": "de",
+						"text": "Modifier"
+					}
+				],
+				"name": "Modifier"
+			},
+			{
+				"width": 1,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-9109d",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Modified At"
+					},
+					{
+						"locale": "de",
+						"text": "Modified At"
+					}
+				],
+				"name": "ModifiedAt"
+			}
+		],
+		"nodes": [
+			{
+				"configuration": {
+					"inherit": {}
+				},
+				"id": "node-ecae3",
+				"documentModelRef": "Metadata_DM",
+				"columns": [
+					{
+						"columnRef": "column-e0c52",
+						"elementRef": "field_e84d9"
+					},
+					{
+						"columnRef": "column-bd941",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_1169c"
+					},
+					{
+						"columnRef": "column-718d3",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_cfb40"
+					},
+					{
+						"columnRef": "column-72caf",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_17e3b"
+					},
+					{
+						"columnRef": "column-f7ea9",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_cdaf9"
+					},
+					{
+						"columnRef": "column-e0f15",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_65672"
+					},
+					{
+						"columnRef": "column-29264",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_1fa32"
+					},
+					{
+						"columnRef": "column-9109d",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_5cd66"
+					}
+				],
+				"actions": [],
+				"contextMenu": {
+					"groups": [
+						{
+							"name": "Add_Node",
+							"actions": [
+								{
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "ChildRole_DM",
+									"icon": {
+										"name": "add"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Add City"
+										},
+										{
+											"locale": "de",
+											"text": "Stadt hinzufügen"
+										}
+									]
+								}
+							],
+							"type": "add"
+						},
+						{
+							"name": "Change_Data",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_copy_node_and_children",
+									"icon": {
+										"name": "content_copy"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Kopieren"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_cut_node",
+									"icon": {
+										"name": "content_cut"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Cut"
+										},
+										{
+											"locale": "de",
+											"text": "Ausschneiden"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_paste",
+									"icon": {
+										"name": "content_paste"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Einfügen"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_delete_node",
+									"icon": {
+										"name": "delete"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Delete"
+										},
+										{
+											"locale": "de",
+											"text": "Löschen"
+										}
+									],
+									"confirmation": {
+										"title": [
+											{
+												"locale": "en",
+												"text": "Confirm deletion"
+											},
+											{
+												"locale": "de",
+												"text": "Löschen bestätigen"
+											}
+										],
+										"message": [
+											{
+												"locale": "en",
+												"text": "Are you sure you want to delete the selected item?"
+											},
+											{
+												"locale": "de",
+												"text": "Soll der ausgewählte Eintrag wirklich gelöscht werden?"
+											}
+										]
+									}
+								}
+							]
+						}
+					]
+				},
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-d69f9",
+						"relationshipModelRef": "MetadataChildRole",
+						"parentRole": "Metadata"
+					}
+				]
+			},
+			{
+				"configuration": {
+					"inherit": {}
+				},
+				"id": "node-87cd5",
+				"documentModelRef": "ChildRole_DM",
+				"columns": [
+					{
+						"columnRef": "column-e0c52",
+						"elementRef": "field_11f0f"
+					},
+					{
+						"columnRef": "column-bd941",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_1169c"
+					},
+					{
+						"columnRef": "column-718d3",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_cfb40"
+					},
+					{
+						"columnRef": "column-72caf",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_17e3b"
+					},
+					{
+						"columnRef": "column-f7ea9",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_cdaf9"
+					},
+					{
+						"columnRef": "column-e0f15",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_65672"
+					},
+					{
+						"columnRef": "column-29264",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_1fa32"
+					},
+					{
+						"columnRef": "column-9109d",
+						"elementRef": "abc6a6767a60488754aace2accb73824_field_5cd66"
+					}
+				],
+				"actions": [],
+				"childRelationshipConfigurations": []
+			}
+		]
+	}
+}

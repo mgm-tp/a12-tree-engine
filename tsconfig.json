@@ -1,0 +1,13 @@
+{
+	"extends": "@com.mgmtp.a12.devtools/tsconfig",
+	"compilerOptions": {
+		"jsx": "react",
+		"allowSyntheticDefaultImports": true,
+		"noEmitOnError": false,
+		"incremental": true,
+		"allowJs": true,
+		"preserveWatchOutput": true
+	},
+	"include": ["copyright.js", ".pnpmfile.cjs", "gradle.js"],
+	"exclude": ["node_modules"]
+}

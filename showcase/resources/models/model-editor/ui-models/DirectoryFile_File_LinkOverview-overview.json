@@ -1,0 +1,82 @@
+{
+	"header": {
+		"id": "DirectoryFile_File_LinkOverview-overview",
+		"modelType": "overview",
+		"modelVersion": "38.3.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-overview",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "DirectoryFile_File____generated"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"majorElements": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
+		"columns": [
+			{
+				"id": "column-f87cf",
+				"elementRef": "I4_field_35d81",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-0334f",
+				"elementRef": "I4_field_84648",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-9b169",
+				"elementRef": "I4_field_2e453",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-0c337",
+				"elementRef": "I4_field_cde92",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": []
+		},
+		"configuration": {
+			"pagingSize": 10,
+			"showFullTextSearch": true,
+			"enableFilter": true,
+			"filterConfiguration": {
+				"showFilterButton": true,
+				"showFilterBar": true,
+				"filterMode": "all"
+			}
+		}
+	}
+}

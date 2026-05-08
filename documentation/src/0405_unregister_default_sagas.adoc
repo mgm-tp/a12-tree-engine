@@ -1,0 +1,45 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#advanced/unregister-default-engine-sagas]
+=== Unregister Default Engine Sagas
+
+Tree Engine module is bundled with a set of saga handlers that support different type of events dispatched by the core module.
+Generally, these sagas follow the standard workflow of an A12 based application.
+However, in some cases where application does not want to follow the default standard, Tree Engine also offers an option to dynamically register/unregister specific saga handler(s).
+
+[source,typescript,options="nowrap",title="src/appsetup.ts"]
+--
+
+export function setup() {
+    const treeEngineModuleSetting: TreeEngineFactories.ModuleSettings = {
+            sagaSetting: { sagaRegistrations: createCustomSagasRegistration() }
+    };
+
+    ModuleRegistryProvider.getInstance().addModule(TreeEngineFactories.createModule(treeEngineModuleSetting));
+  ...
+}
+
+include::assets/generated/typescript/showcase/shared-setup.ts[tags="CustomSagasRegistration"]
+--
+
+NOTE: Each property of the registration map accepts a `boolean` value or a function that also returns a boolean value.
+Returning `false` will unregister respective saga and the other way around.
+
+After defining the saga registration map, the associated action from the Tree Engine will no longer be handled by the saga.
+Developers will need to provide proper handling of the unregistered saga handlers.
+

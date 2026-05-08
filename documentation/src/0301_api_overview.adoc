@@ -1,0 +1,46 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#api-overview]
+=== API Overview
+==== View Component
+
+link:./assets/generated/typedoc/variables/extensions_client.TreeEngineFactories.ViewComponent.html[TreeEngineFactories.ViewComponent] is the main component used to render Tree Engine.
+It is a React component with the following props:
+
+[source,typescript,options="nowrap",title="TreeEngineFactories.ViewComponent Props"]
+--
+include::assets/generated/typescript/tree-engine-context-provider.tsx[]
+--
+
+[#identifier]
+==== Identifier
+A Tree Engine is constructed with nodes and links which are A12 documents.To identify and distinguish these documents, Tree Engine introduces link:./assets/generated/typedoc/interfaces/core_store.Identifier.html[`Identifier`].
+
+The Identifier of a document consists of two fields:
+
+- `id`: The unique ID of the document.
+- `type`: The document name.
+
+[#node-path]
+==== Node Path
+To locate a node, Tree Engine uses node path defined by link:./assets/generated/typedoc/modules/core_store.TreeEngineState.NodePath.html[TreeEngineState.NodePath] interface.
+
+A node path is constructed from an array of link:./assets/generated/typedoc/interfaces/core_store.Identifier.html[`Identifier`]. However, there are additional constraints applied to the array:
+
+- The first entry is the identifier of the root node where the path starts.
+- The following identifiers are the link identifiers which indicate the link connecting a node to its next node on the path.

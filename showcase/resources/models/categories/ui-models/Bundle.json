@@ -1,0 +1,203 @@
+{
+	"header": {
+		"id": "Bundle",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Bundle"
+			},
+			{
+				"locale": "de",
+				"text": "Bündeln"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainBundle"
+			},
+			{
+				"alias": "ProductCandidates-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "ProductCandidates-overview"
+			},
+			{
+				"alias": "BundleProduct_Product_LinkOverview-overview",
+				"modelType": "overview",
+				"purpose": "bindingReference",
+				"reference": "BundleProduct_Product_LinkOverview-overview"
+			}
+		],
+		"annotations": [
+			{
+				"name": "bindingConfiguration",
+				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"BundleProduct\",\"targetRole\":\"Product\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"ProductCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"BundleProduct_Product_LinkOverview-overview\",\"use\":\"link\"}]}]},\"elementId\":\"section-aeb8e\"}]"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-7d500",
+						"name": "Save",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Speichern"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_save",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-542cc",
+						"name": "Cancel",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Abbrechen"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY",
+							"destructive": true
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "Section",
+						"id": "section-b9aa4",
+						"name": "BasicInfo",
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-931e8",
+								"name": "cg1",
+								"layout": {
+									"lg": "12"
+								},
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-49d34",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-da51e",
+												"elementRef": "F1"
+											}
+										]
+									},
+									{
+										"type": "Row",
+										"id": "row-7776c",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-ff752",
+												"elementRef": "F2"
+											}
+										]
+									},
+									{
+										"type": "Row",
+										"id": "row-6fb1e",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-8e3f9",
+												"elementRef": "field_d4c4b"
+											}
+										]
+									},
+									{
+										"type": "Row",
+										"id": "row-d0604",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-b0f55",
+												"elementRef": "F3"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					},
+					{
+						"type": "CustomScreenElement",
+						"id": "section-aeb8e",
+						"name": "ProductBindingUI.json",
+						"annotations": [
+							{
+								"name": "relationship"
+							}
+						],
+						"height": 328
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

@@ -1,0 +1,69 @@
+{
+	"header": {
+		"id": "DomainMultiSelectGroup-GM",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "DomainMultiSelectGroup"
+			},
+			{
+				"locale": "de",
+				"text": "DomainMultiSelectGroup"
+			}
+		],
+		"annotations": [
+			{
+				"name": "superTypes",
+				"value": "DomainGroup-GM"
+			},
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DomainAbstractGroup",
+				"modelType": "document",
+				"purpose": "include",
+				"reference": "DomainAbstractGroup"
+			}
+		]
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainMultiSelectGroup-GM",
+			"immutable": false
+		},
+		"modelConfig": {
+			"timeZone": "UTC",
+			"decimalSeparator": ".",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"type": "Group",
+					"id": "include_d2456",
+					"name": "Element",
+					"Group": {
+						"repeatability": 1,
+						"modelAlias": "DomainAbstractGroup"
+					}
+				}
+			]
+		}
+	}
+}

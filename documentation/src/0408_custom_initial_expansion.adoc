@@ -1,0 +1,63 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#advanced/custom-initial-expansion]
+=== Custom Initial Expansion
+
+Tree Model offers an option to configure the initial expansion behavior of the Tree Engine when it is initialized. This is a fixed behavior that will apply to every Tree Engine instance no matter the context. Furthermore, this can potentially cause the performance issue because always expanding to certain levels can consume a lot of time. Therefore, Tree Engine offers an ability to dynamically set initial expansion based on your application business logic.
+
+[source,typescript,options="nowrap",title="openTreeEngineMiddleware.example.ts"]
+--
+
+const activityPushAction = TreeEngineActions.createActivity(
+    { activityDescriptor: { engine: "tree" } },
+    { initialExpansion: { type: "all_levels" } }
+);
+
+store.dispatch(activityPushAction)
+--
+
+By creating the Tree Engine activity this way, the engine will automatically use passed configuration instead of the one from Tree Model. The property `initialExpansion` accepts one of these value:
+
+* link:./assets/generated/typedoc/types/core_models.TreeModel.ExpansionStrategy.LevelByLevel.InitialExpansion.html[TreeModel.InitialExpansion]: of two types **all_levels** and **level_limit**.
+* `false`: completely disable the initial expansion behavior.
+* `undefined`: skip the configuration via API and only use the configuration from Tree Model.
+
+Let's have a look at Tree Engine Showcase's model editor example, for this one, it is necessary to restrict the initial expansion behavior on Document Model or Form Model which file's size is too large.
+
+[source,typescript,options="nowrap",title="handle-open-model-saga.ts"]
+--
+
+import { DataSelector, TreeEngineState } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/core/store";
+import { TreeEngineActions, TreeEngineSelectors } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/extensions/client";
+
+import { SagaGenerator, put, select } from "typed-redux-saga";
+
+function* handle(action): SagaGenerator<void> {
+  const { activityId } = action.payload;
+
+include::assets/generated/typescript/showcase/model-editor/sagas/handle-open-document-model-button-saga.ts[tags="CustomInitialExpansion"]
+
+  const activityPushAction = TreeEngineActions.createActivity(
+    { activityDescriptor: { engine: "tree" } },
+    { initialExpansion }
+  );
+  yield* put(activityPushAction)
+}
+
+include::assets/generated/typescript/showcase/model-editor/sagas/utils.ts[tags="CustomInitialExpansion"]
+--

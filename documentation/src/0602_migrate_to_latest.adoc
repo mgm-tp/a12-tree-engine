@@ -1,0 +1,240 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+= 2025.06-ext4
+
+== Deprecation of nested imports
+
+Nested imports are deprecated in favor of top-level imports to avoid unnecessary breaking changes caused by moving or renaming internal files.
+This makes the code more resilient to internal refactoring, provides a single consistent import path, and reduces ongoing maintenance effort.
+
+Run the <<codemod,codemod>> command below to migrate automatically:
+[source,bash]
+----
+npx @com.mgmtp.a12.treeengine/treeengine-codemod prefer-top-level-imports ./client/tsconfig.json
+----
+
+== 2025.06
+
+CAUTION: Please have a look at link:/docs/OVERALL/migration_guide/index.html[Migration to latest A12] chapter
+for an explanation of general steps.
+
+=== Migration to ESM
+
+The npm artifact `@com.mgmtp.a12.treeengine/treeengine-core` was migrated
+from CommonJS to link:https://nodejs.org/api/esm.html#modules-ecmascript-modules[ESM].
+When using Node `22.12+` and modern build tools, there should be no changes necessary to your bundler setup.
+
+[NOTE]
+====
+If your tests depend on mocking/stubbing Tree Engine API, consult the documentation of your test runner on how to work with ES modules.
+====
+
+Migrating your own application to ESM is not required, but recommended. Consult the documentation of your bundler for specifics.
+
+=== Updating to ES2024
+
+The javascript output of the npm artifacts was updated from `ES2020` to `ES2024` to be able to use latest language features.
+When using supported browsers, there is no change necessary. If support for older browsers is required, make sure to include necessary polyfills.
+
+=== React 19 upgrade
+
+We dropped the support for React 18 and older and now require React 19 as our peerDependency.
+This means you have to perform the React 19 migration, which is described in great detail in the official
+link:https://react.dev/blog/2024/04/25/react-19-upgrade-guide[React 19 Upgrade Guide]. They have codemods that should make the transition straightforward.
+
+Additionally, we have decided to not also include a Redux update, to minimize the migration effort.
+The "react-redux" library does not have React 19 as a peerDependency, but still works fine with it.
+One solution is to override the dependency in your package.json. You also have to update the corresponding "@types/react-redux" typings to at least 7.1.34.
+
+[source,json]
+----
+{
+	"overrides": {
+		"react-redux": {
+			"react": "^19"
+		}
+	},
+	"devDependencies": {
+		"@types/react-redux": "^7.1.34"
+	}
+}
+----
+
+== Styled-components v6 upgrade
+
+We dropped the support for `styled-components` v5 and now require v6 as our peerDependency.
+Please refer to the link:https://styled-components.com/docs/faqs#what-do-i-need-to-do-to-migrate-to-v6[styled-components guide] and Widgets migration notes for more information.
+
+=== Breaking Changes
+
+==== Model Changes
+
+- Tree Model's `initialExpansion` (and its respective namespace `InitialExpansion`) and `pageSize` has been moved into the `expansionStrategy`, with type "level_by_level",
+it is done in preparation for the new `tree` expansion strategy mentioned in later section.
+
+==== Multi-level tree loading strategy
+
+Multi-level tree loading strategy is introduced to reduce amount of rpc requests sent to Data Services to 1, for most engine's interactions.
+The new strategy results in several changes to the API:
+
+1. New `expansionStrategy` property has been introduced to the `TreeModel` to allow switching between the new and the old strategy.
+2. New Tree Engine data holder descriptors, created by new loading strategy, will no longer has `relationshipName` or `relationshipRole`.
+3. New `Query.TreeNodes` interface has been added to the TreeEngineDataLoader, allow customizing several aspects related to Query API (e.g.: fields projection).
+
+In the `tree` mode, initial expansion will be configured with a maximum depth value per relationship model instead of
+a single maximum depth value for the whole tree previously. Let's have a look at this example:
+
+|===
+|Relationship Model| Max Depth
+
+|CategoryCategory| 5
+|ProductCategory| 1
+|ProductBundle| 1
+|===
+
+With the given example above, the engine can initially fetch and display a tree with up to *7 levels* in *1 single request*.
+
+==== Drop support for LIST_* operations
+
+Since the Data Services Query API is integrated by default, all related interfaces/functions have been removed/renamed, including:
+
+|===
+|Removed functions |Alternative
+
+|`TreeEngineServerConnectorFactories.createModule({[.line-through]#queryAPI: true#})`
+
+|`TreeEngineServerConnectorFactories.createModule({})`
+
+
+|`TreeEngineServerConnectorFactories.createDataProvider({[.line-through]#queryAPI: true#})`
+
+|`TreeEngineServerConnectorFactories.createDataProvider({})`
+
+|===
+
+For better integration/migration path, see the 2024.06's Query API section for an early adoption of the new API.
+
+==== Embedded Attachments API removed
+
+The embedded attachments related API has been removed, the engine now solely relies on the thumbnails slice to render
+the thumbnail. Unless embedded attachment is used, it is expected to have no impact to the current setup. However,
+it case embedded attachment is used, to restore functionality, the newly introduced <<#/selector-map, `selectorMap`>> will be used to remap
+the new default thumbnail accessing logic.
+
+
+[source,typescript,options="nowrap",title="src/customTreeEngineSelectorMap.ts"]
+--
+include::assets/typescript/features/custom-selector-map.ts[tag="CustomSelectorMap"]
+--
+
+By default, the thumbnail selector assumes that thumbnails for attachments can be queried from the thumbnails slice by their id. However, for embedded attachment implementation, the image source can be simply accessed by directly read the content prop.
+
+The selectorMap can then be passed into any TreeEngine view component to override the default behavior.
+
+==== UIStateSelector.latestMultiSelectionNode
+
+The deprecated `UIStateSelector.latestMultiSelectionNode` selector has been removed. It was used to get the latest node selected in multi-selection mode.
+The `UIStateSelector.lastMultiSelectionAction` selector should be used instead. It returns the last action that was performed in multi-selection mode, which can be used to determine the latest node selected.
+
+[source,typescript,title="Old code with UIStateSelector.latestMultiSelectionNode",options="nowrap"]]
+----
+const treeEngineState = yield* select(TreeEngineSelectors.engineState(activityId));
+
+let multiSelectionNodes = UIStateSelector.multiSelectionNodes()(treeEngineState);
+const latestMultiSelectionNode = UIStateSelector.latestMultiSelectionNode()(treeEngineState);
+
+if(latestMultiSelectionNode) {
+    const engineAction = TreeEngineActions.setMultiSelectionNodes({
+        multiSelectionNodes: updateMultiSelectionNodes(multiSelectionNodes, latestMultiSelectionNode),
+    });
+
+    yield* put(TreeEngineActions.event({ activityId, engineAction }));
+}
+
+function updateMultiSelectionNodes(multiSelectionNodes: TreeEngineState.MultiSelectionNodes, latestMultiSelectionNode: TreeEngineState.NodePath) {
+    // do something with multiSelectionNodes
+}
+----
+
+Replace it with the following code:
+
+[source,typescript,title="New code with UIStateSelector.lastMultiSelectionAction",options="nowrap"]]
+----
+const treeEngineState = yield* select(TreeEngineSelectors.engineState(activityId));
+
+let multiSelectionNodes = UIStateSelector.multiSelectionNodes()(treeEngineState);
+const lastMultiSelectionAction = UIStateSelector.lastMultiSelectionAction()(treeEngineState);
+
+if(lastMultiSelectionAction) {
+    const engineAction = TreeEngineActions.setMultiSelectionNodes({
+        multiSelectionNodes: updateMultiSelectionNodes(multiSelectionNodes, lastMultiSelectionAction.payload.nodePath),
+    });
+
+    yield* put(TreeEngineActions.event({ activityId, engineAction }));
+}
+
+function updateMultiSelectionNodes(multiSelectionNodes: TreeEngineState.MultiSelectionNodes, latestMultiSelectionNode: TreeEngineState.NodePath) {
+    // do something with multiSelectionNodes
+}
+----
+
+
+==== Drop migration support for models before version 8.0.0
+
+The migration tool no longer supports migration of Tree models before version 8.0.0.
+If you need to migrate models from an older version, you need to migrate to version 8.0.0 first using the migration tool of that version.
+
+==== Removal of Actions
+
+Actions in the following list are no longer used and removed as a consequence.
+
+* Commands.setRoot
+* Commands.setData
+* Commands.setMatchedNodes
+* Commands.setQuery
+* Events.onQueryChanged
+* Events.onQueryReset
+
+==== Selectors
+
+Most selectors has been reworked to migrate to WeakMap caching mechanism with Reselect v5. This migration allows
+better usability of selectors while maintaining good performance. Most selectors function call signature remains the same,
+but some of them have been changed to accommodate the new caching mechanism.
+
+* `ModelSelector.relationshipBetweenDocumentModels` has changed its parameter into 2 list of strings.
+
+==== Tree Activity Descriptors
+
+Tree Activity Descriptors behavior has been updated to always forward its descriptors to the child activities when possible.
+This will add more flexibilities to the match conditions modeling of the child activities in the app model.
+However, this change may break the existing descriptors modeling which relies on specific descriptor, e.g.: "engine": "tree".
+Fortunately, this "engine" descriptor is no longer required by Tree Engine since 9.0 release, so these could already be adapted accordingly.
+
+==== Maximum Page Size Limit
+
+Query API request from Data Services comes with a default maximum page size limit of 100, Tree Engine respects the limit and use it as the default maximum page size limit per Query request. However, in case of raising the limit, project will not only have to set the `mgmtp.a12.dataservices.query.page-request.page-size-limit` but also required to update the default maximum page limit in the Tree Engine configuration.
+
+[source,typescript,title="Tree Engine Configuration",options="nowrap"]
+```
+TreeEngineServerConnectorFactories.createModule({
+    ...otherSettings,
+    dataServicesSetting: {
+        maximumPageSize: 200, // the value should match the one set in Data Services
+    },
+});
+```

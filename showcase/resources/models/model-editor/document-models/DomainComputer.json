@@ -1,0 +1,65 @@
+{
+	"header": {
+		"id": "DomainComputer",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainComputer"
+			},
+			{
+				"locale": "en",
+				"text": "DomainComputer"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DomainAbstractComputer",
+				"modelType": "document",
+				"purpose": "include",
+				"reference": "DomainAbstractComputer"
+			}
+		]
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainComputer",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"type": "Group",
+					"id": "include_2d437",
+					"name": "Computer",
+					"Group": {
+						"repeatability": 1,
+						"modelAlias": "DomainAbstractComputer"
+					}
+				}
+			]
+		}
+	}
+}

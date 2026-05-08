@@ -1,0 +1,17 @@
+{
+	"Element": {
+		"Field": {
+			"Type": "STRING",
+			"Required": true,
+			"Global": true,
+			"Transient": true,
+			"DataTypeSpecification": {
+				"DecimalPlaceType": "NONE",
+				"Unit": "NONE"
+			}
+		},
+		"GeneralInformation": {
+			"Name": "Description"
+		}
+	}
+}

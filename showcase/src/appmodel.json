@@ -1,0 +1,42 @@
+{
+	"header": {
+		"id": "Tree Engine Showcase",
+		"modelType": "application",
+		"modelVersion": "1.0.0",
+		"locales": [
+			{
+				"code": "en"
+			}
+		]
+	},
+	"content": {
+		"region": {
+			"name": "APP",
+			"layout": {
+				"name": "ApplicationFrame"
+			},
+			"subRegions": [
+				{
+					"name": "CONTENT",
+					"layout": {
+						"name": "MasterDetail"
+					}
+				},
+				{
+					"name": "SIDEBAR",
+					"layout": {
+						"name": "Null"
+					}
+				},
+				{
+					"name": "MODAL",
+					"layout": {
+						"name": "Stack"
+					}
+				}
+			]
+		},
+		"defaultRegion": ["CONTENT"],
+		"modules": []
+	}
+}

@@ -1,0 +1,149 @@
+/*
+ * SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+ *
+ * Copyright (c) 2012-2026 mgm technology partners GmbH
+ *
+ * Dual License
+ * ------------
+ * This source file is part of the mgm A12 Platform and available under
+ * a choice of two different licenses:
+ *
+ * 1. Open-Source License - EUPL v1.2
+ *    You may redistribute and/or modify this file under the terms of the
+ *    European Union Public License, version 1.2 - see https://eupl.eu/.
+ *
+ * 2. Commercial License
+ *    Alternatively, you may obtain a commercial license from
+ *    mgm technology partners GmbH, that permits use of this software
+ *    under different terms (including support and maintenance services).
+ *
+ *    Please contact a12-license@mgm-tp.com for more information.
+ *
+ * You must select and comply with exactly one of the above license options.
+ *
+ * Warranty Disclaimer (applies to either option)
+ * ----------------------------------------------
+ * THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND,
+ * WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
+ * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+ */
+
+import * as Path from "path";
+
+import { defineConfig, type RsbuildConfig } from "@rsbuild/core";
+import { pluginReact } from "@rsbuild/plugin-react";
+import { pluginTypeCheck } from "@rsbuild/plugin-type-check";
+import { IgnorePlugin, SwcJsMinimizerRspackPlugin } from "@rspack/core";
+import { pluginStyledComponents } from "@rsbuild/plugin-styled-components";
+import { pluginBabel } from "@rsbuild/plugin-babel";
+
+import packageJson from "./package.json" with { type: "json" };
+
+const supportedLocales = ["en-US", "de", "fr"];
+
+const PATH = {
+	PUBLIC: Path.join(__dirname, "resources", "public"),
+	MODELS: Path.join(__dirname, "resources", "models"),
+	HTML: Path.join(__dirname, "resources", "public", "index.html"),
+	SRC: Path.join(__dirname, "src"),
+	CORE: Path.join(__dirname, "..", "core"),
+	ENTRY: Path.join(__dirname, "src", "index.tsx"),
+	COMPOSABLE_ENTRY: Path.join(__dirname, "src", "composable.appsetup.tsx")
+};
+
+const entries: Record<string, { path: string; title: string }> = {
+	index: { path: PATH.ENTRY, title: "Tree Engine Showcase" },
+	composable: { path: PATH.COMPOSABLE_ENTRY, title: "[Composable] Tree Engine Showcase" }
+};
+
+const config: ReturnType<typeof defineConfig> = defineConfig(({ command, envMode }) => {
+	// eslint-disable-next-line no-console
+	console.log(envMode);
+	const instrument = envMode === "instrument";
+
+	return {
+		server: {
+			port: 15000,
+			publicDir: [{ name: PATH.PUBLIC }],
+			proxy: [
+				{
+					context: ["/api", "/cs"],
+					target: `http://localhost:15001`,
+					secure: false,
+					changeOrigin: true
+				},
+				{
+					context: ["/composable/api"],
+					target: `http://localhost:15001`,
+					secure: false,
+					changeOrigin: true,
+					pathRewrite: { "^/composable/api": "/api" }
+				}
+			]
+		},
+		source: {
+			entry: Object.fromEntries(Object.entries(entries).map(([name, entry]) => [name, entry.path])),
+			include: [PATH.SRC, PATH.CORE],
+			define: {
+				__VERSION__: `"${packageJson.version}"`,
+				SC_DISABLE_SPEEDY: false
+			}
+		},
+		resolve: {
+			dedupe: ["immutable", "clsx", "scheduler", "react-is"],
+			alias: {
+				// caused by react-dnd
+				"react/jsx-runtime.js": "react/jsx-runtime",
+				// necessary for WhyDidYouRender to track useSelector
+				"react-redux": command === "dev" ? "react-redux/lib" : "react-redux"
+			}
+		},
+		html: {
+			template: PATH.HTML,
+			favicon: "./resources/public/favicon.svg",
+			templateParameters: ({ entryName }) => entries[entryName as any]
+		},
+		plugins: [
+			pluginReact(),
+			pluginStyledComponents(),
+			pluginTypeCheck(),
+			pluginBabel({
+				include: [PATH.SRC, PATH.CORE],
+				exclude: /node_modules/,
+				babelLoaderOptions: (_config, { addPlugins }) => {
+					if (instrument) {
+						addPlugins([["istanbul", { cwd: Path.join(PATH.CORE), include: ["lib/extensions/**/*"] }]]);
+					}
+				}
+			})
+		],
+		tools: {
+			rspack: {
+				plugins: [
+					new IgnorePlugin({
+						resourceRegExp: new RegExp(`^date-fns/locale/(?!${supportedLocales.join("|")}).*$`)
+					})
+				],
+				optimization: {
+					minimizer: [
+						new SwcJsMinimizerRspackPlugin({
+							minimizerOptions: {
+								mangle: { keep_fnames: true }
+							}
+						})
+					]
+				}
+			}
+		},
+		output: {
+			assetPrefix: "./",
+			distPath: { root: "build" },
+			sourceMap: true,
+			injectStyles: true
+		}
+	} satisfies RsbuildConfig;
+});
+
+export default config;

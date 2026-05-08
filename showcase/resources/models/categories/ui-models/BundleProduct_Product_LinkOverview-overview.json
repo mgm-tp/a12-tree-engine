@@ -1,0 +1,92 @@
+{
+	"header": {
+		"modelType": "overview",
+		"modelVersion": "38.3.0",
+		"id": "BundleProduct_Product_LinkOverview-overview",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Bundles"
+			},
+			{
+				"locale": "de",
+				"text": "Bündel"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-overview",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "BundleProduct_Product____generated"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"majorElements": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
+		"rowActionGroup": {
+			"actions": []
+		},
+		"columns": [
+			{
+				"sortable": true,
+				"width": 1,
+				"id": "column-03ffb",
+				"elementRef": "I4_field_e19c8",
+				"pinDirection": "LEFT",
+				"preferredSorting": "ASC"
+			},
+			{
+				"sortable": false,
+				"width": 1,
+				"id": "column-d0229",
+				"elementRef": "I4_field_c3aa2"
+			},
+			{
+				"sortable": false,
+				"width": 1,
+				"id": "column-4bdd0",
+				"elementRef": "I4_field_07572"
+			}
+		],
+		"configuration": {
+			"pagingSize": 10,
+			"initialSorting": [
+				{
+					"idref": "column-03ffb"
+				}
+			],
+			"showFullTextSearch": true,
+			"enableFilter": true,
+			"filterConfiguration": {
+				"showFilterButton": true,
+				"showFilterBar": true,
+				"filterMode": "all"
+			}
+		}
+	}
+}

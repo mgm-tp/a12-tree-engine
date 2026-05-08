@@ -1,0 +1,18 @@
+{
+	"extends": "../node_modules/@com.mgmtp.a12.devtools/devtools/configs/tsconfig",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "es5",
+		"lib": ["es2017", "dom"],
+		"types": ["node"],
+		"sourceMap": false,
+		"declaration": false,
+		"declarationMap": false,
+		"esModuleInterop": true,
+		"noEmit": true,
+		"paths": {
+			"playwright-commands": ["./e2e/commands.ts"]
+		}
+	},
+	"include": ["e2e/**/*.ts"]
+}

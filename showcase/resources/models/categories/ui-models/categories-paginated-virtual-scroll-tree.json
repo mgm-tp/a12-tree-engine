@@ -1,0 +1,1037 @@
+{
+	"header": {
+		"id": "categories-paginated-virtual-scroll-tree",
+		"modelType": "tree",
+		"modelVersion": "10.2.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Phone Category - Pagination w Virtual Scrolling"
+			},
+			{
+				"locale": "de",
+				"text": "Telefon Kategorie - Pagination w Virtual Scrolling"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM1",
+				"reference": "DomainCategory"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM2",
+				"reference": "DomainProduct"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM3",
+				"reference": "DomainBundle"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM1",
+				"reference": "CategoryCategory"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM2",
+				"reference": "ProductCategory"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM3",
+				"reference": "BundleProduct"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"majorElements": [],
+			"minorElements": [
+				{
+					"type": "multi_selection"
+				},
+				{
+					"icon": {
+						"name": "add"
+					},
+					"id": "button-ed2312",
+					"event": "event_add_root_node",
+					"type": "button",
+					"primary": false,
+					"description": [
+						{
+							"locale": "en",
+							"text": "Add root node"
+						},
+						{
+							"locale": "de",
+							"text": "Wurzelknoten hinzufügen"
+						}
+					]
+				},
+				{
+					"destructive": false,
+					"icon": {
+						"name": "my_location"
+					},
+					"id": "button-0a87c",
+					"event": "event_node_reveal_target",
+					"type": "button",
+					"primary": false,
+					"description": [
+						{
+							"locale": "en",
+							"text": "Reveal target node"
+						},
+						{
+							"locale": "de",
+							"text": "Reveal target node [de]"
+						}
+					]
+				}
+			]
+		},
+		"footerBox": {
+			"majorElements": [],
+			"minorElements": []
+		},
+		"configuration": {
+			"hierarchicalColumnRef": "column-87bd8",
+			"rootRef": "crc-f7f64",
+			"enableColumnsResize": true,
+			"dnd": {
+				"onDrag": {
+					"expandHoveredNode": true
+				}
+			},
+			"multiSelection": {
+				"collapseOption": "collapsible_expanded",
+				"counterOption": "simple",
+				"clearConfirmation": {
+					"enabled": true,
+					"confirmation": {
+						"title": [
+							{
+								"locale": "en",
+								"text": "Clear Multi-Selection Nodes Confirmation"
+							},
+							{
+								"locale": "de",
+								"text": "Bestätigung für Mehrfachauswahlknoten löschen"
+							}
+						],
+						"message": [
+							{
+								"locale": "en",
+								"text": "By collapsing the multi-selection panel, all selected nodes will be cleared. Do you want to continue?"
+							},
+							{
+								"locale": "de",
+								"text": "Durch das Reduzieren des Mehrfachauswahlfensters werden alle ausgewählten Knoten gelöscht. Wollen Sie fortfahren?"
+							}
+						]
+					}
+				},
+				"buttons": [
+					{
+						"event": "event_print_nodes",
+						"id": "button-1fba3",
+						"annotations": [],
+						"label": [
+							{
+								"locale": "en",
+								"text": "Print"
+							},
+							{
+								"locale": "de",
+								"text": "Drucken"
+							}
+						],
+						"icon": {
+							"name": "print",
+							"theme": "outlined"
+						},
+						"primary": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Print all nodes"
+							},
+							{
+								"locale": "de",
+								"text": "Alle Knoten drucken"
+							}
+						]
+					},
+					{
+						"label": [
+							{
+								"locale": "en",
+								"text": "Reload"
+							},
+							{
+								"locale": "de",
+								"text": "Neu laden"
+							}
+						],
+						"icon": {
+							"name": "refresh"
+						},
+						"id": "button-e3c12",
+						"event": "event_engine_reload_nodes",
+						"primary": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Reload"
+							},
+							{
+								"locale": "de",
+								"text": "Neu laden"
+							}
+						]
+					},
+					{
+						"label": [
+							{
+								"locale": "en",
+								"text": "Delete"
+							},
+							{
+								"locale": "de",
+								"text": "Delete"
+							}
+						],
+						"icon": {
+							"name": "delete"
+						},
+						"id": "button-dae12b",
+						"event": "event_delete_nodes",
+						"primary": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete"
+							},
+							{
+								"locale": "de",
+								"text": "Delete"
+							}
+						]
+					}
+				]
+			},
+			"enableVirtualScroll": true,
+			"rowHeight": 36,
+			"actionColumnWidth": 1.5,
+			"expansionStrategy": {
+				"type": "level_by_level",
+				"initialExpansion": {
+					"type": "level_limit",
+					"level": 2,
+					"affectedNodeRefs": ["node-6b202"]
+				},
+				"pageSize": 5
+			}
+		},
+		"columns": [
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Name"
+					},
+					{
+						"locale": "de",
+						"text": "Name"
+					}
+				],
+				"width": 3,
+				"fixedWidth": false,
+				"id": "column-87bd8",
+				"name": "Name",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				},
+				"styles": {
+					"header": ["name-columns-styles"],
+					"content": ["name-columns-content-styles"]
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Description"
+					},
+					{
+						"locale": "de",
+						"text": "Beschreibung"
+					}
+				],
+				"width": 3,
+				"fixedWidth": false,
+				"id": "column-18f1e",
+				"name": "Description",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				},
+				"styles": {
+					"header": ["description"],
+					"content": ["mono-text"]
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Release Date"
+					},
+					{
+						"locale": "de",
+						"text": "Veröffentlichungsdatum"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-0906f",
+				"name": "ReleaseDate",
+				"alignment": {
+					"header": {
+						"horizontal": "right",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "right",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Price"
+					},
+					{
+						"locale": "de",
+						"text": "Preis"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-7ce11",
+				"name": "Price",
+				"alignment": {
+					"header": {
+						"vertical": "middle"
+					},
+					"content": {
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Available from"
+					},
+					{
+						"locale": "de",
+						"text": "Verfügbar ab"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-83d90",
+				"name": "AvailableFrom",
+				"alignment": {
+					"header": {
+						"horizontal": "right",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "right",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Quantity"
+					},
+					{
+						"locale": "de",
+						"text": "Quantität"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-db5fe",
+				"name": "Quantity",
+				"alignment": {
+					"header": {
+						"vertical": "middle"
+					},
+					"content": {
+						"vertical": "middle"
+					}
+				}
+			}
+		],
+		"nodes": [
+			{
+				"id": "node-6b202",
+				"documentModelRef": "DomainCategory",
+				"columns": [
+					{
+						"columnRef": "column-87bd8",
+						"elementRef": "field_04d07"
+					},
+					{
+						"columnRef": "column-18f1e",
+						"elementRef": "field_d1da3"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-f7f64",
+						"relationshipModelRef": "CategoryCategory",
+						"parentRole": "Parent"
+					},
+					{
+						"id": "crc-05548",
+						"columns": [
+							{
+								"columnRef": "column-db5fe",
+								"elementRef": "field_c4320"
+							},
+							{
+								"columnRef": "column-83d90",
+								"elementRef": "field_52d82"
+							}
+						],
+						"relationshipModelRef": "ProductCategory",
+						"parentRole": "Category"
+					}
+				],
+				"icon": {
+					"name": "category"
+				},
+				"actions": [
+					{
+						"type": "insert",
+						"position": "as_child",
+						"icon": {
+							"name": "insert_as_child",
+							"theme": "custom"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a new child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie ein neues Kind ein"
+							}
+						]
+					},
+					{
+						"type": "event",
+						"event": "event_add_link",
+						"icon": {
+							"name": "link"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Add link"
+							},
+							{
+								"locale": "de",
+								"text": "Link hinzufügen"
+							}
+						]
+					},
+					{
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to delete this category? This will completely remove this category from other places."
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie diese Kategorie löschen? Dadurch wird diese Kategorie vollständig von anderen Stellen entfernt."
+								}
+							]
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete this category"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen Sie diese Kategorie"
+							}
+						]
+					},
+					{
+						"type": "event",
+						"event": "event_delete_link",
+						"icon": {
+							"name": "link_off"
+						},
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to remove this category?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie diese Kategorie entfernen?"
+								}
+							]
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Remove this category"
+							},
+							{
+								"locale": "de",
+								"text": "Entfernen Sie diese Kategorie"
+							}
+						]
+					},
+					{
+						"type": "event",
+						"event": "event_node_reload",
+						"icon": {
+							"name": "refresh"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Reload"
+							},
+							{
+								"locale": "de",
+								"text": "Neu laden"
+							}
+						]
+					}
+				],
+				"configuration": {
+					"dnd": true
+				},
+				"styles": ["category-styles"]
+			},
+			{
+				"id": "node-3473f",
+				"documentModelRef": "DomainProduct",
+				"columns": [
+					{
+						"columnRef": "column-87bd8",
+						"elementRef": "field_e19c8"
+					},
+					{
+						"elementRef": "field_0b769",
+						"columnRef": "column-18f1e"
+					},
+					{
+						"elementRef": "field_c3aa2",
+						"columnRef": "column-7ce11"
+					},
+					{
+						"elementRef": "field_07572",
+						"columnRef": "column-0906f"
+					}
+				],
+				"childRelationshipConfigurations": [],
+				"actions": [],
+				"contextMenu": {
+					"groups": [
+						{
+							"name": "main",
+							"title": [
+								{
+									"locale": "en",
+									"text": "Main"
+								},
+								{
+									"locale": "de",
+									"text": "Main [DE]"
+								}
+							],
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_delete_node",
+									"icon": {
+										"name": "delete"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Delete"
+										},
+										{
+											"locale": "de",
+											"text": "Löschen Sie dieses Produkt"
+										}
+									],
+									"confirmation": {
+										"title": [
+											{
+												"locale": "en",
+												"text": "Confirmation"
+											},
+											{
+												"locale": "de",
+												"text": "Bestätigung"
+											}
+										],
+										"message": [
+											{
+												"locale": "en",
+												"text": "Do you want to delete this product? This will completely remove this product from other places."
+											},
+											{
+												"locale": "de",
+												"text": "Möchten Sie dieses Produkt löschen? Dadurch wird dieses Produkt vollständig von anderen Stellen entfernt."
+											}
+										]
+									},
+									"description": [
+										{
+											"locale": "en",
+											"text": "Delete this product"
+										},
+										{
+											"locale": "de",
+											"text": "Löschen Sie dieses Produkt"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_delete_link",
+									"icon": {
+										"name": "link_off"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Remove"
+										},
+										{
+											"locale": "de",
+											"text": "Entfernen Sie dieses Produkt"
+										}
+									],
+									"confirmation": {
+										"title": [
+											{
+												"locale": "en",
+												"text": "Confirmation"
+											},
+											{
+												"locale": "de",
+												"text": "Bestätigung"
+											}
+										],
+										"message": [
+											{
+												"locale": "en",
+												"text": "Do you want to remove this product?"
+											},
+											{
+												"locale": "de",
+												"text": "Möchten Sie dieses Produkt entfernen?"
+											}
+										]
+									},
+									"description": [
+										{
+											"locale": "en",
+											"text": "Remove this product"
+										},
+										{
+											"locale": "de",
+											"text": "Entfernen Sie dieses Produkt"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "others",
+							"title": [
+								{
+									"locale": "en",
+									"text": "Others"
+								},
+								{
+									"locale": "de",
+									"text": "Others [DE]"
+								}
+							],
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_copy",
+									"icon": {
+										"name": "file_copy"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy [DE]"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Copy this product"
+										},
+										{
+											"locale": "de",
+											"text": "Copy this product [DE]"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_node_mark_as_target",
+									"icon": {
+										"name": "add_location",
+										"theme": "outlined"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Mark as target node"
+										},
+										{
+											"locale": "de",
+											"text": "Mark as target node [de]"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Mark as target node"
+										},
+										{
+											"locale": "de",
+											"text": "Mark as target node [de]"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_node_info",
+									"label": [
+										{
+											"locale": "en",
+											"text": "Info"
+										},
+										{
+											"locale": "de",
+											"text": "Info [DE]"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Info"
+										},
+										{
+											"locale": "de",
+											"text": "Info [DE]"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				"configuration": {
+					"dnd": true
+				}
+			},
+			{
+				"id": "node-acd29",
+				"documentModelRef": "DomainBundle",
+				"columns": [
+					{
+						"columnRef": "column-87bd8",
+						"elementRef": "F1"
+					},
+					{
+						"columnRef": "column-18f1e",
+						"elementRef": "F3"
+					},
+					{
+						"columnRef": "column-7ce11",
+						"elementRef": "F2"
+					},
+					{
+						"columnRef": "column-0906f",
+						"elementRef": "field_d4c4b"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-994f7",
+						"relationshipModelRef": "BundleProduct",
+						"parentRole": "Bundle"
+					}
+				],
+				"icon": {
+					"name": "style"
+				},
+				"actions": [],
+				"contextMenu": {
+					"groups": [
+						{
+							"name": "main",
+							"actions": [
+								{
+									"type": "insert",
+									"position": "as_child",
+									"label": [
+										{
+											"locale": "en",
+											"text": "Add product"
+										},
+										{
+											"locale": "de",
+											"text": "Add product [DE]"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Add product to this bundle"
+										},
+										{
+											"locale": "de",
+											"text": "Produkt zu diesem Bundle hinzufügen"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_delete_node",
+									"label": [
+										{
+											"locale": "en",
+											"text": "Delete"
+										},
+										{
+											"locale": "de",
+											"text": "Delete [DE]"
+										}
+									],
+									"confirmation": {
+										"title": [
+											{
+												"locale": "en",
+												"text": "Confirmation"
+											},
+											{
+												"locale": "de",
+												"text": "Bestätigung"
+											}
+										],
+										"message": [
+											{
+												"locale": "en",
+												"text": "Do you really want to delete this bundle?"
+											},
+											{
+												"locale": "de",
+												"text": "Möchten Sie dieses Bundle wirklich löschen?"
+											}
+										]
+									},
+									"description": [
+										{
+											"locale": "en",
+											"text": "Delete this bundle"
+										},
+										{
+											"locale": "de",
+											"text": "Löschen Sie dieses Bundle"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_delete_link",
+									"label": [
+										{
+											"locale": "en",
+											"text": "Remove"
+										},
+										{
+											"locale": "de",
+											"text": "Remove [DE]"
+										}
+									],
+									"confirmation": {
+										"title": [
+											{
+												"locale": "en",
+												"text": "Confirmation"
+											},
+											{
+												"locale": "de",
+												"text": "Bestätigung"
+											}
+										],
+										"message": [
+											{
+												"locale": "en",
+												"text": "Do you really want to remove this bundle?"
+											},
+											{
+												"locale": "de",
+												"text": "Möchten Sie dieses Bundle wirklich entfernen?"
+											}
+										]
+									},
+									"description": [
+										{
+											"locale": "en",
+											"text": "Remove this bundle"
+										},
+										{
+											"locale": "de",
+											"text": "Entfernen Sie dieses Bundle"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "others",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_copy",
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy [DE]"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Copy this product"
+										},
+										{
+											"locale": "de",
+											"text": "Copy this product [DE]"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				"configuration": {
+					"dnd": true
+				},
+				"styles": ["bundle-styles"]
+			}
+		],
+		"styles": [
+			"category-styles",
+			"bundle-styles",
+			"name-columns-styles",
+			"name-columns-content-styles",
+			"description",
+			"mono-text"
+		]
+	}
+}

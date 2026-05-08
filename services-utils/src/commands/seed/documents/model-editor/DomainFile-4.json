@@ -1,0 +1,13 @@
+{
+	"File": {
+		"Basic": {
+			"Name": "npm.cmd",
+			"Owner": "admin",
+			"Group": "admin"
+		},
+		"Size": 833,
+		"Extension": "cmd",
+		"FileType": "application",
+		"Readonly": false
+	}
+}

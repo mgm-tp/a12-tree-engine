@@ -1,0 +1,10 @@
+{
+	"Element": {
+		"Group": {
+			"Repeatability": 1
+		},
+		"GeneralInformation": {
+			"Name": "Person"
+		}
+	}
+}

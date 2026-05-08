@@ -1,0 +1,53 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#advanced/disable-link-creation]
+=== Disable Link Creation in Tree Engine
+
+By default, the CRUD module of Tree Engine provides the ability to link the created document in the Form Engine into the parent node when user uses the `Add Child Node` event.
+
+However, in some specific use cases, the user would like to link the created document to the Tree directly in the Form Engine.
+This would give more benefit because of the transactional nature of a batch request. Any error happens while linking will roll back the `CREATE_DOCUMENT` operation.
+
+To achieve it, developers can choose either to:
+
+* Use Relationship Engine inside the Form to perform the linking directly when user creates the document.
+If the Tree Engine sees any link between the created document to the parent node, it will automatically ignore the linking step in the Tree Engine after the document creation.
+
+* Use customized logic to perform the linking using `DataProvider` API.
+However, Tree Engine will not know this customization, so it still links the created document.
+In order to make Tree Engine ignore the linking step, developer should tell it whenever the link creation should be _enabled/disabled_ by providing a setting.
+
+[source,typescript,options="nowrap",title="src/appsetup.ts"]
+--
+export function setup() {
+    const treeEngineModuleSetting: TreeEngineFactories.ModuleSettings = {
+            sagaConfig: { linkCreationSetting: { isLinkAddedByDetailActivity } }
+    };
+
+    ModuleRegistryProvider.getInstance().addModule(TreeEngineFactories.createModule(treeEngineModuleSetting));
+  ...
+}
+
+include::assets/generated/typescript/showcase/shared-setup.ts[tags="LinkCreationSetting2"]
+--
+
+The parameters of the function `isLinkAddedByDetailActivity` will provide:
+
+* `activityId`: The activity ID of Tree Engine.
+* `detailActivityId`: The activity ID of the detail activity (usually a Form Engine activity).
+* `relationshipModelRef`: The relationship name is useful when the link creation is disabled/enabled per relationship.

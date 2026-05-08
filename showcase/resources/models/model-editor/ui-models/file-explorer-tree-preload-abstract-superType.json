@@ -1,0 +1,1382 @@
+{
+	"header": {
+		"id": "file-explorer-tree-preload-abstract-superType",
+		"modelType": "tree",
+		"modelVersion": "10.2.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "File Explorer"
+			},
+			{
+				"locale": "de",
+				"text": "Dateimanager"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM1",
+				"reference": "DomainComputer"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM2",
+				"reference": "DomainAbstractDrive"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM3",
+				"reference": "DomainDirectory"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM4",
+				"reference": "DomainFile"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM1",
+				"reference": "ComputerDrive"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM2",
+				"reference": "DriveDirectory"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM3",
+				"reference": "DriveFile"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM4",
+				"reference": "DirectoryDirectory"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM5",
+				"reference": "DirectoryFile"
+			}
+		]
+	},
+	"content": {
+		"configuration": {
+			"multiSelection": {
+				"collapseOption": "collapsible_expanded",
+				"counterOption": "simple",
+				"buttons": [
+					{
+						"label": [
+							{
+								"locale": "en",
+								"text": "Delete"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen"
+							}
+						],
+						"icon": {
+							"name": "delete"
+						},
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to delete all selected nodes?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie alle ausgewählten Knoten löschen?"
+								}
+							]
+						},
+						"id": "button-73a3a",
+						"event": "event_delete_nodes",
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen"
+							}
+						],
+						"destructive": true,
+						"primary": false
+					},
+					{
+						"id": "button-bafe1",
+						"event": "event_copy_nodes",
+						"label": [
+							{
+								"locale": "en",
+								"text": "Copy"
+							},
+							{
+								"locale": "de",
+								"text": "Copy"
+							}
+						],
+						"description": [
+							{
+								"locale": "en",
+								"text": "Copy"
+							},
+							{
+								"locale": "de",
+								"text": "Copy"
+							}
+						],
+						"destructive": false,
+						"primary": false
+					},
+					{
+						"label": [
+							{
+								"locale": "en",
+								"text": "Cut"
+							},
+							{
+								"locale": "de",
+								"text": "Cut"
+							}
+						],
+						"id": "button-7d1ec",
+						"event": "event_cut_nodes",
+						"destructive": false,
+						"primary": false
+					}
+				]
+			},
+			"dnd": {
+				"onDrag": {
+					"expandHoveredNode": true
+				}
+			},
+			"hierarchicalColumnRef": "column-cda0b",
+			"rootRef": "crc-34adb",
+			"enableColumnsResize": true,
+			"expansionStrategy": {
+				"type": "level_by_level"
+			}
+		},
+		"subHeaderBox": {
+			"majorElements": [],
+			"minorElements": [
+				{
+					"type": "multi_selection"
+				},
+				{
+					"id": "button-ecfd1",
+					"event": "event_paste",
+					"label": [
+						{
+							"locale": "en",
+							"text": "Paste"
+						},
+						{
+							"locale": "de",
+							"text": "Paste"
+						}
+					],
+					"type": "button",
+					"description": [
+						{
+							"locale": "en",
+							"text": "Paste"
+						},
+						{
+							"locale": "de",
+							"text": "Paste"
+						}
+					],
+					"destructive": false,
+					"primary": false
+				}
+			]
+		},
+		"footerBox": {
+			"majorElements": [],
+			"minorElements": [
+				{
+					"icon": {
+						"name": "add"
+					},
+					"id": "button-ed2312",
+					"event": "event_add_root_node",
+					"type": "button",
+					"destructive": false,
+					"primary": false
+				}
+			]
+		},
+		"columns": [
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Name"
+					},
+					{
+						"locale": "de",
+						"text": "Name"
+					}
+				],
+				"width": 3,
+				"fixedWidth": false,
+				"id": "column-cda0b",
+				"name": "Name",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Size"
+					},
+					{
+						"locale": "de",
+						"text": "Größe"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-c60d3",
+				"name": "Size",
+				"alignment": {
+					"header": {
+						"horizontal": "right",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "right",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "File Type"
+					},
+					{
+						"locale": "de",
+						"text": "Dateityp"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-d3a3d",
+				"name": "File Type",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Readonly"
+					},
+					{
+						"locale": "de",
+						"text": "Schreibgeschützt"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-274ce",
+				"name": "Readonly",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Owner"
+					},
+					{
+						"locale": "de",
+						"text": "Besitzer"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-7f74e",
+				"name": "Owner",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Group"
+					},
+					{
+						"locale": "de",
+						"text": "Gruppe"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-8147e",
+				"name": "Group",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			}
+		],
+		"nodes": [
+			{
+				"id": "node-4fea1",
+				"documentModelRef": "DomainComputer",
+				"columns": [
+					{
+						"elementRef": "include_2d437_field_35d81",
+						"columnRef": "column-cda0b"
+					},
+					{
+						"elementRef": "include_2d437_field_84648",
+						"columnRef": "column-7f74e"
+					},
+					{
+						"elementRef": "include_2d437_field_2e453",
+						"columnRef": "column-8147e"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-34adb",
+						"relationshipModelRef": "ComputerDrive",
+						"parentRole": "Computer"
+					}
+				],
+				"icon": {
+					"name": "computer"
+				},
+				"actions": [
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "insert",
+						"position": "as_child",
+						"icon": {
+							"name": "insert_as_child",
+							"theme": "custom"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie ein Kind ein"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete this computer"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen Sie dieses Laufwerk"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you wish to delete this computer?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie dieses Laufwerk löschen?"
+								}
+							]
+						}
+					}
+				],
+				"configuration": {
+					"dnd": false
+				},
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Context"
+								},
+								{
+									"locale": "de",
+									"text": "Context"
+								}
+							],
+							"name": "ContextMenu",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_paste",
+									"icon": {
+										"name": "content_paste"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Paste"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Paste"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "node-c6ccb",
+				"documentModelRef": "DomainAbstractDrive",
+				"columns": [
+					{
+						"elementRef": "field_35d81",
+						"columnRef": "column-cda0b"
+					},
+					{
+						"elementRef": "field_84648",
+						"columnRef": "column-7f74e"
+					},
+					{
+						"elementRef": "field_2e453",
+						"columnRef": "column-8147e"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-12011",
+						"relationshipModelRef": "DriveDirectory",
+						"parentRole": "Drive"
+					},
+					{
+						"id": "crc-6635c",
+						"relationshipModelRef": "DriveFile",
+						"parentRole": "Drive"
+					}
+				],
+				"icon": {
+					"name": "storage"
+				},
+				"actions": [
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "insert",
+						"position": "as_child",
+						"documentModelRef": "DomainFile",
+						"icon": {
+							"name": "insert_drive_file"
+						},
+						"useLabelFromDocumentModel": false,
+						"useTitleFromDocumentModel": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a file as child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie eine Datei als untergeordnetes Element ein"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "insert",
+						"position": "as_child",
+						"documentModelRef": "DomainDirectory",
+						"useGlobalIcon": true,
+						"useLabelFromDocumentModel": false,
+						"useTitleFromDocumentModel": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a directory as child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie ein Verzeichnis als untergeordnetes Element ein"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "insert",
+						"position": "as_child",
+						"icon": {
+							"name": "insert_as_child",
+							"theme": "custom"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie ein Kind ein"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete this drive"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen Sie dieses Laufwerk"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you wish to delete this drive?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie dieses Laufwerk löschen?"
+								}
+							]
+						}
+					}
+				],
+				"configuration": {
+					"dnd": true
+				},
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Context"
+								},
+								{
+									"locale": "de",
+									"text": "Context"
+								}
+							],
+							"name": "ContextMenu",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_paste",
+									"icon": {
+										"name": "content_paste"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Paste"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Paste"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "node-c0e3d",
+				"documentModelRef": "DomainDirectory",
+				"columns": [
+					{
+						"columnRef": "column-cda0b",
+						"elementRef": "field_35d81"
+					},
+					{
+						"elementRef": "field_84648",
+						"columnRef": "column-7f74e"
+					},
+					{
+						"elementRef": "field_2e453",
+						"columnRef": "column-8147e"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-062bb",
+						"relationshipModelRef": "DirectoryDirectory",
+						"parentRole": "Parent"
+					},
+					{
+						"id": "crc-403e4",
+						"relationshipModelRef": "DirectoryFile",
+						"parentRole": "Directory"
+					}
+				],
+				"icon": {
+					"name": "folder"
+				},
+				"actions": [
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "insert",
+						"position": "as_child",
+						"documentModelRef": "DomainFile",
+						"icon": {
+							"name": "insert_drive_file"
+						},
+						"useLabelFromDocumentModel": false,
+						"useTitleFromDocumentModel": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a file as child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie eine Datei als untergeordnetes Element ein"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "insert",
+						"position": "as_child",
+						"documentModelRef": "DomainDirectory",
+						"useGlobalIcon": true,
+						"useLabelFromDocumentModel": false,
+						"useTitleFromDocumentModel": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a directory as child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie ein Verzeichnis als untergeordnetes Element ein"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "insert",
+						"position": "as_child",
+						"icon": {
+							"name": "insert_as_child",
+							"theme": "custom"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Insert a child"
+							},
+							{
+								"locale": "de",
+								"text": "Fügen Sie ein Kind ein"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": true,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete this directory"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen Sie dieses Verzeichnis"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you wish to delete this directory?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie dieses Verzeichnis löschen?"
+								}
+							]
+						}
+					}
+				],
+				"configuration": {
+					"dnd": true
+				},
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Context"
+								},
+								{
+									"locale": "de",
+									"text": "Context"
+								}
+							],
+							"name": "ContextMenu",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_copy_node",
+									"icon": {
+										"name": "content_copy"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_copy_node_and_children",
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy recursively"
+										},
+										{
+											"locale": "de",
+											"text": "Copy recursively"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Copy recursively"
+										},
+										{
+											"locale": "de",
+											"text": "Copy recursively"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_cut_node",
+									"icon": {
+										"name": "content_cut"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Cut"
+										},
+										{
+											"locale": "de",
+											"text": "Schneiden"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Cut"
+										},
+										{
+											"locale": "de",
+											"text": "Schneiden"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_paste",
+									"icon": {
+										"name": "content_paste"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Paste"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Paste"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_paste_above",
+									"icon": {
+										"name": "move_up"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Paste Above"
+										},
+										{
+											"locale": "de",
+											"text": "Oben einfügen"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Paste Above"
+										},
+										{
+											"locale": "de",
+											"text": "Oben einfügen"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_paste_below",
+									"icon": {
+										"name": "move_down"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Paste Below"
+										},
+										{
+											"locale": "de",
+											"text": "Unten einfügen"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Paste Below"
+										},
+										{
+											"locale": "de",
+											"text": "Unten einfügen"
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Refresh"
+								},
+								{
+									"locale": "de",
+									"text": "Refresh"
+								}
+							],
+							"name": "Refresh",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_reload_level_0",
+									"icon": {
+										"name": "repeat",
+										"theme": "filled"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Self reload"
+										},
+										{
+											"locale": "de",
+											"text": "Self reload"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_reload_level_1",
+									"icon": {
+										"name": "repeat_one",
+										"theme": "filled"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Reload direct children"
+										},
+										{
+											"locale": "de",
+											"text": "Reload direct children"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_reload_level_2",
+									"icon": {
+										"name": "account_tree",
+										"theme": "filled"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Reload direct subtrees"
+										},
+										{
+											"locale": "de",
+											"text": "Reload direct subtrees"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_node_reload",
+									"icon": {
+										"name": "all_inclusive",
+										"theme": "filled"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Reload all subtree"
+										},
+										{
+											"locale": "de",
+											"text": "Reload all subtree"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "node-3a118",
+				"documentModelRef": "DomainFile",
+				"columns": [
+					{
+						"columnRef": "column-cda0b",
+						"elementRef": "field_35d81"
+					},
+					{
+						"columnRef": "column-7f74e",
+						"elementRef": "field_84648"
+					},
+					{
+						"columnRef": "column-8147e",
+						"elementRef": "field_2e453"
+					},
+					{
+						"columnRef": "column-d3a3d",
+						"elementRef": "field_265a0"
+					},
+					{
+						"columnRef": "column-274ce",
+						"elementRef": "field_bd939"
+					},
+					{
+						"columnRef": "column-c60d3",
+						"elementRef": "field_94519"
+					}
+				],
+				"childRelationshipConfigurations": [],
+				"actions": [
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_node_open_dm",
+						"icon": {
+							"name": "launch"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Open document model"
+							},
+							{
+								"locale": "de",
+								"text": "Dokumentmodell öffnen"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_node_open_fm",
+						"icon": {
+							"name": "launch"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Open form model"
+							},
+							{
+								"locale": "de",
+								"text": "Open form model"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_node_open_dm_with_replacement",
+						"icon": {
+							"name": "open_in_browser"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Open document model (stretch mode)"
+							},
+							{
+								"locale": "de",
+								"text": "Open document model (stretch mode)"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_node_open_dm_with_temporary_replacement",
+						"icon": {
+							"name": "open_in_full"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Open DM temporary in full screen mode"
+							},
+							{
+								"locale": "de",
+								"text": "Open DM temporary in full screen mode"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_node_open_dm_non_virtual_root",
+						"icon": {
+							"name": "explore"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Open document modeler with non virtual root"
+							},
+							{
+								"locale": "de",
+								"text": "Open document modeler with non virtual root"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_node_open_dm_select_parent",
+						"icon": {
+							"name": "elevator",
+							"theme": "outlined"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Open document model with select parent"
+							},
+							{
+								"locale": "de",
+								"text": "Dokumentmodell und wählen Sie das ubergeordnete"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"destructive": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete this file"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen Sie diese Datei"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you wish to delete this file?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie diese Datei löschen?"
+								}
+							]
+						}
+					}
+				],
+				"configuration": {
+					"dnd": true
+				},
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Context"
+								},
+								{
+									"locale": "de",
+									"text": "Context"
+								}
+							],
+							"name": "ContextMenu",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_copy_node",
+									"icon": {
+										"name": "content_copy"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			}
+		]
+	}
+}

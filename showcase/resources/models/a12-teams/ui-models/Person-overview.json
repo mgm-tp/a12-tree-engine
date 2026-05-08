@@ -1,0 +1,147 @@
+{
+	"header": {
+		"id": "Person-overview",
+		"modelType": "overview",
+		"modelVersion": "38.3.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Person"
+			},
+			{
+				"locale": "de",
+				"text": "Person"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-overview",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "DomainPerson"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous,user"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"majorElements": [
+				{
+					"type": "button",
+					"label": [
+						{
+							"locale": "en",
+							"text": "Add"
+						},
+						{
+							"locale": "de",
+							"text": "Hinzufügen"
+						}
+					],
+					"event": "add",
+					"destructive": false,
+					"primary": false
+				},
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
+		"columns": [
+			{
+				"id": "column-53130",
+				"elementRef": "F3",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-75fbb",
+				"elementRef": "F4",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-32db3",
+				"elementRef": "group_05909",
+				"sortable": false,
+				"width": 1,
+				"label": [
+					{
+						"locale": "en",
+						"text": "Photo"
+					},
+					{
+						"locale": "de",
+						"text": "Foto"
+					}
+				]
+			},
+			{
+				"icon": {
+					"name": "email"
+				},
+				"sortable": true,
+				"width": 1,
+				"styles": {},
+				"id": "column-190d2",
+				"elementRef": "F5",
+				"preferredSorting": "ASC"
+			},
+			{
+				"id": "column-daeae",
+				"elementRef": "F7",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-1d9e3",
+				"elementRef": "F8",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-a7ed9",
+				"elementRef": "F9",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": [
+				{
+					"event": "delete",
+					"icon": {
+						"name": "delete"
+					}
+				}
+			]
+		},
+		"configuration": {
+			"pagingSize": 10,
+			"showFullTextSearch": true,
+			"enableFilter": true,
+			"filterConfiguration": {
+				"showFilterButton": true,
+				"showFilterBar": true,
+				"filterMode": "all"
+			}
+		}
+	}
+}

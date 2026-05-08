@@ -1,0 +1,29 @@
+{
+	"Person": {
+		"PersonalData": {
+			"FirstName": "Jane",
+			"LastName": "Jaskolski",
+			"Email": "jane_jas_1992@gmail.com",
+			"Married": true,
+			"Confirm": true,
+			"Photo": {
+				"internal_filename": "pdf_file.pdf",
+				"mime_type": "application/pdf",
+				"content": "data:application/pdf;base64,abcxyz",
+				"size": 12646,
+				"original_filename": "pdf_file.pdf"
+			},
+			"Expertise": [
+				{
+					"expertise": "3"
+				},
+				{
+					"expertise": "5"
+				}
+			]
+		},
+		"Work": {
+			"AnnualLeave": null
+		}
+	}
+}

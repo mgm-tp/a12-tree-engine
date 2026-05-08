@@ -1,0 +1,101 @@
+{
+	"header": {
+		"id": "GroupElement-GM",
+		"modelType": "relationship",
+		"modelVersion": "3.0.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "Document model",
+				"modelType": "document",
+				"alias": "Group",
+				"reference": "DomainGroup-GM"
+			},
+			{
+				"purpose": "Document model",
+				"modelType": "document",
+				"alias": "Element",
+				"reference": "DomainElement-GM"
+			}
+		]
+	},
+	"content": {
+		"duplicatesAllowed": false,
+		"associationType": "SHARED",
+		"storage": "EXTERNAL",
+		"linkDocumentModel": null,
+		"embeddedGroupPath": null,
+		"labels": [
+			{
+				"locale": "en"
+			},
+			{
+				"locale": "de"
+			}
+		],
+		"entityCharacteristics": [
+			{
+				"role": "Group",
+				"documentModel": "DomainGroup-GM",
+				"ordered": true,
+				"navigable": true,
+				"linkConstraints": {
+					"multiplicity": {
+						"lowerLimit": 0,
+						"unbounded": false,
+						"upperLimit": 1
+					}
+				},
+				"candidateConstraints": null,
+				"labels": [
+					{
+						"locale": "en",
+						"text": "Group"
+					},
+					{
+						"locale": "de",
+						"text": "Gruppe"
+					}
+				]
+			},
+			{
+				"role": "Element",
+				"documentModel": "DomainElement-GM",
+				"ordered": false,
+				"navigable": true,
+				"linkConstraints": {
+					"multiplicity": {
+						"lowerLimit": 0,
+						"unbounded": true,
+						"upperLimit": null
+					}
+				},
+				"candidateConstraints": null,
+				"labels": [
+					{
+						"locale": "en",
+						"text": "Element"
+					},
+					{
+						"locale": "de",
+						"text": "Element"
+					}
+				]
+			}
+		]
+	}
+}

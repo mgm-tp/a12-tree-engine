@@ -1,0 +1,58 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#reloading]
+=== Reloading
+
+Tree Engine enables reloading subtrees by providing the action `Events.reload`.
+By dispatching this action, multiple subtrees can be reloaded at once.
+
+link:./assets/generated/typedoc/variables/core_store.Events.reload.html[Events.reload] and link:./assets/generated/typedoc/variables/core_store.Events.reloadAll.html[Events.reloadAll]  payload interface are as follows:
+
+[source,typescript,title="Reload action payload"]
+--
+interface ReloadPayload {
+  /**
+   * Identifiers of source nodes whose subtree to be reloaded
+   */
+  sources: Identifier[];
+  /**
+   * Define a limit on how many levels to be reloaded
+   * @default Infinity travel until reaching the leaf nodes
+   */
+  level?: number;
+}
+
+interface ReloadAllPayload {
+  /**
+   * Define a limit on how many levels to be reloaded
+   * @default Infinity travel until reaching the leaf nodes
+   */
+  level?: number;
+}
+--
+
+An action payload of this type contains a list of `sources`, each source represents the root of each subtree. An empty array sources will result no reloading. However, in case `sources` are not provided hence a `reloadAll` action, the engine will attempt to reload the whole tree starting from the root nodes.
+
+By default, the action will recursively travel and reload until every leaf node of each subtree is reached. Defining a `level` shall limit how many levels to be reloaded, potentially prevent a resource-intensive reloading action:
+
+* `0`: reload only the *sources*, resulting in `GET_DOCUMENT` operations to be requested. Providing `0` will only reload the provided sources, which expects only the source document to be updated. If the source document is deleted or removed from the subtree beforehand, the subtrees will not be updated properly. `0` is not a valid value for a `reloadAll` action.
+* `1`: reload the direct children of every provided source, this always result in `LIST_LINKS` operations to be requested.
+* For every increased number of level, the traveling depth is also increased. The Engine will automatically stop when the leaf is reached regardless of the pre-defined `level`.
+* The `GET_DOCUMENT` operation will be used only when `0` is provided, otherwise it is always the `LIST_LINKS` operation.
+
+INFO:: The operations listed above assume a setup using the link:#data-loader/default-data-loader[default data loader]. For a custom implementation of `TreeEngineDataLoader`, Tree Engine's link:./assets/generated/typedoc/modules/extensions_server-connector.DataOperation.Query.GetDocument.Query.html[GetDocument query] handler should also be included.

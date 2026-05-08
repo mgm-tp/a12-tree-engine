@@ -1,0 +1,9 @@
+{
+	"extends": "../tsconfig",
+	"include": ["./src/assets/typescript", "./scripts"],
+	"exclude": ["./**/generated"],
+	"compilerOptions": {
+		"noEmit": true,
+		"skipLibCheck": true
+	}
+}

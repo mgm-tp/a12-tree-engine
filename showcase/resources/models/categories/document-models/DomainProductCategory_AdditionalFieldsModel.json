@@ -1,0 +1,102 @@
+{
+	"header": {
+		"id": "DomainProductCategory_AdditionalFieldsModel",
+		"modelType": "document",
+		"modelVersion": "28.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "de",
+				"text": "DomainProductCategory_AdditionalFieldsModel"
+			},
+			{
+				"locale": "en",
+				"text": "DomainProductCategory_AdditionalFieldsModel"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"modelInfo": {
+			"name": "DomainProductCategory_AdditionalFieldsModel",
+			"immutable": false
+		},
+		"modelConfig": {
+			"decimalSeparator": ".",
+			"timeZone": "UTC",
+			"conditionLanguage": {
+				"code": "en_US"
+			}
+		},
+		"modelRoot": {
+			"rootGroups": [
+				{
+					"id": "group_059a0",
+					"type": "Group",
+					"name": "AdditionalFields",
+					"Group": {
+						"repeatability": 1,
+						"elements": [
+							{
+								"id": "field_c4320",
+								"type": "Field",
+								"name": "Quantity",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Quantity"
+										},
+										{
+											"locale": "de",
+											"text": "Quantität"
+										}
+									],
+									"fieldType": {
+										"type": "NumberType"
+									}
+								}
+							},
+							{
+								"id": "field_52d82",
+								"type": "Field",
+								"name": "AvailableFrom",
+								"Field": {
+									"label": [
+										{
+											"locale": "en",
+											"text": "Available From"
+										},
+										{
+											"locale": "de",
+											"text": "Verfügbar ab"
+										}
+									],
+									"fieldType": {
+										"type": "DateType",
+										"DateType": {
+											"format": "yyyy-MM-dd"
+										}
+									}
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

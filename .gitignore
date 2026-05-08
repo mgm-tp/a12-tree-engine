@@ -1,0 +1,47 @@
+.idea
+.vscode
+
+.npm
+node_modules
+
+.gradle
+
+lib
+build
+target
+dist
+
+server/bin
+
+*.log
+*.validation.js
+.nyc_output/
+*.tsbuildinfo
+cyclonedx.json
+dataservices-server.log.*.gz
+.nvmrc
+.envrc
+**/generated/
+TEST-performance-tree-engine.xml
+performance-results.json
+server/src/main/resources/models
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
+
+# Legal files copied into packages by copyLegalFiles task
+*/LICENSE
+*/NOTICE
+*/THIRD_PARTY_NOTICES
+*/licenses/
+
+# AI
+.serena
+*.local.*
+*.spec.*
+*.plan.*
+.playwright-mcp

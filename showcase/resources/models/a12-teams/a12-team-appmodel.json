@@ -1,0 +1,504 @@
+{
+	"header": {
+		"id": "a12-team-appmodel",
+		"modelType": "application",
+		"modelVersion": "6.0.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": []
+	},
+	"content": {
+		"region": {
+			"name": "APP",
+			"layout": {
+				"name": "ApplicationFrame"
+			},
+			"subRegions": [
+				{
+					"name": "CONTENT",
+					"layout": {
+						"name": "MasterDetail"
+					}
+				},
+				{
+					"name": "MODAL",
+					"layout": {
+						"name": "Stack"
+					}
+				}
+			]
+		},
+		"defaultRegion": ["CONTENT"],
+		"modules": [
+			{
+				"name": "A12Team",
+				"menu": {
+					"name": "A12Team",
+					"label": [
+						{
+							"locale": "en",
+							"text": "A12 Team"
+						},
+						{
+							"locale": "de",
+							"text": "A12 der Teams"
+						}
+					],
+					"children": [
+						{
+							"name": "A12 Tree",
+							"label": [
+								{
+									"locale": "en",
+									"text": "A12 Tree"
+								},
+								{
+									"locale": "de",
+									"text": "A12 Tree"
+								}
+							],
+							"initialActivity": {
+								"descriptor": {
+									"model": "a12-teams"
+								}
+							}
+						},
+						{
+							"name": "A12 Tree Custom",
+							"label": [
+								{
+									"locale": "en",
+									"text": "A12 Tree (Custom)"
+								},
+								{
+									"locale": "de",
+									"text": "A12 Tree (Benutzerdefiniert)"
+								}
+							],
+							"initialActivity": {
+								"descriptor": {
+									"model": "a12-teams",
+									"view": "CustomA12TeamTreeEngine"
+								}
+							}
+						},
+						{
+							"name": "A12 Tree Pagination",
+							"label": [
+								{
+									"locale": "en",
+									"text": "A12 Tree Pagination"
+								},
+								{
+									"locale": "de",
+									"text": "A12 Tree Seitennummerierung"
+								}
+							],
+							"initialActivity": {
+								"descriptor": {
+									"model": "a12-teams-tree-pagination"
+								}
+							}
+						},
+						{
+							"name": "A12 Tree Multi-Level",
+							"label": [
+								{
+									"locale": "en",
+									"text": "A12 Tree - Multi-Level"
+								},
+								{
+									"locale": "de",
+									"text": "A12 Tree - Multi-Level"
+								}
+							],
+							"initialActivity": {
+								"descriptor": {
+									"model": "a12-teams-tree-multi-level"
+								}
+							}
+						},
+						{
+							"name": "DomainTeam",
+							"label": [
+								{
+									"locale": "en",
+									"text": "Team"
+								},
+								{
+									"locale": "de",
+									"text": "Team"
+								}
+							],
+							"initialActivity": {
+								"descriptor": {
+									"model": "DomainTeam"
+								}
+							}
+						},
+						{
+							"name": "DomainPerson",
+							"label": [
+								{
+									"locale": "en",
+									"text": "Person"
+								},
+								{
+									"locale": "de",
+									"text": "Person"
+								}
+							],
+							"initialActivity": {
+								"descriptor": {
+									"model": "DomainPerson"
+								}
+							}
+						}
+					]
+				},
+				"flows": [
+					{
+						"name": "A12TeamFlow",
+						"scenes": [
+							{
+								"name": "a12-teams-tree",
+								"description": "a12-teams's tree",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "a12-teams"
+									},
+									{
+										"key": "view",
+										"isSet": false
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "REGION_CLEAR"
+										},
+										{
+											"type": "VIEW_ADD",
+											"name": "TreeCRUD",
+											"models": [
+												{
+													"modelType": "tree",
+													"name": "a12-teams-tree"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"name": "a12-teams-tree-custom",
+								"description": "a12-teams's tree custom",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "a12-teams"
+									},
+									{
+										"key": "view",
+										"mustEqual": "CustomA12TeamTreeEngine"
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "REGION_CLEAR"
+										},
+										{
+											"type": "VIEW_ADD",
+											"name": "CustomA12TeamTreeEngine",
+											"models": [
+												{
+													"modelType": "tree",
+													"name": "custom-a12-teams-tree"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "VIEW_ADD",
+											"region": ["MODAL"],
+											"name": "FormCRUD",
+											"models": [
+												{
+													"modelType": "form",
+													"name": "A12TeamsStandaloneRelationshipEngine"
+												}
+											]
+										}
+									]
+								},
+								"name": "a12-team-child-relationship-editor",
+								"description": "Child relationship editor for a12 team",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "DomainTeam"
+									},
+									{
+										"key": "engine",
+										"mustEqual": "relationship"
+									},
+									{
+										"key": "instance",
+										"isSet": true
+									}
+								]
+							},
+							{
+								"name": "Team-overview",
+								"description": "Team-overview",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "DomainTeam"
+									},
+									{
+										"key": "instance",
+										"isSet": false
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "REGION_CLEAR"
+										},
+										{
+											"type": "VIEW_ADD",
+											"name": "OverviewCRUD",
+											"models": [
+												{
+													"modelType": "overview",
+													"name": "Team-overview"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"name": "Team",
+								"description": "Team",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "DomainTeam"
+									},
+									{
+										"key": "instance",
+										"isSet": true
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "VIEW_ADD",
+											"name": "FormCRUD",
+											"models": [
+												{
+													"modelType": "form",
+													"name": "Team"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"name": "Person-overview",
+								"description": "Person-overview",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "DomainPerson"
+									},
+									{
+										"key": "instance",
+										"isSet": false
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "REGION_CLEAR"
+										},
+										{
+											"type": "VIEW_ADD",
+											"name": "OverviewCRUD",
+											"models": [
+												{
+													"modelType": "overview",
+													"name": "Person-overview"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"name": "Person",
+								"description": "Person",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "DomainPerson"
+									},
+									{
+										"key": "instance",
+										"isSet": true
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "VIEW_ADD",
+											"name": "FormCRUD",
+											"models": [
+												{
+													"modelType": "form",
+													"name": "Person"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"name": "TeamPerson_LinkForm",
+								"description": "TeamPerson_LinkForm",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "DomainTeamPerson_AdditionalFieldsModel"
+									},
+									{
+										"key": "instance",
+										"isSet": true
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "VIEW_ADD",
+											"name": "FormCRUD",
+											"region": ["MODAL"],
+											"models": [
+												{
+													"modelType": "form",
+													"name": "TeamPerson_LinkForm"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"name": "a12-teams-tree-pagination",
+								"description": "a12-teams's tree pagination",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "a12-teams-tree-pagination"
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "REGION_CLEAR"
+										},
+										{
+											"type": "VIEW_ADD",
+											"name": "TreeCRUD",
+											"models": [
+												{
+													"modelType": "tree",
+													"name": "a12-teams-tree-pagination"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"name": "a12-teams-tree-multi-level",
+								"description": "a12-teams's tree - multi-level showcase",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "a12-teams-tree-multi-level"
+									}
+								],
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "REGION_CLEAR"
+										},
+										{
+											"type": "VIEW_ADD",
+											"name": "TreeCRUD",
+											"models": [
+												{
+													"modelType": "tree",
+													"name": "a12-teams-tree-multi-level"
+												}
+											]
+										}
+									]
+								}
+							},
+							{
+								"sceneChange": {
+									"onEnter": [
+										{
+											"type": "VIEW_ADD",
+											"models": [
+												{
+													"modelType": "form",
+													"name": "Location"
+												}
+											],
+											"name": "FormCRUD"
+										}
+									]
+								},
+								"name": "Location",
+								"matchConditions": [
+									{
+										"key": "model",
+										"mustEqual": "DomainLocation"
+									},
+									{
+										"key": "instance",
+										"isSet": true
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

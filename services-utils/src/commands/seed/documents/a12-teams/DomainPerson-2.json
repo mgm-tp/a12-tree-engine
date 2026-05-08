@@ -1,0 +1,29 @@
+{
+	"Person": {
+		"PersonalData": {
+			"FirstName": "Levi",
+			"LastName": "Walker",
+			"Email": "lwalker_1983@gmail.com",
+			"Married": true,
+			"Confirm": null,
+			"Photo": {
+				"internal_filename": "docx_file.docx",
+				"mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+				"content": "data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,abcxyz",
+				"size": 11743,
+				"original_filename": "docx_file.docx"
+			},
+			"Expertise": [
+				{
+					"expertise": "1"
+				},
+				{
+					"expertise": "5"
+				}
+			]
+		},
+		"Work": {
+			"AnnualLeave": "2020-02-29/2020-03-20"
+		}
+	}
+}

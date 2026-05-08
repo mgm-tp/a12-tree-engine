@@ -1,0 +1,218 @@
+{
+	"header": {
+		"id": "AttachmentGroup",
+		"modelType": "form",
+		"modelVersion": "37.4.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "AttachmentGroup"
+			},
+			{
+				"locale": "de",
+				"text": "Anhangsgruppe"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"alias": "DM",
+				"modelType": "document",
+				"purpose": "data binding",
+				"reference": "DomainAttachmentGroup"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"id": "subHeaderBox1"
+		},
+		"footerBox": {
+			"id": "footerBox1",
+			"majorButtons": {
+				"button": [
+					{
+						"type": "EVENT",
+						"id": "button-85d79",
+						"name": "CancelButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Cancel"
+										},
+										{
+											"locale": "de",
+											"text": "Abbrechen"
+										}
+									]
+								}
+							},
+							"priority": "SECONDARY",
+							"destructive": true
+						},
+						"event": "event_cancel",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					},
+					{
+						"type": "EVENT",
+						"id": "button-74df9",
+						"name": "SaveButton",
+						"buttonStyling": {
+							"label": {
+								"type": "Multilingual",
+								"multilingualText": {
+									"text": [
+										{
+											"locale": "en",
+											"text": "Save"
+										},
+										{
+											"locale": "de",
+											"text": "Speichern"
+										}
+									]
+								}
+							},
+							"priority": "PRIMARY"
+						},
+						"event": "event_save",
+						"validation": "full",
+						"scope": "HIDDEN_IN_READONLY_MODE"
+					}
+				]
+			}
+		},
+		"screens": [
+			{
+				"id": "screen1",
+				"name": "Screen1",
+				"screenElements": [
+					{
+						"type": "Section",
+						"id": "section-881ba",
+						"name": "GeneralInformation",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "General Information"
+									},
+									{
+										"locale": "de",
+										"text": "Allgemeine Information"
+									}
+								]
+							}
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-96638",
+								"name": "ControlGrid",
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-bd949",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-f32ab",
+												"elementRef": "include_d2456_field_91a2c"
+											}
+										]
+									},
+									{
+										"type": "Row",
+										"id": "row-c1811",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-69b2a",
+												"elementRef": "include_d2456_field_60604"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					},
+					{
+						"type": "Section",
+						"id": "section-4b34b",
+						"name": "Group",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "Group"
+									},
+									{
+										"locale": "de",
+										"text": "Gruppe"
+									}
+								]
+							}
+						},
+						"screenElements": [
+							{
+								"type": "ControlGrid",
+								"id": "controlgrid-d34e6",
+								"name": "ControlGrid",
+								"row": [
+									{
+										"type": "Row",
+										"id": "row-2d8d0",
+										"cell": [
+											{
+												"type": "Control",
+												"id": "control-53f5e",
+												"offset": {
+													"lg": 0
+												},
+												"readonly": true,
+												"elementRef": "include_d2456_field_67e4f"
+											}
+										]
+									}
+								],
+								"verticalAlignment": "BOTTOM"
+							}
+						]
+					}
+				]
+			}
+		],
+		"fieldConfiguration": {
+			"field": [
+				{
+					"initialValue": "1",
+					"elementRef": "include_d2456_field_67e4f"
+				}
+			]
+		},
+		"groupConfiguration": {},
+		"defaults": {}
+	}
+}

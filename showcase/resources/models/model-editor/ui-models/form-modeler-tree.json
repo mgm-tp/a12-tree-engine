@@ -1,0 +1,618 @@
+{
+	"header": {
+		"id": "form-modeler-tree",
+		"modelType": "tree",
+		"modelVersion": "10.2.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Form Modeler"
+			},
+			{
+				"locale": "de",
+				"text": "Form Modeler"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM1",
+				"reference": "DomainScreen"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM2",
+				"reference": "DomainScreenElement"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM3",
+				"reference": "DomainDetachedRepeat"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM4",
+				"reference": "DomainInlineRepeat"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM1",
+				"reference": "ScreenScreenElement"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM2",
+				"reference": "DetachedRepeatScreen"
+			}
+		]
+	},
+	"content": {
+		"configuration": {
+			"dnd": {
+				"onDrag": {
+					"expandHoveredNode": true
+				}
+			},
+			"multiSelection": {
+				"clearConfirmation": {
+					"enabled": true,
+					"confirmation": {
+						"message": [
+							{
+								"locale": "en",
+								"text": "Do you want to clear the multi-selection?"
+							},
+							{
+								"locale": "de",
+								"text": "Do you want to clear the multi-selection?"
+							}
+						]
+					}
+				},
+				"collapseOption": "collapsible_collapsed",
+				"counterOption": "simple",
+				"buttons": [
+					{
+						"icon": {
+							"name": "delete_sweep"
+						},
+						"confirmation": {
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to delete selected elements?"
+								},
+								{
+									"locale": "de",
+									"text": "Do you want to delete selected elements?"
+								}
+							]
+						},
+						"id": "button-adb34",
+						"event": "event_delete_nodes",
+						"primary": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete"
+							},
+							{
+								"locale": "de",
+								"text": "Delete"
+							}
+						]
+					},
+					{
+						"icon": {
+							"name": "folder_copy"
+						},
+						"id": "button-27cf3",
+						"event": "event_copy_nodes",
+						"primary": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Copy"
+							},
+							{
+								"locale": "de",
+								"text": "Copy"
+							}
+						]
+					},
+					{
+						"icon": {
+							"name": "content_cut"
+						},
+						"id": "button-89c13",
+						"event": "event_cut_nodes",
+						"primary": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Cut"
+							},
+							{
+								"locale": "de",
+								"text": "Cut"
+							}
+						]
+					},
+					{
+						"icon": {
+							"name": "content_paste"
+						},
+						"id": "button-8ceb4",
+						"event": "event_paste",
+						"primary": false,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Paste"
+							},
+							{
+								"locale": "de",
+								"text": "Paste"
+							}
+						]
+					}
+				]
+			},
+			"hierarchicalColumnRef": "column-3d970",
+			"rootRef": "crc-4265f",
+			"wholeTreeExpansion": true,
+			"enableColumnsResize": true,
+			"virtualRoot": {
+				"label": [
+					{
+						"locale": "en",
+						"text": "Model Tree"
+					},
+					{
+						"locale": "de",
+						"text": "Model Tree"
+					}
+				],
+				"actions": [],
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Insert"
+								},
+								{
+									"locale": "de",
+									"text": "Insert"
+								}
+							],
+							"name": "Insert",
+							"type": "add",
+							"actions": [
+								{
+									"type": "insert",
+									"documentModelRef": "DomainScreen",
+									"useGlobalIcon": true,
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": true
+								}
+							]
+						}
+					]
+				}
+			},
+			"expansionStrategy": {
+				"type": "level_by_level",
+				"initialExpansion": {
+					"type": "all_levels"
+				}
+			}
+		},
+		"subHeaderBox": {
+			"majorElements": [],
+			"minorElements": [
+				{
+					"type": "expand_all_popup"
+				},
+				{
+					"type": "multi_selection"
+				}
+			]
+		},
+		"footerBox": {
+			"majorElements": [],
+			"minorElements": []
+		},
+		"nodes": [
+			{
+				"icon": {
+					"name": "screenshot_monitor"
+				},
+				"configuration": {
+					"dnd": true,
+					"inherit": {}
+				},
+				"id": "node-05b50",
+				"documentModelRef": "DomainScreen",
+				"columns": [
+					{
+						"columnRef": "column-3d970",
+						"elementRef": "field_6a08f"
+					},
+					{
+						"columnRef": "column-6c2e6",
+						"elementRef": "field_8e414"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-4265f",
+						"relationshipModelRef": "ScreenScreenElement",
+						"parentRole": "Screen"
+					}
+				],
+				"actions": [],
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Insert"
+								},
+								{
+									"locale": "de",
+									"text": "Insert"
+								}
+							],
+							"name": "Insert",
+							"type": "add",
+							"actions": [
+								{
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "DomainDetachedRepeat",
+									"useGlobalIcon": true,
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": true
+								},
+								{
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "DomainInlineRepeat",
+									"useGlobalIcon": true,
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": true
+								}
+							]
+						},
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Actions"
+								},
+								{
+									"locale": "de",
+									"text": "Actions"
+								}
+							],
+							"name": "Actions",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_copy_node_and_children",
+									"icon": {
+										"name": "file_copy"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_cut_node",
+									"icon": {
+										"name": "content_cut"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Cut"
+										},
+										{
+											"locale": "de",
+											"text": "Cut"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Cut"
+										},
+										{
+											"locale": "de",
+											"text": "Cut"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_paste",
+									"icon": {
+										"name": "content_paste"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Paste"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Paste"
+										},
+										{
+											"locale": "de",
+											"text": "Paste"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"configuration": {
+					"dnd": true,
+					"inherit": {}
+				},
+				"id": "node-30272",
+				"documentModelRef": "DomainScreenElement",
+				"columns": [
+					{
+						"columnRef": "column-3d970",
+						"elementRef": "field_6a08f"
+					},
+					{
+						"columnRef": "column-6c2e6",
+						"elementRef": "field_8e414"
+					}
+				],
+				"actions": [],
+				"childRelationshipConfigurations": [],
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Actions"
+								},
+								{
+									"locale": "de",
+									"text": "Actions"
+								}
+							],
+							"name": "CutAndCopy",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_copy_node_and_children",
+									"icon": {
+										"name": "file_copy"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Copy"
+										},
+										{
+											"locale": "de",
+											"text": "Copy"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_cut_node",
+									"icon": {
+										"name": "content_cut"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Cut"
+										},
+										{
+											"locale": "de",
+											"text": "Cut"
+										}
+									],
+									"description": [
+										{
+											"locale": "en",
+											"text": "Cut"
+										},
+										{
+											"locale": "de",
+											"text": "Cut"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"icon": {
+					"name": "launch"
+				},
+				"configuration": {
+					"dnd": true,
+					"inherit": {
+						"contextMenu": true,
+						"columns": true,
+						"defaultRowAction": true,
+						"rowTitle": true,
+						"styles": true
+					}
+				},
+				"id": "node-6a612",
+				"documentModelRef": "DomainDetachedRepeat",
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-072a5",
+						"relationshipModelRef": "DetachedRepeatScreen",
+						"parentRole": "DetachedRepeat"
+					}
+				],
+				"columns": [],
+				"actions": [
+					{
+						"primary": false,
+						"type": "insert",
+						"position": "as_child",
+						"documentModelRef": "DomainScreen",
+						"useGlobalIcon": true,
+						"useLabelFromDocumentModel": false,
+						"useTitleFromDocumentModel": false,
+						"label": [
+							{
+								"locale": "en",
+								"text": "Add screen"
+							},
+							{
+								"locale": "de",
+								"text": "Add screen"
+							}
+						],
+						"description": [
+							{
+								"locale": "en",
+								"text": "Add screen"
+							},
+							{
+								"locale": "de",
+								"text": "Add screen"
+							}
+						]
+					}
+				]
+			},
+			{
+				"icon": {
+					"name": "repeat"
+				},
+				"configuration": {
+					"dnd": true,
+					"inherit": {
+						"contextMenu": true,
+						"columns": true,
+						"defaultRowAction": true,
+						"childRelationshipConfigurations": true,
+						"rowTitle": true,
+						"actions": true,
+						"styles": true
+					}
+				},
+				"id": "node-333f1",
+				"documentModelRef": "DomainInlineRepeat",
+				"columns": [],
+				"actions": [],
+				"childRelationshipConfigurations": []
+			}
+		],
+		"columns": [
+			{
+				"width": 3,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-3d970",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Name"
+					},
+					{
+						"locale": "de",
+						"text": "Name"
+					}
+				],
+				"name": "Name"
+			},
+			{
+				"width": 1,
+				"fixedWidth": false,
+				"styles": {},
+				"id": "column-6c2e6",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Description"
+					},
+					{
+						"locale": "de",
+						"text": "Description"
+					}
+				],
+				"name": "Description"
+			}
+		]
+	}
+}

@@ -1,0 +1,94 @@
+{
+	"header": {
+		"id": "BundleProduct",
+		"modelType": "relationship",
+		"modelVersion": "3.0.0",
+		"labels": [],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "Document model",
+				"modelType": "document",
+				"alias": "Bundle",
+				"reference": "DomainBundle"
+			},
+			{
+				"purpose": "Document model",
+				"modelType": "document",
+				"alias": "Product",
+				"reference": "DomainProduct"
+			}
+		]
+	},
+	"content": {
+		"associationType": "SHARED",
+		"linkDocumentModel": null,
+		"duplicatesAllowed": false,
+		"storage": "EXTERNAL",
+		"embeddedGroupPath": null,
+		"labels": [],
+		"entityCharacteristics": [
+			{
+				"role": "Bundle",
+				"documentModel": "DomainBundle",
+				"ordered": false,
+				"navigable": true,
+				"linkConstraints": {
+					"multiplicity": {
+						"lowerLimit": 0,
+						"unbounded": true,
+						"upperLimit": null
+					}
+				},
+				"candidateConstraints": null,
+				"labels": [
+					{
+						"locale": "en",
+						"text": "Bundle"
+					},
+					{
+						"locale": "de",
+						"text": "Bündeln"
+					}
+				]
+			},
+			{
+				"role": "Product",
+				"documentModel": "DomainProduct",
+				"ordered": false,
+				"navigable": true,
+				"linkConstraints": {
+					"multiplicity": {
+						"lowerLimit": 0,
+						"unbounded": true,
+						"upperLimit": null
+					}
+				},
+				"candidateConstraints": null,
+				"labels": [
+					{
+						"locale": "en",
+						"text": "Product"
+					},
+					{
+						"locale": "de",
+						"text": "Produkt"
+					}
+				]
+			}
+		]
+	}
+}

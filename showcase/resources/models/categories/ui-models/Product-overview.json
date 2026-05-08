@@ -1,0 +1,114 @@
+{
+	"header": {
+		"id": "Product-overview",
+		"modelType": "overview",
+		"modelVersion": "38.3.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Products"
+			},
+			{
+				"locale": "de",
+				"text": "Produkte"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-overview",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "DomainProduct"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		]
+	},
+	"content": {
+		"subHeaderBox": {
+			"majorElements": [
+				{
+					"type": "button",
+					"label": [
+						{
+							"locale": "en",
+							"text": "Add"
+						},
+						{
+							"locale": "de",
+							"text": "Hinzufügen"
+						}
+					],
+					"event": "add",
+					"destructive": false,
+					"primary": false
+				},
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
+		"columns": [
+			{
+				"id": "column-28d07",
+				"elementRef": "field_e19c8",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-3eff2",
+				"elementRef": "field_0b769",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-d9386",
+				"elementRef": "field_c3aa2",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-1ac61",
+				"elementRef": "field_07572",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": [
+				{
+					"event": "delete",
+					"icon": {
+						"name": "delete"
+					}
+				}
+			]
+		},
+		"configuration": {
+			"pagingSize": 10,
+			"showFullTextSearch": true,
+			"enableFilter": true,
+			"filterConfiguration": {
+				"showFilterButton": true,
+				"showFilterBar": true,
+				"filterMode": "all"
+			}
+		}
+	}
+}

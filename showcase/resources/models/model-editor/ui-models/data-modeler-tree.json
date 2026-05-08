@@ -1,0 +1,1399 @@
+{
+	"header": {
+		"id": "data-modeler-tree",
+		"modelType": "tree",
+		"modelVersion": "10.2.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Data Modeler"
+			},
+			{
+				"locale": "de",
+				"text": "Data Modeler"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM1",
+				"reference": "DomainAttachmentGroup"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM2",
+				"reference": "DomainGroup"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM3",
+				"reference": "DomainField"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM4",
+				"reference": "DomainRule"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM1",
+				"reference": "GroupElement"
+			}
+		]
+	},
+	"content": {
+		"configuration": {
+			"multiSelection": {
+				"collapseOption": "non_collapsible",
+				"counterOption": "simple",
+				"buttons": [
+					{
+						"id": "button-bafd9",
+						"event": "event_delete_nodes",
+						"icon": {
+							"name": "delete"
+						},
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you want to delete all selected nodes?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie alle ausgewählten Knoten löschen?"
+								}
+							]
+						},
+						"label": [
+							{
+								"locale": "en",
+								"text": "Delete"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen"
+							}
+						],
+						"destructive": true,
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen"
+							}
+						],
+						"primary": false
+					},
+					{
+						"label": [
+							{
+								"locale": "en",
+								"text": "Edit"
+							},
+							{
+								"locale": "de",
+								"text": "Bearbeiten"
+							}
+						],
+						"icon": {
+							"name": "edit_outline",
+							"theme": "custom"
+						},
+						"id": "button-dcacd",
+						"event": "event_edit_nodes",
+						"description": [
+							{
+								"locale": "en",
+								"text": "Edit"
+							},
+							{
+								"locale": "de",
+								"text": "Bearbeiten"
+							}
+						],
+						"primary": false
+					},
+					{
+						"label": [
+							{
+								"locale": "en",
+								"text": "Copy"
+							},
+							{
+								"locale": "de",
+								"text": "Copy"
+							}
+						],
+						"id": "button-beda3f",
+						"event": "event_copy_nodes",
+						"description": [
+							{
+								"locale": "en",
+								"text": "Copy"
+							},
+							{
+								"locale": "de",
+								"text": "Copy"
+							}
+						],
+						"primary": false
+					},
+					{
+						"label": [
+							{
+								"locale": "en",
+								"text": "Cut"
+							},
+							{
+								"locale": "de",
+								"text": "Cut"
+							}
+						],
+						"id": "button-abda3f",
+						"event": "event_cut_nodes",
+						"description": [
+							{
+								"locale": "en",
+								"text": "Cut"
+							},
+							{
+								"locale": "de",
+								"text": "Cut"
+							}
+						],
+						"primary": false
+					}
+				]
+			},
+			"dnd": {
+				"onDrag": {
+					"expandHoveredNode": true
+				}
+			},
+			"hierarchicalColumnRef": "column-ab0e2",
+			"rootRef": "crc-6040e",
+			"enableColumnsResize": true,
+			"virtualRoot": {
+				"label": [
+					{
+						"locale": "en",
+						"text": "Model"
+					},
+					{
+						"locale": "de",
+						"text": "Modell"
+					}
+				],
+				"actions": [
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_paste",
+						"icon": {
+							"name": "content_paste"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Paste"
+							},
+							{
+								"locale": "de",
+								"text": "Paste"
+							}
+						]
+					}
+				],
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Add"
+								},
+								{
+									"locale": "de",
+									"text": "Hinzufügen"
+								}
+							],
+							"name": "add",
+							"type": "add",
+							"actions": [
+								{
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "DomainGroup",
+									"useGlobalIcon": true,
+									"useLabelFromDocumentModel": false,
+									"useTitleFromDocumentModel": false,
+									"label": [
+										{
+											"locale": "en",
+											"text": "Group"
+										},
+										{
+											"locale": "de",
+											"text": "Gruppe"
+										}
+									]
+								},
+								{
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "DomainAttachmentGroup",
+									"useGlobalIcon": true,
+									"useLabelFromDocumentModel": false,
+									"useTitleFromDocumentModel": false,
+									"label": [
+										{
+											"locale": "en",
+											"text": "Attachment Group"
+										},
+										{
+											"locale": "de",
+											"text": "Anhangsgruppe"
+										}
+									]
+								},
+								{
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "DomainMultiSelectGroup",
+									"useGlobalIcon": true,
+									"useLabelFromDocumentModel": false,
+									"useTitleFromDocumentModel": false,
+									"label": [
+										{
+											"locale": "en",
+											"text": "Multi-select Group"
+										},
+										{
+											"locale": "de",
+											"text": "Gruppe mit Mehrfachauswahl"
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Expansion"
+								},
+								{
+									"locale": "de",
+									"text": "Erweiterung"
+								}
+							],
+							"name": "expand/collapse",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_expand_whole_tree",
+									"icon": {
+										"name": "expand"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Expand"
+										},
+										{
+											"locale": "de",
+											"text": "Erweitern"
+										}
+									]
+								},
+								{
+									"type": "event",
+									"event": "event_collapse_whole_tree",
+									"icon": {
+										"name": "close_fullscreen"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Collapse"
+										},
+										{
+											"locale": "de",
+											"text": "Zusammenbruch"
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Scroll to node"
+								},
+								{
+									"locale": "de",
+									"text": "Scroll to node [de]"
+								}
+							],
+							"name": "scrollToNode",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_node_reveal_target",
+									"icon": {
+										"name": "my_location"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Reveal target node"
+										},
+										{
+											"locale": "de",
+											"text": "Reveal target node [de]"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"expansionStrategy": {
+				"type": "level_by_level",
+				"initialExpansion": {
+					"type": "all_levels"
+				}
+			}
+		},
+		"subHeaderBox": {
+			"majorElements": [
+				{
+					"type": "multi_selection"
+				},
+				{
+					"id": "button-3edafe",
+					"event": "event_paste",
+					"label": [
+						{
+							"locale": "en",
+							"text": "Paste"
+						},
+						{
+							"locale": "de",
+							"text": "Paste"
+						}
+					],
+					"destructive": false,
+					"type": "button",
+					"description": [
+						{
+							"locale": "en",
+							"text": "Paste"
+						},
+						{
+							"locale": "de",
+							"text": "Paste"
+						}
+					],
+					"primary": false
+				},
+				{
+					"label": [
+						{
+							"locale": "en",
+							"text": "Add group"
+						},
+						{
+							"locale": "de",
+							"text": "Gruppe hinzufügen"
+						}
+					],
+					"destructive": false,
+					"icon": {
+						"name": "add"
+					},
+					"id": "button-bafdf",
+					"event": "event_add_root_node",
+					"annotations": [
+						{
+							"name": "documents",
+							"value": "DomainGroup"
+						}
+					],
+					"type": "button",
+					"description": [
+						{
+							"locale": "en",
+							"text": "Add a group as root"
+						},
+						{
+							"locale": "de",
+							"text": "Fügen Sie eine Gruppe als root hinzu"
+						}
+					],
+					"primary": false
+				},
+				{
+					"label": [
+						{
+							"locale": "en",
+							"text": "Add subgroup"
+						},
+						{
+							"locale": "de",
+							"text": "Untergruppe hinzufügen"
+						}
+					],
+					"destructive": false,
+					"icon": {
+						"name": "add"
+					},
+					"id": "button-3c6b6",
+					"event": "event_add_root_node",
+					"annotations": [
+						{
+							"name": "documents",
+							"value": "DomainAttachmentGroup,DomainMultiSelectGroup"
+						}
+					],
+					"type": "button",
+					"description": [
+						{
+							"locale": "en",
+							"text": "Add a subgroup as root"
+						},
+						{
+							"locale": "de",
+							"text": "Fügen Sie eine Untergruppe als root hinzu"
+						}
+					],
+					"primary": false
+				}
+			],
+			"minorElements": [
+				{
+					"id": "button-ed2313",
+					"event": "event_engine_back",
+					"type": "button",
+					"icon": {
+						"name": "arrow_back"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Back"
+						},
+						{
+							"locale": "de",
+							"text": "Der Rücken"
+						}
+					],
+					"description": [
+						{
+							"locale": "en",
+							"text": "Back"
+						},
+						{
+							"locale": "de",
+							"text": "Der Rücken"
+						}
+					],
+					"primary": false
+				},
+				{
+					"id": "button-edba32",
+					"event": "event_reload_hidden_root",
+					"type": "button",
+					"icon": {
+						"name": "refresh"
+					},
+					"description": [
+						{
+							"locale": "en",
+							"text": "Reload tree (from hidden root)"
+						},
+						{
+							"locale": "de",
+							"text": "Reload tree (from hidden root)"
+						}
+					],
+					"primary": false
+				},
+				{
+					"id": "button-ecdb12",
+					"event": "event_reload_whole_tree",
+					"type": "button",
+					"icon": {
+						"name": "repeat"
+					},
+					"description": [
+						{
+							"locale": "en",
+							"text": "Reload whole tree"
+						},
+						{
+							"locale": "de",
+							"text": "Reload whole tree"
+						}
+					],
+					"primary": false
+				}
+			]
+		},
+		"footerBox": {
+			"majorElements": [],
+			"minorElements": []
+		},
+		"columns": [
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Name"
+					},
+					{
+						"locale": "de",
+						"text": "Name"
+					}
+				],
+				"width": 2,
+				"fixedWidth": false,
+				"id": "column-ab0e2",
+				"name": "Name",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Description"
+					},
+					{
+						"locale": "de",
+						"text": "Beschreibung"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-ac536",
+				"name": "Description",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			},
+			{
+				"label": [
+					{
+						"locale": "en",
+						"text": "Repeatability/Type"
+					},
+					{
+						"locale": "de",
+						"text": "Wiederholbarkeit/Typ"
+					}
+				],
+				"width": 1,
+				"fixedWidth": false,
+				"id": "column-ab083",
+				"name": "Repeatability/Type",
+				"alignment": {
+					"header": {
+						"horizontal": "left",
+						"vertical": "middle"
+					},
+					"content": {
+						"horizontal": "left",
+						"vertical": "middle"
+					}
+				}
+			}
+		],
+		"nodes": [
+			{
+				"id": "node-debbb",
+				"documentModelRef": "DomainAttachmentGroup",
+				"childRelationshipConfigurations": [],
+				"columns": [],
+				"actions": [
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_cut_node",
+						"icon": {
+							"name": "content_cut"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Cut"
+							},
+							{
+								"locale": "de",
+								"text": "Cut"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Remove this group"
+							},
+							{
+								"locale": "de",
+								"text": "Entfernen Sie diese Gruppe"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you really want to delete this group?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie diese Gruppe wirklich löschen?"
+								}
+							]
+						}
+					}
+				],
+				"icon": {
+					"name": "attachment",
+					"theme": "outlined"
+				},
+				"configuration": {
+					"dnd": true,
+					"inherit": {
+						"columns": true,
+						"childRelationshipConfigurations": true
+					}
+				},
+				"contextMenu": {
+					"groups": []
+				}
+			},
+			{
+				"id": "node-54bbd",
+				"documentModelRef": "DomainGroup",
+				"columns": [
+					{
+						"columnRef": "column-ab0e2",
+						"elementRef": "include_d2456_field_91a2c"
+					},
+					{
+						"columnRef": "column-ac536",
+						"elementRef": "include_d2456_field_60604"
+					},
+					{
+						"columnRef": "column-ab083",
+						"elementRef": "include_d2456_field_67e4f"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-6040e",
+						"relationshipModelRef": "GroupElement",
+						"parentRole": "Group"
+					}
+				],
+				"actions": [
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_paste",
+						"icon": {
+							"name": "content_paste"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Paste"
+							},
+							{
+								"locale": "de",
+								"text": "Paste"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_copy_node",
+						"icon": {
+							"name": "content_copy"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Copy"
+							},
+							{
+								"locale": "de",
+								"text": "Copy"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_cut_node",
+						"icon": {
+							"name": "content_cut"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Cut"
+							},
+							{
+								"locale": "de",
+								"text": "Cut"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Remove this group"
+							},
+							{
+								"locale": "de",
+								"text": "Entfernen Sie diese Gruppe"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you really want to delete this group?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie diese Gruppe wirklich löschen?"
+								}
+							]
+						}
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_node_reload",
+						"icon": {
+							"name": "refresh"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Reload"
+							},
+							{
+								"locale": "de",
+								"text": "Reload"
+							}
+						]
+					}
+				],
+				"icon": {
+					"name": "dynamic_feed",
+					"theme": "outlined"
+				},
+				"configuration": {
+					"dnd": true
+				},
+				"contextMenu": {
+					"groups": [
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Add child"
+								},
+								{
+									"locale": "de",
+									"text": "Add child [de]"
+								}
+							],
+							"name": "insertMenu",
+							"actions": [
+								{
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "DomainField",
+									"useGlobalIcon": true,
+									"label": [
+										{
+											"locale": "en",
+											"text": "Insert field"
+										},
+										{
+											"locale": "de",
+											"text": "Feld einfügen"
+										}
+									]
+								},
+								{
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "DomainRule",
+									"useGlobalIcon": true,
+									"useLabelFromDocumentModel": false,
+									"useTitleFromDocumentModel": false,
+									"label": [
+										{
+											"locale": "en",
+											"text": "Insert rule"
+										},
+										{
+											"locale": "de",
+											"text": "Regel einfügen"
+										}
+									]
+								},
+								{
+									"annotations": [
+										{
+											"name": "documents",
+											"value": "DomainGroup"
+										}
+									],
+									"type": "insert",
+									"position": "as_child",
+									"documentModelRef": "DomainGroup",
+									"useGlobalIcon": true,
+									"label": [
+										{
+											"locale": "en",
+											"text": "Insert group"
+										},
+										{
+											"locale": "de",
+											"text": "Gruppe einfügen"
+										}
+									]
+								},
+								{
+									"type": "insert",
+									"position": "as_child",
+									"icon": {
+										"name": "insert_as_child",
+										"theme": "custom"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Insert a child"
+										},
+										{
+											"locale": "de",
+											"text": "Fügen Sie ein Kind ein"
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Add sibling"
+								},
+								{
+									"locale": "de",
+									"text": "Add sibling [de]"
+								}
+							],
+							"name": "insertSibling",
+							"type": "add",
+							"actions": [
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainField",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainRule",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainGroup",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainMultiSelectGroup",
+									"useLabelFromDocumentModel": false,
+									"useTitleFromDocumentModel": false,
+									"label": [
+										{
+											"locale": "en",
+											"text": "DomainMultiSelectGroup"
+										},
+										{
+											"locale": "de",
+											"text": "DomainMultiSelectGroup"
+										}
+									]
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainAttachmentGroup",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "node-8c800",
+				"documentModelRef": "DomainField",
+				"columns": [
+					{
+						"columnRef": "column-ab0e2",
+						"elementRef": "field_91a2c"
+					},
+					{
+						"columnRef": "column-ac536",
+						"elementRef": "field_60604"
+					},
+					{
+						"columnRef": "column-ab083",
+						"elementRef": "field_511e8"
+					}
+				],
+				"childRelationshipConfigurations": [],
+				"actions": [
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_cut_node",
+						"icon": {
+							"name": "content_cut"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Cut"
+							},
+							{
+								"locale": "de",
+								"text": "Schneiden"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Remove this field"
+							},
+							{
+								"locale": "de",
+								"text": "Entfernen Sie dieses Feld"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you really want to delete this field?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie dieses Feld wirklich löschen?"
+								}
+							]
+						}
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_node_open_dm_twin",
+						"icon": {
+							"name": "compare"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Open twin document model"
+							},
+							{
+								"locale": "de",
+								"text": "Öffnen Sie das Zwillingsdokumentenmodell"
+							}
+						]
+					}
+				],
+				"configuration": {
+					"dnd": true
+				},
+				"contextMenu": {
+					"groups": [
+						{
+							"name": "contextMenu",
+							"actions": [
+								{
+									"type": "event",
+									"event": "event_node_mark_as_target",
+									"icon": {
+										"name": "add_location",
+										"theme": "outlined"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Mark as target node"
+										},
+										{
+											"locale": "de",
+											"text": "Mark as target node [de]"
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Add"
+								},
+								{
+									"locale": "de",
+									"text": "Add [de]"
+								}
+							],
+							"name": "add",
+							"actions": [
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainField",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainRule",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainGroup",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainMultiSelectGroup",
+									"useLabelFromDocumentModel": false,
+									"useTitleFromDocumentModel": false,
+									"label": [
+										{
+											"locale": "en",
+											"text": "DomainMultiSelectGroup"
+										},
+										{
+											"locale": "de",
+											"text": "DomainMultiSelectGroup"
+										}
+									]
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainAttachmentGroup",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "node-ce938",
+				"documentModelRef": "DomainRule",
+				"columns": [
+					{
+						"columnRef": "column-ab0e2",
+						"elementRef": "field_91a2c"
+					},
+					{
+						"columnRef": "column-ac536",
+						"elementRef": "field_60604"
+					},
+					{
+						"columnRef": "column-ab083",
+						"elementRef": "field_5995e"
+					}
+				],
+				"childRelationshipConfigurations": [],
+				"actions": [
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_cut_node",
+						"description": [
+							{
+								"locale": "en",
+								"text": "Cut"
+							},
+							{
+								"locale": "de",
+								"text": "Cut"
+							}
+						]
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_delete_node",
+						"icon": {
+							"name": "delete"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Delete this rule"
+							},
+							{
+								"locale": "de",
+								"text": "Löschen Sie diese Regel"
+							}
+						],
+						"confirmation": {
+							"title": [
+								{
+									"locale": "en",
+									"text": "Confirmation"
+								},
+								{
+									"locale": "de",
+									"text": "Bestätigung"
+								}
+							],
+							"message": [
+								{
+									"locale": "en",
+									"text": "Do you really want to delete this rule?"
+								},
+								{
+									"locale": "de",
+									"text": "Möchten Sie diese Regel wirklich löschen?"
+								}
+							]
+						}
+					}
+				],
+				"configuration": {
+					"dnd": true
+				},
+				"contextMenu": {
+					"groups": [
+						{
+							"name": "contextMenu",
+							"actions": [
+								{
+									"type": "event",
+									"event": "mark_as_target_node",
+									"icon": {
+										"name": "add_location",
+										"theme": "outlined"
+									},
+									"label": [
+										{
+											"locale": "en",
+											"text": "Mark as target node"
+										},
+										{
+											"locale": "de",
+											"text": "Mark as target node [de]"
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": [
+								{
+									"locale": "en",
+									"text": "Add"
+								},
+								{
+									"locale": "de",
+									"text": "Add"
+								}
+							],
+							"name": "add",
+							"type": "add",
+							"actions": [
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainField",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainRule",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainGroup",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainMultiSelectGroup",
+									"useLabelFromDocumentModel": false,
+									"useTitleFromDocumentModel": false,
+									"label": [
+										{
+											"locale": "en",
+											"text": "DomainMultiSelectGroup"
+										},
+										{
+											"locale": "de",
+											"text": "DomainMultiSelectGroup"
+										}
+									]
+								},
+								{
+									"type": "insert",
+									"position": "below",
+									"documentModelRef": "DomainAttachmentGroup",
+									"useLabelFromDocumentModel": true,
+									"useTitleFromDocumentModel": false
+								}
+							]
+						}
+					]
+				}
+			}
+		]
+	}
+}

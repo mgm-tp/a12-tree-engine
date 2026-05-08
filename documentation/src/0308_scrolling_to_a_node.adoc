@@ -1,0 +1,48 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#scroll-to-node]
+=== Scrolling to a Node
+
+Tree Engine supports scrolling to a node through the action link:./assets/generated/typedoc/variables/core_store.Events.scrollToNode.html[Events.scrollToNode].
+The action payload contains node path of the scroll target, and corresponding identifiers of nodes in that path:
+
+[source,typescript,title="ScrollToNodePayload"]
+--
+interface ScrollToNodePayload {
+    nodePath: TreeEngineState.NodePath;
+    nodesFromNodePath?: Identifier[];
+    autoFocus?: boolean;
+}
+--
+
+NOTE: For further information, see <<node-path, Node Path>> and <<identifier, Identifier>> sections.
+
+If the node is not visible because it is not loaded yet or nested in collapsed nodes, Tree Engine will try to reveal the node.
+To do that, it loads and expands all the nodes along the way to the specified node based on the provided node path, then scroll to it.
+
+By default, if only `nodePath` is provided, Tree Engine will try to expand level by level until the path is finished, loading this way might lead to generating too many network requests if the `nodePath` is too long. By providing `nodesFromNodePath`, Tree Engine will be able to generate only *one* single batch request to load all required nodes along the path then attempt to scroll to the target node.
+
+NOTE: The *nodesFromNodePath* can be simply retrieved by using the link:./assets/generated/typedoc/functions/core_store.DataSelector.nodesFromNodePath.html[DataSelector.nodesFromNodePath]. This selector only works when the full path to the node is revealed/loaded, otherwise, `undefined` shall be returned.
+
+[source,typescript,title="NodesFromNodePath"]
+--
+import { DataSelector } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/core/store";
+
+const { nodePath } = action.payload;
+const nodesFromNodePath = DataSelector.nodesFromNodePath(nodePath)(engineState);
+--

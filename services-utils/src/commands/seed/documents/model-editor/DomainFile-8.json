@@ -1,0 +1,13 @@
+{
+	"File": {
+		"Basic": {
+			"Name": "DomainTeam.json",
+			"Owner": "admin",
+			"Group": "admin"
+		},
+		"Extension": "json",
+		"Size": 3456,
+		"FileType": "document_model",
+		"Readonly": false
+	}
+}
