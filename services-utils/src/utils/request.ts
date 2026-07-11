@@ -32,8 +32,8 @@
 
 import JSZip from "jszip";
 
-import { type Model } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { type JsonRpc2Request, type JsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { Model } from "@com.mgmtp.a12.base/base-model-api";
+import type { JsonRpc2Request, JsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 export let BASE_URL = process.env.BASE_URL || "http://localhost:15000";
 export function updateBaseUrl(baseUrl: string) {

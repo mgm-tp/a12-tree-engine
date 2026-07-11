@@ -32,7 +32,7 @@
 
 import { vi, expect } from "vitest";
 
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
+import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import {
 	defaultDndConfiguration,
@@ -46,8 +46,8 @@ import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { testHook } from "../../../../utils/test-utils.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 import { type DataState, type ModelsState, TreeEngineState } from "../../../../../core/store/index.js";
-import { useDndOptions } from "../../../../../core/view/internal/configuration/dnd/use-dnd-options.js";
-import { FlattenRowHooks } from "../../../../../core/view/internal/components/tree-engine/use-flatten-rows.js";
+import { useDndOptions } from "../../../../../core/view/configuration/dnd/use-dnd-options.js";
+import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-tree-engine-dnd-configuration", () => {
 	const basicEngineState = defaultEngineState;

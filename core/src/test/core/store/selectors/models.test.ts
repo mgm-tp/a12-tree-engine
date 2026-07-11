@@ -32,7 +32,7 @@
 
 import { vi, type MockInstance } from "vitest";
 
-import { type RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import { ModelSelector } from "../../../../core/store/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";

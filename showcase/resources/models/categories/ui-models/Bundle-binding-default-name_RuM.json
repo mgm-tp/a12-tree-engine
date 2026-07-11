@@ -1,0 +1,29 @@
+{
+	"header": {
+		"id": "Bundle-binding-default-name_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "ProductCandidates-overview--BundleProduct"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "BundleProduct_Product_LinkOverview-overview"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"relationshipName": "BundleProduct",
+		"targetRole": "Product",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "ProductCandidates-overview--BundleProduct",
+			"selectedItemsOverviewModel": "BundleProduct_Product_LinkOverview-overview"
+		}
+	}
+}

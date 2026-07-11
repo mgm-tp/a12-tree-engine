@@ -30,15 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { BulletList } from "@com.mgmtp.a12.widgets/widgets-core/lib/bullet-list/index.js";
-import { TextOutput } from "@com.mgmtp.a12.widgets/widgets-core/lib/text-output/index.js";
-import { CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core/lib/css-ellipsis/main/css-ellipsis.view.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { BulletList, TextOutput, CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type Models, type TreeEngineState } from "../../../../../../core/store/index.js";
+import type { Models, TreeEngineState } from "../../../../../../core/store/index.js";
 import { TreeEngineContextProvider, MultiSelectCell } from "../../../../../../core/view/index.js";
 import { TreeModel } from "../../../../../../core/models/index.js";
 import { createContextProps, defaultEngineState, deLocale, enLocale } from "../../../../../setup/basic.spec.js";

@@ -2,7 +2,7 @@
 	"header": {
 		"id": "ProductCategory_Product_Link_Overview-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -14,72 +14,131 @@
 		"labels": [
 			{
 				"locale": "en",
-				"text": "Products"
+				"text": "Category includes"
 			},
 			{
 				"locale": "de",
-				"text": "Produkte"
+				"text": "Kategorie umfasst"
 			}
 		],
 		"modelReferences": [
 			{
-				"purpose": "document-model-for-overview",
-				"modelType": "document",
-				"alias": "DM",
-				"reference": "ProductCategory_Product____generated"
+				"purpose": "query-model-for-overview",
+				"modelType": "query",
+				"reference": "ProductCategory_Product_Link_Overview-overview-query"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		]
+		"annotations": []
 	},
 	"content": {
-		"subHeaderBox": {
-			"majorElements": [
-				{
-					"type": "search"
-				},
-				{
-					"type": "filter"
-				}
-			]
-		},
-		"footerBox": {},
 		"columns": [
 			{
 				"id": "column-62424",
-				"elementRef": "I4_field_e19c8",
+				"elementRef": "field_e19c8",
 				"sortable": false,
-				"width": 1
+				"width": 1,
+				"linkReferences": [
+					{
+						"relationship": "ProductCategory",
+						"targetRole": "Product",
+						"type": "CHILD"
+					}
+				]
 			},
 			{
 				"id": "column-8ba1d",
-				"elementRef": "I4_field_c3aa2",
+				"elementRef": "field_c3aa2",
 				"sortable": false,
-				"width": 1
+				"width": 1,
+				"linkReferences": [
+					{
+						"relationship": "ProductCategory",
+						"targetRole": "Product",
+						"type": "CHILD"
+					}
+				]
 			},
 			{
 				"id": "column-471f4",
-				"elementRef": "I5_field_c4320",
+				"elementRef": "field_c4320",
 				"sortable": false,
-				"width": 1
+				"width": 1,
+				"linkReferences": [
+					{
+						"relationship": "ProductCategory",
+						"targetRole": "Product",
+						"type": "LINK"
+					}
+				]
 			}
 		],
 		"rowActionGroup": {
-			"actions": []
+			"actions": [
+				{
+					"event": "event_delete_link",
+					"icon": {
+						"name": "remove_circle"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Remove"
+						},
+						{
+							"locale": "de",
+							"text": "Entfernen"
+						}
+					],
+					"labelHidden": true
+				},
+				{
+					"event": "event_restore_link",
+					"icon": {
+						"name": "add_circle"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Restore"
+						},
+						{
+							"locale": "de",
+							"text": "Wiederherstellen"
+						}
+					],
+					"labelHidden": true
+				},
+				{
+					"event": "event_edit_link_document",
+					"icon": {
+						"name": "edit"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Edit additional properties"
+						},
+						{
+							"locale": "de",
+							"text": "Zusätzliche Eigenschaften bearbeiten"
+						}
+					],
+					"labelHidden": true
+				}
+			]
 		},
+		"subHeaderBox": {
+			"rightSlot": []
+		},
+		"footerBox": {},
 		"configuration": {
 			"pagingSize": 10,
-			"showFullTextSearch": true,
-			"enableFilter": true,
-			"filterConfiguration": {
-				"showFilterButton": true,
-				"showFilterBar": true,
-				"filterMode": "all"
-			}
+			"showFullTextSearch": false,
+			"enableFilter": false
+		},
+		"rowActivation": {
+			"type": "event",
+			"event": "event_delete_link"
 		}
 	}
 }

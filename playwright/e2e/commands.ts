@@ -32,8 +32,8 @@
 
 import { type Page, type Locator, expect } from "@playwright/test";
 
-import { Selector } from "./selectors";
-import { type MultiSelectionState } from "./types";
+import { Selector } from "./selectors.js";
+import type { MultiSelectionState } from "./types.js";
 
 export type MovePosition = "asChild" | "top" | "bottom" | "asRoot";
 
@@ -232,7 +232,7 @@ export class PlaywrightCommands {
 		if (text) {
 			if (container) {
 				return container.locator(baseSelector).filter({
-					has: this.page.locator(Selector.TREE_NODE_NAME, { has: this.page.getByText(text, { exact: true }) })
+					has: container.locator(Selector.TREE_NODE_NAME, { has: this.page.getByText(text, { exact: true }) })
 				});
 			}
 			return this.page.locator(baseSelector).filter({

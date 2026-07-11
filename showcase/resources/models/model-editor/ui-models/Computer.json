@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Computer",
 		"modelType": "form",
-		"modelVersion": "37.4.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,16 +21,7 @@
 				"text": "Computer"
 			}
 		],
-		"annotations": [
-			{
-				"name": "bindingConfiguration",
-				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"ComputerDrive\",\"targetRole\":\"Drive\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"DriveCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"ComputerDrive_Drive_LinkOverview-overview\",\"use\":\"link\"}]}]},\"elementId\":\"section-tu5y5\"}]"
-			},
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"alias": "DM",
@@ -39,16 +30,9 @@
 				"reference": "DomainComputer"
 			},
 			{
-				"alias": "DriveCandidates-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "DriveCandidates-overview"
-			},
-			{
-				"alias": "ComputerDrive_Drive_LinkOverview-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "ComputerDrive_Drive_LinkOverview-overview"
+				"purpose": "relationship-ui",
+				"modelType": "relationship-ui",
+				"reference": "Computer-binding-default-name_RuM"
 			}
 		]
 	},
@@ -172,7 +156,8 @@
 								"name": "relationship"
 							}
 						],
-						"height": 328
+						"height": 328,
+						"reference": "Computer-binding-default-name_RuM"
 					}
 				]
 			}

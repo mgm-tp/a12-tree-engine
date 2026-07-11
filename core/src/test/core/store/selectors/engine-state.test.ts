@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type TreeEngineState } from "../../../../core/store/index.js";
-import { engineState, isEngineState } from "../../../../core/store/internal/shared.js";
+import type { TreeEngineState } from "../../../../core/store/index.js";
+import { engineState, isEngineState } from "../../../../core/store/shared.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.selectors.engine-state", () => {

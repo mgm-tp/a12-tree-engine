@@ -1,0 +1,39 @@
+{
+	"header": {
+		"id": "File-binding-DirectoryFile_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItemsQuery",
+				"modelType": "query",
+				"reference": "File-binding-DirectoryFile_RuM-available-query"
+			},
+			{
+				"purpose": "selectedItemQuery",
+				"modelType": "query",
+				"reference": "File-binding-DirectoryFile_RuM-selected-query"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Belongs to"
+			},
+			{
+				"locale": "de",
+				"text": "Gehört zu"
+			}
+		]
+	},
+	"content": {
+		"relationshipName": "DirectoryFile",
+		"targetRole": "Directory",
+		"component": {
+			"componentType": "DropDownSelection",
+			"availableItemsQueryModel": "File-binding-DirectoryFile_RuM-available-query",
+			"selectedItemQueryModel": "File-binding-DirectoryFile_RuM-selected-query",
+			"elementRef": "field_35d81"
+		}
+	}
+}

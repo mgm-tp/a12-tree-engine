@@ -30,13 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type SagaGenerator, call, put, race, select, take } from "typed-redux-saga";
-import { type AnyAction } from "typescript-fsa";
+import { type SagaGenerator, call, put, select } from "typed-redux-saga";
 
 import { ActivityActions, ActivityMap, ActivitySagas, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
-import { type TreeEngineState } from "@com.mgmtp.a12.treeengine/treeengine-core";
+import type { TreeEngineState } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
-import { type File } from "../document.js";
+import type { File } from "../document.js";
 
 export function* cancelChildActivities(activityId: string): SagaGenerator<boolean> {
 	const activities = ActivityMap.toList(yield* select(ActivitySelectors.activities()));
@@ -49,23 +48,6 @@ export function* cancelChildActivities(activityId: string): SagaGenerator<boolea
 		}
 	}
 	return true;
-}
-
-export function* waitUntilActivitySavingStateIsDoneOrFailed(activityId: string): SagaGenerator<AnyAction | undefined> {
-	const { done } = yield* race({
-		done: take(
-			(anyAction: AnyAction) =>
-				(ActivityActions.commit.done.match(anyAction) || ActivityActions.save.done.match(anyAction)) &&
-				anyAction.payload.params.activityId === activityId
-		),
-		failed: take(
-			(anyAction: AnyAction) =>
-				(ActivityActions.commit.failed.match(anyAction) || ActivityActions.save.failed.match(anyAction)) &&
-				anyAction.payload.params.activityId === activityId
-		)
-	});
-
-	return done;
 }
 
 // tag::CustomInitialExpansion[]

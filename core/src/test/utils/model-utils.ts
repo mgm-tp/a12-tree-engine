@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { type ModelGraph, type RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ModelGraph, RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { type TreeModel, type RuntimeTreeModel } from "../../core/models/index.js";
-import { type TreeEngineState } from "../../core/store/index.js";
+import type { TreeModel, RuntimeTreeModel } from "../../core/models/index.js";
+import type { TreeEngineState } from "../../core/store/index.js";
 
 import { defaultEngineState } from "../setup/basic.spec.js";
 
@@ -370,7 +370,8 @@ export function createDocumentModel(id: string, elements: DocumentModel.Element[
 					}
 				],
 				repeatability: 1
-			}
+			},
+			documentUniquenessCriteria: []
 		}
 	};
 }

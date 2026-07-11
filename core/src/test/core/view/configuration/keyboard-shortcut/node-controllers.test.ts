@@ -45,10 +45,10 @@ import {
 	useRowActions,
 	useNodeActionController,
 	useNodeBuiltinActionController
-} from "../../../../../core/view/internal/configuration/keyboard-shortcut/node-controllers.js";
+} from "../../../../../core/view/configuration/keyboard-shortcut/node-controllers.js";
 import { TreeModel } from "../../../../../core/models/index.js";
-import { type RowState } from "../../../../../core/store/index.js";
-import { RowActionHooks } from "../../../../../core/view/internal/components/tree-engine/sub-components/hooks/row-action-hooks.js";
+import type { RowState } from "../../../../../core/store/index.js";
+import { RowActionHooks } from "../../../../../core/view/components/tree-engine/sub-components/hooks/row-action-hooks.js";
 
 function assertFunction(object: unknown): object is () => void {
 	return typeof object === "function";

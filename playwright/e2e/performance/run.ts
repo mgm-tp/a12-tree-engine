@@ -32,9 +32,9 @@
 
 import { test, type Page } from "@playwright/test";
 
-import { REPETITION } from "./config";
-import { type RawRecorder, ExecutionType, SingleTestConfig, type TestConfig } from "./types";
-import { PlaywrightUtils } from "./utils";
+import { REPETITION } from "./config.js";
+import { type RawRecorder, ExecutionType, SingleTestConfig, type TestConfig } from "./types.js";
+import { PlaywrightUtils } from "./utils.js";
 
 export function run(testConfig: TestConfig, rawRecorder: RawRecorder) {
 	if (SingleTestConfig.isAssignableFrom(testConfig)) {

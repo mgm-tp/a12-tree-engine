@@ -45,9 +45,9 @@
 // import { DataFormats, defaultDataFormats, Locale } from "@com.mgmtp.a12.utils/utils-localization";
 //
 // import { defaultConverterProvider } from "../../../../core/services/converter";
-// import { Models } from "../../../../core/store";
-// import { defaultEngineState, deLocale } from "../../../setup/basic.spec";
-// import { mockType } from "../../../utils/mock-utils";
+// import { Models } from "../../../../core/store/index.js";
+// import { defaultEngineState, deLocale } from "../../../setup/basic.spec.js";
+// import { mockType } from "../../../utils/mock-utils.js";
 //
 // describe("@com.mgmtp.a12.tree-engine.core.services.converter.converter-provider", () => {
 // 	describe("defaultConverterProvider", () => {

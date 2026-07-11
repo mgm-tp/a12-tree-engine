@@ -2,7 +2,7 @@
 	"header": {
 		"id": "PersonCandidates-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -11,34 +11,26 @@
 				"code": "de"
 			}
 		],
-		"labels": [],
-		"modelReferences": [
+		"labels": [
 			{
-				"purpose": "document-model-for-overview",
-				"modelType": "document",
-				"alias": "DM",
-				"reference": "DomainPerson"
+				"locale": "en",
+				"text": "Available people"
+			},
+			{
+				"locale": "de",
+				"text": "Verfügbare Personen"
 			}
 		],
-		"annotations": [
+		"modelReferences": [
 			{
-				"name": "roles",
-				"value": "anonymous"
+				"purpose": "query-model-for-overview",
+				"modelType": "query",
+				"reference": "PersonCandidates-overview-query"
 			}
-		]
+		],
+		"annotations": []
 	},
 	"content": {
-		"subHeaderBox": {
-			"majorElements": [
-				{
-					"type": "search"
-				},
-				{
-					"type": "filter"
-				}
-			]
-		},
-		"footerBox": {},
 		"columns": [
 			{
 				"id": "column-de25d",
@@ -54,8 +46,26 @@
 			}
 		],
 		"rowActionGroup": {
-			"actions": []
+			"actions": [
+				{
+					"event": "event_add_link",
+					"icon": {
+						"name": "add"
+					}
+				}
+			]
 		},
+		"subHeaderBox": {
+			"rightSlot": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
 		"configuration": {
 			"pagingSize": 10,
 			"showFullTextSearch": true,
@@ -65,6 +75,10 @@
 				"showFilterBar": true,
 				"filterMode": "all"
 			}
+		},
+		"rowActivation": {
+			"type": "event",
+			"event": "event_add_link"
 		}
 	}
 }

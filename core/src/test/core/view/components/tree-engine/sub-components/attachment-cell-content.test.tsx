@@ -31,16 +31,14 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { ResponsiveImageContainer } from "@com.mgmtp.a12.widgets/widgets-core/lib/responsive-image-container/index.js";
-import { type Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
+import { ResponsiveImageContainer, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import {
 	AttachmentCellContent,
 	AttachmentIcon
-} from "../../../../../../core/view/internal/components/tree-engine/sub-components/attachment-cell-content.js";
+} from "../../../../../../core/view/components/tree-engine/sub-components/attachment-cell-content.js";
 import { type FlattenNodeRow, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import { TreeModel } from "../../../../../../core/models/index.js";
 import {

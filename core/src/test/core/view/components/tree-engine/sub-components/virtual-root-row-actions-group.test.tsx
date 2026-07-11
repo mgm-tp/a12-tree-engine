@@ -30,13 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
-
 import { defaultEngineState } from "../../../../../setup/basic.spec.js";
 import { type RuntimeTreeModel, TreeModel } from "../../../../../../core/models/index.js";
-import { type TreeEngineState } from "../../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
 import { BaseRowActionGroup, RootNodeRow } from "../../../../../../core/view/index.js";
-import { VirtualRootRowActionsGroup } from "../../../../../../core/view/internal/components/tree-engine/sub-components/virtual-root-row-actions-group.js";
+import { VirtualRootRowActionsGroup } from "../../../../../../core/view/components/tree-engine/sub-components/virtual-root-row-actions-group.js";
 
 import { BodyCellWrapper } from "./body-cell/shared.js";
 

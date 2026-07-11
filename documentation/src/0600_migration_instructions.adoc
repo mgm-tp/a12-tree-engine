@@ -17,6 +17,9 @@ THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPR
 ////
 == Migration Instructions
 
+CAUTION: Please have a look at link:/docs/OVERALL/migration_guide/index.html[Migration to latest A12] chapter
+for an explanation of general steps.
+
 :sectnums!:
 
 :leveloffset: +1

@@ -30,17 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { Checkbox } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.view.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { Checkbox } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { Events, TreeEngineState, type UIStateSelector } from "../../../../../../core/store/index.js";
-import { type FlattenNodeRow, type TreeEngineRowContext } from "../../../../../../core/view/index.js";
+import type { FlattenNodeRow, TreeEngineRowContext } from "../../../../../../core/view/index.js";
 import { defaultEngineState, deLocale, type PartialEventHandlerContextProps } from "../../../../../setup/basic.spec.js";
-import { en } from "../../../../../../core/services/localization/internal/languages/en.js";
-import { de } from "../../../../../../core/services/localization/internal/languages/de.js";
+import { en } from "../../../../../../core/services/localization/languages/en.js";
+import { de } from "../../../../../../core/services/localization/languages/de.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
 import { RowCheckbox } from "../../../../../../core/view/index.js";
 import { testIsNullComponent } from "../../../../../utils/test-utils.js";

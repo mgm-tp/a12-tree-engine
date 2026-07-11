@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Person-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -29,41 +29,9 @@
 				"reference": "DomainPerson"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous,user"
-			}
-		]
+		"annotations": []
 	},
 	"content": {
-		"subHeaderBox": {
-			"majorElements": [
-				{
-					"type": "button",
-					"label": [
-						{
-							"locale": "en",
-							"text": "Add"
-						},
-						{
-							"locale": "de",
-							"text": "Hinzufügen"
-						}
-					],
-					"event": "add",
-					"destructive": false,
-					"primary": false
-				},
-				{
-					"type": "search"
-				},
-				{
-					"type": "filter"
-				}
-			]
-		},
-		"footerBox": {},
 		"columns": [
 			{
 				"id": "column-53130",
@@ -133,6 +101,33 @@
 				}
 			]
 		},
+		"subHeaderBox": {
+			"rightSlot": [
+				{
+					"type": "button",
+					"label": [
+						{
+							"locale": "en",
+							"text": "Add"
+						},
+						{
+							"locale": "de",
+							"text": "Hinzufügen"
+						}
+					],
+					"event": "add",
+					"destructive": false,
+					"primary": false
+				},
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
 		"configuration": {
 			"pagingSize": 10,
 			"showFullTextSearch": true,

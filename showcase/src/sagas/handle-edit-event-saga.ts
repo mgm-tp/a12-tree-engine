@@ -30,18 +30,19 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type AnyAction } from "redux";
 import { type SagaGenerator, takeEvery, put } from "typed-redux-saga";
-import { type Action } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { Events, TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 import { EDIT_NODE_EVENT } from "../helpers.js";
 
 // tag::handleEditEventSaga[]
 export function* handleEditEventSaga(): SagaGenerator<void> {
-	yield* takeEvery((action: AnyAction) => {
+	yield* takeEvery((action: unknown) => {
 		return (
+			isAction(action) &&
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			action.payload.engineAction.payload.button.event === EDIT_NODE_EVENT

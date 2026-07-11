@@ -1,0 +1,29 @@
+{
+	"header": {
+		"id": "Computer-binding-default-name_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "DriveCandidates-overview"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "ComputerDrive_Drive_LinkOverview-overview"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"relationshipName": "ComputerDrive",
+		"targetRole": "Drive",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "DriveCandidates-overview",
+			"selectedItemsOverviewModel": "ComputerDrive_Drive_LinkOverview-overview"
+		}
+	}
+}

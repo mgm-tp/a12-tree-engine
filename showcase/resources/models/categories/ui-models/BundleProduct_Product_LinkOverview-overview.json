@@ -1,7 +1,7 @@
 {
 	"header": {
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"id": "BundleProduct_Product_LinkOverview-overview",
 		"locales": [
 			{
@@ -21,24 +21,78 @@
 				"text": "Bündel"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
-				"purpose": "document-model-for-overview",
-				"modelType": "document",
-				"alias": "DM",
-				"reference": "BundleProduct_Product____generated"
+				"purpose": "query-model-for-overview",
+				"modelType": "query",
+				"reference": "BundleProduct_Product_LinkOverview-overview-query"
 			}
 		]
 	},
 	"content": {
+		"rowActionGroup": {
+			"actions": [
+				{
+					"event": "event_delete_link",
+					"icon": {
+						"name": "remove_circle"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Remove"
+						},
+						{
+							"locale": "de",
+							"text": "Entfernen"
+						}
+					],
+					"labelHidden": true
+				},
+				{
+					"event": "event_restore_link",
+					"icon": {
+						"name": "add_circle"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Restore"
+						},
+						{
+							"locale": "de",
+							"text": "Wiederherstellen"
+						}
+					],
+					"labelHidden": true
+				}
+			]
+		},
+		"columns": [
+			{
+				"sortable": true,
+				"width": 1,
+				"id": "column-03ffb",
+				"elementRef": "field_e19c8",
+				"pinDirection": "LEFT",
+				"preferredSorting": "ASC"
+			},
+			{
+				"sortable": false,
+				"width": 1,
+				"id": "column-d0229",
+				"elementRef": "field_c3aa2"
+			},
+			{
+				"sortable": false,
+				"width": 1,
+				"id": "column-4bdd0",
+				"elementRef": "field_07572"
+			}
+		],
 		"subHeaderBox": {
-			"majorElements": [
+			"rightSlot": [
 				{
 					"type": "search"
 				},
@@ -48,31 +102,6 @@
 			]
 		},
 		"footerBox": {},
-		"rowActionGroup": {
-			"actions": []
-		},
-		"columns": [
-			{
-				"sortable": true,
-				"width": 1,
-				"id": "column-03ffb",
-				"elementRef": "I4_field_e19c8",
-				"pinDirection": "LEFT",
-				"preferredSorting": "ASC"
-			},
-			{
-				"sortable": false,
-				"width": 1,
-				"id": "column-d0229",
-				"elementRef": "I4_field_c3aa2"
-			},
-			{
-				"sortable": false,
-				"width": 1,
-				"id": "column-4bdd0",
-				"elementRef": "I4_field_07572"
-			}
-		],
 		"configuration": {
 			"pagingSize": 10,
 			"initialSorting": [
@@ -87,6 +116,10 @@
 				"showFilterBar": true,
 				"filterMode": "all"
 			}
+		},
+		"rowActivation": {
+			"type": "event",
+			"event": "event_delete_link"
 		}
 	}
 }

@@ -30,8 +30,6 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { cloneDeep } from "lodash-es";
-
 import {
 	initializeKeys,
 	type LocalizationTree,
@@ -40,7 +38,38 @@ import {
 
 const enResourceTree = {
 	application: {
-		title: "Tree Engine Showcase"
+		title: "Tree Engine Showcase",
+		menu: {
+			a12team: {
+				label: "A12 Team",
+				tree: "A12 Tree",
+				custom: "A12 Tree (Custom)",
+				pagination: "A12 Tree Pagination",
+				multiLevel: "A12 Tree - Multi-Level",
+				domainTeam: "Team",
+				domainPerson: "Person"
+			},
+			productsManagement: {
+				label: "Products Management",
+				tree: "Products Tree",
+				scroll: "Virtual Scroll",
+				pagination: "Pagination",
+				paginatedVirtualScroll: "Pagination with Virtual Scroll",
+				multiLevel: "Categories - Multi-Level",
+				customCategory: "Custom Categories",
+				domainCategory: "Category",
+				domainProduct: "Product"
+			},
+			modelEditor: {
+				label: "Model Editor",
+				fileExplorer: "File Explorer",
+				paginatedFileExplorer: "Pagination",
+				multiSelectParentFileExplorer: "MultiSelect Parent",
+				fileExplorerMultiLevelTree: "File Explorer - Multi level",
+				groupManagement: "Group Management",
+				fileExplorerWithPreloadChildNodes: "File Explorer With Preload ChildNodes"
+			}
+		}
 	},
 	server: {
 		connection: {
@@ -111,6 +140,39 @@ const enResourceTree = {
 };
 
 const deResourceTree: LocalizationTree = {
+	application: {
+		menu: {
+			a12team: {
+				label: "A12 Team",
+				tree: "A12 Tree",
+				custom: "A12 Tree (Benutzerdefiniert)",
+				pagination: "A12 Tree Seitennummerierung",
+				multiLevel: "A12 Tree - Multi-Level",
+				domainTeam: "Team",
+				domainPerson: "Person"
+			},
+			productsManagement: {
+				label: "Produktmanagement",
+				tree: "Produktbaum",
+				scroll: "Virtual Scroll",
+				pagination: "Seitennummerierung",
+				paginatedVirtualScroll: "Seitennummerierung mit Virtual Scroll",
+				multiLevel: "Kategorien - Multi-Level",
+				customCategory: "Benutzerdefinierte Kategorie",
+				domainCategory: "Kategorie",
+				domainProduct: "Produkt"
+			},
+			modelEditor: {
+				label: "Modelleditor",
+				fileExplorer: "File Explorer",
+				paginatedFileExplorer: "Seitennummerierung",
+				multiSelectParentFileExplorer: "MultiSelect Parent",
+				fileExplorerMultiLevelTree: "File Explorer - Multi level",
+				groupManagement: "Group Management",
+				fileExplorerWithPreloadChildNodes: "File Explorer With Preload ChildNodes"
+			}
+		}
+	},
 	showcase: {
 		error: {
 			server: {
@@ -122,6 +184,6 @@ const deResourceTree: LocalizationTree = {
 
 export const SHOWCASE_RESOURCES: LocalizationTreeMap = { en: enResourceTree, de: deResourceTree };
 
-export const SHOWCASE_RESOURCE_KEYS = cloneDeep(enResourceTree);
+export const SHOWCASE_RESOURCE_KEYS = structuredClone(enResourceTree);
 
 initializeKeys(SHOWCASE_RESOURCE_KEYS);

@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type DocumentJsonRpc2Request, type JsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { DocumentJsonRpc2Request, JsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import { linkEntities } from "./index.js";
 

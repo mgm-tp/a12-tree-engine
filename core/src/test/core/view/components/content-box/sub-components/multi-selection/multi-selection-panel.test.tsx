@@ -31,11 +31,10 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/main/template/contentbox.tpl.view.js";
+import { ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type TreeEngineState } from "../../../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../../../core/store/index.js";
 import {
 	MultiSelectionActions,
 	MultiSelectionButton,

@@ -30,7 +30,6 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
 import {
@@ -49,7 +48,7 @@ import {
 } from "../../../../../../../core/view/index.js";
 import { mockType } from "../../../../../../utils/mock-utils.js";
 import { testIsNullComponent } from "../../../../../../utils/test-utils.js";
-import { DocumentUtils } from "../../../../../../../core/models/internal/shared.js";
+import { DocumentUtils } from "../../../../../../../core/models/shared.js";
 
 import { teamCellProps, BodyCellWrapper, CustomWidget, teamNodeModel, teamIdentifier } from "./shared.js";
 

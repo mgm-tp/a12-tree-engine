@@ -2,7 +2,7 @@
 	"header": {
 		"id": "TeamTeam_Child_LinkOverview-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -11,25 +11,80 @@
 				"code": "de"
 			}
 		],
-		"labels": [],
-		"modelReferences": [
+		"labels": [
 			{
-				"purpose": "document-model-for-overview",
-				"modelType": "document",
-				"alias": "DM",
-				"reference": "TeamTeam_Child____generated"
+				"locale": "en",
+				"text": "Sub teams"
+			},
+			{
+				"locale": "de",
+				"text": "Subteams"
 			}
 		],
-		"annotations": [
+		"modelReferences": [
 			{
-				"name": "roles",
-				"value": "anonymous"
+				"purpose": "query-model-for-overview",
+				"modelType": "query",
+				"reference": "TeamTeam_Child_LinkOverview-overview-query"
 			}
-		]
+		],
+		"annotations": []
 	},
 	"content": {
+		"columns": [
+			{
+				"id": "column-f8510",
+				"elementRef": "field_c2497",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-d68ba",
+				"elementRef": "field_c9ad3",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": [
+				{
+					"event": "event_delete_link",
+					"icon": {
+						"name": "remove_circle"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Remove"
+						},
+						{
+							"locale": "de",
+							"text": "Entfernen"
+						}
+					],
+					"labelHidden": true
+				},
+				{
+					"event": "event_restore_link",
+					"icon": {
+						"name": "add_circle"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Restore"
+						},
+						{
+							"locale": "de",
+							"text": "Wiederherstellen"
+						}
+					],
+					"labelHidden": true
+				}
+			]
+		},
 		"subHeaderBox": {
-			"majorElements": [
+			"rightSlot": [
 				{
 					"type": "search"
 				},
@@ -39,23 +94,6 @@
 			]
 		},
 		"footerBox": {},
-		"columns": [
-			{
-				"id": "column-f8510",
-				"elementRef": "I4_field_c2497",
-				"sortable": false,
-				"width": 1
-			},
-			{
-				"id": "column-d68ba",
-				"elementRef": "I4_field_c9ad3",
-				"sortable": false,
-				"width": 1
-			}
-		],
-		"rowActionGroup": {
-			"actions": []
-		},
 		"configuration": {
 			"pagingSize": 10,
 			"showFullTextSearch": true,
@@ -65,6 +103,10 @@
 				"showFilterBar": true,
 				"filterMode": "all"
 			}
+		},
+		"rowActivation": {
+			"type": "event",
+			"event": "event_delete_link"
 		}
 	}
 }

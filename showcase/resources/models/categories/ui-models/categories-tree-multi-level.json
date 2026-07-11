@@ -2,7 +2,7 @@
 	"header": {
 		"id": "categories-tree-multi-level",
 		"modelType": "tree",
-		"modelVersion": "10.2.0",
+		"modelVersion": "11.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,12 +21,7 @@
 				"text": "Telefon Kategorie"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"purpose": "document-model-for-tree",
@@ -186,8 +181,8 @@
 			}
 		},
 		"subHeaderBox": {
-			"majorElements": [],
-			"minorElements": [
+			"rightSlot": [],
+			"leftSlot": [
 				{
 					"type": "multi_selection"
 				},
@@ -254,8 +249,8 @@
 			]
 		},
 		"footerBox": {
-			"majorElements": [],
-			"minorElements": []
+			"rightSlot": [],
+			"leftSlot": []
 		},
 		"columns": [
 			{

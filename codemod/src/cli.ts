@@ -36,10 +36,11 @@
 
 import { createCodemodCLI } from "@com.mgmtp.a12.devtools/codemod";
 
+import { enforceTopLevelExportsRecipe } from "./recipes/enforce-top-level-exports.js";
 import { preferTopLevelImportsRecipe } from "./recipes/prefer-top-level-imports.js";
 
 createCodemodCLI({
 	name: "tree-engine-codemod",
-	description: "Codemod for assisting with migrations of A12 Overview Engine",
-	recipes: [preferTopLevelImportsRecipe]
+	description: "Codemod for assisting with migrations of A12 Tree Engine",
+	recipes: [preferTopLevelImportsRecipe, enforceTopLevelExportsRecipe]
 });

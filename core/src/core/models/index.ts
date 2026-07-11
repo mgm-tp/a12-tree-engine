@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export * from "./internal/tree-model.js";
-export { marshallTreeModel } from "./internal/marshaller.js";
-export { isValidTreeModel } from "./internal/validations.js";
-export { LinkDescriptorUtils, RelationshipModelUtils } from "./internal/utils/relationship-utils.js";
+export * from "./tree-model.js";
+export { marshallTreeModel } from "./marshaller.js";
+export { isValidTreeModel } from "./validations.js";
+export { LinkDescriptorUtils, RelationshipModelUtils } from "./utils/relationship-utils.js";

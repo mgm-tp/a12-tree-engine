@@ -27,4 +27,6 @@ include::0400_advanced.adoc[]
 
 include::0500_typedoc.adoc[]
 
+include::0550_breaking_change_management.adoc[]
+
 include::0600_migration_instructions.adoc[]

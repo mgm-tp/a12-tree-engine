@@ -36,7 +36,7 @@ import { BASE_URL } from "../utils/index.js";
 
 export async function main(params: { timeout?: number }) {
 	await waitOn({
-		resources: [`${BASE_URL}/actuator/health/initializationFinished`],
+		resources: [`${BASE_URL}/actuator/health`],
 		interval: 5000,
 		verbose: true,
 		timeout: params.timeout

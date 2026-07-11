@@ -32,14 +32,13 @@
 
 import { vi } from "vitest";
 
-import { type TableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js";
-import { type TreeTableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js";
+import type { TableRenderPropsType, TreeTableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { testHook } from "../../../../utils/test-utils.js";
 import { defaultDndConfiguration, type DndConfiguration, type FlattenNodeRow } from "../../../../../core/view/index.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { useCanDrop } from "../../../../../core/view/internal/configuration/dnd/use-can-drop.js";
+import { useCanDrop } from "../../../../../core/view/configuration/dnd/use-can-drop.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.use-can-drop", () => {
 	const basicEngineState = defaultEngineState;

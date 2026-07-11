@@ -1,0 +1,71 @@
+{
+	"header": {
+		"id": "test-tree",
+		"modelType": "tree",
+		"modelVersion": "11.0.0-pre.1",
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM1",
+				"reference": "DomainNode"
+			}
+		]
+	},
+	"content": {
+		"configuration": {
+			"rootRef": "root-1",
+			"hierarchicalColumnRef": "col-1",
+			"expansionStrategy": {
+				"type": "tree",
+				"expansionDepths": []
+			}
+		},
+		"subHeaderBox": {
+			"leftSlot": [],
+			"rightSlot": []
+		},
+		"footerBox": {
+			"leftSlot": [],
+			"rightSlot": []
+		},
+		"columns": [
+			{
+				"id": "col-1",
+				"name": "name",
+				"label": [{ "locale": "en", "text": "Name" }],
+				"width": 200,
+				"fixedWidth": false
+			}
+		],
+		"nodes": [
+			{
+				"id": "node-1",
+				"documentModelRef": "DomainNode",
+				"columns": [{ "columnRef": "col-1", "elementRef": "field-1" }],
+				"childRelationshipConfigurations": [],
+				"actions": [],
+				"defaultRowAction": {
+					"custom": true,
+					"event": "openNode"
+				},
+				"configuration": { "dnd": false }
+			},
+			{
+				"id": "node-2",
+				"documentModelRef": "DomainNode",
+				"columns": [],
+				"childRelationshipConfigurations": [],
+				"actions": [],
+				"configuration": {
+					"dnd": false,
+					"inherit": {
+						"columns": true,
+						"defaultRowAction": true
+					}
+				}
+			}
+		],
+		"styles": []
+	}
+}

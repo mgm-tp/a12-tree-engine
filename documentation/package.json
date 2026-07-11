@@ -1,17 +1,17 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-dev-docs",
-	"version": "10.3.0",
+	"version": "11.0.0",
 	"type": "module",
+	"exports": null,
 	"description": "Tree Engine documentation which includes typedoc and developer documentation",
 	"author": "mgm technology partners",
 	"license": "(EUPL-1.2 OR LicenseRef-commercial)",
 	"scripts": {
-		"clean": "rimraf -g src/assets/generated/** build/**",
-		"compile": "pnpm --sequential \"/^compile:.*/\"",
-		"compile:typedoc": "pnpm -F \"*-core\" exec typedoc",
-		"compile:typescript": "tsc",
-		"compile:docs": "node scripts/compile",
+		"dist": "pnpm --sequential \"/dist:/\"",
+		"dist:typedoc": "pnpm --filter ../core exec typedoc",
+		"dist:docs": "node scripts/compile",
 		"start": "node scripts/start",
+		"pretest": "pnpm dist",
 		"test": "node --test",
 		"lint:eslint": "eslint --quiet"
 	},
@@ -29,13 +29,11 @@
 		"@types/react": "catalog:libs",
 		"asciidoctor": "^2.2.7",
 		"asciidoctor-highlight.js": "^0.4.0",
-		"browser-sync": "^3.0.2",
+		"browser-sync": "^3.0.4",
 		"dayjs": "catalog:libs",
 		"highlight.js": "^11.9.0",
 		"react": "catalog:libs",
-		"rimraf": "catalog:devLibs",
-		"ts-morph": "^15.1.0",
-		"typescript": "catalog:libs"
+		"ts-morph": "^28.0.0"
 	},
 	"files": [
 		"dist",

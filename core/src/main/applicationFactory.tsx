@@ -30,14 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import React from "react";
-
 import {
 	type View,
 	addView,
 	modifyView,
 	setConfigured,
-	addDataHandlers,
 	addDataReducers,
 	combineFeatures,
 	type RequireFeatures,
@@ -49,10 +46,11 @@ import {
 import { addSupportedModelVersion } from "@com.mgmtp.a12.client/client-core/modelLoader";
 
 import { TreeEngineServerConnectorFactories } from "../extensions/server-connector/index.js";
-import { TreeEngineFactories, type TreeEngineSaga } from "../extensions/client/index.js";
+import type { TreeEngineSaga } from "../extensions/client/sagas/saga-setting.js";
+import { TreeEngineFactories } from "../extensions/client/index.js";
 
 /** @internal */
-export const SUPPORTED_MODEL_VERSIONS = "^10.2.0";
+export const SUPPORTED_MODEL_VERSIONS = "^11.0.0";
 const MODEL_TYPE = "tree";
 
 /**
@@ -61,7 +59,7 @@ const MODEL_TYPE = "tree";
  * we must use the "internal" path as TS does not support module augmentation for re-exported types
  * See https://github.com/microsoft/TypeScript/issues/12607
  */
-declare module "@com.mgmtp.a12.client/client-core/lib/core/application/internal/factories/applicationConfig.js" {
+declare module "@com.mgmtp.a12.client/client-core" {
 	interface A12ApplicationConfig {
 		readonly treeEngine?: {
 			readonly saga?: TreeEngineSaga.Setting;
@@ -77,17 +75,25 @@ declare module "@com.mgmtp.a12.client/client-core/lib/core/application/internal/
  */
 export type ApplicationWithTreeEngineConfig = RequireFeatures<
 	A12ApplicationConfig,
-	{ treeEngine?: never; modelLoader?: never }
+	{ treeEngine?: never; modelLoader?: never; relationshipEngine: true }
 >;
 
 /**
  * @experimental
  */
-export const withTreeEngineDataHandlers = <T extends ApplicationWithTreeEngineConfig>(cfg: T) =>
-	addDataHandlers<T>(
-		TreeEngineFactories.createDataProvider(),
-		TreeEngineServerConnectorFactories.createDataProvider(cfg.treeEngine?.serverConnector)
-	)(cfg);
+export const withTreeEngineDataHandlers = <T extends ApplicationWithTreeEngineConfig>(cfg: T): T =>
+	({
+		...cfg,
+		config: {
+			...cfg.config,
+			// Prepend to prioritized Tree Engine link form to "win" Form Engine & Relationship Engine data providers
+			dataHandlers: [
+				TreeEngineFactories.createDataProvider(),
+				TreeEngineServerConnectorFactories.createDataProvider(cfg.treeEngine?.serverConnector),
+				...(cfg.config?.dataHandlers ?? [])
+			]
+		}
+	}) satisfies T;
 
 /**
  * @experimental
@@ -98,8 +104,13 @@ export const withTreeEngineDataReducers = <T extends ApplicationWithTreeEngineCo
 /**
  * @experimental
  */
-export const withTreeEngineSagas = <T extends ApplicationWithTreeEngineConfig>(cfg: T) =>
-	addCustomSagas<T>(...TreeEngineFactories.createSagas(cfg.treeEngine?.saga ?? {}))(cfg);
+export const withTreeEngineSagas = <T extends ApplicationWithTreeEngineConfig>(cfg: T) => {
+	const sagaSetting: TreeEngineSaga.Setting = {
+		...cfg.treeEngine?.saga,
+		newRelationshipEngine: cfg.configured?.newRelationshipEngine
+	};
+	return addCustomSagas<T>(...TreeEngineFactories.createSagas(sagaSetting))(cfg);
+};
 
 /**
  * @experimental
@@ -143,7 +154,3 @@ export const withTreeEngine = <T extends ApplicationWithTreeEngineConfig>(
 			withTreeModelSupport
 		)(cfg)
 	);
-
-// re-export for convenience
-export { TreeEngineFactories };
-export { TreeEngineServerConnectorFactories };

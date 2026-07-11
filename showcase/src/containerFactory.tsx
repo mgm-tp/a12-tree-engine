@@ -32,7 +32,7 @@
 
 import * as React from "react";
 
-import { FrameFactories, type View } from "@com.mgmtp.a12.client/client-core";
+import type { View } from "@com.mgmtp.a12.client/client-core";
 import { CRUDViews } from "@com.mgmtp.a12.crud/crud-core";
 import { DefaultSelectorMap, type SelectorMap } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
@@ -41,34 +41,17 @@ import { ModelEditorTreeEngine } from "./views/model-editor-tree-engine.js";
 import { FileExplorerTreeEngine } from "./views/file-explorer-tree-engine.js";
 import { CustomTreeEngine } from "./views/custom-tree-engine.js";
 
-export function createViewProvider() {
-	const crudViewProvider = createCRUDViewProvider();
-	return function viewProvider(componentName: string): React.ComponentType<View> {
-		return crudViewProvider(componentName) || FrameFactories.viewProvider(componentName) || Placeholder;
-	};
-}
-
-function Placeholder(): React.JSX.Element {
-	return <div>ERROR: NO CONTAINER FOUND</div>;
-}
-
 // tag::SetupViewProvider[]
-export const viewComponents: { [name: string]: React.ComponentType<View> } = {
+export const viewComponents = {
 	TreeCRUD: (props) => <CustomTreeEngine {...props} selectorMap={CustomSelectorMap} />,
 	TreeCRUDTwin: (props) => <CustomTreeEngine {...props} uiIdPrefix={"Twin"} />,
 	FileExplorerTreeEngine: (props) => <FileExplorerTreeEngine {...props} />,
 	ModelEditorTreeEngine: (props) => <ModelEditorTreeEngine {...props} />,
 	CustomA12TeamTreeEngine: (props) => <CustomA12TeamTreeEngine {...props} dndConfiguration={false} />,
 	OverviewCRUD: (props) => <CRUDViews.OverviewEngineView {...props} />,
-	FormCRUD: (props) => <CRUDViews.FormEngineView {...props} />
-};
+	FormCRUD: (props) => <CRUDViews.FormEngineWithRelationshipEngineView {...props} />
+} satisfies { [name: string]: React.ComponentType<View> };
 // end::SetupViewProvider[]
-
-function createCRUDViewProvider(): (componentName: string) => React.ComponentType<View> | undefined {
-	return function provider(name) {
-		return viewComponents[name];
-	};
-}
 
 const CustomSelectorMap: SelectorMap = {
 	...DefaultSelectorMap,

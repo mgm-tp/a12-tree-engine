@@ -1,0 +1,53 @@
+{
+	"header": {
+		"id": "TeamPerson_Person_LinkOverview-overview-query",
+		"modelType": "query",
+		"modelVersion": "0.1.0",
+		"annotations": [],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-query",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "DomainPerson"
+			},
+			{
+				"purpose": "relationship-model-for-query",
+				"modelType": "relationship",
+				"alias": "RM",
+				"reference": "TeamPerson"
+			}
+		]
+	},
+	"content": {
+		"targetDocumentModel": "DomainPerson",
+		"projectionName": "document",
+		"paging": {
+			"pageNumber": 0,
+			"pageSize": 50
+		},
+		"links": [
+			{
+				"relationshipModel": "TeamPerson",
+				"targetRole": "Team",
+				"maxDepth": 1,
+				"constraint": {
+					"operator": "exact_match",
+					"field": "/__meta/docRef",
+					"value": "${DomainTeam, [/__meta/docRef]}"
+				}
+			}
+		],
+		"constraint": {
+			"operator": "has",
+			"relationshipModel": "TeamPerson",
+			"targetRole": "Team",
+			"constraint": {
+				"operator": "exact_match",
+				"field": "/__meta/docRef",
+				"value": "${DomainTeam, [/__meta/docRef]}"
+			},
+			"maxDepth": 1
+		}
+	}
+}

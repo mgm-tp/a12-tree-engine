@@ -31,9 +31,8 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
+import { Button } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { type RuntimeTreeModel, TreeModel } from "../../../../../../core/models/index.js";
 import { SubActionBar, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
@@ -117,26 +116,26 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 	};
 
 	it("should work with buttons only", () => {
-		testComponent({ subHeaderBox: { majorElements: [], minorElements: [] }, expected: { left: [], right: [] } });
+		testComponent({ subHeaderBox: { rightSlot: [], leftSlot: [] }, expected: { left: [], right: [] } });
 		testComponent({
-			subHeaderBox: { minorElements: [], majorElements: [buttonA] },
+			subHeaderBox: { leftSlot: [], rightSlot: [buttonA] },
 			expected: { left: [], right: [TITLES.BUTTON_A] }
 		});
 		testComponent({
-			subHeaderBox: { minorElements: [buttonB], majorElements: [buttonA] },
+			subHeaderBox: { leftSlot: [buttonB], rightSlot: [buttonA] },
 			expected: { left: [TITLES.BUTTON_B], right: [TITLES.BUTTON_A] }
 		});
 	});
 
 	it("should work with WholeTreeExpansion feature", () => {
 		testComponent({
-			subHeaderBox: { minorElements: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }], majorElements: [] },
+			subHeaderBox: { leftSlot: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }], rightSlot: [] },
 			configurations: { ...basicConfiguration, ...wholeTreeExpansionConfig },
 			expected: { left: [TITLES.WHOLE_TREE_EXPANSION], right: [] }
 		});
 
 		testComponent({
-			subHeaderBox: { minorElements: [], majorElements: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }] },
+			subHeaderBox: { leftSlot: [], rightSlot: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }] },
 			configurations: { ...basicConfiguration, ...wholeTreeExpansionConfig },
 			expected: { left: [], right: [TITLES.WHOLE_TREE_EXPANSION] }
 		});
@@ -144,13 +143,13 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 
 	it("should work with MultiSelection feature", () => {
 		testComponent({
-			subHeaderBox: { minorElements: [{ type: TreeModel.ElementType.MULTI_SELECTION }], majorElements: [] },
+			subHeaderBox: { leftSlot: [{ type: TreeModel.ElementType.MULTI_SELECTION }], rightSlot: [] },
 			configurations: { ...basicConfiguration, ...multiSelectionConfig },
 			expected: { left: [TITLES.MULTI_SELECTION], right: [] }
 		});
 
 		testComponent({
-			subHeaderBox: { minorElements: [], majorElements: [{ type: TreeModel.ElementType.MULTI_SELECTION }] },
+			subHeaderBox: { leftSlot: [], rightSlot: [{ type: TreeModel.ElementType.MULTI_SELECTION }] },
 			configurations: { ...basicConfiguration, ...multiSelectionConfig },
 			expected: { left: [], right: [TITLES.MULTI_SELECTION] }
 		});
@@ -160,7 +159,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 		describe("when no given wholeTreeExpansion and multiSelection config", () => {
 			it("should render only subheader buttons", () => {
 				testComponent({
-					subHeaderBox: { minorElements: [buttonA, buttonB], majorElements: [] },
+					subHeaderBox: { leftSlot: [buttonA, buttonB], rightSlot: [] },
 					expected: { left: [TITLES.BUTTON_A, TITLES.BUTTON_B], right: [] }
 				});
 			});
@@ -170,8 +169,8 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 			it("should render subheader buttons and ExpandAllPopUp", () => {
 				testComponent({
 					subHeaderBox: {
-						minorElements: [buttonA],
-						majorElements: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }, buttonB]
+						leftSlot: [buttonA],
+						rightSlot: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }, buttonB]
 					},
 					configurations: { ...basicConfiguration, ...wholeTreeExpansionConfig },
 					expected: {
@@ -186,8 +185,8 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 			it("should render subheader buttons and MultiSelectionPanel", () => {
 				testComponent({
 					subHeaderBox: {
-						minorElements: [buttonA, { type: TreeModel.ElementType.MULTI_SELECTION }],
-						majorElements: [buttonB]
+						leftSlot: [buttonA, { type: TreeModel.ElementType.MULTI_SELECTION }],
+						rightSlot: [buttonB]
 					},
 					configurations: { ...basicConfiguration, ...multiSelectionConfig },
 					expected: {
@@ -202,8 +201,8 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 			it("should render subheader buttons, ExpandAllPopUp menu and MultiSelectionPanel", () => {
 				testComponent({
 					subHeaderBox: {
-						minorElements: [buttonB],
-						majorElements: [
+						leftSlot: [buttonB],
+						rightSlot: [
 							{ type: TreeModel.ElementType.MULTI_SELECTION },
 							buttonA,
 							{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }

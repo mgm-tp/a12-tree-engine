@@ -34,11 +34,14 @@ export default function adjustTreeModel(treeModel) {
 	treeModel
 		.getImportDeclaration((importDeclaration) => importDeclaration.getModuleSpecifierValue().includes("widgets"))
 		?.remove();
-	treeModel
-		.getImportDeclaration((importDeclaration) =>
-			importDeclaration.getModuleSpecifierValue().includes("@com.mgmtp.a12.base/base-model-api/lib/main/model")
-		)
+	const baseModelApiImport = treeModel.getImportDeclaration((importDeclaration) =>
+		importDeclaration.getModuleSpecifierValue().includes("@com.mgmtp.a12.base/base-model-api")
+	);
+	baseModelApiImport
+		?.getNamedImports()
+		.find((namedImport) => namedImport.getName() === "ModelPath")
 		?.remove();
+
 	treeModel.getInterface("RuntimeTreeModel")?.remove();
 	treeModel.getModule("RuntimeTreeModel")?.remove();
 

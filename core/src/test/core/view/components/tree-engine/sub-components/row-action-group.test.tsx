@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
-
-import { ButtonGroup } from "@com.mgmtp.a12.widgets/widgets-core/lib/button-group/main/button-group.view.js";
+import { ButtonGroup } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeModel } from "../../../../../../core/models/index.js";
-import { type Identifier, type RowState, type UIStateSelector } from "../../../../../../core/store/index.js";
+import type { Identifier, RowState, UIStateSelector } from "../../../../../../core/store/index.js";
 import {
 	BaseRowActionGroup,
 	ContextMenu,

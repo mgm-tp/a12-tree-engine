@@ -2,7 +2,7 @@
 	"header": {
 		"id": "ProductCandidates-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -29,25 +29,9 @@
 				"reference": "DomainProduct"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		]
+		"annotations": []
 	},
 	"content": {
-		"subHeaderBox": {
-			"majorElements": [
-				{
-					"type": "search"
-				},
-				{
-					"type": "filter"
-				}
-			]
-		},
-		"footerBox": {},
 		"columns": [
 			{
 				"id": "column-5c39e",
@@ -66,8 +50,19 @@
 		"rowActionGroup": {
 			"actions": []
 		},
+		"subHeaderBox": {
+			"rightSlot": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
 		"configuration": {
-			"pagingSize": 10,
+			"pagingSize": 5,
 			"initialSorting": [
 				{
 					"idref": "column-5c39e"

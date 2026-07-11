@@ -32,7 +32,7 @@
 
 import { Commands, TreeEngineState } from "../../../../../core/store/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
-import { handleSetMultiSelectionNodes } from "../../../../../core/store/internal/reducer/handler/setMultiSelectionNodes.js";
+import { handleSetMultiSelectionNodes } from "../../../../../core/store/reducer/handler/setMultiSelectionNodes.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.reducer.handler.setMultiSelectionNodes", () => {
 	const engineState = defaultEngineState;

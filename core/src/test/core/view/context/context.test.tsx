@@ -34,8 +34,8 @@ import { renderHook } from "@testing-library/react";
 import * as React from "react";
 import { vi } from "vitest";
 
-import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/drag-and-drop-utils.js";
-import { type DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import {
 	type WidgetMap,

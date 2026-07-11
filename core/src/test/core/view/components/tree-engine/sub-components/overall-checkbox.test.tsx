@@ -30,11 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { Checkbox } from "@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/main/checkbox.view.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { Checkbox } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeEngineState, UIStateSelector } from "../../../../../../core/store/index.js";
 import { TreeEngineContextProvider } from "../../../../../../core/view/index.js";
@@ -45,10 +44,10 @@ import {
 	enLocale,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
-import { en } from "../../../../../../core/services/localization/internal/languages/en.js";
-import { de } from "../../../../../../core/services/localization/internal/languages/de.js";
+import { en } from "../../../../../../core/services/localization/languages/en.js";
+import { de } from "../../../../../../core/services/localization/languages/de.js";
 import { OverallCheckbox } from "../../../../../../core/view/index.js";
-import { type Stub } from "../../../../../utils/mock-utils.js";
+import type { Stub } from "../../../../../utils/mock-utils.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.overall-checkbox", () => {
 	const basicEngineState = defaultEngineState;

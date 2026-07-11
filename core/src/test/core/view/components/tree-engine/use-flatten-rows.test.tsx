@@ -36,7 +36,7 @@ import { DataSelector, ModelSelector, type TreeEngineState, type Identifier } fr
 import { type FlattenNodeRow, RootNodeRow } from "../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { testHook } from "../../../../utils/test-utils.js";
-import { FlattenRowHooks } from "../../../../../core/view/internal/components/tree-engine/use-flatten-rows.js";
+import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-flatten-rows", () => {
 	const basicEngineState = defaultEngineState;

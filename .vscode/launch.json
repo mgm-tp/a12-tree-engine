@@ -1,0 +1,17 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Launch Chrome Debugging",
+			"url": "http://localhost:15000",
+			"webRoot": "${workspaceFolder}/showcase",
+			"preLaunchTask": "Start",
+			"skipFiles": ["<node_internals>/**", "${workspaceFolder}/**/node_modules/**"],
+			"trace": true,
+			"userDataDir": "${userHome}/.vscode/chrome",
+			"runtimeArgs": ["--new-window", "--disable-background-networking", "--profile-directory=debug-profile"]
+		}
+	]
+}

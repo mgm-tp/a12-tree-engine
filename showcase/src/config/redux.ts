@@ -37,6 +37,7 @@ import {
 	ModelActions,
 	NotificationActions,
 	ApplicationActions,
+	actionSanitizer,
 	type ComposeEnhancer,
 	type A12ApplicationConfig
 } from "@com.mgmtp.a12.client/client-core";
@@ -50,17 +51,17 @@ export async function fetchModelGraph(dispatch: Dispatch): Promise<void> {
 	try {
 		const serverConnector = ConnectorLocator.getInstance().getServerConnector() as RestServerConnector;
 		const modelGraph = await serverConnector.fetchData(ModelGraph.build(true)).then((r) => r.json());
-		dispatch(ModelActions.setModelGraph(modelGraph));
-		dispatch(ApplicationActions.setBusy(false));
+		dispatch({ ...ModelActions.setModelGraph(modelGraph) });
+		dispatch({ ...ApplicationActions.setBusy(false) });
 	} catch (e) {
 		const error = e as Response;
-		dispatch(
-			NotificationActions.add({
+		dispatch({
+			...NotificationActions.add({
 				severity: "error",
 				title: { key: "server.connection.failed" },
 				message: { key: "any", defaults: { en: JSON.stringify(error.statusText, undefined, 2) } }
 			})
-		);
+		});
 		throw error;
 	}
 }
@@ -70,7 +71,7 @@ export function createComposeEnhancer(): ComposeEnhancer | undefined {
 }
 
 declare let window: Window & {
-	__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: ComposeEnhancer;
+	__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: ((options: unknown) => ComposeEnhancer) & ComposeEnhancer;
 };
 
 /**
@@ -78,7 +79,7 @@ declare let window: Window & {
  */
 export function enableReduxDevTools(): ComposeEnhancer | undefined {
 	return typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ !== undefined
-		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionSanitizer })
 		: undefined;
 }
 

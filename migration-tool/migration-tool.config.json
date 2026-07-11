@@ -1,9 +1,10 @@
 {
 	"$schema": "./node_modules/@com.mgmtp.a12.migrationtool/migrationtool-utils/config.schema.json",
+	"tsConfigPath": "./tsconfig.schema.json",
 	"stepsDirPath": "./src/internal/steps",
 	"stepModelFileName": "tree-model.ts",
 	"modelInterfaceName": "TreeModel",
-	"referenceModelPath": "../core/src/core/models/internal/tree-model.ts",
+	"referenceModelPath": "../core/src/core/models/tree-model.ts",
 	"adjustModelFuncPath": "./scripts/adjust-model.js",
 	"persistentSchema": true
 }

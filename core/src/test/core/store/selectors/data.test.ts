@@ -33,7 +33,7 @@
 import { DataSelector, Identifier, TreeEngineState } from "../../../../core/store/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
-import { type Mutable } from "../../../../extensions/client/internal/shared.js";
+import type { Mutable } from "../../../../extensions/client/shared.js";
 import { createMockPerson } from "../../../utils/state-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.selectors.data", () => {
@@ -225,8 +225,8 @@ describe("@com.mgmtp.a12.tree-engine.core.store.selectors.data", () => {
 					linkRef: mockType<TreeEngineState.LinkRef>({
 						linkDescriptor: {
 							entities: [
-								{ docRef: teamIdentifier.id, role: "Parent", modelName: "DomainTeam" },
-								{ docRef: teamIdentifier.id, role: "Child", modelName: "DomainTeam" }
+								{ docRef: teamIdentifier.id, role: "Parent" },
+								{ docRef: teamIdentifier.id, role: "Child" }
 							]
 						}
 					})
@@ -291,8 +291,8 @@ describe("@com.mgmtp.a12.tree-engine.core.store.selectors.data", () => {
 						linkDescriptor: {
 							relationshipModel: "TeamTeam",
 							entities: [
-								{ role: "Parent", docRef: parentTeamNode.identifier.id, modelName: parentTeamNode.identifier.type },
-								{ role: "Child", docRef: childTeamNode.identifier.id, modelName: parentTeamNode.identifier.type }
+								{ role: "Parent", docRef: parentTeamNode.identifier.id, modelName: "Team" },
+								{ role: "Child", docRef: childTeamNode.identifier.id, modelName: "Team" }
 							]
 						}
 					}

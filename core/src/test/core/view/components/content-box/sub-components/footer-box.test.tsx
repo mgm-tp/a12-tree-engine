@@ -31,26 +31,25 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { ButtonGroupContainer } from "@com.mgmtp.a12.widgets/widgets-core/lib/layout/button-group-container/index.js";
+import { ButtonGroupContainer } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeModel } from "../../../../../../core/models/index.js";
-import { TreeModelKeys } from "../../../../../../core/services/localization/internal/tree-model-keys.js";
+import { TreeModelKeys } from "../../../../../../core/services/localization/tree-model-keys.js";
 import { TreeEngineContextProvider, FooterBox } from "../../../../../../core/view/index.js";
-import { Button } from "../../../../../../core/view/internal/components/content-box/sub-components/buttons.js";
+import { Button } from "../../../../../../core/view/components/content-box/sub-components/buttons.js";
 import { createContextProps, defaultEngineState } from "../../../../../setup/basic.spec.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.footer-box", () => {
 	const basicEngineState = defaultEngineState;
-	const customMajorElements: TreeModel.ButtonElement[] = [
+	const customRightElements: TreeModel.ButtonElement[] = [
 		{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON },
 		{ id: "1", event: "B", type: TreeModel.ElementType.BUTTON },
 		{ id: "2", event: "C", type: TreeModel.ElementType.BUTTON }
 	];
 
-	const customMinorElements: TreeModel.ButtonElement[] = [
+	const customLeftElements: TreeModel.ButtonElement[] = [
 		{ id: "3", event: "D", type: TreeModel.ElementType.BUTTON },
 		{ id: "4", event: "E", type: TreeModel.ElementType.BUTTON }
 	];
@@ -68,14 +67,14 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 
 	describe("given various footer type", () => {
 		const testCases: [TreeModel.FooterType, number, number][] = [
-			[{ majorElements: [], minorElements: [] }, 0, 0],
-			[{ majorElements: customMajorElements, minorElements: [] }, 3, 0],
-			[{ majorElements: [], minorElements: customMinorElements }, 0, 2],
-			[{ majorElements: customMajorElements, minorElements: customMinorElements }, 3, 2]
+			[{ rightSlot: [], leftSlot: [] }, 0, 0],
+			[{ rightSlot: customRightElements, leftSlot: [] }, 3, 0],
+			[{ rightSlot: [], leftSlot: customLeftElements }, 0, 2],
+			[{ rightSlot: customRightElements, leftSlot: customLeftElements }, 3, 2]
 		];
 
 		testCases.forEach(([footerType, rightButtonLength, leftButtonLength]) => {
-			const description = `${rightButtonLength} majorButtons and ${leftButtonLength} minorButtons`;
+			const description = `${rightButtonLength} rightButtons and ${leftButtonLength} leftButtons`;
 			describe("given footerBox with " + description, () => {
 				it("should render footerBox properly with " + description, () => {
 					const result = setupTest(footerType);
@@ -97,8 +96,8 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 		it("should pass element & componentKey props to Button properly", () => {
 			const buttonProps: TreeModel.ButtonElement = { id: "1024", event: "test", type: TreeModel.ElementType.BUTTON };
 			const result = setupTest({
-				majorElements: [buttonProps],
-				minorElements: []
+				rightSlot: [buttonProps],
+				leftSlot: []
 			});
 
 			const button = result.find(Button);

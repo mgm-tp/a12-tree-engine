@@ -60,6 +60,7 @@ The following figure is an example of a flow used in Tree Engine showcase applic
 [image,options="nowrap",title="Tree Engine flow in Application Model"]
 image::assets/images/204_sme_app_model_tree_engine_flow.png[Tree Engine flow in Application Model]
 
+[#connect-to-other-engines]
 ==== Connect to Other Engines
 
 Tree Engine exposes a list of sagas via link:./assets/generated/typedoc/variables/extensions_client.TreeEngineFactories.createSagas.html[TreeEngineFactories.createSagas()]
@@ -106,3 +107,50 @@ Example of `VIEW_ADD` directive:
 
 [image,options="nowrap",title="Link Form Engine `VIEW ADD` in Application Model"]
 image::assets/images/204_sme_app_model_link_form_engine_scene_view_add_directive.png[Link Form Engine `VIEW ADD` in Application Model]
+
+[#activity-descriptors]
+==== Activity Descriptors
+
+Tree Engine provides its own CRUD-like functionality for creating, reading, updating, and deleting tree nodes and link documents, independently of the link:/docs/crud/crud-dev-docs/index.html[CRUD component].
+When Tree Engine opens a child activity, it constructs the activity descriptor by spreading the current tree activity descriptor and adding scenario-specific keys.
+The Application Model _Match Conditions_ of the target scene must align with these keys to ensure the correct scene is activated.
+
+NOTE: *Current state documentation.*
+Tree Engine implements CRUD-like functionality (node creation, editing, link management) independently of the CRUD component.
+The descriptor conventions described here reflect this independent implementation.
+A future Master Detail Component (A12-15815) will unify these conventions across engines.
+Until then, this section is the authoritative reference for Tree Engine's current activity descriptor behavior.
+
+NOTE: `engine: "tree"` in the tree master activity descriptor is optional and was made so in v9.0.0 (A12TE-280).
+In the current iteration, projects do not need it for the engine to work correctly.
+
+[cols="1,2,2",options="header"]
+|===
+|Scenario |Added / overridden keys |Matching tip
+
+|View / edit existing node
+|`model` (node's document model ref), `instance` (node's document ID)
+|Match on `model` to route to the correct Form Engine scene.
+
+|Create new node (child, sibling, or root)
+|`model` (document model ref of the new node), `instance: "__NEW__"`
+|`instance: "__NEW__"` identifies a new, unsaved document; match on `model` to route to the correct Form Engine scene.
+
+|Add link (`event_add_link`)
+|`model` (target node's document type), `instance` (target node's ID), `engine: "relationship"`
+|Match on `engine: "relationship"` to distinguish the Standalone Relationship Engine from a plain form activity.
+
+|Edit link document
+|`model` (link document model ref), `instance` (link document ID, or `__NEW__` for a new document), `linkForm: "true"`
+|Match on `linkForm: "true"` to distinguish the link document form from a regular edit activity.
+|===
+
+NOTE: With the new Relationship Engine integration, child and sibling node creation additionally propagate
+`parentInstance`, `parentRelationshipName`, and `parentRelationshipRole` (sibling creation also
+propagates `predecessor`) into the descriptor, to combine create document and link process into one step. 
+These keys are extra payload, Application Model match conditions do not need to include them.
+
+NOTE: When using a SME-generated Master Details Model, the `engine` key in activity descriptors originates from the MDM-generated initial activity descriptor, not from Tree Engine itself.
+See link:/docs/crud/crud-dev-docs/index.html#activity-descriptors-mdm[CRUD's Activity Descriptors: With Master Details Model] for the match condition requirements in that context.
+
+TIP: See <<#connect-to-other-engines,Connect to Other Engines>> for concrete Application Model match condition examples for Form Engine, Relationship Engine, and link document scenes.

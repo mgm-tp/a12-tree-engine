@@ -1,9 +1,10 @@
 {
-	"extends": "../tsconfig",
-	"include": ["src"],
+	"extends": "../tsconfig.json",
+	"include": ["src", "src/**/*.json", "package.json", "resources/**/*.json"],
+	"references": [{ "path": "../core" }],
 	"compilerOptions": {
+		"rootDir": "${configDir}",
 		"noEmit": true,
-		"skipLibCheck": true,
-		"types": ["node"]
+		"noUncheckedSideEffectImports": false
 	}
 }

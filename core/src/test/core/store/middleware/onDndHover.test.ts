@@ -32,7 +32,7 @@
 
 import { type Mock, vi } from "vitest";
 
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
+import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import {
 	Events,
@@ -41,7 +41,7 @@ import {
 	type TreeEngineState,
 	UIStateSelector
 } from "../../../../core/store/index.js";
-import { onDndHoverMiddleware } from "../../../../core/store/internal/middleware/events/onDndHover.js";
+import { onDndHoverMiddleware } from "../../../../core/store/middleware/events/onDndHover.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";

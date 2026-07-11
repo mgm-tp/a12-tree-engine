@@ -31,6 +31,7 @@
  */
 
 import { type Identifier, TreeEngineState, UIStateSelector } from "../../../../core/store/index.js";
+import { TreeModel } from "../../../../core/models/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.selectors.ui-state", () => {
@@ -263,6 +264,82 @@ describe("@com.mgmtp.a12.tree-engine.core.store.selectors.ui-state", () => {
 				const customEngineState = { ...engineState, disabled: testCase };
 				const disabled = UIStateSelector.disabled()(customEngineState);
 				expect(disabled).toBe(customEngineState.disabled);
+			});
+		});
+	});
+
+	describe("isMultiSelectionRowClickActive", () => {
+		const { CollapseOption, SelectionArea } = TreeModel.MultiSelectionConfiguration;
+
+		const defaultMultiSelectionConfig: TreeModel.MultiSelectionConfiguration = {
+			collapseOption: CollapseOption.COLLAPSIBLE_EXPANDED,
+			counterOption: TreeModel.MultiSelectionConfiguration.CounterOption.SIMPLE
+		};
+
+		const rootNodePath = `DomainTeam[DomainTeam/1]`;
+
+		function createState(
+			opts: { expandedMultiSelectionPanel: boolean; hasSelectedRow: boolean },
+			config?: TreeModel.MultiSelectionConfiguration
+		): TreeEngineState {
+			return {
+				...engineState,
+				models: {
+					...engineState.models,
+					uiModel: {
+						...engineState.models.uiModel,
+						content: {
+							...engineState.models.uiModel.content,
+							configuration: {
+								...engineState.models.uiModel.content.configuration,
+								multiSelection: config
+							}
+						}
+					}
+				},
+				expandedMultiSelectionPanel: opts.expandedMultiSelectionPanel,
+				multiSelectionNodes: opts.hasSelectedRow ? { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } : {}
+			};
+		}
+
+		const panelClosed = { expandedMultiSelectionPanel: false, hasSelectedRow: false };
+		const panelOpen = { expandedMultiSelectionPanel: true, hasSelectedRow: false };
+		const rowSelected = { expandedMultiSelectionPanel: false, hasSelectedRow: true };
+		const bothActive = { expandedMultiSelectionPanel: true, hasSelectedRow: true };
+
+		const testCases: [
+			TreeModel.MultiSelectionConfiguration | undefined,
+			{ expandedMultiSelectionPanel: boolean; hasSelectedRow: boolean },
+			boolean
+		][] = [
+			// No multi-selection configured
+			[undefined, panelClosed, false],
+			[undefined, panelOpen, true],
+
+			// CHECKBOX selectionArea — row click never triggers selection
+			[{ ...defaultMultiSelectionConfig, selectionArea: SelectionArea.CHECKBOX }, panelOpen, false],
+			[{ ...defaultMultiSelectionConfig, selectionArea: SelectionArea.CHECKBOX }, rowSelected, false],
+
+			// COLLAPSIBLE_EXPANDED — active when panel is open
+			[{ ...defaultMultiSelectionConfig }, panelClosed, false],
+			[{ ...defaultMultiSelectionConfig }, panelOpen, true],
+			[{ ...defaultMultiSelectionConfig }, bothActive, true],
+
+			// COLLAPSIBLE_COLLAPSED — same as COLLAPSIBLE_EXPANDED
+			[{ ...defaultMultiSelectionConfig, collapseOption: CollapseOption.COLLAPSIBLE_COLLAPSED }, panelClosed, false],
+			[{ ...defaultMultiSelectionConfig, collapseOption: CollapseOption.COLLAPSIBLE_COLLAPSED }, panelOpen, true],
+
+			// NON_COLLAPSIBLE — active when at least one row is selected; panel state is irrelevant
+			[{ ...defaultMultiSelectionConfig, collapseOption: CollapseOption.NON_COLLAPSIBLE }, panelClosed, false],
+			[{ ...defaultMultiSelectionConfig, collapseOption: CollapseOption.NON_COLLAPSIBLE }, rowSelected, true],
+			[{ ...defaultMultiSelectionConfig, collapseOption: CollapseOption.NON_COLLAPSIBLE }, panelOpen, false]
+		];
+
+		it("should return the expected value", () => {
+			testCases.forEach(([config, stateOpts, expectedValue]) => {
+				const state = createState(stateOpts, config);
+				const result = UIStateSelector.isMultiSelectionRowClickActive()(state);
+				expect(result).toBe(expectedValue);
 			});
 		});
 	});

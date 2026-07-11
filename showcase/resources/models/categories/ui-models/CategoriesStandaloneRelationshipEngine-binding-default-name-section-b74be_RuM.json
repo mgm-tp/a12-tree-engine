@@ -1,0 +1,35 @@
+{
+	"header": {
+		"id": "CategoriesStandaloneRelationshipEngine-binding-default-name-section-b74be_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "ProductCandidates-overview--ProductCategory"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "ProductCategory_Product_Link_Overview-overview"
+			},
+			{
+				"purpose": "link",
+				"modelType": "form",
+				"reference": "ProductCategory_LinkForm"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"relationshipName": "ProductCategory",
+		"targetRole": "Product",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "ProductCandidates-overview--ProductCategory",
+			"selectedItemsOverviewModel": "ProductCategory_Product_Link_Overview-overview",
+			"linkFormModel": "ProductCategory_LinkForm"
+		}
+	}
+}

@@ -1,0 +1,29 @@
+{
+	"header": {
+		"id": "A12TeamsStandaloneRelationshipEngine-binding-default-name_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "TeamCandidates-overview--TeamTeam"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "TeamTeam_Child_LinkOverview-overview"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"relationshipName": "TeamTeam",
+		"targetRole": "Child",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "TeamCandidates-overview--TeamTeam",
+			"selectedItemsOverviewModel": "TeamTeam_Child_LinkOverview-overview"
+		}
+	}
+}

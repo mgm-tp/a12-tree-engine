@@ -30,20 +30,19 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { DefaultTreeTableComponentRenderers } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
+import { DefaultTreeTableComponentRenderers } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import {
 	createContextProps,
 	defaultEngineState,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
-import { type TreeEngineState } from "../../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
 import { RootNodeRow, TreeEngineContextProvider, VirtualizedBody } from "../../../../../../core/view/index.js";
-import { InitialViewBody } from "../../../../../../core/view/internal/components/tree-engine/sub-components/body.js";
-import { type RuntimeTreeModel } from "../../../../../../core/models/index.js";
+import { InitialViewBody } from "../../../../../../core/view/components/tree-engine/sub-components/body.js";
+import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.virtualized-body", () => {
 	const basicEngineState = defaultEngineState;

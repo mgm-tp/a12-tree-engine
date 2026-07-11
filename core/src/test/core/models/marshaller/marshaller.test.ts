@@ -30,17 +30,17 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { type DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
-import { type LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
+import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
 
 import {
 	findSuperTypeNode,
 	type MarshallingParams,
 	marshallTreeModel,
 	marshallTreeNode
-} from "../../../../core/models/internal/marshaller.js";
-import { type TreeModel } from "../../../../core/models/index.js";
+} from "../../../../core/models/marshaller.js";
+import type { TreeModel } from "../../../../core/models/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
 
@@ -83,8 +83,8 @@ describe("@com.mgmtp.a12.tree-engine.core.models.marshaller", () => {
 	};
 
 	const basicContent: TreeModel.Content = {
-		subHeaderBox: { majorElements: [], minorElements: [] },
-		footerBox: { majorElements: [], minorElements: [] },
+		subHeaderBox: { rightSlot: [], leftSlot: [] },
+		footerBox: { rightSlot: [], leftSlot: [] },
 		columns: [],
 		nodes: [basicTeamNode],
 		configuration: {
@@ -271,7 +271,7 @@ describe("@com.mgmtp.a12.tree-engine.core.models.marshaller", () => {
 				childRelationshipConfigurations: basicChildRelationshipConfigurations,
 				actions: mockType<TreeModel.TreeNodeActionButton[]>(),
 				contextMenu: mockType<TreeModel.TreeNodeContextMenu>(),
-				defaultRowAction: mockType<TreeModel.DefaultRowAction>(),
+				rowActivation: mockType<TreeModel.RowActivation>(),
 				rowTitle: mockType<LocalizedModelText>(),
 				icon: { name: "super-icon" },
 				configuration: { dnd: true }
@@ -284,7 +284,7 @@ describe("@com.mgmtp.a12.tree-engine.core.models.marshaller", () => {
 				childRelationshipConfigurations: [],
 				actions: mockType<TreeModel.TreeNodeActionButton[]>(),
 				contextMenu: mockType<TreeModel.TreeNodeContextMenu>(),
-				defaultRowAction: mockType<TreeModel.DefaultRowAction>(),
+				rowActivation: mockType<TreeModel.RowActivation>(),
 				configuration: { dnd: false }
 			};
 
@@ -307,7 +307,7 @@ describe("@com.mgmtp.a12.tree-engine.core.models.marshaller", () => {
 					"actions",
 					"columns",
 					"contextMenu",
-					"defaultRowAction",
+					"rowActivation",
 					"rowTitle",
 					"childRelationshipConfigurations"
 				];

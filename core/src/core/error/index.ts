@@ -30,4 +30,4 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export * from "./internal/tree-engine-error.js";
+export * from "./tree-engine-error.js";

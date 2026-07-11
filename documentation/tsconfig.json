@@ -1,9 +1,10 @@
 {
-	"extends": "../tsconfig",
-	"include": ["./src/assets/typescript", "./scripts"],
+	"extends": "../tsconfig.json",
+	"include": ["./src/assets/typescript", "./scripts", "package.json"],
 	"exclude": ["./**/generated"],
+	"references": [{ "path": "../core" }],
 	"compilerOptions": {
-		"noEmit": true,
-		"skipLibCheck": true
+		"rootDir": "${configDir}",
+		"noEmit": true
 	}
 }

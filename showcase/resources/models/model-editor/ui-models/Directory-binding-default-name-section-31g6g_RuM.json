@@ -1,0 +1,29 @@
+{
+	"header": {
+		"id": "Directory-binding-default-name-section-31g6g_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "FileCandidates-overview--DirectoryFile"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "DirectoryFile_File_LinkOverview-overview"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"relationshipName": "DirectoryFile",
+		"targetRole": "File",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "FileCandidates-overview--DirectoryFile",
+			"selectedItemsOverviewModel": "DirectoryFile_File_LinkOverview-overview"
+		}
+	}
+}

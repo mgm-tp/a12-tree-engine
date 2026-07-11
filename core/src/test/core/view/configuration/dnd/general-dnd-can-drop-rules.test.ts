@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
+import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type RuntimeTreeModel } from "../../../../../core/models/index.js";
-import { type Identifier } from "../../../../../core/store/index.js";
+import type { RuntimeTreeModel } from "../../../../../core/models/index.js";
+import type { Identifier } from "../../../../../core/store/index.js";
 import { type DragObject, type HoveredObject, RootNodeRow } from "../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
@@ -47,7 +47,7 @@ import {
 	MakeChildRule,
 	MakeRootRule,
 	MakeSiblingRule
-} from "../../../../../core/view/internal/configuration/dnd/can-drop-rules.js";
+} from "../../../../../core/view/configuration/dnd/can-drop-rules.js";
 
 import { createDragItem, createFlattenNodeRow, createHoveredItem } from "./shared.js";
 

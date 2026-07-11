@@ -43,3 +43,5 @@ include::0311_limitation_of_link_document_model.adoc[]
 include::0312_selector_map.adoc[]
 
 include::0313_request_selector_map.adoc[]
+
+include::0314_row_activation.adoc[]

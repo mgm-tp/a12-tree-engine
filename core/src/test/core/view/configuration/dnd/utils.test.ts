@@ -31,10 +31,10 @@
  */
 
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
-import { DndUtils } from "../../../../../core/view/internal/configuration/dnd/utils.js";
+import { DndUtils } from "../../../../../core/view/configuration/dnd/utils.js";
 import { FlattenNodeRow } from "../../../../../core/view/index.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { type RuntimeTreeModel } from "../../../../../core/models/index.js";
+import type { RuntimeTreeModel } from "../../../../../core/models/index.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.utils", () => {
 	const basicEngineState = defaultEngineState;

@@ -30,10 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type AnyAction } from "redux";
 import { type SagaGenerator, takeEvery, put } from "typed-redux-saga";
-import { type Action } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { Events, TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core";
 import { NotificationActions } from "@com.mgmtp.a12.client/client-core";
 
@@ -42,8 +42,10 @@ import { SHOWCASE_RESOURCE_KEYS } from "../config/resources.js";
 // tag::handleCustomRowActionSaga[]
 export function* handleCustomRowActionSaga(): SagaGenerator<void> {
 	yield* takeEvery(
-		(anyAction: AnyAction) =>
-			TreeEngineActions.event.match(anyAction) && Events.onRowClicked.match(anyAction.payload.engineAction),
+		(action: unknown) =>
+			isAction(action) &&
+			TreeEngineActions.event.match(action) &&
+			Events.onRowClicked.match(action.payload.engineAction),
 		handle
 	);
 }

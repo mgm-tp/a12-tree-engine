@@ -31,9 +31,9 @@
  */
 
 import { type SagaGenerator, put, select, takeEvery } from "typed-redux-saga";
-import { type AnyAction } from "redux";
-import { type Action } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	TreeEngineActions,
 	TreeEngineSelectors,
@@ -49,14 +49,15 @@ import { assert, RELOAD_NODES_ENGINE_EVENT, RELOAD_WHOLE_TREE } from "../helpers
 
 export function* handleReloadNodesSaga(): SagaGenerator<void> {
 	yield* takeEvery(
-		(action: AnyAction) =>
+		(action: unknown) =>
+			isAction(action) &&
 			TreeEngineActions.event.match(action) &&
 			Events.onMultiSelectionEventButtonClicked.match(action.payload.engineAction) &&
 			action.payload.engineAction.payload.button.event === RELOAD_NODES_ENGINE_EVENT,
 		handleReloadNodes
 	);
 	yield* takeEvery(
-		(action: AnyAction) =>
+		(action: unknown) =>
 			TreeEngineActions.event.match(action) &&
 			Events.onEventButtonClicked.match(action.payload.engineAction) &&
 			action.payload.engineAction.payload.button.event === RELOAD_WHOLE_TREE,

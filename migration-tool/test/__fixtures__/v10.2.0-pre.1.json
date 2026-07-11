@@ -1,0 +1,155 @@
+{
+	"header": {
+		"id": "a12-teams-tree",
+		"modelType": "tree",
+		"modelVersion": "10.2.0-pre.1",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "A12 Teams"
+			},
+			{
+				"locale": "de",
+				"text": "A12 der Teams"
+			}
+		],
+		"annotations": [
+			{
+				"name": "roles",
+				"value": "anonymous"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM1",
+				"reference": "DomainTeam"
+			},
+			{
+				"purpose": "document-model-for-tree",
+				"modelType": "document",
+				"alias": "DM2",
+				"reference": "DomainPerson"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM1",
+				"reference": "TeamPerson"
+			},
+			{
+				"purpose": "relationship-model-for-tree",
+				"modelType": "relationship",
+				"alias": "RM2",
+				"reference": "TeamTeam"
+			}
+		]
+	},
+	"content": {
+		"configuration": {
+			"rootRef": "crc-cfae1d",
+			"hierarchicalColumnRef": "column-23eade",
+			"enableColumnsResize": true,
+			"expansionStrategy": {
+				"type": "level_by_level",
+				"initialExpansion": {
+					"type": "level_limit",
+					"level": 1,
+					"affectedNodeRefs": ["node-12feda"]
+				}
+			}
+		},
+		"subHeaderBox": {
+			"majorElements": [],
+			"minorElements": [
+				{
+					"type": "expand_all_popup"
+				},
+				{
+					"label": [
+						{
+							"locale": "en",
+							"text": "Add team"
+						},
+						{
+							"locale": "de",
+							"text": "Add Team"
+						}
+					],
+					"destructive": false,
+					"icon": {
+						"name": "add"
+					},
+					"id": "button-bafda",
+					"event": "event_add_root_node",
+					"type": "button",
+					"primary": false
+				}
+			]
+		},
+		"footerBox": {
+			"majorElements": [
+				{
+					"icon": {
+						"name": "autorenew"
+					},
+					"id": "button-ec3fb",
+					"event": "event_renew",
+					"type": "button",
+					"primary": false
+				}
+			],
+			"minorElements": []
+		},
+		"columns": [
+			{
+				"id": "column-23eade",
+				"name": "Name",
+				"label": [
+					{
+						"locale": "en",
+						"text": "Name"
+					},
+					{
+						"locale": "de",
+						"text": "Name"
+					}
+				],
+				"width": 2.5,
+				"fixedWidth": true
+			}
+		],
+		"nodes": [
+			{
+				"id": "node-12feda",
+				"documentModelRef": "DomainTeam",
+				"columns": [
+					{
+						"columnRef": "column-23eade",
+						"elementRef": "field_c9ad3"
+					}
+				],
+				"childRelationshipConfigurations": [
+					{
+						"id": "crc-cfae1d",
+						"relationshipModelRef": "TeamTeam",
+						"parentRole": "Parent"
+					}
+				],
+				"actions": [],
+				"configuration": {
+					"dnd": true
+				}
+			}
+		]
+	}
+}

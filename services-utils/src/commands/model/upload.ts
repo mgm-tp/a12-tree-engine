@@ -34,7 +34,7 @@ import Path from "node:path";
 import { inspect } from "node:util";
 import Fs from "node:fs/promises";
 
-import { isModelInstance, type Model } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { isModelInstance, type Model } from "@com.mgmtp.a12.base/base-model-api";
 
 import { bulkModelUploadRequest } from "../../utils/index.js";
 
@@ -56,12 +56,16 @@ export async function main({ path, waitOn }: UploadParams) {
 
 	for await (const filePath of Fs.glob("**/*.json", { cwd })) {
 		const fileContent = JSON.parse(await Fs.readFile(Path.join(cwd, filePath), "utf-8"));
-		if (isModelInstance(fileContent)) {
-			models.push(fileContent);
+		if (
+			isModelInstance(fileContent) &&
+			fileContent.header.modelType !== "document" &&
+			fileContent.header.modelType !== "relationship"
+		) {
+			models.push(applyRoleAnnotation(fileContent));
 		}
 	}
 
-	console.log("Found", models.length, "model files.");
+	console.log("Found", models.length, "UI model files.");
 	console.log("Preparing the bulk upload process...");
 
 	try {
@@ -72,4 +76,22 @@ export async function main({ path, waitOn }: UploadParams) {
 		console.error(inspect(e, { depth: 3 }));
 		process.exit(1);
 	}
+}
+
+/**
+ * Mirrors the build-time WCF converter chain (see showcase-models-converters) so
+ * that runtime uploads (e2e overrides, ad-hoc seed) match what `:server:convertModels`
+ * would emit. Currently only injects the `roles: anonymous` annotation required by
+ * the showcase's anonymous auth setup. Extend here when new WCF converters are added.
+ */
+function applyRoleAnnotation(model: Model): Model {
+	const header = model?.header;
+
+	const annotations = header.annotations ?? [];
+
+	if (annotations.some((a) => a?.name === "roles")) {
+		return model;
+	}
+
+	return { ...model, header: { ...header, annotations: [...annotations, { name: "roles", value: "anonymous" }] } };
 }

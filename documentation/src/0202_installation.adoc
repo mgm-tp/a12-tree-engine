@@ -18,7 +18,7 @@ THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPR
 [#installation]
 === Installation
 
-Tree Engine is provided as a npm package containing ES5 CommonJS modules. Run the following command to install Tree Engine:
+Tree Engine is provided as an npm package published as ES Modules (ESM). Run the following command to install Tree Engine:
 
 [source]
 ----
@@ -31,12 +31,11 @@ After that, it is possible to start integrating Tree Engine into the application
 
 ==== Register Tree Engine modules
 
-The registration process of Tree Engine is quite simple, it is only required to register two Tree Engine modules (link:./assets/generated/typedoc/modules/extensions_client.TreeEngineFactories.html[TreeEngineFactories] and link:./typedoc/modules/extensions_server_connector.TreeEngineServerConnectorFactories.html[TreeEngineServerConnectorFactories]).
+The registration process of Tree Engine is quite simple, it is only required to register two Tree Engine modules (link:./assets/generated/typedoc/modules/extensions_client.TreeEngineFactories.html[TreeEngineFactories] and link:./assets/generated/typedoc/modules/extensions_server-connector.TreeEngineServerConnectorFactories.html[TreeEngineServerConnectorFactories]).
 
 [source,typescript,options="nowrap",title="src/appsetup.ts"]
 --
-import { TreeEngineFactories } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/extensions/client";
-import { TreeEngineServerConnectorFactories } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/extensions/server-connector";
+import { TreeEngineFactories, TreeEngineServerConnectorFactories } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 export function setup() {
   ModuleRegistryProvider.getInstance().addModule(TreeEngineFactories.createModule());
@@ -83,7 +82,7 @@ In case of not using TreeEngine's module, it is possible to include Tree Engine'
 
 [source,typescript,options="nowrap",title="src/defaultContainerFactory.tsx"]
 --
-import { TreeEngineFactories } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/extensions/client";
+import { TreeEngineFactories } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 function viewComponentProvider(componentName: string) {
   return TreeEngineFactories.viewComponentProvider(componentName);
@@ -111,7 +110,7 @@ it is mandatory to have a DndProvider registered as the highest order component 
 [source,typescript,options="nowrap",title="src/app/page/index.tsx"]
 ----
 import { DndProvider } from "react-dnd";
-import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core/lib/common";
+import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core";
 
 export const BasePage = () => (
   <DndProvider

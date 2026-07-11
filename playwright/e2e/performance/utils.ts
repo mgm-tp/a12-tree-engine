@@ -30,10 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
 import { PlaywrightCommands } from "playwright-commands";
 
-import { cleanDocumentsData } from "../../../services-utils/src";
+import { cleanDocumentsData } from "../../../services-utils/src/index.js";
 
 export namespace PlaywrightUtils {
 	export async function cleanDocuments() {

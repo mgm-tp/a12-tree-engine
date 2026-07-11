@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Drive",
 		"modelType": "form",
-		"modelVersion": "37.4.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,16 +21,7 @@
 				"text": "Fahrt"
 			}
 		],
-		"annotations": [
-			{
-				"name": "bindingConfiguration",
-				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"DriveDirectory.json\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"DriveDirectory\",\"targetRole\":\"Directory\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"DirectoryCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"DriveDirectory_Directory_LinkOverview-overview\",\"use\":\"link\"}]}]},\"elementId\":\"section-p772o\"},{\"type\":\"relationship\",\"details\":{\"name\":\"DriveFile.json\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"DriveFile\",\"targetRole\":\"File\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"FileCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"DriveFile_File_SelectedItemsOverview\",\"use\":\"link\"}]}]},\"elementId\":\"section-morm4\"}]"
-			},
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"alias": "DM",
@@ -39,28 +30,14 @@
 				"reference": "DomainDrive"
 			},
 			{
-				"alias": "DirectoryCandidates-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "DirectoryCandidates-overview"
+				"purpose": "relationship-ui",
+				"modelType": "relationship-ui",
+				"reference": "Drive-binding-DriveDirectory.json_RuM"
 			},
 			{
-				"alias": "DriveDirectory_Directory_LinkOverview-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "DriveDirectory_Directory_LinkOverview-overview"
-			},
-			{
-				"alias": "FileCandidates-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "FileCandidates-overview"
-			},
-			{
-				"alias": "DriveFile_File_SelectedItemsOverview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "DriveFile_File_SelectedItemsOverview"
+				"purpose": "relationship-ui",
+				"modelType": "relationship-ui",
+				"reference": "Drive-binding-DriveFile.json_RuM"
 			}
 		]
 	},
@@ -179,41 +156,13 @@
 						"type": "CustomScreenElement",
 						"id": "section-p772o",
 						"name": "DriveDirectory.json",
-						"title": {
-							"type": "Multilingual",
-							"multilingualText": {
-								"text": [
-									{
-										"locale": "en",
-										"text": "DriveDirectory.json"
-									},
-									{
-										"locale": "de",
-										"text": "DriveDirectory.json"
-									}
-								]
-							}
-						}
+						"reference": "Drive-binding-DriveDirectory.json_RuM"
 					},
 					{
 						"type": "CustomScreenElement",
 						"id": "section-morm4",
 						"name": "DriveFile.json",
-						"title": {
-							"type": "Multilingual",
-							"multilingualText": {
-								"text": [
-									{
-										"locale": "en",
-										"text": "DriveFile.json"
-									},
-									{
-										"locale": "de",
-										"text": "DriveFile.json"
-									}
-								]
-							}
-						}
+						"reference": "Drive-binding-DriveFile.json_RuM"
 					}
 				]
 			}

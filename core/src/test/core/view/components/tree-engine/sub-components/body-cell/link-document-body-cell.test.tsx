@@ -30,10 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { type RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import {
 	DataSelector,

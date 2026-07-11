@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Directory",
 		"modelType": "form",
-		"modelVersion": "37.4.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,16 +21,7 @@
 				"text": "Verzeichnis"
 			}
 		],
-		"annotations": [
-			{
-				"name": "bindingConfiguration",
-				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"DirectoryDirectory\",\"targetRole\":\"Child\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"DirectoryCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"DirectoryDirectory_Child_LinkOverview-overview\",\"use\":\"link\"}]}]},\"elementId\":\"section-8lvdw\"},{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"DirectoryFile\",\"targetRole\":\"File\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"FileCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"DirectoryFile_File_LinkOverview-overview\",\"use\":\"link\"}]}]},\"elementId\":\"section-31g6g\"}]"
-			},
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"alias": "DM",
@@ -39,28 +30,14 @@
 				"reference": "DomainDirectory"
 			},
 			{
-				"alias": "DirectoryCandidates-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "DirectoryCandidates-overview"
+				"purpose": "relationship-ui",
+				"modelType": "relationship-ui",
+				"reference": "Directory-binding-default-name_RuM"
 			},
 			{
-				"alias": "DirectoryDirectory_Child_LinkOverview-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "DirectoryDirectory_Child_LinkOverview-overview"
-			},
-			{
-				"alias": "FileCandidates-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "FileCandidates-overview"
-			},
-			{
-				"alias": "DirectoryFile_File_LinkOverview-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "DirectoryFile_File_LinkOverview-overview"
+				"purpose": "relationship-ui",
+				"modelType": "relationship-ui",
+				"reference": "Directory-binding-default-name-section-31g6g_RuM"
 			}
 		]
 	},
@@ -184,7 +161,8 @@
 								"name": "relationship"
 							}
 						],
-						"height": 328
+						"height": 328,
+						"reference": "Directory-binding-default-name_RuM"
 					},
 					{
 						"type": "CustomScreenElement",
@@ -195,7 +173,8 @@
 								"name": "relationship"
 							}
 						],
-						"height": 328
+						"height": 328,
+						"reference": "Directory-binding-default-name-section-31g6g_RuM"
 					}
 				]
 			}

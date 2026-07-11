@@ -34,8 +34,8 @@ import Assert from "node:assert";
 
 import * as React from "react";
 
-import { PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core/lib/pop-up-menu/index.js";
-import { type LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
+import { PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { DefaultWidgetMap, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import {
@@ -44,10 +44,10 @@ import {
 	type PartialEventHandlerContextProps,
 	enLocale
 } from "../../../../../setup/basic.spec.js";
-import { Heading } from "../../../../../../core/view/internal/components/content-box/sub-components/heading.js";
+import { Heading } from "../../../../../../core/view/components/content-box/sub-components/heading.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
 import { TreeModel } from "../../../../../../core/models/index.js";
-import { type TreeEngineState } from "../../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.heading", () => {
 	const basicEngineState = defaultEngineState;
@@ -170,7 +170,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 			describe("given some sub-header buttons", () => {
 				const engineState = createEngineState
 					.from(basicEngineState)
-					.withSubHeaderBox({ majorElements: [button1], minorElements: [] })
+					.withSubHeaderBox({ rightSlot: [button1], leftSlot: [] })
 					.create();
 
 				it("should render popup menu with the buttons", () => {
@@ -186,7 +186,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 			describe("given wholeTreeExpand is on", () => {
 				const engineState = createEngineState
 					.from(basicEngineState)
-					.withSubHeaderBox({ majorElements: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }], minorElements: [] })
+					.withSubHeaderBox({ rightSlot: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }], leftSlot: [] })
 					.withConfigurations({
 						...basicEngineState.models.uiModel.content.configuration,
 						wholeTreeExpansion: true
@@ -208,8 +208,8 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 				const engineState = createEngineState
 					.from(basicEngineState)
 					.withSubHeaderBox({
-						majorElements: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }, button1],
-						minorElements: []
+						rightSlot: [{ type: TreeModel.ElementType.EXPAND_ALL_POPUP }, button1],
+						leftSlot: []
 					})
 					.withConfigurations({
 						...basicEngineState.models.uiModel.content.configuration,
@@ -232,7 +232,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 			describe("given no sub-header buttons and wholeTreeExpand is off", () => {
 				const engineState = createEngineState
 					.from(basicEngineState)
-					.withSubHeaderBox({ majorElements: [], minorElements: [] })
+					.withSubHeaderBox({ rightSlot: [], leftSlot: [] })
 					.withConfigurations({
 						...basicEngineState.models.uiModel.content.configuration,
 						wholeTreeExpansion: undefined
@@ -262,7 +262,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 				cases.forEach(({ buttons, wholeTreeExpansion }) => {
 					const engineState = createEngineState
 						.from(basicEngineState)
-						.withSubHeaderBox({ majorElements: buttons, minorElements: [] })
+						.withSubHeaderBox({ rightSlot: buttons, leftSlot: [] })
 						.withConfigurations({ ...basicEngineState.models.uiModel.content.configuration, wholeTreeExpansion })
 						.create();
 

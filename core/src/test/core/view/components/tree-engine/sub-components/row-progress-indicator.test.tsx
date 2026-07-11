@@ -31,11 +31,10 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { ProgressIndicator } from "@com.mgmtp.a12.widgets/widgets-core/lib/progress-indicator/main/progress-indicator.view.js";
+import { ProgressIndicator } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type Identifier } from "../../../../../../core/store/index.js";
+import type { Identifier } from "../../../../../../core/store/index.js";
 import {
 	RowProgressIndicator,
 	type FlattenNodeRow,

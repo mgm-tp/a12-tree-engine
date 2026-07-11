@@ -35,23 +35,18 @@ import "./config/wdyr.js";
 import "./config/reselect.js";
 import "./config/logging.js";
 import "./config/server-connector.js";
-import "@com.mgmtp.a12.widgets/widgets-core/lib/theme/basic.css";
+import "@com.mgmtp.a12.widgets/widgets-core/styles/basic.css";
 
 import { scan } from "react-scan";
 import * as React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider, useSelector } from "react-redux";
 
-import { ApplicationSelectors } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
-import { FrameFactories, type FrameViews } from "@com.mgmtp.a12.client/client-core/lib/core/frame/index.js";
-import { NotificationViews } from "@com.mgmtp.a12.client/client-core/lib/core/notification/index.js";
-import { ViewViews } from "@com.mgmtp.a12.client/client-core/lib/core/view/index.js";
-import { DirtyHandlingViews } from "@com.mgmtp.a12.client/client-core/lib/extensions/dirtyHandling/index.js";
+import { ApplicationSelectors, DynamicRegionUi, NotificationViews, ViewViews } from "@com.mgmtp.a12.client/client-core";
+import { DirtyHandlingViews } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
 
 import { isReactScanEnabled } from "./config/react-scan.js";
 import { setup } from "./appsetup.js";
-import { createViewProvider } from "./containerFactory.js";
-import { ApplicationFrameLayout } from "./views/application-frame-layout.js";
 import { ShowcaseContextProvider } from "./context.js";
 import { SizeDetector } from "./config/size-detector.js";
 import { ThemeWrapper } from "./config/theme.js";
@@ -65,20 +60,6 @@ scan({ enabled: isReactScanEnabled() });
 const Page: React.FC = () => {
 	const busyState = useSelector(ApplicationSelectors.busy());
 
-	const rootRegionRef = React.useMemo(() => [], []);
-	const RegionUi = React.useMemo(() => FrameFactories.regionUiProvider(rootRegionRef), [rootRegionRef]);
-	const progressComponentProvider = React.useMemo(() => FrameFactories.createProgressComponentProvider(), []);
-	const viewProvider = React.useMemo(() => createViewProvider(), []);
-
-	const layoutProvider: FrameViews.LayoutProvider = React.useCallback((name) => {
-		if (name === "ApplicationFrame") {
-			return {
-				component: ApplicationFrameLayout
-			};
-		}
-		return FrameFactories.layoutProvider(name);
-	}, []);
-
 	return (
 		<ThemeWrapper>
 			<SizeDetector>
@@ -86,13 +67,7 @@ const Page: React.FC = () => {
 					<A11LanguageWrapper>
 						<ViewViews.ProgressIndicator global progress={busyState ? "loading" : "none"}>
 							<NotificationViews.Frame>
-								<RegionUi
-									regionReference={rootRegionRef}
-									layoutProvider={layoutProvider}
-									regionUiProvider={FrameFactories.regionUiProvider}
-									viewProvider={viewProvider}
-									progressComponentProvider={progressComponentProvider}
-								/>
+								<DynamicRegionUi />
 							</NotificationViews.Frame>
 							<DirtyHandlingViews.VetoDialog />
 						</ViewViews.ProgressIndicator>

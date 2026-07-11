@@ -31,7 +31,7 @@ instead of the number of children merely. This limitation of Data Services could
 [source,typescript,options="nowrap",title="src/appsetup.ts"]
 --
 import { ModuleRegistryProvider } from "@com.mgmtp.a12.client/client-core/lib/core/application";
-import { TreeEngineServerConnectorFactories } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/extensions/server-connector";
+import { TreeEngineServerConnectorFactories } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 function setup() {
   const settings: TreeEngineServerConnectorFactories.ModuleSettings = {

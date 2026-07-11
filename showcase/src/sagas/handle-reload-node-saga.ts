@@ -31,37 +31,38 @@
  */
 
 import { type SagaGenerator, put, takeEvery } from "typed-redux-saga";
-import { type AnyAction } from "redux";
-import { type Action } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { TreeEngineActions, Events } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 import { RELOAD_LEVEL_0, RELOAD_LEVEL_1, RELOAD_LEVEL_2, RELOAD_NODE_EVENT } from "../helpers.js";
 
 export function* handleReloadNodeSaga(): SagaGenerator<void> {
 	yield* takeEvery(
-		(action: AnyAction) =>
+		(action: unknown) =>
+			isAction(action) &&
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			action.payload.engineAction.payload.button.event === RELOAD_NODE_EVENT,
 		createHandler()
 	);
 	yield* takeEvery(
-		(action: AnyAction) =>
+		(action: unknown) =>
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			action.payload.engineAction.payload.button.event === RELOAD_LEVEL_0,
 		createHandler(0)
 	);
 	yield* takeEvery(
-		(action: AnyAction) =>
+		(action: unknown) =>
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			action.payload.engineAction.payload.button.event === RELOAD_LEVEL_1,
 		createHandler(1)
 	);
 	yield* takeEvery(
-		(action: AnyAction) =>
+		(action: unknown) =>
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			action.payload.engineAction.payload.button.event === RELOAD_LEVEL_2,

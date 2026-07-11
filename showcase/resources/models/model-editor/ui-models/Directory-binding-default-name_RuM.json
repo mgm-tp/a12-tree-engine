@@ -1,0 +1,29 @@
+{
+	"header": {
+		"id": "Directory-binding-default-name_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "DirectoryCandidates-overview--DirectoryDirectory"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "DirectoryDirectory_Child_LinkOverview-overview"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"relationshipName": "DirectoryDirectory",
+		"targetRole": "Child",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "DirectoryCandidates-overview--DirectoryDirectory",
+			"selectedItemsOverviewModel": "DirectoryDirectory_Child_LinkOverview-overview"
+		}
+	}
+}

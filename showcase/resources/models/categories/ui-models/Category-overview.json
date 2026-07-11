@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Category-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -29,16 +29,35 @@
 				"reference": "DomainCategory"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		]
+		"annotations": []
 	},
 	"content": {
+		"columns": [
+			{
+				"id": "column-31722",
+				"elementRef": "field_04d07",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-3b814",
+				"elementRef": "field_d1da3",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": [
+				{
+					"event": "delete",
+					"icon": {
+						"name": "delete"
+					}
+				}
+			]
+		},
 		"subHeaderBox": {
-			"majorElements": [
+			"rightSlot": [
 				{
 					"type": "button",
 					"label": [
@@ -64,30 +83,6 @@
 			]
 		},
 		"footerBox": {},
-		"columns": [
-			{
-				"id": "column-31722",
-				"elementRef": "field_04d07",
-				"sortable": false,
-				"width": 1
-			},
-			{
-				"id": "column-3b814",
-				"elementRef": "field_d1da3",
-				"sortable": false,
-				"width": 1
-			}
-		],
-		"rowActionGroup": {
-			"actions": [
-				{
-					"event": "delete",
-					"icon": {
-						"name": "delete"
-					}
-				}
-			]
-		},
 		"configuration": {
 			"pagingSize": 10,
 			"showFullTextSearch": true,

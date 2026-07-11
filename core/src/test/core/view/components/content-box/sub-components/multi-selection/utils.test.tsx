@@ -31,7 +31,7 @@
  */
 
 import { TreeModel } from "../../../../../../../core/models/index.js";
-import { hasMultiSelectionComponents } from "../../../../../../../core/view/internal/components/content-box/sub-components/multi-selection/utils.js";
+import { hasMultiSelectionComponents } from "../../../../../../../core/view/components/content-box/sub-components/multi-selection/utils.js";
 
 export const defaultMultiSelectionConfig: TreeModel.MultiSelectionConfiguration = {
 	collapseOption: TreeModel.MultiSelectionConfiguration.CollapseOption.COLLAPSIBLE_EXPANDED,

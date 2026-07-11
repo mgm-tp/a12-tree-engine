@@ -2,7 +2,7 @@
 	"header": {
 		"id": "DriveCandidates-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -11,38 +11,26 @@
 				"code": "de"
 			}
 		],
-		"labels": [],
-		"annotations": [
+		"labels": [
 			{
-				"name": "roles",
-				"value": "anonymous"
+				"locale": "en",
+				"text": "Available Items"
+			},
+			{
+				"locale": "de",
+				"text": "Verfügbare Einträge"
 			}
 		],
+		"annotations": [],
 		"modelReferences": [
 			{
-				"purpose": "document-model-for-overview",
-				"modelType": "document",
-				"alias": "DM",
-				"reference": "DomainDrive"
+				"purpose": "query-model-for-overview",
+				"modelType": "query",
+				"reference": "DriveCandidates-overview-query"
 			}
 		]
 	},
 	"content": {
-		"subHeaderBox": {
-			"majorElements": [
-				{
-					"type": "search"
-				},
-				{
-					"type": "filter"
-				}
-			],
-			"minorElements": []
-		},
-		"footerBox": {
-			"majorElements": [],
-			"minorElements": []
-		},
 		"columns": [
 			{
 				"id": "column-1de64",
@@ -64,10 +52,32 @@
 			}
 		],
 		"rowActionGroup": {
-			"actions": []
+			"actions": [
+				{
+					"event": "event_add_link",
+					"icon": {
+						"name": "add"
+					}
+				}
+			]
+		},
+		"subHeaderBox": {
+			"leftSlot": [],
+			"rightSlot": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {
+			"leftSlot": [],
+			"rightSlot": []
 		},
 		"configuration": {
-			"pagingSize": 10,
+			"pagingSize": 5,
 			"showFullTextSearch": true,
 			"enableFilter": true,
 			"filterConfiguration": {
@@ -75,6 +85,10 @@
 				"showFilterBar": true,
 				"filterMode": "all"
 			}
+		},
+		"rowActivation": {
+			"type": "event",
+			"event": "event_add_link"
 		}
 	}
 }

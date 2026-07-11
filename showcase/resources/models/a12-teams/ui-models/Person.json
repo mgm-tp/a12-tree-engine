@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Person",
 		"modelType": "form",
-		"modelVersion": "37.4.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,16 +21,7 @@
 				"text": "Person"
 			}
 		],
-		"annotations": [
-			{
-				"name": "bindingConfiguration",
-				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"DualPaneTeams\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"TeamPerson\",\"targetRole\":\"Team\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":10,\"props\":{\"availableItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"Available Teams\"},{\"locale\":\"de\",\"text\":\"Verfügbare Teams\"}]},\"selectedItemsTable\":{\"label\":[{\"locale\":\"en\",\"text\":\"Belongs to\"},{\"locale\":\"de\",\"text\":\"Gehört\"}]}},\"models\":[{\"name\":\"TeamCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"TeamPerson_Team_LinkOverview-overview\",\"use\":\"link\"},{\"name\":\"TeamPerson_LinkForm\",\"use\":\"link\"}]}]},\"elementId\":\"section-501h6\"}]"
-			},
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"alias": "DM",
@@ -39,22 +30,9 @@
 				"reference": "DomainPerson"
 			},
 			{
-				"alias": "TeamCandidates-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "TeamCandidates-overview"
-			},
-			{
-				"alias": "TeamPerson_Team_LinkOverview-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "TeamPerson_Team_LinkOverview-overview"
-			},
-			{
-				"alias": "TeamPerson_LinkForm",
-				"modelType": "form",
-				"purpose": "bindingReference",
-				"reference": "TeamPerson_LinkForm"
+				"purpose": "relationship-ui",
+				"modelType": "relationship-ui",
+				"reference": "Person-binding-DualPaneTeams_RuM"
 			}
 		]
 	},
@@ -252,21 +230,7 @@
 						"type": "CustomScreenElement",
 						"id": "section-501h6",
 						"name": "DualPaneTeams",
-						"title": {
-							"type": "Multilingual",
-							"multilingualText": {
-								"text": [
-									{
-										"locale": "en",
-										"text": "DualPaneTeams"
-									},
-									{
-										"locale": "de",
-										"text": "DualPaneTeams"
-									}
-								]
-							}
-						}
+						"reference": "Person-binding-DualPaneTeams_RuM"
 					},
 					{
 						"type": "Section",

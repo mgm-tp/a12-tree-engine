@@ -33,10 +33,7 @@
 import * as React from "react";
 import { vi } from "vitest";
 
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/index.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/index.js";
-import { PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core/lib/pop-up-menu/index.js";
-import { List } from "@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.view.js";
+import { Button, Icon, PopUpMenu, List } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { ExpandAllPopUp, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import { createContextProps, defaultEngineState } from "../../../../../setup/basic.spec.js";

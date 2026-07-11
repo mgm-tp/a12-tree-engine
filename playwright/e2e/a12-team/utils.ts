@@ -33,8 +33,8 @@
 import { type Page, expect, type Locator } from "@playwright/test";
 import { PlaywrightCommands } from "playwright-commands";
 
-import { Selector } from "../selectors";
-import { type InsertSiblingPosition } from "../types";
+import { Selector } from "../selectors.js";
+import type { InsertSiblingPosition } from "../types.js";
 
 /**
  * Helper class containing utility functions for A12 Team tests

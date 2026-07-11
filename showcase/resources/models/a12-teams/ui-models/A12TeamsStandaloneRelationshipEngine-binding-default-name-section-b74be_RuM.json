@@ -1,0 +1,35 @@
+{
+	"header": {
+		"id": "A12TeamsStandaloneRelationshipEngine-binding-default-name-section-b74be_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "PersonCandidates-overview"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "TeamPerson_Person_LinkOverview-overview"
+			},
+			{
+				"purpose": "link",
+				"modelType": "form",
+				"reference": "TeamPerson_LinkForm"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"relationshipName": "TeamPerson",
+		"targetRole": "Person",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "PersonCandidates-overview",
+			"selectedItemsOverviewModel": "TeamPerson_Person_LinkOverview-overview",
+			"linkFormModel": "TeamPerson_LinkForm"
+		}
+	}
+}

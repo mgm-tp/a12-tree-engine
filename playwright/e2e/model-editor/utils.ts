@@ -30,10 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
 import { PlaywrightCommands } from "playwright-commands";
 
-import { Selector } from "../selectors";
+import { Selector } from "../selectors.js";
 
 /**
  * Helper class containing utility functions for Model Editor tests

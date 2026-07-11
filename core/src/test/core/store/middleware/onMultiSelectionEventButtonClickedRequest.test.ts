@@ -34,8 +34,8 @@ import { Commands, Events, TreeEngineState } from "../../../../core/store/index.
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";
 import { mockType } from "../../../utils/mock-utils.js";
-import { type TreeModel } from "../../../../core/models/index.js";
-import { onMultiSelectionEventButtonClickedRequestMiddleware } from "../../../../core/store/internal/middleware/events/onMultiSelectionEventButtonClickedRequest.js";
+import type { TreeModel } from "../../../../core/models/index.js";
+import { onMultiSelectionEventButtonClickedRequestMiddleware } from "../../../../core/store/middleware/events/onMultiSelectionEventButtonClickedRequest.js";
 
 import { nonMatchedAction, shouldCallNextMiddlewareAndReturnResultedAction } from "./shared.js";
 

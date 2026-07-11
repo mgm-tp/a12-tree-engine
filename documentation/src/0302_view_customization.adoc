@@ -32,7 +32,7 @@ Tree Engine provides a way to initialize the UI state of the engine. This is use
 [source,typescript,options="nowrap",title="initial-tree-engine-with-customized-ui-state.example.ts"]
 --
 
-import { TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/extensions/client/index.js";
+import { TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 const activityPushAction = TreeEngineActions.createActivity(
     { activityDescriptor: {

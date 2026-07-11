@@ -56,8 +56,8 @@ export function createMockPerson(
 		linkRef: {
 			linkDescriptor: {
 				entities: [
-					{ docRef: parentIdentifier.id, role: "Team", modelName: "DomainTeam" },
-					{ docRef: identifier.id, role: "Person", modelName: "DomainPerson" }
+					{ docRef: parentIdentifier.id, role: "Team" },
+					{ docRef: identifier.id, role: "Person" }
 				]
 			}
 		}

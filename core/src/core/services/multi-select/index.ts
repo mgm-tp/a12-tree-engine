@@ -30,4 +30,4 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export * from "./internal/multi-select.js";
+export * from "./multi-select.js";

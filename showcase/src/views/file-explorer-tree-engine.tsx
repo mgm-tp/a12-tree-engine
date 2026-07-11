@@ -68,35 +68,52 @@ export const FileExplorerTreeEngine: React.FC<FileExplorerTreeEngine.Props> = (p
 
 	const rowActionStateGetter: RowActionStateGetter = React.useCallback(
 		({ row, action }) => {
-			let hidden = false;
-			if (!dataState || action.type !== "event") {
-				return { hidden };
+			if (!dataState) {
+				return {};
 			}
+
 			const node = DataSelector.node(row.data.nodeIdentifier)(dataState);
 			if (!node?.document || !File.isInstance(node.document)) {
-				hidden = false;
-			} else if (node.document.File.FileType !== "document_model" && node.document.File.FileType !== "form_model") {
-				hidden = [
-					OPEN_DM_NODE_EVENT,
-					OPEN_DM_PAGINATED_NODE_EVENT,
-					OPEN_FM_NODE_EVENT,
-					OPEN_DM_WITH_REPLACEMENT_NODE_EVENT,
-					OPEN_DM_WITH_TEMPORARY_REPLACEMENT_NODE_EVENT,
-					OPEN_DM_NODE_NON_VIRTUAL_ROOT_EVENT,
-					OPEN_DM_NODE_SELECT_PARENT
-				].includes(action.event);
-			} else if (node.document.File.FileType === "document_model") {
-				hidden = action.event === OPEN_FM_NODE_EVENT;
-			} else if (node.document.File.FileType === "form_model") {
-				hidden = [
-					OPEN_DM_NODE_EVENT,
-					OPEN_DM_WITH_REPLACEMENT_NODE_EVENT,
-					OPEN_DM_WITH_TEMPORARY_REPLACEMENT_NODE_EVENT,
-					OPEN_DM_NODE_NON_VIRTUAL_ROOT_EVENT,
-					OPEN_DM_NODE_SELECT_PARENT
-				].includes(action.event);
+				return {};
 			}
-			return { hidden };
+
+			if (action.type === "insert" && (action.position === "above" || action.position === "below")) {
+				return { hidden: row.parent?.nodeModel.documentModelRef !== "DomainDirectory" };
+			}
+
+			if (action.type !== "event") {
+				return {};
+			}
+
+			const fileType = node.document.File.FileType;
+			if (fileType !== "document_model" && fileType !== "form_model") {
+				return {
+					hidden: [
+						OPEN_DM_NODE_EVENT,
+						OPEN_DM_PAGINATED_NODE_EVENT,
+						OPEN_FM_NODE_EVENT,
+						OPEN_DM_WITH_REPLACEMENT_NODE_EVENT,
+						OPEN_DM_WITH_TEMPORARY_REPLACEMENT_NODE_EVENT,
+						OPEN_DM_NODE_NON_VIRTUAL_ROOT_EVENT,
+						OPEN_DM_NODE_SELECT_PARENT
+					].includes(action.event)
+				};
+			}
+			if (fileType === "document_model") {
+				return { hidden: action.event === OPEN_FM_NODE_EVENT };
+			}
+			if (fileType === "form_model") {
+				return {
+					hidden: [
+						OPEN_DM_NODE_EVENT,
+						OPEN_DM_WITH_REPLACEMENT_NODE_EVENT,
+						OPEN_DM_WITH_TEMPORARY_REPLACEMENT_NODE_EVENT,
+						OPEN_DM_NODE_NON_VIRTUAL_ROOT_EVENT,
+						OPEN_DM_NODE_SELECT_PARENT
+					].includes(action.event)
+				};
+			}
+			return {};
 		},
 		[dataState]
 	);

@@ -30,13 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
-
 import { AttachmentCell, type TreeEngineRowContext } from "../../../../../../core/view/index.js";
 import { createContextProps } from "../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
-import { type TreeModel } from "../../../../../../core/models/index.js";
-import { AttachmentIcon } from "../../../../../../core/view/internal/components/tree-engine/sub-components/attachment-cell-content.js";
+import type { TreeModel } from "../../../../../../core/models/index.js";
+import { AttachmentIcon } from "../../../../../../core/view/components/tree-engine/sub-components/attachment-cell-content.js";
 
 import { BodyCellWrapper } from "./body-cell/shared.js";
 

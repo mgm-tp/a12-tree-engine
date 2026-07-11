@@ -30,9 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type FieldInstanceValue, type GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+import type { FieldInstanceValue, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { DocumentUtils } from "../../../../core/models/internal/utils/document-utils.js";
+import { DocumentUtils } from "../../../../core/models/utils/document-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.models.utils.document-utils", () => {
 	describe("DocumentUtils", () => {

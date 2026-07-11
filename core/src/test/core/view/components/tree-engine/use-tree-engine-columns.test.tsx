@@ -36,21 +36,20 @@
 import * as Enzyme from "enzyme";
 import * as React from "react";
 
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/index.js";
-import { HiddenText } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/hidden-text/hidden-text.view.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { Icon, HiddenText } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { type RuntimeTreeModel, TreeModel } from "../../../../../core/models/index.js";
 import { type FlattenNodeRow, BodyCell, RowActionsGroup } from "../../../../../core/view/index.js";
 import {
 	useTreeEngineColumns,
 	isNumberTypeColumn
-} from "../../../../../core/view/internal/components/tree-engine/use-tree-engine-columns.js";
+} from "../../../../../core/view/components/tree-engine/use-tree-engine-columns.js";
 import { defaultEngineState, deLocale } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 import { createEngineState } from "../../../../utils/model-utils.js";
 import { testHook } from "../../../../utils/test-utils.js";
-import { type TreeEngineState } from "../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../core/store/index.js";
 import { RowCheckbox, OverallCheckbox } from "../../../../../core/view/index.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-tree-engine-columns", () => {

@@ -30,14 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import {
-	type Relationship,
-	type EntityCharacteristics,
-	type RelationshipModel
+import type {
+	Relationship,
+	EntityCharacteristics,
+	RelationshipModel
 } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import { LinkDescriptorUtils, RelationshipModelUtils } from "../../../../core/models/index.js";
-import { type Identifier } from "../../../../core/store/index.js";
+import type { Identifier } from "../../../../core/store/index.js";
 import { defaultRelationshipModels } from "../../../setup/basic.spec.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.models.utils.relationship-utils", () => {
@@ -54,6 +54,7 @@ describe("@com.mgmtp.a12.tree-engine.core.models.utils.relationship-utils", () =
 		relationshipModel: "TeamPerson",
 		entities: [
 			{ role: "Team", docRef: "DomainTeam/1", modelName: "DomainTeam" },
+			// @ts-expect-error - docRef is intentionally set to null for testing purposes
 			{ role: "Person", docRef: null, modelName: "DomainPerson" }
 		]
 	};

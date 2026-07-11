@@ -1,0 +1,39 @@
+{
+	"header": {
+		"id": "Drive-binding-DriveDirectory.json_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "DirectoryCandidates-overview--DriveDirectory"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "DriveDirectory_Directory_LinkOverview-overview"
+			}
+		],
+		"annotations": [],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "DriveDirectory.json"
+			},
+			{
+				"locale": "de",
+				"text": "DriveDirectory.json"
+			}
+		]
+	},
+	"content": {
+		"relationshipName": "DriveDirectory",
+		"targetRole": "Directory",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "DirectoryCandidates-overview--DriveDirectory",
+			"selectedItemsOverviewModel": "DriveDirectory_Directory_LinkOverview-overview"
+		}
+	}
+}

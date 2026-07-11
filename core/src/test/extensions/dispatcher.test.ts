@@ -35,11 +35,11 @@ import { vi, type MockInstance } from "vitest";
 import {
 	Dispatcher,
 	type JsonRpc2Response,
-	type DocumentJsonRpc2Request
+	type DocumentJsonRpc2Request,
+	type ResponseFor
 } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { type ResponseFor } from "@com.mgmtp.a12.dataservices/dataservices-access/lib/dispatch/ResponseTypings.js";
 
-import { JsonRpc } from "../../extensions/server-connector/internal/data-loaders/json-rpc.js";
+import { JsonRpc } from "../../extensions/server-connector/data-loaders/json-rpc.js";
 import { type TreeEngineError, TreeEngineErrorCode } from "../../core/error/index.js";
 
 describe("JsonRpc", () => {

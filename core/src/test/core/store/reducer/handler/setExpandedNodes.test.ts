@@ -31,7 +31,7 @@
  */
 
 import { Commands, type TreeEngineState } from "../../../../../core/store/index.js";
-import { handleSetExpandedNodes } from "../../../../../core/store/internal/reducer/handler/setExpandedNodes.js";
+import { handleSetExpandedNodes } from "../../../../../core/store/reducer/handler/setExpandedNodes.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 

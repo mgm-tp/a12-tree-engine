@@ -30,15 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
-
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/index.js";
-import { List } from "@com.mgmtp.a12.widgets/widgets-core/lib/list/index.js";
-import { PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core/lib/pop-up-menu/index.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { Button, List, PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeModel } from "../../../../../../core/models/index.js";
-import { type TreeEngineState, type UIStateSelector } from "../../../../../../core/store/index.js";
+import type { TreeEngineState, UIStateSelector } from "../../../../../../core/store/index.js";
 import {
 	ContextMenu,
 	type FlattenNodeRow,

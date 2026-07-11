@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type ICustomFieldType } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldType.js";
-import { type ICustomFieldTypeConversionResult } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldTypeConversionResult.js";
-import { type ICustomFieldTypeValidationParam } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldTypeValidationParam.js";
-import { type ICustomFieldTypeCheckError } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldTypeCheckError.js";
+import type { ICustomFieldValidator } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ICustomFieldTypeConversionResult } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ICustomFieldTypeValidationParam } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ICustomFieldTypeCheckError } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-export class EmailType implements ICustomFieldType {
+export class EmailType implements ICustomFieldValidator {
 	regex = /^\S+@\S+$/;
 
 	convertDisplay2Internal(displayValue: string): ICustomFieldTypeConversionResult {

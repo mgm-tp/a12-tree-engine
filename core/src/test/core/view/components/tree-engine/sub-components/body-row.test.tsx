@@ -30,14 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
 import {
 	DefaultTableComponentRenderers,
-	TableContextProvider
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.view.js";
-import { TableTemplate } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/index.js";
+	TableContextProvider,
+	TableTemplate
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
 import {
 	createContextProps,

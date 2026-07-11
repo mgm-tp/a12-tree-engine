@@ -1,7 +1,4 @@
 {
-	"files": [],
-	"references": [{ "path": "./tsconfig.build.json" }, { "path": "./tsconfig.lint.json" }],
-	"compilerOptions": {
-		"noEmit": true
-	}
+	"extends": "../tsconfig.json",
+	"include": ["src", "src/**/*.json", "test", "scripts"]
 }

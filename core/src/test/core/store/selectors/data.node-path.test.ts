@@ -115,8 +115,8 @@ describe("@com.mgmtp.a12.tree-engine.core.store.selectors.data.nodePath", () => 
 			linkRef: mockType<TreeEngineState.LinkRef>({
 				linkDescriptor: {
 					entities: [
-						{ docRef: secondParentIdentifier.id, role: "Team", modelName: "DomainTeam" },
-						{ docRef: firstPersonIdentifier.id, role: "Person", modelName: "DomainPerson" }
+						{ docRef: secondParentIdentifier.id, role: "Team" },
+						{ docRef: firstPersonIdentifier.id, role: "Person" }
 					]
 				}
 			})

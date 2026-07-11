@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
-import {
-	type Annotation as BaseAnnotation,
-	type Header as BaseHeader,
-	type ModelReference as BaseModelReference
-} from "@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js";
+import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
+import type {
+	Annotation as BaseAnnotation,
+	Header as BaseHeader,
+	ModelReference as BaseModelReference
+} from "@com.mgmtp.a12.base/base-model-api";
 
 export interface TreeModel {
 	readonly header: TreeModel.Header;

@@ -92,5 +92,5 @@ export namespace Selector {
 	export const MASTER_DETAIL_LAYOUT_PANE = `[data-role=master-detail-layout-pane]`;
 	export const CONTEXT_MENU_ITEM = `${Selector.ATTACHED_PORTAL} ${Selector.LIST_ITEM}, ${Selector.ATTACHED_PORTAL} [data-role="list-sub-header"]`;
 
-	export const TWIN_DATA_MODELER_TREE_CONTAINER = '[id="Twin-data-modeler-tree-GM-container"]';
+	export const TWIN_DATA_MODELER_TREE_CONTAINER = '[id="Twin-data-modeler-tree-container"]';
 }

@@ -30,11 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { faker } from "@faker-js/faker";
-
-import { type TreeModel, type RuntimeTreeModel } from "../../../../core/models/index.js";
+import type { TreeModel, RuntimeTreeModel } from "../../../../core/models/index.js";
 import { Commands, Events, TreeEngineState, type Identifier } from "../../../../core/store/index.js";
-import { onDialogConfirmedMiddleware } from "../../../../core/store/internal/middleware/events/onDialogConfirmed.js";
+import { onDialogConfirmedMiddleware } from "../../../../core/store/middleware/events/onDialogConfirmed.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";
@@ -68,7 +66,7 @@ describe("@com.mgmtp.a12.tree-engine.core.store.middleware.events.onDialogConfir
 			const insertPosition = mockType<TreeEngineState.InsertPosition>();
 			const button = mockType<TreeModel.TreeNodeInsertActionButton>();
 			const childRelationshipConfiguration = mockType<RuntimeTreeModel.ChildRelationshipConfiguration>();
-			const documentModelId = faker.string.uuid();
+			const documentModelId = crypto.randomUUID();
 
 			const dialog: TreeEngineState.Dialog.InsertChildNode = {
 				type: TreeEngineState.Dialog.Type.INSERT_CHILD_NODE,
@@ -105,7 +103,7 @@ describe("@com.mgmtp.a12.tree-engine.core.store.middleware.events.onDialogConfir
 		});
 
 		describe("given dialog state is of type InsertRootNode", () => {
-			const documentModelId = faker.string.uuid();
+			const documentModelId = crypto.randomUUID();
 			const button = mockType<TreeModel.ButtonType>();
 			const dialog: TreeEngineState.Dialog.InsertRootNode = {
 				type: TreeEngineState.Dialog.Type.INSERT_ROOT_NODE,

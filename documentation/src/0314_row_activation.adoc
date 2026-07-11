@@ -1,0 +1,135 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#row-activation]
+=== Row Activation
+
+The `rowActivation` field on a `TreeNode` controls how rows of that node type respond to a click.
+When omitted, the default behavior applies: clicking a row dispatches link:./assets/generated/typedoc/variables/core_store.Events.onNodeSelectionChanged.html[Events.onNodeSelectionChanged], selecting the node for viewing or editing.
+
+Three activation types are available:
+
+* <<_row_activation_event,`event`>> — row click dispatches link:./assets/generated/typedoc/variables/core_store.Events.onNodeEventButtonClicked.html[Events.onNodeEventButtonClicked] for built-in event names, or link:./assets/generated/typedoc/variables/core_store.Events.onRowClicked.html[Events.onRowClicked] for custom event names.
+* <<_row_activation_insert,`insert`>> — row click triggers an insert action.
+* <<_row_activation_non_interactive,`non_interactive`>> — rows have no click behavior and are excluded from keyboard tab order.
+
+[[_row_activation_event]]
+==== Event
+
+Setting `rowActivation` to `{ "type": "event", "event": "<eventName>" }` dispatches one of two events depending on whether the event name is built-in:
+
+* *Built-in event names* — row click behaves identically to clicking a row action button: link:./assets/generated/typedoc/variables/core_store.Events.onNodeEventButtonClicked.html[Events.onNodeEventButtonClicked] is dispatched with the configured event name.
++
+The full list of built-in event names is exported as link:./assets/generated/typedoc/variables/core_models.TreeModel.BUILT_IN_EVENT_NAMES.html[TreeModel.BUILT_IN_EVENT_NAMES]:
+`event_add_link`,
+`event_delete_node`,
+`event_delete_link`,
+`event_expand_sub_tree`,
+`event_collapse_sub_tree`,
+`event_copy_node`,
+`event_copy_node_and_children`,
+`event_cut_node`,
+`event_paste`,
+`event_paste_above`,
+`event_paste_below`,
+`event_open_node`,
+`event_toggle_expansion`.
+
+* *Custom event name* — row click dispatches link:./assets/generated/typedoc/variables/core_store.Events.onRowClicked.html[Events.onRowClicked] with the configured event name in the payload.
+Use this to react to row clicks in a saga with your own logic.
+
+[source,json,title="Tree Model — dispatch a custom event on row click"]
+----
+{
+  "rowActivation": {
+    "type": "event",
+    "event": "selectPerson"
+  }
+}
+----
+
+Listen to link:./assets/generated/typedoc/variables/core_store.Events.onRowClicked.html[Events.onRowClicked] in a saga to react to the event:
+
+[source,typescript,options="nowrap",title="handle-custom-row-action-saga.ts"]
+--
+include::assets/generated/typescript/showcase/sagas/handle-custom-row-action-saga.ts[tags="handleCustomRowActionSaga"]
+--
+
+link:./assets/generated/typedoc/interfaces/core_store.Events.RowClickedPayload.html[Events.RowClickedPayload] provides `nodeIdentifier`, `nodePath`, and `event` — the configured event name — so a single saga can branch on multiple custom row actions.
+
+[[_row_activation_insert]]
+==== Insert
+
+Setting `rowActivation` to `{ "type": "insert" }` causes a row click to trigger an insert action, equivalent to clicking a row insert button.
+
+The optional `position` field controls where the new node is placed:
+
+[cols="1,3",options="header"]
+|===
+|Value |Behavior
+
+|`as_child` (default)
+|New node is inserted as a child of the clicked node.
+
+|`above`
+|New node is inserted as a sibling above the clicked node.
+
+|`below`
+|New node is inserted as a sibling below the clicked node.
+|===
+
+The optional `documentModelRef` field specifies the document model of the new node.
+When omitted the engine uses the same resolution logic as a row insert button without a `documentModelRef`.
+
+[source,json,title="Tree Model — insert a child node on row click"]
+----
+{
+  "rowActivation": {
+    "type": "insert",
+    "position": "as_child",
+    "documentModelRef": "MyDocument"
+  }
+}
+----
+
+[[_row_activation_non_interactive]]
+==== Non-Interactive Rows
+
+Setting `rowActivation` to `{ "type": "non_interactive" }` makes rows of that node type non-interactive.
+Clicking the row produces no action, and the row is excluded from the keyboard tab order (`tabindex="-1"`).
+
+[source,json,title="Tree Model — non-interactive row"]
+----
+{
+  "rowActivation": {
+    "type": "non_interactive"
+  }
+}
+----
+
+Row action buttons within non-interactive rows still work normally — only the row click itself is suppressed.
+
+[[_row_activation_inheritance]]
+==== Inheritance
+
+`rowActivation` supports inheritance via `configuration.inherit.rowActivation: true`.
+
+[[_row_activation_typescript]]
+==== TypeScript
+
+`TreeModel.RowActivation` is a discriminated union of the three activation types.
+Branch at runtime using a `switch` on the `type` discriminant.

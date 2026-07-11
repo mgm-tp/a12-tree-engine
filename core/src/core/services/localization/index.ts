@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export { RESOURCE_KEYS } from "./internal/languages/keys.js";
-export { TreeModelKeys } from "./internal/tree-model-keys.js";
+export { RESOURCE_KEYS } from "./languages/keys.js";
+export { TreeModelKeys } from "./tree-model-keys.js";
 
-export { LocalizerHooks } from "./internal/localizer-hooks.js";
-export { LocalizableFactory } from "./internal/localizable-factory.js";
+export { LocalizerHooks } from "./localizer-hooks.js";
+export { LocalizableFactory } from "./localizable-factory.js";

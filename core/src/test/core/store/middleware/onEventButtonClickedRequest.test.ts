@@ -30,9 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type TreeModel } from "../../../../core/models/index.js";
+import type { TreeModel } from "../../../../core/models/index.js";
 import { Events, Commands, TreeEngineState } from "../../../../core/store/index.js";
-import { onEventButtonClickedRequestMiddleware } from "../../../../core/store/internal/middleware/events/onEventButtonClickedRequest.js";
+import { onEventButtonClickedRequestMiddleware } from "../../../../core/store/middleware/events/onEventButtonClickedRequest.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";

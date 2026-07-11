@@ -2,7 +2,7 @@
 	"header": {
 		"id": "file-explorer-paginated-tree",
 		"modelType": "tree",
-		"modelVersion": "10.2.0",
+		"modelVersion": "11.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,12 +21,7 @@
 				"text": "Dateimanager"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"purpose": "document-model-for-tree",
@@ -202,8 +197,8 @@
 			}
 		},
 		"subHeaderBox": {
-			"majorElements": [],
-			"minorElements": [
+			"rightSlot": [],
+			"leftSlot": [
 				{
 					"type": "multi_selection"
 				},
@@ -237,8 +232,8 @@
 			]
 		},
 		"footerBox": {
-			"majorElements": [],
-			"minorElements": [
+			"rightSlot": [],
+			"leftSlot": [
 				{
 					"icon": {
 						"name": "add"
@@ -500,8 +495,8 @@
 				"configuration": {
 					"dnd": false
 				},
-				"defaultRowAction": {
-					"custom": true,
+				"rowActivation": {
+					"type": "event",
 					"event": "nothing"
 				},
 				"contextMenu": {

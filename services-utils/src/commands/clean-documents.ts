@@ -40,7 +40,7 @@ import {
 
 import { deleteDocument, listDocuments, rpcRequest } from "../utils/index.js";
 
-import { type ModelEditorParams } from "./seed/presets/model-editor.js";
+import type { ModelEditorParams } from "./seed/presets/model-editor.js";
 
 export interface CleanDocParams {
 	showcases?: string[];

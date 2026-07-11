@@ -2,7 +2,7 @@
 	"header": {
 		"id": "File",
 		"modelType": "form",
-		"modelVersion": "37.4.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,18 +21,18 @@
 				"text": "Datei"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"alias": "DM",
 				"modelType": "document",
 				"purpose": "data binding",
 				"reference": "DomainFile"
+			},
+			{
+				"purpose": "relationship-ui",
+				"modelType": "relationship-ui",
+				"reference": "File-binding-DirectoryFile_RuM"
 			}
 		]
 	},
@@ -104,6 +104,23 @@
 				"id": "screen1",
 				"name": "Screen1",
 				"screenElements": [
+					{
+						"type": "CustomScreenElement",
+						"id": "section-file-parent-directory",
+						"name": "Directory",
+						"title": {
+							"type": "Multilingual",
+							"multilingualText": {
+								"text": [
+									{
+										"locale": "en",
+										"text": "Parent Directory"
+									}
+								]
+							}
+						},
+						"reference": "File-binding-DirectoryFile_RuM"
+					},
 					{
 						"type": "MultiColumnSection",
 						"id": "multicolumnsection-77051",

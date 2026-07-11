@@ -44,6 +44,7 @@ const IGNORE_DIRS = new Set([
 	"build",
 	"target",
 	"coverage",
+	"playwright-report",
 	"resources",
 	"generated",
 	"node_modules",
@@ -51,6 +52,8 @@ const IGNORE_DIRS = new Set([
 	".npm",
 	".git"
 ]);
+
+const IGNORE_FILES = new Set(["migration-tool/src/internal/steps/index.ts"]);
 
 const adocTemplate = (await Fs.readFile(ADOC_TEMPLATE_PATH, "utf-8"))
 	.split("\n")
@@ -105,15 +108,22 @@ for (const file of adocFiles) {
 	}
 }
 
-// --- Check source files for duplicate headers ---
+// --- Check source files for missing / duplicate headers ---
 
 const sourceFiles = await findFiles(".", SOURCE_EXTENSIONS);
 
 for (const file of sourceFiles) {
+	const normalized = file.startsWith("./") ? file.slice(2) : file;
+	if (IGNORE_FILES.has(normalized)) {
+		continue;
+	}
+
 	const content = await Fs.readFile(file, "utf-8");
 	const count = content.split(SPDX_MARKER).length - 1;
 
-	if (count > 1) {
+	if (count === 0) {
+		errors.push({ file, error: "missing license header" });
+	} else if (count > 1) {
 		errors.push({ file, error: `duplicate license header (found ${count} times)` });
 	}
 }
@@ -131,4 +141,4 @@ if (errors.length > 0) {
 }
 
 const total = adocFiles.length + sourceFiles.length;
-console.log(`All ${total} file(s) have correct license headers.`);
+console.log(`All ${total} file(s) have correct and unique license headers.`);

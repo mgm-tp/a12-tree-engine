@@ -42,8 +42,7 @@ Let's have a look at Tree Engine Showcase's model editor example, for this one, 
 [source,typescript,options="nowrap",title="handle-open-model-saga.ts"]
 --
 
-import { DataSelector, TreeEngineState } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/core/store";
-import { TreeEngineActions, TreeEngineSelectors } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/extensions/client";
+import { DataSelector, TreeEngineState, TreeEngineActions, TreeEngineSelectors } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 import { SagaGenerator, put, select } from "typed-redux-saga";
 

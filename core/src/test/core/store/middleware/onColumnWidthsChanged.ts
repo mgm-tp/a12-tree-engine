@@ -33,7 +33,7 @@
 import { Events, Commands, type TreeEngineState } from "../../../../core/store/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";
-import { onColumnWidthsChangedMiddleware } from "../../../../core/store/internal/middleware/events/onColumnWidthsChanged.js";
+import { onColumnWidthsChangedMiddleware } from "../../../../core/store/middleware/events/onColumnWidthsChanged.js";
 
 import { nonMatchedAction, shouldCallNextMiddlewareAndReturnResultedAction } from "./shared.js";
 

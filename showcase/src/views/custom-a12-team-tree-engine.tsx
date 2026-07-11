@@ -65,9 +65,8 @@ import {
 	A11YLanguageContext,
 	type Container
 } from "@com.mgmtp.a12.widgets/widgets-core";
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
-import { NotificationActions } from "@com.mgmtp.a12.client/client-core/lib/core/notification/index.js";
-import { LOCALE_RESOURCE_KEYS } from "@com.mgmtp.a12.client/client-core/lib/core/locale/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { NotificationActions, LOCALE_RESOURCE_KEYS } from "@com.mgmtp.a12.client/client-core";
 
 import { assert, EDIT_NODE_EVENT, EDIT_ENGINE_EVENT, INFO_NODE_EVENT } from "../helpers.js";
 import { engineShortcuts } from "../utils.js";
@@ -163,12 +162,13 @@ export const CustomA12TeamTreeEngine: React.FC<CustomA12TeamTreeEngine.Props> = 
 						<DefaultWidgetMap.Button
 							label={"Paste from Clipboard"}
 							onClick={() => {
-								const notificationAction = NotificationActions.add({
-									severity: "info",
-									title: { key: LOCALE_RESOURCE_KEYS.application.title },
-									message: { key: SHOWCASE_RESOURCE_KEYS.showcase.button.pasteFromClipboard }
+								dispatch({
+									...NotificationActions.add({
+										severity: "info",
+										title: { key: LOCALE_RESOURCE_KEYS.application.title },
+										message: { key: SHOWCASE_RESOURCE_KEYS.showcase.button.pasteFromClipboard }
+									})
 								});
-								dispatch(notificationAction);
 							}}
 						/>
 					</DefaultWidgetMap.Message>

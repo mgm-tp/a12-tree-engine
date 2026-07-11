@@ -30,9 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Identifier } from "../../core/store/index.js";
+import type { Identifier } from "../../core/store/index.js";
 import { TreeEngineDataHolder } from "../../extensions/client/index.js";
-import { PaginationUtils } from "../../extensions/server-connector/internal/data-providers/resolver/pagination-utils.js";
+import { PaginationUtils } from "../../extensions/server-connector/data-providers/resolver/pagination-utils.js";
 
 import { mockType } from "../utils/mock-utils.js";
 

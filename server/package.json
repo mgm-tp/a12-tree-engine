@@ -1,9 +1,9 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-server",
 	"private": true,
-	"version": "10.3.0",
+	"version": "11.0.0",
 	"author": "mgm technology partners",
-	"license": "(EUPL-1.2 OR LicenseRef-commercial)",
+	"license": "UNLICENSED",
 	"description": "Dev server for Tree Engine showcase",
 	"type": "module",
 	"scripts": {

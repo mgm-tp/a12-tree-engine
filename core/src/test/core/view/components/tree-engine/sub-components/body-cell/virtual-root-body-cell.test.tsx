@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
-
 import { RootNodeRow, type TreeEngineRowContext } from "../../../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../../utils/mock-utils.js";
-import { VirtualRootBodyCell } from "../../../../../../../core/view/internal/components/tree-engine/sub-components/virtual-root-body-cell.js";
+import { VirtualRootBodyCell } from "../../../../../../../core/view/components/tree-engine/sub-components/virtual-root-body-cell.js";
 import { createEngineState } from "../../../../../../utils/model-utils.js";
 
 import { BodyCellWrapper, teamNodeModel } from "./shared.js";

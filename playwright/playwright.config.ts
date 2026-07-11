@@ -55,7 +55,7 @@ export default defineConfig({
 	},
 	webServer: {
 		command: "gradle start --parallel",
-		url: "http://localhost:15000/actuator/health/initializationFinished",
+		url: "http://localhost:15000/actuator/health",
 		reuseExistingServer: true,
 		cwd: "../",
 		timeout: 240 * 1000

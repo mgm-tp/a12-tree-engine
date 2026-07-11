@@ -1,8 +1,0 @@
-{
-	"extends": "../tsconfig",
-	"include": ["src", "test", "scripts"],
-	"compilerOptions": {
-		"noEmit": true,
-		"allowJs": true
-	}
-}

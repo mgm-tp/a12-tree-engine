@@ -1,0 +1,39 @@
+{
+	"header": {
+		"id": "Drive-binding-DriveFile.json_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "FileCandidates-overview--DriveFile"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "DriveFile_File_SelectedItemsOverview"
+			}
+		],
+		"annotations": [],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "DriveFile.json"
+			},
+			{
+				"locale": "de",
+				"text": "DriveFile.json"
+			}
+		]
+	},
+	"content": {
+		"relationshipName": "DriveFile",
+		"targetRole": "File",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "FileCandidates-overview--DriveFile",
+			"selectedItemsOverviewModel": "DriveFile_File_SelectedItemsOverview"
+		}
+	}
+}

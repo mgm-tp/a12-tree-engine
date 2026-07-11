@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type MigrationParameters } from "@com.mgmtp.a12.migrationtool/migrationtool-core/types";
+import type { MigrationParameters } from "@com.mgmtp.a12.migrationtool/migrationtool-core/types";
 
 import { MIGRATION_STEPS } from "./steps/index.js";
 
@@ -38,5 +38,5 @@ import { MIGRATION_STEPS } from "./steps/index.js";
 export const MIGRATION_PARAMETERS: MigrationParameters = {
 	modelType: "tree",
 	migrationSteps: MIGRATION_STEPS,
-	minimumSupportedVersion: "8.0.0"
+	minimumSupportedVersion: "9.0.0"
 };

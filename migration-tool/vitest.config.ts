@@ -32,4 +32,8 @@
 
 import { defineConfig } from "vitest/config";
 
-export default defineConfig({ test: { include: ["test/**/*.test.ts"] } });
+export default defineConfig({
+	/** Suppress annoying unsupported es2025 warning message from esbuild, which might crash Jenkins instance */
+	esbuild: { tsconfigRaw: { compilerOptions: { target: "es2024", useDefineForClassFields: true } } },
+	test: { include: ["test/**/*.test.ts"] }
+});

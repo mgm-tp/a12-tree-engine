@@ -1,12 +1,6 @@
 {
-	"extends": "../tsconfig",
-	"include": ["src/**/*.ts", "src/**/*.json"],
+	"extends": "../tsconfig.json",
 	"compilerOptions": {
-		"outDir": "lib",
-		"declaration": false,
-		"declarationMap": false,
-		"resolveJsonModule": true,
-		"module": "NodeNext",
-		"types": ["node"]
+		"declarationMap": false
 	}
 }

@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Store } from "redux";
+import type { Store } from "redux";
 
 import {
 	TreeEngineFactories,
@@ -41,6 +41,7 @@ import { DataServicesReducerMap } from "@com.mgmtp.a12.dataservices/dataservices
 import { DeepLinkingFactories } from "@com.mgmtp.a12.client/client-core/deepLinking";
 import {
 	ActivitySelectors,
+	APPLICATION_MODEL_PLACEHOLDER,
 	ApplicationFactories,
 	type ApplicationSetup,
 	ModelActions
@@ -56,16 +57,15 @@ import {
 } from "@com.mgmtp.a12.formengine/formengine-core";
 import { CRUDFactories } from "@com.mgmtp.a12.crud/crud-core";
 import { DirtyHandlingFactories } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
-import { RelationshipFactories, RelationshipReducers } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
+import { RelationshipEngineFactories } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
 import { OverviewEngineFactories } from "@com.mgmtp.a12.overviewengine/overviewengine-core";
 import { createPlatformServerModelLoader } from "@com.mgmtp.a12.client/client-core/modelLoader";
 
-import model from "./appmodel.json" with { type: "json" };
 import { appCustomSagas } from "./sagas/index.js";
 import { restoreActivityAction } from "./model-editor/activity-suspending/actions.js";
 import {
 	registerApplicationModules,
-	registerCustomFieldTypes,
+	// registerCustomFieldTypes,
 	isLinkAddedByDetailActivity,
 	createCustomSagaRegistrations,
 	getNewLinkPosition,
@@ -75,7 +75,7 @@ import { createComposeEnhancer, fetchModelGraph, loadDSConfigurations } from "./
 
 let config: ApplicationSetup | undefined;
 
-registerCustomFieldTypes();
+// registerCustomFieldTypes();
 
 export function setup(): {
 	config: ApplicationSetup;
@@ -102,21 +102,21 @@ export function setup(): {
 		TreeEngineFactories.createDataProvider(),
 		TreeEngineServerConnectorFactories.createDataProvider(teDataProviderSetting),
 
-		createEmptyDocumentDataProvider(),
-		RelationshipFactories.createRelationshipDataProvider(),
+		...RelationshipEngineFactories.createDataProviders(),
 		...OverviewEngineFactories.createDataProviders(),
+		createEmptyDocumentDataProvider(),
 		platformSingleDocumentDataProvider
 	];
 
 	config = ApplicationFactories.createApplicationSetup({
-		model,
+		model: APPLICATION_MODEL_PLACEHOLDER, // not used
 		dataHandlers,
 		modelLoader: createPlatformServerModelLoader({ modelProcessors: [FormModelProcessor] }),
 		dataReducers: [
 			// Tree Engine data dataReducers
 			...TreeEngineFactories.createDataReducers(),
 
-			...RelationshipReducers.dataReducers,
+			...RelationshipEngineFactories.createDataReducers(),
 			...OverviewEngineFactories.createDataReducers(),
 			...formEngineDataReducers
 		],
@@ -127,6 +127,8 @@ export function setup(): {
 		additionalMiddlewares: [
 			// Tree Engine middlewares
 			...TreeEngineFactories.createMiddlewares(),
+
+			...RelationshipEngineFactories.createMiddlewares(),
 
 			...createFormEngineMiddlewares(),
 			...OverviewEngineFactories.createMiddlewares(),
@@ -139,7 +141,7 @@ export function setup(): {
 
 			...formEngineSagas({ attachmentLoader: platformAttachmentLoader }),
 			...CRUDFactories.createSagas(),
-			...RelationshipFactories.createSagas({ dataHandlers }),
+			...RelationshipEngineFactories.createSagas(),
 			...DeepLinkingFactories.createSagas({
 				applyTriggers: [ModelActions.setModelGraph]
 			})

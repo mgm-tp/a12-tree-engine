@@ -40,6 +40,7 @@ import { MIGRATION_PARAMETERS } from "../src/internal/config.js";
 test("model version compatibility", async () => {
 	const compatibleRange = corePackageJson.modelVersion;
 	const latestVersion = MIGRATION_PARAMETERS.migrationSteps.at(-1)?.version as string;
+	console.log(`Latest migration step version: ${latestVersion}, compatible range: ${compatibleRange}`);
 
 	expect(semverSatisfies(latestVersion, compatibleRange)).toBeTruthy();
 });

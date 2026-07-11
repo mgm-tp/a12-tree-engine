@@ -2,7 +2,7 @@
 	"header": {
 		"id": "CategoryCandidates-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -14,40 +14,23 @@
 		"labels": [
 			{
 				"locale": "en",
-				"text": "Categories"
+				"text": "Candidate categories"
 			},
 			{
 				"locale": "de",
-				"text": "Kategorien"
+				"text": "Kandidaten Kategorien"
 			}
 		],
 		"modelReferences": [
 			{
-				"purpose": "document-model-for-overview",
-				"modelType": "document",
-				"alias": "DM",
-				"reference": "DomainCategory"
+				"purpose": "query-model-for-overview",
+				"modelType": "query",
+				"reference": "CategoryCandidates-overview-query"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		]
+		"annotations": []
 	},
 	"content": {
-		"subHeaderBox": {
-			"majorElements": [
-				{
-					"type": "search"
-				},
-				{
-					"type": "filter"
-				}
-			]
-		},
-		"footerBox": {},
 		"columns": [
 			{
 				"id": "column-b40e6",
@@ -58,10 +41,28 @@
 			}
 		],
 		"rowActionGroup": {
-			"actions": []
+			"actions": [
+				{
+					"event": "event_add_link",
+					"icon": {
+						"name": "add"
+					}
+				}
+			]
 		},
+		"subHeaderBox": {
+			"rightSlot": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
 		"configuration": {
-			"pagingSize": 10,
+			"pagingSize": 5,
 			"initialSorting": [
 				{
 					"idref": "column-b40e6"
@@ -74,6 +75,10 @@
 				"showFilterBar": true,
 				"filterMode": "all"
 			}
+		},
+		"rowActivation": {
+			"type": "event",
+			"event": "event_add_link"
 		}
 	}
 }

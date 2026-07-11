@@ -33,8 +33,8 @@
 import { type Page, expect } from "@playwright/test";
 import { PlaywrightCommands } from "playwright-commands";
 
-import { Selector } from "../selectors";
-import { type InsertSiblingPosition } from "../types";
+import { Selector } from "../selectors.js";
+import type { InsertSiblingPosition } from "../types.js";
 
 /**
  * Helper class containing utility functions for Categories tests
@@ -195,6 +195,7 @@ export class CategoriesUtils {
 			.locator("#CategoriesStandaloneRelationshipEngine")
 			.locator(Selector.BODY_ROW)
 			.filter({ hasText: name })
+			.locator(Selector.BUTTON, { hasText: "add" })
 			.click();
 		await this.page.getByRole("button", { name: "Submit" }).click();
 		await this.commands.waitUntilLoaded();

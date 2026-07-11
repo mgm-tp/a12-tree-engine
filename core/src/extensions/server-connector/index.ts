@@ -30,14 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Module, type DataProvider } from "@com.mgmtp.a12.client/client-core";
+import type { Module, DataProvider } from "@com.mgmtp.a12.client/client-core";
 
-import { type MaybeAsync } from "../client/index.js";
+import type { MaybeAsync } from "../client/index.js";
 
-import { type TreeEngineDataLoader } from "./internal/data-loaders/data-loader.js";
-import { createTreeEngineDataProvider } from "./internal/data-providers/index.js";
-import { type A12DataServicesSetting } from "./internal/data-loaders/a12-data-services-setting.js";
-import { type RequestSelectorMap } from "./internal/request-selector-map.js";
+import type { TreeEngineDataLoader } from "./data-loaders/data-loader.js";
+import { createTreeEngineDataProvider } from "./data-providers/index.js";
+import type { A12DataServicesSetting } from "./data-loaders/a12-data-services-setting.js";
+import type { RequestSelectorMap } from "./request-selector-map.js";
 
 export namespace TreeEngineServerConnectorFactories {
 	/** These data providers must be defined before @com.mgmtp.a12.client/client-core/lib/extensions/relationship */
@@ -59,10 +59,10 @@ export namespace TreeEngineServerConnectorFactories {
 	}
 }
 
-export * from "./internal/types.js";
-export * from "./internal/utils.js";
-export * from "./internal/types.js";
-export * from "./internal/data-loaders/data-loader.js";
-export * from "./internal/data-loaders/a12-data-services-setting.js";
-export * from "./internal/data-loaders/a12-data-loader.js";
-export * from "./internal/request-selector-map.js";
+export * from "./types.js";
+export * from "./utils.js";
+export * from "./types.js";
+export * from "./data-loaders/data-loader.js";
+export * from "./data-loaders/a12-data-services-setting.js";
+export * from "./data-loaders/a12-data-loader.js";
+export * from "./request-selector-map.js";

@@ -34,7 +34,7 @@ They can be categorized into three groups:
  - *Loading/saving operation errors*: are caused from end-user actions such as `ExpandNodeError`, `CopyNodeError`, etc.
  - *ServerError*: are come from the server-side and contains an extra `errors` field - the list of A12 DataService's `JsonRpc2ResponseError` instances.
 
-All relevant classes, instances and typings/type guards are hosted by link:./assets/generated/typedoc/modules/core_error.TreeEngineError.html[TreeEngineError namespace] along with the link:./typedoc/enums/core_error.TreeEngineErrorCode.html[TreeEngineErrorCode enumeration].
+All relevant classes, instances and typings/type guards are hosted by link:./assets/generated/typedoc/modules/core_error.TreeEngineError.html[TreeEngineError namespace] along with the link:./assets/generated/typedoc/enums/core_error.TreeEngineErrorCode.html[TreeEngineErrorCode enumeration].
 
 ==== Error Catching
 

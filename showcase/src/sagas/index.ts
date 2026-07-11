@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type SagaGenerator } from "typed-redux-saga";
+import type { SagaGenerator } from "typed-redux-saga";
 
 import { handleCustomRowActionSaga } from "./handle-custom-row-action-saga.js";
 import { handleCustomEngineActionSaga } from "./handle-custom-engine-action-saga.js";

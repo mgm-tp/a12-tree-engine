@@ -32,14 +32,14 @@
 
 import { vi, expect } from "vitest";
 
-import { type TableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js";
+import type { TableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { defaultEngineState, type PartialEventHandlerContextProps } from "../../../../setup/basic.spec.js";
 import { testHook } from "../../../../utils/test-utils.js";
-import { useCanDrag } from "../../../../../core/view/internal/configuration/dnd/use-can-drag.js";
+import { useCanDrag } from "../../../../../core/view/configuration/dnd/use-can-drag.js";
 import { defaultDndConfiguration, type FlattenNodeRow } from "../../../../../core/view/index.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { FlattenRowHooks } from "../../../../../core/view/internal/components/tree-engine/use-flatten-rows.js";
+import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
 import { TreeEngineState } from "../../../../../core/store/index.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.use-can-drag", () => {

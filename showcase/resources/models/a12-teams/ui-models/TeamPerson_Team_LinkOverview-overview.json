@@ -2,7 +2,7 @@
 	"header": {
 		"id": "TeamPerson_Team_LinkOverview-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -11,25 +11,110 @@
 				"code": "de"
 			}
 		],
-		"labels": [],
-		"modelReferences": [
+		"labels": [
 			{
-				"purpose": "document-model-for-overview",
-				"modelType": "document",
-				"alias": "DM",
-				"reference": "TeamPerson_Team____generated"
+				"locale": "en",
+				"text": "Belongs to"
+			},
+			{
+				"locale": "de",
+				"text": "Gehört"
 			}
 		],
-		"annotations": [
+		"modelReferences": [
 			{
-				"name": "roles",
-				"value": "anonymous"
+				"purpose": "query-model-for-overview",
+				"modelType": "query",
+				"reference": "TeamPerson_Team_LinkOverview-overview-query"
 			}
-		]
+		],
+		"annotations": []
 	},
 	"content": {
+		"columns": [
+			{
+				"id": "column-414a2",
+				"elementRef": "field_c9ad3",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-1d5e8",
+				"elementRef": "field_c2497",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-dca8a",
+				"elementRef": "field_04443",
+				"sortable": false,
+				"width": 1,
+				"linkReferences": [
+					{
+						"relationship": "TeamPerson",
+						"targetRole": "Person",
+						"type": "LINK"
+					}
+				]
+			}
+		],
+		"rowActionGroup": {
+			"actions": [
+				{
+					"event": "event_delete_link",
+					"icon": {
+						"name": "remove_circle"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Remove"
+						},
+						{
+							"locale": "de",
+							"text": "Entfernen"
+						}
+					],
+					"labelHidden": true
+				},
+				{
+					"event": "event_restore_link",
+					"icon": {
+						"name": "add_circle"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Restore"
+						},
+						{
+							"locale": "de",
+							"text": "Wiederherstellen"
+						}
+					],
+					"labelHidden": true
+				},
+				{
+					"event": "event_edit_link_document",
+					"icon": {
+						"name": "edit"
+					},
+					"label": [
+						{
+							"locale": "en",
+							"text": "Edit additional properties"
+						},
+						{
+							"locale": "de",
+							"text": "Zusätzliche Eigenschaften bearbeiten"
+						}
+					],
+					"labelHidden": true
+				}
+			]
+		},
 		"subHeaderBox": {
-			"majorElements": [
+			"rightSlot": [
 				{
 					"type": "search"
 				},
@@ -39,29 +124,6 @@
 			]
 		},
 		"footerBox": {},
-		"columns": [
-			{
-				"id": "column-414a2",
-				"elementRef": "I4_field_c9ad3",
-				"sortable": false,
-				"width": 1
-			},
-			{
-				"id": "column-1d5e8",
-				"elementRef": "I4_field_c2497",
-				"sortable": false,
-				"width": 1
-			},
-			{
-				"id": "column-dca8a",
-				"elementRef": "I5_field_04443",
-				"sortable": false,
-				"width": 1
-			}
-		],
-		"rowActionGroup": {
-			"actions": []
-		},
 		"configuration": {
 			"pagingSize": 10,
 			"showFullTextSearch": true,
@@ -71,6 +133,10 @@
 				"showFilterBar": true,
 				"filterMode": "all"
 			}
+		},
+		"rowActivation": {
+			"type": "event",
+			"event": "event_delete_link"
 		}
 	}
 }

@@ -31,12 +31,11 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { ContentBox } from "@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/index.js";
+import { ContentBox } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeModel } from "../../../../../core/models/index.js";
-import { type TreeEngineState } from "../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../core/store/index.js";
 import {
 	TreeEngineContextProvider,
 	ContentBoxRenderer,
@@ -44,7 +43,7 @@ import {
 	FooterBox,
 	DefaultComponentMap
 } from "../../../../../core/view/index.js";
-import { Button } from "../../../../../core/view/internal/components/content-box/sub-components/buttons.js";
+import { Button } from "../../../../../core/view/components/content-box/sub-components/buttons.js";
 import {
 	createContextProps,
 	defaultEngineState,
@@ -90,7 +89,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.conte
 		describe("when subHeaderBox button is empty", () => {
 			const engineState = createEngineState
 				.from(basicEngineState)
-				.withSubHeaderBox({ majorElements: [], minorElements: [] })
+				.withSubHeaderBox({ rightSlot: [], leftSlot: [] })
 				.create();
 
 			it("should not render SubActionBar", () => {
@@ -105,8 +104,8 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.conte
 			const engineState = createEngineState
 				.from(basicEngineState)
 				.withSubHeaderBox({
-					majorElements: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }],
-					minorElements: []
+					rightSlot: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }],
+					leftSlot: []
 				})
 				.create();
 
@@ -124,8 +123,8 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.conte
 			const engineState = createEngineState
 				.from(basicEngineState)
 				.withSubHeaderBox({
-					majorElements: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }],
-					minorElements: []
+					rightSlot: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }],
+					leftSlot: []
 				})
 				.withConfigurations({
 					...basicEngineState.models.uiModel.content.configuration,
@@ -144,13 +143,13 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.conte
 
 	describe("FooterBox", () => {
 		const testCases: [TreeModel.FooterType, number][] = [
-			[{ majorElements: [], minorElements: [] }, 0],
-			[{ majorElements: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }], minorElements: [] }, 1],
-			[{ majorElements: [], minorElements: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }] }, 1],
+			[{ rightSlot: [], leftSlot: [] }, 0],
+			[{ rightSlot: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }], leftSlot: [] }, 1],
+			[{ rightSlot: [], leftSlot: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }] }, 1],
 			[
 				{
-					majorElements: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }],
-					minorElements: [{ id: "1", event: "B", type: TreeModel.ElementType.BUTTON }]
+					rightSlot: [{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON }],
+					leftSlot: [{ id: "1", event: "B", type: TreeModel.ElementType.BUTTON }]
 				},
 				2
 			]

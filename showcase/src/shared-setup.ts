@@ -34,23 +34,23 @@ import { type SagaGenerator, select } from "typed-redux-saga";
 
 import {
 	ActivitySelectors,
-	type ApplicationModel,
-	ModuleRegistryProvider,
-	type Module
+	type DynamicConfiguration,
+	ModuleRegistryProvider
 } from "@com.mgmtp.a12.client/client-core";
-import { DocumentRtCustomExtensionService } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
+// import { DocumentRtCustomExtensionService } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { NewLinkPositionParams, TreeEngineSaga } from "@com.mgmtp.a12.treeengine/treeengine-core";
 import { Relationship } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import A12TeamAppModel from "../resources/models/a12-teams/a12-team-appmodel.json" with { type: "json" };
-
 import { dataModelerModule } from "./model-editor/module.js";
 import { categoriesModule } from "./categories/module.js";
-import { CustomFieldTypeFactory } from "./custom-field-types/customFieldTypeFactory.js";
+// import { CustomFieldTypeFactory } from "./custom-field-types/customFieldTypeFactory.js";
 import { assert } from "./helpers.js";
+import { ShowcaseConfigModule } from "./showcase-module.js";
+import { teamModule } from "./a12team/module.js";
 
-export const applicationModules: Module[] = [
-	{ id: "A12Team", model: () => A12TeamAppModel as ApplicationModel },
+export const applicationModules: DynamicConfiguration[] = [
+	ShowcaseConfigModule,
+	teamModule,
 	categoriesModule,
 	dataModelerModule
 ];
@@ -63,9 +63,10 @@ export function registerApplicationModules(): void {
 	applicationModules.forEach((module) => ModuleRegistryProvider.getInstance().addModule(module));
 }
 
-export function registerCustomFieldTypes(): void {
-	DocumentRtCustomExtensionService.registerCustomFieldTypes(new CustomFieldTypeFactory());
-}
+// export function registerCustomFieldTypes(): void {
+// 	// FIXME: This service is deprecated. Provide the custom field types to the Kernel APIs directly instead (see GeneratedCodeRtConfig.customFieldTypeFactory).
+// 	DocumentRtCustomExtensionService.registerCustomFieldTypes(new CustomFieldTypeFactory());
+// }
 
 // tag::LinkCreationSetting2[]
 export function* isLinkAddedByDetailActivity(

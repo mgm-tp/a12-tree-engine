@@ -33,7 +33,7 @@
 import * as React from "react";
 import { DndProvider } from "react-dnd";
 
-import { addWrapper, type A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core/lib/core/application/index.js";
+import { addWrapper, type A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core";
 import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core";
 
 export const DndWrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => {

@@ -35,7 +35,7 @@ import Path from "path";
 const __dirname = import.meta.dirname;
 const srcDir = Path.resolve(__dirname, "..", "src");
 const outDir = Path.resolve(__dirname, "..", "build");
-const contextProviderDir = Path.resolve(__dirname, "..", "..", "core", "src", "core", "view", "internal", "context");
+const contextProviderDir = Path.resolve(__dirname, "..", "..", "core", "src", "core", "view", "context");
 const keyboardShortcutDir = Path.resolve(
 	__dirname,
 	"..",
@@ -44,7 +44,6 @@ const keyboardShortcutDir = Path.resolve(
 	"src",
 	"core",
 	"view",
-	"internal",
 	"configuration",
 	"keyboard-shortcut"
 );

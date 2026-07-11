@@ -2,7 +2,7 @@
 	"header": {
 		"id": "CategoryCategory",
 		"modelType": "relationship",
-		"modelVersion": "3.0.0",
+		"modelVersion": "4.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -12,12 +12,7 @@
 			}
 		],
 		"labels": [],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"purpose": "Document model",
@@ -35,10 +30,7 @@
 	},
 	"content": {
 		"duplicatesAllowed": false,
-		"associationType": "SHARED",
-		"storage": "EXTERNAL",
 		"linkDocumentModel": null,
-		"embeddedGroupPath": null,
 		"labels": [
 			{
 				"locale": "en"
@@ -52,15 +44,6 @@
 				"role": "Parent",
 				"documentModel": "DomainCategory",
 				"ordered": true,
-				"navigable": true,
-				"linkConstraints": {
-					"multiplicity": {
-						"lowerLimit": 0,
-						"unbounded": true,
-						"upperLimit": null
-					}
-				},
-				"candidateConstraints": null,
 				"labels": [
 					{
 						"locale": "en",
@@ -70,21 +53,18 @@
 						"locale": "de",
 						"text": "Gehört zur Kategorie"
 					}
-				]
+				],
+				"linkConstraints": {
+					"multiplicity": {
+						"unbounded": true,
+						"upperLimit": null
+					}
+				}
 			},
 			{
 				"role": "Child",
 				"documentModel": "DomainCategory",
 				"ordered": false,
-				"navigable": true,
-				"linkConstraints": {
-					"multiplicity": {
-						"lowerLimit": 0,
-						"unbounded": true,
-						"upperLimit": null
-					}
-				},
-				"candidateConstraints": null,
 				"labels": [
 					{
 						"locale": "en",
@@ -94,7 +74,13 @@
 						"locale": "de",
 						"text": "Unterkategorie hinzufügen"
 					}
-				]
+				],
+				"linkConstraints": {
+					"multiplicity": {
+						"unbounded": true,
+						"upperLimit": null
+					}
+				}
 			}
 		]
 	}

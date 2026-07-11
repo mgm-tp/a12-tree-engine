@@ -31,8 +31,9 @@
  */
 
 import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
-import { type Action, type AnyAction } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 import { Events, TreeEngineActions, type TreeEngineActivity } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
@@ -43,8 +44,9 @@ import { cancelChildActivities } from "../sagas/utils.js";
 import { hideActivityAction } from "./actions.js";
 
 export function* handleOpenDocumentModelTemporaryButtonSaga(): SagaGenerator<void> {
-	yield* takeLatest((action: AnyAction) => {
+	yield* takeLatest((action: unknown) => {
 		return (
+			isAction(action) &&
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			[OPEN_DM_WITH_TEMPORARY_REPLACEMENT_NODE_EVENT].includes(action.payload.engineAction.payload.button.event)

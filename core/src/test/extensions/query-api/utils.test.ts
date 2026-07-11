@@ -32,8 +32,8 @@
 
 import type { QueryJsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { type DataOperation } from "../../../extensions/server-connector/index.js";
-import { A12QueryAPIUtils } from "../../../extensions/server-connector/internal/data-loaders/queries/utils.js";
+import type { DataOperation } from "../../../extensions/server-connector/index.js";
+import { A12QueryAPIUtils } from "../../../extensions/server-connector/data-loaders/queries/utils.js";
 
 describe("com.mgmtp.a12.tree-engine.services.query-api.internal.query-api-utils", () => {
 	describe("paging utilities", () => {

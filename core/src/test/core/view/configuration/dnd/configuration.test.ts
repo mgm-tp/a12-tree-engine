@@ -32,19 +32,15 @@
 
 import { vi } from "vitest";
 
-import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/drag-and-drop-utils.js";
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
+import { DragAndDropUtils, TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { ModelSelector, type TreeEngineState } from "../../../../../core/store/index.js";
 import { defaultDndConfiguration, type DragObject, type FlattenNodeRow } from "../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { type RuntimeTreeModel } from "../../../../../core/models/index.js";
-import { type HoveredObject, stringify } from "../../../../../core/view/internal/configuration/dnd/configuration.js";
-import {
-	ForbidCreateCircularRule,
-	MakeRootRule
-} from "../../../../../core/view/internal/configuration/dnd/can-drop-rules.js";
+import type { RuntimeTreeModel } from "../../../../../core/models/index.js";
+import { type HoveredObject, stringify } from "../../../../../core/view/configuration/dnd/configuration.js";
+import { ForbidCreateCircularRule, MakeRootRule } from "../../../../../core/view/configuration/dnd/can-drop-rules.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.configuration", () => {
 	const basicEngineState = defaultEngineState;

@@ -1,0 +1,53 @@
+{
+	"header": {
+		"id": "BundleProduct_Product_LinkOverview-overview-query",
+		"modelType": "query",
+		"modelVersion": "0.1.0",
+		"annotations": [],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-query",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "DomainProduct"
+			},
+			{
+				"purpose": "relationship-model-for-query",
+				"modelType": "relationship",
+				"alias": "RM",
+				"reference": "BundleProduct"
+			}
+		]
+	},
+	"content": {
+		"targetDocumentModel": "DomainProduct",
+		"projectionName": "document",
+		"paging": {
+			"pageNumber": 0,
+			"pageSize": 50
+		},
+		"links": [
+			{
+				"relationshipModel": "BundleProduct",
+				"targetRole": "Bundle",
+				"maxDepth": 1,
+				"constraint": {
+					"operator": "exact_match",
+					"field": "/__meta/docRef",
+					"value": "${DomainBundle, [/__meta/docRef]}"
+				}
+			}
+		],
+		"constraint": {
+			"operator": "has",
+			"relationshipModel": "BundleProduct",
+			"targetRole": "Bundle",
+			"constraint": {
+				"operator": "exact_match",
+				"field": "/__meta/docRef",
+				"value": "${DomainBundle, [/__meta/docRef]}"
+			},
+			"maxDepth": 1
+		}
+	}
+}

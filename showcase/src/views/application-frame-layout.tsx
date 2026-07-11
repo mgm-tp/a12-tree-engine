@@ -35,11 +35,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
 	Model,
-	FrameViews,
+	type FrameViews,
 	ActivityMap,
 	ActivitySelectors,
-	addLayout,
-	type A12ApplicationConfig
+	type ApplicationFrameLayoutPropsNG,
+	ApplicationFrameLayoutNGComponent
 } from "@com.mgmtp.a12.client/client-core";
 import { GlobalMessageBox, HeaderTrigger, PopUpMenu, List, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
 import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
@@ -54,10 +54,7 @@ import { getShowcaseDisabled, setShowcaseDisabled } from "../utils.js";
 declare const __VERSION__: string;
 const version = typeof __VERSION__ !== "undefined" ? __VERSION__ : "Unknown version";
 
-export const withApplicationFrameLayout = <T extends A12ApplicationConfig>(cfg: T) =>
-	addLayout<T>("ApplicationFrame", { component: ApplicationFrameLayout })(cfg);
-
-export const ApplicationFrameLayout: React.FC<FrameViews.LayoutProps> = (props) => {
+export const CustomApplicationFrameLayout: React.FC<ApplicationFrameLayoutPropsNG> = (props) => {
 	const locales = useShowcaseContext((context) => context.locales);
 
 	const settingItem: FrameViews.HeaderItemProps = {
@@ -104,7 +101,7 @@ export const ApplicationFrameLayout: React.FC<FrameViews.LayoutProps> = (props) 
 	}, [errors]);
 
 	return (
-		<FrameViews.ApplicationFrameLayout
+		<ApplicationFrameLayoutNGComponent
 			{...props}
 			additionalHeaderItems={[settingItem]}
 			globalMessageBox={

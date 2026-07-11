@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
+import type { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type RuntimeTreeModel } from "../../../../../core/models/index.js";
-import { type Identifier } from "../../../../../core/store/index.js";
-import { type FlattenNodeRow, type DragObject, type HoveredObject } from "../../../../../core/view/index.js";
+import type { RuntimeTreeModel } from "../../../../../core/models/index.js";
+import type { Identifier } from "../../../../../core/store/index.js";
+import type { FlattenNodeRow, DragObject, HoveredObject } from "../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 

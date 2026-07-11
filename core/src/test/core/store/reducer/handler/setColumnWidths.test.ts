@@ -31,7 +31,7 @@
  */
 
 import { Commands, type TreeEngineState } from "../../../../../core/store/index.js";
-import { handleSetColumnWidths } from "../../../../../core/store/internal/reducer/handler/setColumnWidths.js";
+import { handleSetColumnWidths } from "../../../../../core/store/reducer/handler/setColumnWidths.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.reducer.handler.setColumnWidths", () => {

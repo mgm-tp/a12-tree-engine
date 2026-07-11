@@ -37,14 +37,13 @@ import type * as Enzyme from "enzyme";
 import * as React from "react";
 import { vi } from "vitest";
 
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { ModalNotification } from "@com.mgmtp.a12.widgets/widgets-core/lib/modal-notification/index.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/index.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { ModalNotification, Button } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type TreeModel } from "../../../../../../core/models/index.js";
-import { de } from "../../../../../../core/services/localization/internal/languages/de.js";
-import { en } from "../../../../../../core/services/localization/internal/languages/en.js";
-import { type RESOURCE_KEYS } from "../../../../../../core/services/localization/index.js";
+import type { TreeModel } from "../../../../../../core/models/index.js";
+import { de } from "../../../../../../core/services/localization/languages/de.js";
+import { en } from "../../../../../../core/services/localization/languages/en.js";
+import type { RESOURCE_KEYS } from "../../../../../../core/services/localization/index.js";
 import { TreeEngineState, type Identifier } from "../../../../../../core/store/index.js";
 import {
 	TreeEngineContextProvider,

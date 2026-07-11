@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Team-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -29,16 +29,35 @@
 				"reference": "DomainTeam"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous,user"
-			}
-		]
+		"annotations": []
 	},
 	"content": {
+		"columns": [
+			{
+				"id": "column-51bf8",
+				"elementRef": "field_c9ad3",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-4a736",
+				"elementRef": "field_c2497",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": [
+				{
+					"event": "delete",
+					"icon": {
+						"name": "delete"
+					}
+				}
+			]
+		},
 		"subHeaderBox": {
-			"majorElements": [
+			"rightSlot": [
 				{
 					"type": "button",
 					"label": [
@@ -64,30 +83,6 @@
 			]
 		},
 		"footerBox": {},
-		"columns": [
-			{
-				"id": "column-51bf8",
-				"elementRef": "field_c9ad3",
-				"sortable": false,
-				"width": 1
-			},
-			{
-				"id": "column-4a736",
-				"elementRef": "field_c2497",
-				"sortable": false,
-				"width": 1
-			}
-		],
-		"rowActionGroup": {
-			"actions": [
-				{
-					"event": "delete",
-					"icon": {
-						"name": "delete"
-					}
-				}
-			]
-		},
 		"configuration": {
 			"pagingSize": 10,
 			"showFullTextSearch": true,

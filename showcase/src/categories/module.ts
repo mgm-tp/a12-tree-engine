@@ -30,14 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Module, type ApplicationModel } from "@com.mgmtp.a12.client/client-core";
-
-import CategoriesAppModel from "../../resources/models/categories/categories-appmodel.json" with { type: "json" };
+import type { DynamicConfiguration } from "@com.mgmtp.a12.client/client-core";
 
 import { extendedPushMiddleware } from "./middlwares/extended-push-middleware.js";
+import { scenes } from "./scenes.js";
+import { menus } from "./menus.js";
 
-export const categoriesModule: Module = {
+export const categoriesModule: DynamicConfiguration = {
 	id: "Categories",
-	model: () => CategoriesAppModel as ApplicationModel,
-	middlewares: () => [extendedPushMiddleware]
+	middlewares: () => [extendedPushMiddleware],
+	menus,
+	flows: [
+		{
+			name: "ProductsManagementFlow",
+			scenes
+		}
+	]
 };

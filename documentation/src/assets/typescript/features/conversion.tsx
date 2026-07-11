@@ -33,9 +33,9 @@
 import * as React from "react";
 import dayjs from "dayjs";
 
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js";
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 // tag::main[]
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { LocalizerContext, type LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
@@ -46,7 +46,7 @@ import {
 export const LocalizationProvider: React.FC = () => {
 	const locale = useProjectLocale();
 
-	const localizerContextValue: LocalizerContext.Type = React.useMemo(() => {
+	const localizerContextValue: LocalizerContextProps = React.useMemo(() => {
 		const dataFormats = defaultDataFormats(locale);
 		const defaultConversion = defaultValueConversion(dataFormats);
 

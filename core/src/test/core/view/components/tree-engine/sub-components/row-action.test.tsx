@@ -33,11 +33,9 @@
 import * as React from "react";
 import { vi } from "vitest";
 
-import { type ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { type Locale, type LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/index.js";
-import { List } from "@com.mgmtp.a12.widgets/widgets-core/lib/list/index.js";
+import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { Locale, LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
+import { TreeTableNodeDropPosition, Button, List } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import {
 	DataSelector,
@@ -501,6 +499,70 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 
 					expect(button.props().disabled).toBe(true);
 				});
+
+				it("should be false for event_expand_whole_tree", () => {
+					const result = setupTest(
+						{
+							...normalEventActionProps,
+							rowActionModel: {
+								type: "event",
+								event: "event_expand_whole_tree",
+								...createLocalizedModelText("Expand Whole Tree")
+							}
+						},
+						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
+						getRowUIState({ busy: false })
+					);
+					expect(result.find(Button).props().disabled).toBe(false);
+				});
+
+				it("should be false for event_collapse_whole_tree", () => {
+					const result = setupTest(
+						{
+							...normalEventActionProps,
+							rowActionModel: {
+								type: "event",
+								event: "event_collapse_whole_tree",
+								...createLocalizedModelText("Collapse Whole Tree")
+							}
+						},
+						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
+						getRowUIState({ busy: false })
+					);
+					expect(result.find(Button).props().disabled).toBe(false);
+				});
+
+				it("should be false for event_expand_sub_tree", () => {
+					const result = setupTest(
+						{
+							...normalEventActionProps,
+							rowActionModel: {
+								type: "event",
+								event: "event_expand_sub_tree",
+								...createLocalizedModelText("Expand Sub Tree")
+							}
+						},
+						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
+						getRowUIState({ busy: false })
+					);
+					expect(result.find(Button).props().disabled).toBe(false);
+				});
+
+				it("should be false for event_collapse_sub_tree", () => {
+					const result = setupTest(
+						{
+							...normalEventActionProps,
+							rowActionModel: {
+								type: "event",
+								event: "event_collapse_sub_tree",
+								...createLocalizedModelText("Collapse Sub Tree")
+							}
+						},
+						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
+						getRowUIState({ busy: false })
+					);
+					expect(result.find(Button).props().disabled).toBe(false);
+				});
 			});
 		});
 
@@ -566,6 +628,70 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 					const button = result.find(List.Item);
 
 					expect(button.props().disabled).toBe(true);
+				});
+
+				it("should be false for event_expand_whole_tree", () => {
+					const result = setupTest(
+						{
+							...contextEventActionProps,
+							rowActionModel: {
+								type: "event",
+								event: "event_expand_whole_tree",
+								...createLocalizedModelText("Expand Whole Tree")
+							}
+						},
+						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
+						getRowUIState({ busy: false })
+					);
+					expect(result.find(List.Item).props().disabled).toBe(false);
+				});
+
+				it("should be false for event_collapse_whole_tree", () => {
+					const result = setupTest(
+						{
+							...contextEventActionProps,
+							rowActionModel: {
+								type: "event",
+								event: "event_collapse_whole_tree",
+								...createLocalizedModelText("Collapse Whole Tree")
+							}
+						},
+						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
+						getRowUIState({ busy: false })
+					);
+					expect(result.find(List.Item).props().disabled).toBe(false);
+				});
+
+				it("should be false for event_expand_sub_tree", () => {
+					const result = setupTest(
+						{
+							...contextEventActionProps,
+							rowActionModel: {
+								type: "event",
+								event: "event_expand_sub_tree",
+								...createLocalizedModelText("Expand Sub Tree")
+							}
+						},
+						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
+						getRowUIState({ busy: false })
+					);
+					expect(result.find(List.Item).props().disabled).toBe(false);
+				});
+
+				it("should be false for event_collapse_sub_tree", () => {
+					const result = setupTest(
+						{
+							...contextEventActionProps,
+							rowActionModel: {
+								type: "event",
+								event: "event_collapse_sub_tree",
+								...createLocalizedModelText("Collapse Sub Tree")
+							}
+						},
+						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
+						getRowUIState({ busy: false })
+					);
+					expect(result.find(List.Item).props().disabled).toBe(false);
 				});
 			});
 		});

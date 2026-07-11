@@ -32,13 +32,11 @@
 
 import { vi } from "vitest";
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/main/icon.view.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { Button, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type TreeEngineState } from "../../../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../../../core/store/index.js";
 import { MultiSelectionButton, TreeEngineContextProvider } from "../../../../../../../core/view/index.js";
 import {
 	createContextProps,
@@ -50,8 +48,8 @@ import {
 import { TreeModel } from "../../../../../../../core/models/index.js";
 import { createEngineState } from "../../../../../../utils/model-utils.js";
 import { testIsNullComponent } from "../../../../../../utils/test-utils.js";
-import { en } from "../../../../../../../core/services/localization/internal/languages/en.js";
-import { de } from "../../../../../../../core/services/localization/internal/languages/de.js";
+import { en } from "../../../../../../../core/services/localization/languages/en.js";
+import { de } from "../../../../../../../core/services/localization/languages/de.js";
 
 import { defaultMultiSelectionConfig } from "./utils.test.js";
 

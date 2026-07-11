@@ -2,7 +2,7 @@
 	"header": {
 		"id": "TeamPerson",
 		"modelType": "relationship",
-		"modelVersion": "3.0.0",
+		"modelVersion": "4.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -12,12 +12,7 @@
 			}
 		],
 		"labels": [],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"purpose": "Document model",
@@ -41,10 +36,7 @@
 	},
 	"content": {
 		"duplicatesAllowed": false,
-		"associationType": "SHARED",
-		"storage": "EXTERNAL",
 		"linkDocumentModel": "DomainTeamPerson_AdditionalFieldsModel",
-		"embeddedGroupPath": null,
 		"labels": [
 			{
 				"locale": "en"
@@ -58,15 +50,6 @@
 				"role": "Person",
 				"documentModel": "DomainPersonAbstract-0",
 				"ordered": false,
-				"navigable": true,
-				"linkConstraints": {
-					"multiplicity": {
-						"lowerLimit": 0,
-						"unbounded": true,
-						"upperLimit": null
-					}
-				},
-				"candidateConstraints": null,
 				"labels": [
 					{
 						"locale": "en",
@@ -76,21 +59,18 @@
 						"locale": "de",
 						"text": "Teammitglieder"
 					}
-				]
+				],
+				"linkConstraints": {
+					"multiplicity": {
+						"unbounded": true,
+						"upperLimit": null
+					}
+				}
 			},
 			{
 				"role": "Team",
 				"documentModel": "DomainTeam",
 				"ordered": true,
-				"navigable": true,
-				"linkConstraints": {
-					"multiplicity": {
-						"lowerLimit": 0,
-						"unbounded": true,
-						"upperLimit": null
-					}
-				},
-				"candidateConstraints": null,
 				"labels": [
 					{
 						"locale": "en",
@@ -100,7 +80,13 @@
 						"locale": "de",
 						"text": "gehört zu Teams"
 					}
-				]
+				],
+				"linkConstraints": {
+					"multiplicity": {
+						"unbounded": true,
+						"upperLimit": null
+					}
+				}
 			}
 		]
 	}

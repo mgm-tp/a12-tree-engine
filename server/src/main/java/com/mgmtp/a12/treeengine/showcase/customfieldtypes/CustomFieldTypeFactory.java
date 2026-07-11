@@ -31,7 +31,7 @@
  */
 package com.mgmtp.a12.treeengine.showcase.customfieldtypes;
 
-import com.mgmtp.a12.kernel.core.customfieldtype.ICustomFieldType;
+import com.mgmtp.a12.kernel.core.customfieldtype.ICustomFieldValidator;
 import com.mgmtp.a12.kernel.core.customfieldtype.ICustomFieldTypeFactory;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +40,7 @@ import java.util.Optional;
 @Component
 public class CustomFieldTypeFactory implements ICustomFieldTypeFactory {
     @Override
-    public Optional<ICustomFieldType> createCustomFieldTypeV2(String customFieldTypeName) {
+    public Optional<ICustomFieldValidator> createCustomFieldValidator(String customFieldTypeName) {
         if (customFieldTypeName.equals("Email")) {
             return Optional.of(new EmailType());
         } else {

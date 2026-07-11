@@ -2,7 +2,7 @@
 	"header": {
 		"id": "form-modeler-tree",
 		"modelType": "tree",
-		"modelVersion": "10.2.0",
+		"modelVersion": "11.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,12 +21,7 @@
 				"text": "Form Modeler"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"purpose": "document-model-for-tree",
@@ -230,8 +225,8 @@
 			}
 		},
 		"subHeaderBox": {
-			"majorElements": [],
-			"minorElements": [
+			"rightSlot": [],
+			"leftSlot": [
 				{
 					"type": "expand_all_popup"
 				},
@@ -241,8 +236,8 @@
 			]
 		},
 		"footerBox": {
-			"majorElements": [],
-			"minorElements": []
+			"rightSlot": [],
+			"leftSlot": []
 		},
 		"nodes": [
 			{
@@ -508,7 +503,7 @@
 					"inherit": {
 						"contextMenu": true,
 						"columns": true,
-						"defaultRowAction": true,
+						"rowActivation": true,
 						"rowTitle": true,
 						"styles": true
 					}
@@ -564,7 +559,7 @@
 					"inherit": {
 						"contextMenu": true,
 						"columns": true,
-						"defaultRowAction": true,
+						"rowActivation": true,
 						"childRelationshipConfigurations": true,
 						"rowTitle": true,
 						"actions": true,

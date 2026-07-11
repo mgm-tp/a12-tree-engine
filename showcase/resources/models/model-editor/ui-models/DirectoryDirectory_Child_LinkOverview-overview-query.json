@@ -1,0 +1,53 @@
+{
+	"header": {
+		"id": "DirectoryDirectory_Child_LinkOverview-overview-query",
+		"modelType": "query",
+		"modelVersion": "0.1.0",
+		"annotations": [],
+		"modelReferences": [
+			{
+				"purpose": "document-model-for-query",
+				"modelType": "document",
+				"alias": "DM",
+				"reference": "DomainDirectory"
+			},
+			{
+				"purpose": "relationship-model-for-query",
+				"modelType": "relationship",
+				"alias": "RM",
+				"reference": "DirectoryDirectory"
+			}
+		]
+	},
+	"content": {
+		"targetDocumentModel": "DomainDirectory",
+		"projectionName": "document",
+		"paging": {
+			"pageNumber": 0,
+			"pageSize": 50
+		},
+		"links": [
+			{
+				"relationshipModel": "DirectoryDirectory",
+				"targetRole": "Parent",
+				"maxDepth": 1,
+				"constraint": {
+					"operator": "exact_match",
+					"field": "/__meta/docRef",
+					"value": "${DomainDirectory, [/__meta/docRef]}"
+				}
+			}
+		],
+		"constraint": {
+			"operator": "has",
+			"relationshipModel": "DirectoryDirectory",
+			"targetRole": "Parent",
+			"constraint": {
+				"operator": "exact_match",
+				"field": "/__meta/docRef",
+				"value": "${DomainDirectory, [/__meta/docRef]}"
+			},
+			"maxDepth": 1
+		}
+	}
+}

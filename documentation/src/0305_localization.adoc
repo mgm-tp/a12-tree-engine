@@ -18,7 +18,7 @@ THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPR
 [#localization]
 === Localization
 
-An application using Tree Engine has to provide a `LocalizerContext` instance from `util-localization-react` package.
+An application using Tree Engine has to provide a `LocalizerContext` instance from `utils-localization-react` package.
 The context can be initialized by using `DefaultLocalizerContextProvider`, or customized completely by passing
 three parameters: `localizer`, `locale`, and `dataFormats` into `LocalizerContext`. `localizer` receives an array of `Localizables` and returns resolved
 string according to the current `locale`. For more details, see link:/docs/utils_localization/utils-localization-documentation-bundle/index.html[Utils localization documentation].
@@ -47,7 +47,7 @@ Every localizable element in Tree Engine is identified by a key. The keys can be
 ===== Static Resource Keys
 
 Resources such as titles for notifications and confirmation buttons are marked using static keys.
-The static keys are defined and well-documented in `RESOURCE_KEYS` in `core/services/localization/internal/languages/keys.ts`.
+The static keys are defined and well-documented in `RESOURCE_KEYS` in `core/services/localization/languages/keys.ts`.
 Please see the file for more details.
 
 ===== Model Element Keys

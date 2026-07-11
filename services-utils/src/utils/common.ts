@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import {
-	type Relationship,
-	type DocumentJsonRpc2Request,
-	type RelationshipJsonRpc2request,
-	type QueryJsonRpc2Request
+import type {
+	Relationship,
+	DocumentJsonRpc2Request,
+	RelationshipJsonRpc2request,
+	QueryJsonRpc2Request
 } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 export function listDocuments(documentModel: string, limit = 1000): QueryJsonRpc2Request {

@@ -2,7 +2,7 @@
 	"header": {
 		"id": "DomainMultiSelectGroup",
 		"modelType": "document",
-		"modelVersion": "28.4.0",
+		"modelVersion": "29.4.0",
 		"locales": [
 			{
 				"code": "en"
@@ -25,10 +25,6 @@
 			{
 				"name": "superTypes",
 				"value": "DomainGroup"
-			},
-			{
-				"name": "roles",
-				"value": "anonymous"
 			}
 		],
 		"modelReferences": [
@@ -60,7 +56,9 @@
 					"name": "Element",
 					"Group": {
 						"repeatability": 1,
-						"modelAlias": "DomainAbstractGroup"
+						"includeConfig": {
+							"reference": "DomainAbstractGroup"
+						}
 					}
 				}
 			]

@@ -31,9 +31,8 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { Counter } from "@com.mgmtp.a12.widgets/widgets-core/lib/counter/main/counter.view.js";
+import { Counter } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeEngineState } from "../../../../../../../core/store/index.js";
 import { MultiSelectionCounter, TreeEngineContextProvider } from "../../../../../../../core/view/index.js";

@@ -32,7 +32,7 @@
 
 import { TreeModel } from "../../../../core/models/index.js";
 import { Commands, Events, TreeEngineState } from "../../../../core/store/index.js";
-import { onInsertChildNodeRequestMiddleware } from "../../../../core/store/internal/middleware/events/onInsertChildNodeRequest.js";
+import { onInsertChildNodeRequestMiddleware } from "../../../../core/store/middleware/events/onInsertChildNodeRequest.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";

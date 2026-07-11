@@ -2,7 +2,7 @@
 	"header": {
 		"id": "file-explorer-multi-level-tree",
 		"modelType": "tree",
-		"modelVersion": "10.2.0",
+		"modelVersion": "11.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -21,12 +21,7 @@
 				"text": "Dateimanager - Multi level"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"purpose": "document-model-for-tree",
@@ -219,8 +214,8 @@
 			}
 		},
 		"subHeaderBox": {
-			"majorElements": [],
-			"minorElements": [
+			"rightSlot": [],
+			"leftSlot": [
 				{
 					"type": "multi_selection"
 				},
@@ -254,8 +249,8 @@
 			]
 		},
 		"footerBox": {
-			"majorElements": [],
-			"minorElements": [
+			"rightSlot": [],
+			"leftSlot": [
 				{
 					"icon": {
 						"name": "add"
@@ -750,6 +745,10 @@
 			{
 				"id": "node-c0e3d",
 				"documentModelRef": "DomainDirectory",
+				"rowActivation": {
+					"type": "event",
+					"event": "event_toggle_expansion"
+				},
 				"columns": [
 					{
 						"columnRef": "column-cda0b",
@@ -879,6 +878,24 @@
 								}
 							]
 						}
+					},
+					{
+						"primary": false,
+						"type": "event",
+						"event": "event_open_node",
+						"icon": {
+							"name": "folder_open"
+						},
+						"description": [
+							{
+								"locale": "en",
+								"text": "Open this directory"
+							},
+							{
+								"locale": "de",
+								"text": "Öffnen Sie dieses Verzeichnis"
+							}
+						]
 					}
 				],
 				"configuration": {

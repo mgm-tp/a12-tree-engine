@@ -30,10 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type AnyAction, type Middleware } from "redux";
+import type { Middleware, UnknownAction } from "redux";
 import { vi, type Mock } from "vitest";
 
-import { type TreeEngineState } from "../../core/store/index.js";
+import type { TreeEngineState } from "../../core/store/index.js";
 
 export function setupMiddleware(middleware: Middleware, initialState: TreeEngineState): MiddlewareSetup {
 	const store = {
@@ -41,7 +41,7 @@ export function setupMiddleware(middleware: Middleware, initialState: TreeEngine
 		dispatch: vi.fn()
 	};
 	const next = vi.fn();
-	const invoke = (action: AnyAction) => middleware(store)(next)(action);
+	const invoke = (action: UnknownAction) => middleware(store)(next)(action);
 
 	return { store, next, invoke };
 }
@@ -52,5 +52,5 @@ export interface MiddlewareSetup {
 		dispatch: Mock;
 	};
 	next: Mock;
-	invoke: (action: AnyAction) => void;
+	invoke: (action: UnknownAction) => void;
 }

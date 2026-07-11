@@ -31,7 +31,7 @@
  */
 
 import { Commands, Events, type Identifier, TreeEngineState } from "../../../../core/store/index.js";
-import { onMakeRootNodeRequestMiddleware } from "../../../../core/store/internal/middleware/events/onMakeRootNodeRequest.js";
+import { onMakeRootNodeRequestMiddleware } from "../../../../core/store/middleware/events/onMakeRootNodeRequest.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";

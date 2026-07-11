@@ -44,8 +44,35 @@ tree-model-migration . --backup
 
 *Note*
 
-- The minimum supported model version is 8.0.0. Models older than this must first be migrated to version 8.0.0 using that version's migration tool.
+- The minimum supported model version is 9.0.0. Models older than this must first be migrated to version 9.0.0 using that version's migration tool.
 - If `<path to tree model file or directory>` is a directory, the migration tool will recursively search for Tree Model files to migrate.
 - If Tree Model files are not under version control, use `--backup` (alias `-b`) flag to create backups for model files. This flag is optional.
 - Use `--help` (alias `-h`) flag to show all available options.
+
+=== Model migrations
+
+This section documents what the tool changes in a Tree Model when migrating to a given engine version — the change categories it applies, with at least one named example each — so you can map the resulting diff to the documented intent. Each entry is also referenced from the matching subsection of the migration instructions.
+
+[[model-migration-11.0.0]]
+==== 11.0.0
+
+*Rename model fields.* `SubHeaderBox`/`FooterBox` `majorElements` becomes `rightSlot` and `minorElements` becomes `leftSlot`.
+
+[source,json]
+----
+// before
+{ "majorElements": [/* ... */], "minorElements": [/* ... */] }
+// after
+{ "rightSlot": [/* ... */], "leftSlot": [/* ... */] }
+----
+
+*Rewrite the row-action shape.* The legacy `defaultRowAction` custom-event shape is rewritten to the new `rowActivation` shape, and the `configuration.inherit.defaultRowAction` flag is renamed to `configuration.inherit.rowActivation`.
+
+[source,json]
+----
+// before
+"defaultRowAction": { "custom": true, "event": "open" }
+// after
+"rowActivation": { "type": "event", "event": "open" }
+----
 

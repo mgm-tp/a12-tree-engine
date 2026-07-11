@@ -1,0 +1,29 @@
+{
+	"header": {
+		"id": "CategoriesStandaloneRelationshipEngine-binding-default-name_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "CategoryCandidates-overview"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "CategoryCategory_Child_LinkOverview-overview"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"relationshipName": "CategoryCategory",
+		"targetRole": "Child",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "CategoryCandidates-overview",
+			"selectedItemsOverviewModel": "CategoryCategory_Child_LinkOverview-overview"
+		}
+	}
+}

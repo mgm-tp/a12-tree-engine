@@ -33,7 +33,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { type DataOperation } from "@com.mgmtp.a12.treeengine/treeengine-core";
+import type { DataOperation } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 // tag::ListRootNodes[]
 const listRootNodes: DataOperation.Query.ListRootNodes.Query = {

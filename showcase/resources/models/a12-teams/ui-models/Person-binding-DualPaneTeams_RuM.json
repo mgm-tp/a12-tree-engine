@@ -1,0 +1,45 @@
+{
+	"header": {
+		"id": "Person-binding-DualPaneTeams_RuM",
+		"modelType": "relationship-ui",
+		"modelVersion": "2.0.0",
+		"modelReferences": [
+			{
+				"purpose": "availableItems",
+				"modelType": "overview",
+				"reference": "TeamCandidates-overview--TeamPerson"
+			},
+			{
+				"purpose": "selectedItems",
+				"modelType": "overview",
+				"reference": "TeamPerson_Team_LinkOverview-overview"
+			},
+			{
+				"purpose": "link",
+				"modelType": "form",
+				"reference": "TeamPerson_LinkForm"
+			}
+		],
+		"annotations": [],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "DualPaneTeams"
+			},
+			{
+				"locale": "de",
+				"text": "DualPaneTeams"
+			}
+		]
+	},
+	"content": {
+		"relationshipName": "TeamPerson",
+		"targetRole": "Team",
+		"component": {
+			"componentType": "DualPaneSelection",
+			"availableItemsOverviewModel": "TeamCandidates-overview--TeamPerson",
+			"selectedItemsOverviewModel": "TeamPerson_Team_LinkOverview-overview",
+			"linkFormModel": "TeamPerson_LinkForm"
+		}
+	}
+}

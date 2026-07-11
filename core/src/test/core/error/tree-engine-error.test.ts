@@ -67,7 +67,7 @@ describe("@com.mgmtp.a12.tree-engine.core.error.tree-engine-error", () => {
 					[baseObject, false],
 					[{ ...baseObject, errors: undefined }, false],
 					[{ ...baseObject, errors: [] }, false],
-					[{ ...baseObject, errors: [{ code: 12345, message: "Rpc error" }] }, true]
+					[{ ...baseObject, errors: [{ code: 12345, message: "Rpc error", data: {} }] }, true]
 				].forEach(([object, result]) => {
 					expect(TreeEngineError.ServerError.isInstance(object)).toBe(result);
 				});

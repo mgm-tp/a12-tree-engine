@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
 
-import { seedData } from "../../../../services-utils/src";
+import { seedData } from "../../../../services-utils/src/index.js";
 
-import { type SingleTestConfig } from "../types";
-import { PlaywrightUtils } from "../utils";
+import type { SingleTestConfig } from "../types.js";
+import { PlaywrightUtils } from "../utils.js";
 
 export const initDefault: SingleTestConfig = {
 	id: "init.default",

@@ -32,14 +32,18 @@
 
 import { defineConfig } from "vitest/config";
 
+const pool = process.env.CI ? "forks" : "vmForks";
+
 export default defineConfig({
+	/** Suppress annoying unsupported es2025 warning message from esbuild, which might crash Jenkins instance */
+	esbuild: { tsconfigRaw: { compilerOptions: { target: "es2024", useDefineForClassFields: true } } },
 	test: {
 		include: ["src/test/**/*.test.{ts,tsx}"],
 		exclude: [
 			"src/test/core/services/converter/**.test.ts",
 			"src/test/core/view/components/tree-engine/tree-engine-renderer.test.tsx"
 		],
-		pool: "vmForks",
+		pool,
 		environment: "jsdom",
 		setupFiles: ["./src/test/setup/enzyme.ts"],
 		reporters: ["default", "junit"],

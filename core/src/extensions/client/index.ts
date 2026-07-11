@@ -31,17 +31,17 @@
  */
 
 import type * as React from "react";
-import { type Middleware } from "redux";
-import { type SagaGenerator } from "typed-redux-saga";
+import type { Middleware } from "redux";
+import type { SagaGenerator } from "typed-redux-saga";
 
-import { type ActivityReducers, type Module, type DataProvider, type View } from "@com.mgmtp.a12.client/client-core";
+import type { ActivityReducers, Module, DataProvider, View } from "@com.mgmtp.a12.client/client-core";
 
-import { createTreeEngineClientDataReducers } from "./internal/data-reducers/index.js";
-import { createLinkFormEngineDataProvider } from "./internal/data-providers/link-form-engine-data-provider.js";
-import { createTreeEngineClientMiddlewares } from "./internal/middlewares/index.js";
-import { createTreeEngineSagas } from "./internal/sagas/index.js";
-import { type TreeEngineSaga } from "./internal/sagas/saga-setting.js";
-import { TreeEngineClientContainer, treeEngineClientViewComponentProvider } from "./internal/views/container.js";
+import { createTreeEngineClientDataReducers } from "./data-reducers/index.js";
+import { createLinkFormEngineDataProvider } from "./data-providers/link-form-engine-data-provider.js";
+import { createTreeEngineClientMiddlewares } from "./middlewares/index.js";
+import { createTreeEngineSagas } from "./sagas/index.js";
+import type { TreeEngineSaga } from "./sagas/saga-setting.js";
+import { TreeEngineClientContainer, treeEngineClientViewComponentProvider } from "./views/container.js";
 
 export namespace TreeEngineFactories {
 	export const createDataReducers: () => ActivityReducers.DataReducer[] = createTreeEngineClientDataReducers;
@@ -73,14 +73,15 @@ export namespace TreeEngineFactories {
 	}
 }
 
-export * from "./internal/operation.js";
-export * from "./internal/data-holder.js";
-export * from "./internal/actions.js";
-export * from "./internal/selectors.js";
-export * from "./internal/views/container.js";
-export * from "./internal/views/heterogeneous-insert-child-node-dialog.js";
-export * from "./internal/views/heterogeneous-insert-root-node-dialog.js";
-export * from "./internal/sagas/saga-registration.js";
-export * from "./internal/sagas/saga-setting.js";
+export * from "./operation.js";
+export * from "./data-holder.js";
+export * from "./actions.js";
+export * from "./selectors.js";
+export * from "./views/container.js";
+export * from "./views/heterogeneous-insert-child-node-dialog.js";
+export * from "./views/heterogeneous-insert-root-node-dialog.js";
+export * from "./sagas/saga-registration.js";
+export * from "./sagas/saga-setting.js";
 
-export { type MaybeAsync, maybeAsyncFnWrapper } from "./internal/utils.js";
+export type { MaybeAsync } from "./utils.js";
+export { maybeAsyncFnWrapper } from "./utils.js";

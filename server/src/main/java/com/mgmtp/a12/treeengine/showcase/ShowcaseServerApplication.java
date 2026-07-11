@@ -33,15 +33,11 @@ package com.mgmtp.a12.treeengine.showcase;
 
 import com.mgmtp.a12.dataservices.DataServicesApplication;
 import com.mgmtp.a12.dataservices.configuration.DataServicesCoreProperties;
-import com.mgmtp.a12.kernel.core.customfieldtype.CustomFieldTypeService;
-import com.mgmtp.a12.treeengine.showcase.customfieldtypes.CustomFieldTypeFactory;
 import org.springframework.boot.SpringApplication;
 
 @DataServicesApplication(scanBasePackages = { DataServicesCoreProperties.DS_PACKAGE_PREFIX, "com.mgmtp.a12.treeengine.showcase" })
 public class ShowcaseServerApplication {
     public static void main(String[] args) {
-	    CustomFieldTypeService.getInstanceV2().registerV2(new CustomFieldTypeFactory());
-
         SpringApplication.run(ShowcaseServerApplication.class, args);
     }
 }

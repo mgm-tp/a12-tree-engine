@@ -31,7 +31,7 @@
  */
 
 import { Commands, Events, TreeEngineState } from "../../../../core/store/index.js";
-import { onMultiSelectionButtonClickedMiddleware } from "../../../../core/store/internal/middleware/events/onMultiSelectionButtonClicked.js";
+import { onMultiSelectionButtonClickedMiddleware } from "../../../../core/store/middleware/events/onMultiSelectionButtonClicked.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";
 import { createEngineState } from "../../../utils/model-utils.js";

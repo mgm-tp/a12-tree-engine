@@ -34,14 +34,14 @@ import * as React from "react";
 
 import {
 	type TreeTableContextType,
-	type TreeTableDragDropOptions
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js";
-import { TreeTableContextProvider } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.view.js";
-import { type BaseTreeTableColumnType } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
-import { type Container } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/index.js";
+	type TreeTableDragDropOptions,
+	TreeTableContextProvider,
+	type BaseTreeTableColumnType,
+	type Container
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type TreeModel } from "../../../../../../../core/models/index.js";
-import { type TreeEngineState } from "../../../../../../../core/store/index.js";
+import type { TreeModel } from "../../../../../../../core/models/index.js";
+import type { TreeEngineState } from "../../../../../../../core/store/index.js";
 import {
 	type BodyCell,
 	type FlattenNodeRow,

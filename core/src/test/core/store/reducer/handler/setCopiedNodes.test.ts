@@ -31,7 +31,7 @@
  */
 
 import { Commands, TreeEngineState } from "../../../../../core/store/index.js";
-import { handleSetCopiedNodes } from "../../../../../core/store/internal/reducer/handler/setCopiedNodes.js";
+import { handleSetCopiedNodes } from "../../../../../core/store/reducer/handler/setCopiedNodes.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 

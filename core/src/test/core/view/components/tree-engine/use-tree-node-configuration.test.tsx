@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type FlattenNodeRow } from "../../../../../core/view/index.js";
+import type { FlattenNodeRow } from "../../../../../core/view/index.js";
 import { type RuntimeTreeModel, TreeModel } from "../../../../../core/models/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 import { testHook } from "../../../../utils/test-utils.js";
-import { NodeConfigurationHook } from "../../../../../core/view/internal/components/tree-engine/sub-components/hooks/node-configuration-hook.js";
+import { NodeConfigurationHook } from "../../../../../core/view/components/tree-engine/sub-components/hooks/node-configuration-hook.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.hooks.node-configuration-hook", () => {
 	const basicEngineState = defaultEngineState;

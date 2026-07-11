@@ -31,9 +31,9 @@
  */
 
 import { type SagaGenerator, put, select, takeEvery } from "typed-redux-saga";
-import { type AnyAction } from "redux";
-import { type Action } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { TreeEngineActions, Events } from "@com.mgmtp.a12.treeengine/treeengine-core";
 import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 
@@ -42,11 +42,12 @@ import { assert, REVEAL_TARGET_NODE_EVENT, REVEAL_TARGET_NODE_EVENT_NO_AUTOFOCUS
 
 export function* handleRevealTargetNodeSaga(): SagaGenerator<void> {
 	yield* takeEvery(
-		(anyAction: AnyAction) =>
-			TreeEngineActions.event.match(anyAction) &&
-			Events.onEventButtonClicked.match(anyAction.payload.engineAction) &&
+		(action: unknown) =>
+			isAction(action) &&
+			TreeEngineActions.event.match(action) &&
+			Events.onEventButtonClicked.match(action.payload.engineAction) &&
 			[REVEAL_TARGET_NODE_EVENT, REVEAL_TARGET_NODE_EVENT_NO_AUTOFOCUS].includes(
-				anyAction.payload.engineAction.payload.button.event
+				action.payload.engineAction.payload.button.event
 			),
 		handle
 	);

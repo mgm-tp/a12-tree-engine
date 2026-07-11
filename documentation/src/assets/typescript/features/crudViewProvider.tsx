@@ -33,7 +33,7 @@
 import * as React from "react";
 
 // tag::SetupViewProvider[]
-import { type View } from "@com.mgmtp.a12.client/client-core";
+import type { View } from "@com.mgmtp.a12.client/client-core";
 import { CRUDViews } from "@com.mgmtp.a12.crud/crud-core";
 import { TreeEngineFactories, type RowStyleGetter } from "@com.mgmtp.a12.treeengine/treeengine-core";
 

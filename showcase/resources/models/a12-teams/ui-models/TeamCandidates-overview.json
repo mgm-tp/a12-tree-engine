@@ -2,7 +2,7 @@
 	"header": {
 		"id": "TeamCandidates-overview",
 		"modelType": "overview",
-		"modelVersion": "38.3.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -11,7 +11,16 @@
 				"code": "de"
 			}
 		],
-		"labels": [],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Candidate sub teams"
+			},
+			{
+				"locale": "de",
+				"text": "Kandidaten-Subteams"
+			}
+		],
 		"modelReferences": [
 			{
 				"purpose": "document-model-for-overview",
@@ -20,25 +29,9 @@
 				"reference": "DomainTeam"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		]
+		"annotations": []
 	},
 	"content": {
-		"subHeaderBox": {
-			"majorElements": [
-				{
-					"type": "search"
-				},
-				{
-					"type": "filter"
-				}
-			]
-		},
-		"footerBox": {},
 		"columns": [
 			{
 				"id": "column-f43fa",
@@ -56,8 +49,19 @@
 		"rowActionGroup": {
 			"actions": []
 		},
+		"subHeaderBox": {
+			"rightSlot": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
 		"configuration": {
-			"pagingSize": 10,
+			"pagingSize": 5,
 			"showFullTextSearch": true,
 			"enableFilter": true,
 			"filterConfiguration": {

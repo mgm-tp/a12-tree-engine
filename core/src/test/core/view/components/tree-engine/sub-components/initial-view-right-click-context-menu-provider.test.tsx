@@ -35,20 +35,19 @@ import { vi } from "vitest";
 import type * as Enzyme from "enzyme";
 import { VALUE_ESCAPE } from "keycode-js";
 
-import { AttachedPortal } from "@com.mgmtp.a12.widgets/widgets-core/lib/attached-portal/index.js";
-import { List } from "@com.mgmtp.a12.widgets/widgets-core/lib/list/index.js";
+import { AttachedPortal, List } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { InitialViewRightClickContextMenuProvider } from "../../../../../../core/view/internal/components/tree-engine/sub-components/initial-view-right-click-context-menu-provider.js";
+import { InitialViewRightClickContextMenuProvider } from "../../../../../../core/view/components/tree-engine/sub-components/initial-view-right-click-context-menu-provider.js";
 import {
 	createContextProps,
 	defaultEngineState,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
-import { type TreeEngineState } from "../../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
 import { RowAction, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
-import { en } from "../../../../../../core/services/localization/internal/languages/en.js";
+import { en } from "../../../../../../core/services/localization/languages/en.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.initial-view-right-click-context-menu-provider", () => {
 	const basicEngineState = createEngineState

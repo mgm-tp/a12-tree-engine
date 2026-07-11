@@ -32,7 +32,7 @@
 
 import { Commands } from "../../../../../core/store/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
-import { handleSetPreloadChildNodes } from "../../../../../core/store/internal/reducer/handler/setPreloadChildNodes.js";
+import { handleSetPreloadChildNodes } from "../../../../../core/store/reducer/handler/setPreloadChildNodes.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.reducer.handler.setPreloadChildNodes", () => {
 	const engineState = defaultEngineState;

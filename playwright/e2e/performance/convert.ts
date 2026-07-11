@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type AnalysedRecorder, type RawRecorder } from "./types";
-import { NumberUtils, StringUtils } from "./utils";
+import type { AnalysedRecorder, RawRecorder } from "./types.js";
+import { NumberUtils, StringUtils } from "./utils.js";
 
 export function convert(rawRecorder: RawRecorder, type: "chart" | "xml" | "stat" | "json"): string | AnalysedRecorder {
 	switch (type) {

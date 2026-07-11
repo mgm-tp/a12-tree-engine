@@ -34,7 +34,6 @@ import * as Path from "path";
 
 import { defineConfig, type RsbuildConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
-import { pluginTypeCheck } from "@rsbuild/plugin-type-check";
 import { IgnorePlugin, SwcJsMinimizerRspackPlugin } from "@rspack/core";
 import { pluginStyledComponents } from "@rsbuild/plugin-styled-components";
 import { pluginBabel } from "@rsbuild/plugin-babel";
@@ -95,20 +94,16 @@ const config: ReturnType<typeof defineConfig> = defineConfig(({ command, envMode
 			dedupe: ["immutable", "clsx", "scheduler", "react-is"],
 			alias: {
 				// caused by react-dnd
-				"react/jsx-runtime.js": "react/jsx-runtime",
-				// necessary for WhyDidYouRender to track useSelector
-				"react-redux": command === "dev" ? "react-redux/lib" : "react-redux"
+				"react/jsx-runtime.js": "react/jsx-runtime"
 			}
 		},
 		html: {
 			template: PATH.HTML,
-			favicon: "./resources/public/favicon.svg",
 			templateParameters: ({ entryName }) => entries[entryName as any]
 		},
 		plugins: [
 			pluginReact(),
 			pluginStyledComponents(),
-			pluginTypeCheck(),
 			pluginBabel({
 				include: [PATH.SRC, PATH.CORE],
 				exclude: /node_modules/,

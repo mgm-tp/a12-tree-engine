@@ -31,8 +31,9 @@
  */
 
 import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
-import { type Action, type AnyAction } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions } from "@com.mgmtp.a12.client/client-core";
 import {
 	DataSelector,
@@ -58,8 +59,9 @@ import { File } from "../document.js";
 import { cancelChildActivities, getInitialExpansionConfig } from "./utils.js";
 
 export function* handleOpenDocumentModelButtonSaga(): SagaGenerator<void> {
-	yield* takeLatest((action: AnyAction) => {
+	yield* takeLatest((action: unknown) => {
 		return (
+			isAction(action) &&
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			[

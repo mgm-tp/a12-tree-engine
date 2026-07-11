@@ -31,6 +31,7 @@
  */
 
 import * as KeyCode from "keycode-js";
+import type { Dispatch } from "redux";
 
 import {
 	TreeEngineState,
@@ -38,6 +39,7 @@ import {
 	TreeModel,
 	type Identifier
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
+import { type Activity, ApplicationActions } from "@com.mgmtp.a12.client/client-core";
 
 import { SHOWCASE_RESOURCE_KEYS } from "./config/resources.js";
 
@@ -176,3 +178,13 @@ export const engineShortcuts: KeyboardShortcut[] = [
 		target: { type: KeyboardShortcut.TargetType.ENGINE_EVENT_ACTION, event: "event_paste" }
 	}
 ];
+
+export function onClickFor(descriptor: Activity.Descriptor) {
+	return (dispatch: Dispatch) => {
+		dispatch(
+			ApplicationActions.startMainActivityRequested({
+				descriptor
+			})
+		);
+	};
+}

@@ -34,7 +34,7 @@ import type * as React from "react";
 import * as KeyCode from "keycode-js";
 import { vi } from "vitest";
 
-import { type Localizable } from "@com.mgmtp.a12.utils/utils-localization";
+import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { defaultEngineState, type PartialEventHandlerContextProps } from "../../../../setup/basic.spec.js";
 import { testHook } from "../../../../utils/test-utils.js";
@@ -45,9 +45,9 @@ import {
 	useBuiltinShortcut,
 	useKeyDown,
 	useRowActionShortcut
-} from "../../../../../core/view/internal/configuration/keyboard-shortcut/hooks.js";
+} from "../../../../../core/view/configuration/keyboard-shortcut/hooks.js";
 import { TreeModel } from "../../../../../core/models/index.js";
-import { type TreeEngineState } from "../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../core/store/index.js";
 
 import InsertPosition = TreeModel.InsertPosition;
 

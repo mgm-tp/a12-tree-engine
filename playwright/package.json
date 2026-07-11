@@ -1,8 +1,8 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-playwright",
-	"version": "10.3.0",
+	"version": "11.0.0",
 	"private": true,
-	"license": "(EUPL-1.2 OR LicenseRef-commercial)",
+	"type": "module",
 	"scripts": {
 		"prepare": "playwright install chromium",
 		"test:e2e": "playwright test --project a12-team --project categories --project modelEditor-normal --project modelEditor-pagination --config=./playwright-parallel.config.ts",
@@ -12,7 +12,6 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.56.1",
-		"@types/node": "^24.9.1",
-		"typescript": "catalog:libs"
+		"@types/node": "^24.9.1"
 	}
 }

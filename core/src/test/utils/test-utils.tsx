@@ -36,13 +36,11 @@ import * as Enzyme from "enzyme";
 import { ThemeProvider } from "styled-components";
 import { DndProvider } from "react-dnd";
 
-import { defaultTheme } from "@com.mgmtp.a12.widgets/widgets-core/lib/theme/default/default-theme.js";
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { defaultTheme, DragAndDropUtils, type Container } from "@com.mgmtp.a12.widgets/widgets-core";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { DefaultLocalizerContextProvider } from "@com.mgmtp.a12.utils/utils-localization-react";
-import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/drag-and-drop-utils.js";
-import { type Container } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/index.js";
 
-import { type TreeEngineState } from "../../core/store/index.js";
+import type { TreeEngineState } from "../../core/store/index.js";
 import {
 	TreeEngineContextProvider,
 	type TreeEngineRowContext,

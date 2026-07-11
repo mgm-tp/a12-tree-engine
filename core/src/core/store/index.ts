@@ -30,29 +30,22 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-export {
-	TreeEngineState,
-	Identifier,
-	type DataState,
-	type UiState,
-	type ModelsState,
-	type Models
-} from "./internal/store.js";
-export { Events, Commands } from "./internal/actions.js";
+export { TreeEngineState, Identifier, type DataState, type UiState, type ModelsState, type Models } from "./store.js";
+export { Events, Commands } from "./actions.js";
 
-export * from "./internal/utils.js";
+export * from "./utils.js";
 
 export {
 	dataStateReducer,
 	uiStateReducer,
 	buildInitialDataState,
 	buildInitialUiState
-} from "./internal/reducer/reducer-factory.js";
-export { createEngineMiddlewares } from "./internal/middleware/middleware-factory.js";
+} from "./reducer/reducer-factory.js";
+export { createEngineMiddlewares } from "./middleware/middleware-factory.js";
 
-export { CellSelector } from "./internal/selectors/cell.js";
-export { DataSelector } from "./internal/selectors/data.js";
-export { UIStateSelector } from "./internal/selectors/ui-state.js";
-export { ModelSelector } from "./internal/selectors/models.js";
-export { type RowState, RowStateSelector } from "./internal/selectors/row-state.js";
-export { type Selector } from "./internal/selectors/selector.js";
+export { CellSelector } from "./selectors/cell.js";
+export { DataSelector } from "./selectors/data.js";
+export { UIStateSelector } from "./selectors/ui-state.js";
+export { ModelSelector } from "./selectors/models.js";
+export { type RowState, RowStateSelector } from "./selectors/row-state.js";
+export { type Selector } from "./selectors/selector.js";

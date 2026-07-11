@@ -9,6 +9,7 @@ module.exports = {
 			 */
 			for (const key in lockfile.packages) {
 				const tarball = lockfile.packages[key].resolution?.tarball;
+
 				if (tarball && !tarball.startsWith("file:")) {
 					delete lockfile.packages[key].resolution.tarball;
 				}

@@ -5,89 +5,86 @@
 ```ts
 
 import { A12ApplicationConfig } from '@com.mgmtp.a12.client/client-core';
-import { Action } from 'typescript-fsa';
-import { ActionContentboxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/index.js';
-import { ActionCreator } from 'typescript-fsa';
-import { ActionCreatorFactory } from 'typescript-fsa';
+import { Action } from '@com.mgmtp.a12.client/typescript-fsa-redux-5-compat';
+import { ActionContentboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ActionCreator } from '@com.mgmtp.a12.client/typescript-fsa-redux-5-compat';
+import { ActionCreatorFactory } from '@com.mgmtp.a12.client/typescript-fsa-redux-5-compat';
 import { Activity } from '@com.mgmtp.a12.client/client-core';
 import { ActivityActions } from '@com.mgmtp.a12.client/client-core';
-import { ActivityReducers } from '@com.mgmtp.a12.client/client-core';
-import { Annotation } from '@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js';
-import { AnyAction } from 'typescript-fsa';
+import type { ActivityReducers } from '@com.mgmtp.a12.client/client-core';
+import type { Annotation } from '@com.mgmtp.a12.base/base-model-api';
 import { ApplicationWithConfiguredFeature } from '@com.mgmtp.a12.client/client-core';
-import { AsyncActionCreators } from 'typescript-fsa';
-import { Attachment } from '@com.mgmtp.a12.dataservices/dataservices-access';
-import type { Attachment as Attachment_2 } from '@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js';
-import { BaseTreeTableColumnType } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js';
-import { BaseTreeTableNode } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js';
-import { BulletListProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/bullet-list/index.js';
-import { ButtonGroupContainerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/layout/button-group-container/index.js';
-import { ButtonGroupProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/button-group/index.js';
-import { ButtonProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/button/index.js';
-import { CellStyleGetter } from '@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.api.js';
-import { CheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/index.js';
-import { Column } from '@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js';
-import { ColumnResizingOptions } from '@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.api.js';
-import { Container } from '@com.mgmtp.a12.widgets/widgets-core/lib/common/index.js';
-import { ContentBoxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/contentbox/index.js';
-import type { CounterProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/counter/main/counter.api.js';
-import { CssEllipsisProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/css-ellipsis/index.js';
+import { AsyncActionCreators } from '@com.mgmtp.a12.client/typescript-fsa-redux-5-compat';
+import type { Attachment } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import type { BaseTreeTableColumnType } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { BaseTreeTableNode } from '@com.mgmtp.a12.widgets/widgets-core';
+import { BulletListProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ButtonGroupContainerProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ButtonGroupProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ButtonProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { CellStyleGetter } from '@com.mgmtp.a12.widgets/widgets-core';
+import { CheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { Column } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ColumnResizingOptions } from '@com.mgmtp.a12.widgets/widgets-core';
+import { Container } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ContentBoxProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { CounterProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { CssEllipsisProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { DataProvider } from '@com.mgmtp.a12.client/client-core';
-import { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 import { DocumentJsonRpc2Request } from '@com.mgmtp.a12.dataservices/dataservices-access';
-import { DocumentModel } from '@com.mgmtp.a12.kernel/kernel-md-facade';
-import { DragAndDropUtils } from '@com.mgmtp.a12.widgets/widgets-core/lib/common/main/drag-and-drop-utils.js';
+import type { DocumentModel } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import { DragAndDropUtils } from '@com.mgmtp.a12.widgets/widgets-core';
 import { EntityCharacteristics } from '@com.mgmtp.a12.dataservices/dataservices-access';
-import { FieldInstanceValue } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import { FlattenTreeTableNode } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js';
-import { GroupInstance } from '@com.mgmtp.a12.kernel/kernel-md-facade';
-import { GroupInstance as GroupInstance_2 } from '@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js';
-import { Header } from '@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js';
-import { HiddenTextProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/common/main/hidden-text/hidden-text.api.js';
-import { IconProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/icon/index.js';
-import { IconTheme } from '@com.mgmtp.a12.widgets/widgets-core/lib/icon/index.js';
-import { IndeterminateCheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/input/checkbox/index.js';
+import type { FieldInstanceValue } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { FlattenTreeTableNode } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { GroupInstance } from '@com.mgmtp.a12.kernel/kernel-md-facade';
+import type { Header } from '@com.mgmtp.a12.base/base-model-api';
+import { HiddenTextProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { IconProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { IconTheme } from '@com.mgmtp.a12.widgets/widgets-core';
+import { IndeterminateCheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { JsonRpc2Response } from '@com.mgmtp.a12.dataservices/dataservices-access';
-import { LinkProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/link/index.js';
-import { ListItemProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/index.js';
-import { ListProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/index.js';
-import { ListSubHeaderProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/list/main/list.api.js';
-import { LoadThumbnailUrlsJsonRpc2 } from '@com.mgmtp.a12.dataservices/dataservices-access/lib/Attachment/attachment.js';
+import { LinkProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ListItemProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ListProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ListSubHeaderProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { LoadThumbnailUrlsJsonRpc2 } from '@com.mgmtp.a12.dataservices/dataservices-access';
 import { Localizable } from '@com.mgmtp.a12.utils/utils-localization';
 import { LocalizableArgs } from '@com.mgmtp.a12.utils/utils-localization';
 import { LocalizedModelText } from '@com.mgmtp.a12.utils/utils-localization';
-import { MessageProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/message/index.js';
-import { Middleware } from 'redux';
-import { ModalNotificationProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/modal-notification/index.js';
-import { ModalOverlayProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/modal-overlay/index.js';
-import { ModelGraph } from '@com.mgmtp.a12.dataservices/dataservices-access';
-import { ModelPath } from '@com.mgmtp.a12.base/base-model-api/lib/main/model/index.js';
-import { ModelReference } from '@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js';
-import { Module } from '@com.mgmtp.a12.client/client-core';
-import { PopUpMenuProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/pop-up-menu/index.js';
-import { ProgressIndicatorProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/progress-indicator/index.js';
+import { MessageProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { Middleware } from 'redux';
+import { ModalNotificationProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ModalOverlayProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { ModelGraph } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import type { ModelPath } from '@com.mgmtp.a12.base/base-model-api';
+import type { ModelReference } from '@com.mgmtp.a12.base/base-model-api';
+import type { Module } from '@com.mgmtp.a12.client/client-core';
+import { PopUpMenuProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ProgressIndicatorProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { QueryJsonRpc2Request } from '@com.mgmtp.a12.dataservices/dataservices-access';
 import * as React_2 from 'react';
-import { Relationship } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import type { Relationship } from '@com.mgmtp.a12.dataservices/dataservices-access';
 import { RelationshipJsonRpc2request } from '@com.mgmtp.a12.dataservices/dataservices-access';
-import { RelationshipModel } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import type { RelationshipModel } from '@com.mgmtp.a12.dataservices/dataservices-access';
 import { RequireFeatures } from '@com.mgmtp.a12.client/client-core';
-import { ResponsiveImageContainerProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/responsive-image-container/index.js';
+import { ResponsiveImageContainerProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { SagaGenerator } from 'typed-redux-saga';
 import { Selector as Selector_2 } from '@com.mgmtp.a12.client/client-core';
-import { Styleable } from '@com.mgmtp.a12.widgets/widgets-core/lib/common/main/base-props.js';
-import { TableRenderPropsType } from '@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table-renderer.api.js';
-import { TextOutputProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/text-output/index.js';
-import { TooltipProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tooltip/index.js';
-import { TreeNodeProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree/index.js';
-import { TreeTableComponentRenderers } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js';
-import { TreeTableDragDropOptions } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js';
-import { TreeTableNodeDropPosition } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js';
-import { TreeTableProps } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js';
-import { TreeTableRenderPropsType } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js';
-import { TreeTableRenderPropsType as TreeTableRenderPropsType_2 } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js';
-import { TreeTableRowStyles } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js';
-import { TreeTableRowStyling } from '@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js';
+import { Styleable } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TableRenderPropsType } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TextOutputProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TreeNodeProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TreeTableComponentRenderers } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TreeTableDragDropOptions } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TreeTableNodeDropPosition } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TreeTableProps } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TreeTableRenderPropsType } from '@com.mgmtp.a12.widgets/widgets-core';
+import type { TreeTableRowStyles } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TreeTableRowStyling } from '@com.mgmtp.a12.widgets/widgets-core';
+import { UnknownAction } from 'redux';
 import { View } from '@com.mgmtp.a12.client/client-core';
 
 // @public (undocumented)
@@ -108,6 +105,7 @@ export interface AddLinkSetting {
 export type ApplicationWithTreeEngineConfig = RequireFeatures<A12ApplicationConfig, {
     treeEngine?: never;
     modelLoader?: never;
+    relationshipEngine: true;
 }>;
 
 // @public (undocumented)
@@ -164,7 +162,7 @@ export namespace BodyCellUIValue {
         // (undocumented)
         readonly element: DocumentModel.Field | DocumentModel.Group;
         // (undocumented)
-        readonly value: GroupInstance_2[] | GroupInstance_2 | FieldInstanceValue;
+        readonly value: GroupInstance[] | GroupInstance | FieldInstanceValue;
     }
 }
 
@@ -438,6 +436,8 @@ export function createDefaultSagasMap(setting: TreeEngineSaga.Setting): {
     watchRootNodeCreation: (activityId: string) => SagaGenerator<void>;
     watchLoadMoreNodesSaga: (activityId: string) => SagaGenerator<void>;
     watchLoadAllNodesSaga: (activityId: string) => SagaGenerator<void>;
+    watchNodeOpen: (activityId: string) => SagaGenerator<void>;
+    watchToggleExpansion: (activityId: string) => SagaGenerator<void>;
 };
 
 // @public (undocumented)
@@ -740,6 +740,8 @@ export namespace DataOperation {
                 // (undocumented)
                 entries: Entry[];
                 // (undocumented)
+                fullSize?: number;
+                // (undocumented)
                 links: Link[];
             }
             // (undocumented)
@@ -779,7 +781,7 @@ export namespace DataOperation {
 // @public
 export namespace DataSelector {
     // (undocumented)
-    export function childNodes({ nodePath, nodeIdentifier }: RelativeNodeParams): Selector<RelativeNodeReturnedType[], DataState>;
+    export function childNodes(input: RelativeNodeParams): Selector<RelativeNodeReturnedType[], DataState>;
     // (undocumented)
     export function data(): Selector<TreeEngineState.Data, DataState>;
     // (undocumented)
@@ -840,7 +842,7 @@ export interface DataState {
 }
 
 // @public (undocumented)
-export function dataStateReducer(state: DataState | undefined, action: AnyAction): DataState;
+export function dataStateReducer(state: DataState | undefined, action: UnknownAction): DataState;
 
 // @public (undocumented)
 export const DefaultComponentMap: ComponentMap;
@@ -910,7 +912,7 @@ export interface DocumentProcessors {
 }
 
 // @public (undocumented)
-export type DragObject = TreeTableRenderPropsType_2.DragObject<FlattenNodeRow>;
+export type DragObject = TreeTableRenderPropsType.DragObject<FlattenNodeRow>;
 
 // @public @deprecated (undocumented)
 export namespace DragSource {
@@ -919,7 +921,7 @@ export namespace DragSource {
 }
 
 // @public (undocumented)
-export type DropResult = TreeTableRenderPropsType_2.DropResult<FlattenNodeRow>;
+export type DropResult = TreeTableRenderPropsType.DropResult<FlattenNodeRow>;
 
 // @public (undocumented)
 type ErrorConstructor_2<Code extends TreeEngineErrorCode, Params extends unknown[]> = (...params: Params) => TreeEngineError<Code>;
@@ -1134,7 +1136,7 @@ export namespace Events {
             // (undocumented)
             export function isAssignableFrom(o: object): o is InsertSiblingNode;
         }
-            {};
+        export {};
     }
     const // (undocumented)
     onMakeRootNodeRequest: AsyncActionCreators<MakeRootRequestPayload.Params, MakeRootRequestPayload.Result, {}>;
@@ -1476,7 +1478,7 @@ export namespace HeterogeneousInsertRootNodeDialog {
 export const HeterogeneousInsertRootNodeDialog: React_2.FC<HeterogeneousInsertRootNodeDialog.Props>;
 
 // @public (undocumented)
-export type HoveredObject = TreeTableRenderPropsType_2.HoveredObject<FlattenNodeRow>;
+export type HoveredObject = TreeTableRenderPropsType.HoveredObject<FlattenNodeRow>;
 
 // @public (undocumented)
 export interface Identifier {
@@ -1493,7 +1495,7 @@ export namespace Identifier {
     // (undocumented)
     export function areListEqual(identifiers1: Identifier[], identifiers2: Identifier[]): boolean;
     // (undocumented)
-    export function from(instance: string | Relationship.LinkEntitySpecResponse): Identifier;
+    export function from(instance: string): Identifier;
 }
 
 // @public (undocumented)
@@ -1727,7 +1729,7 @@ export namespace KeyboardShortcut {
         // (undocumented)
         NODE_INSERT_ACTION = "nodeInsertAction"
     }
-        {};
+    export {};
 }
 
 // @public (undocumented)
@@ -1735,17 +1737,17 @@ export namespace LinkDescriptorUtils {
     // (undocumented)
     export function getLinkEntitySpecByReversedRole(linkDescriptor: Relationship.LinkDescriptorResponse, role: string): Relationship.LinkEntitySpecResponse | undefined;
     // (undocumented)
-    export function getLinkEntitySpecByRole(linkDescriptor: Relationship.LinkDescriptorResponse, role: string): Relationship.LinkEntitySpecResponse | undefined;
+    export function getLinkEntitySpecByRole(linkDescriptor: Relationship.LinkDescriptor, role: string): Relationship.LinkEntitySpec | undefined;
     // (undocumented)
     export function getNodeIdentifierByReversedRole(linkDescriptor: Relationship.LinkDescriptorResponse, role: string): Identifier | undefined;
     // (undocumented)
-    export function getNodeIdentifierByRole(linkDescriptor: Relationship.LinkDescriptorResponse, role: string): Identifier | undefined;
+    export function getNodeIdentifierByRole(linkDescriptor: Relationship.LinkDescriptor, role: string): Identifier | undefined;
     // (undocumented)
-    export function getNodeIdentifierFromOtherSide(linkDescriptor: Relationship.LinkDescriptorResponse, nodeIdentifier: Identifier): Identifier | undefined;
+    export function getNodeIdentifierFromOtherSide(linkDescriptor: Relationship.LinkDescriptor, nodeIdentifier: Identifier): Identifier | undefined;
     // (undocumented)
-    export function getNodeIdentifierFromRootNode(linkDescriptor: Relationship.LinkDescriptorResponse, rootIdentifier: Identifier): Identifier;
+    export function getNodeIdentifierFromRootNode(linkDescriptor: Relationship.LinkDescriptor, rootIdentifier: Identifier): Identifier;
     // (undocumented)
-    export function getNodeIdentifiers(linkDescriptor: Relationship.LinkDescriptorResponse): Identifier[];
+    export function getNodeIdentifiers(linkDescriptor: Relationship.LinkDescriptor): Identifier[];
 }
 
 // @public (undocumented)
@@ -1755,7 +1757,7 @@ export namespace LocalizableFactory {
     // (undocumented)
     export function createConfirmValueLocalizables(documentModelName: string, path: ModelPath, value: true | null): Localizable[];
     // (undocumented)
-    export function createEnumerationValueLocalizables(documentModelName: string, path: ModelPath, { value, label }: DocumentModel.EnumValue): Localizable[];
+    export function createEnumerationValueLocalizables(documentModelName: string, path: ModelPath, input: DocumentModel.EnumValue): Localizable[];
     // (undocumented)
     export function createResourceLocalizables(resourceKey: string, args?: LocalizableArgs): Localizable[];
     // (undocumented)
@@ -1810,7 +1812,7 @@ export namespace ModelSelector {
     // (undocumented)
     export function nodeModel(identifierType: string): Selector<RuntimeTreeModel.TreeNode | undefined, ModelsState>;
     // (undocumented)
-    export function relationshipBetweenDocumentModels([model1, model2]: [string, string], candidateRelationshipModels?: string[]): Selector<RelationshipModel | undefined, ModelsState>;
+    export function relationshipBetweenDocumentModels(input: [string, string], candidateRelationshipModels?: string[]): Selector<RelationshipModel | undefined, ModelsState>;
     // (undocumented)
     export function relationshipModelByName(name: string): Selector<RelationshipModel | undefined, ModelsState>;
     // (undocumented)
@@ -2107,6 +2109,10 @@ export const RESOURCE_KEYS: {
                 title: string;
                 message: string;
             };
+            pageSizeLimitExceeded: {
+                title: string;
+                message: string;
+            };
         };
         dialog: {
             delete: {
@@ -2337,7 +2343,7 @@ export interface Selector<ReturnType, State = object> {
 
 // @public
 export interface SelectorMap {
-    readonly attachmentThumbnail: (attachment: Attachment_2) => Selector<string | undefined, TreeEngineContext.Type>;
+    readonly attachmentThumbnail: (attachment: Attachment) => Selector<string | undefined, TreeEngineContext.Type>;
 }
 
 // @public (undocumented)
@@ -2377,7 +2383,7 @@ export namespace TreeDataUtils {
 // @public (undocumented)
 export namespace TreeEngineActions {
     // (undocumented)
-    export interface CommandPayload<T = AnyAction> {
+    export interface CommandPayload<T = UnknownAction> {
         // (undocumented)
         activityId: string;
         // (undocumented)
@@ -2420,7 +2426,7 @@ export namespace TreeEngineActions {
         cancelled: ActionCreator<EditLinkDocumentPayload.Params>;
     };
     // (undocumented)
-    export interface EventPayload<T = AnyAction> {
+    export interface EventPayload<T = UnknownAction> {
         // (undocumented)
         activityId: string;
         // (undocumented)
@@ -2533,7 +2539,7 @@ export namespace TreeEngineContext {
         // (undocumented)
         readonly uiIdPrefix?: string;
     }
-        {};
+    export {};
 }
 
 // @public (undocumented)
@@ -2645,7 +2651,7 @@ export namespace TreeEngineDataHolder {
             // (undocumented)
             export function isAssignableFrom(descriptor: Activity.DataHolderDescriptor): descriptor is RootNodes;
         }
-            {};
+        export {};
     }
     // (undocumented)
     export function isAssignableFrom(dataHolder: Activity.DataHolder): dataHolder is TreeEngineDataHolder;
@@ -2687,13 +2693,13 @@ export class TreeEngineError<ErrorCode extends string = TreeEngineErrorCode> ext
         errorCode: ErrorCode;
         details?: {
             subError: unknown;
-            causeAction: AnyAction;
+            causeAction: UnknownAction;
         };
     });
     // (undocumented)
     details?: {
         subError: unknown;
-        causeAction: AnyAction;
+        causeAction: UnknownAction;
     };
     // (undocumented)
     errorCode: ErrorCode;
@@ -3226,7 +3232,7 @@ export namespace TreeEngineOperation {
             readonly nodes: Identifier[];
         }
     }
-        {};
+    export {};
 }
 
 // @public (undocumented)
@@ -3484,7 +3490,7 @@ export namespace TreeEngineState {
                 // (undocumented)
                 export function isAssignableFrom(o: unknown): o is NodeEventButton;
             }
-                {};
+            export {};
         }
         // (undocumented)
         export type InsertChildNode = InsertChildNode.State;
@@ -3806,7 +3812,7 @@ export namespace TreeModel {
         // (undocumented)
         readonly confirmation?: ConfirmationText;
         // (undocumented)
-        readonly event: string;
+        readonly event: EngineEvent;
         // (undocumented)
         readonly id: string;
     }
@@ -3910,13 +3916,6 @@ export namespace TreeModel {
         readonly subHeaderBox: TreeModel.SubHeaderType;
     }
     // (undocumented)
-    export interface DefaultRowAction {
-        // (undocumented)
-        readonly custom: true;
-        // (undocumented)
-        readonly event: string;
-    }
-    // (undocumented)
     export interface DndConfiguration {
         readonly onDrag: {
             readonly expandHoveredNode: boolean;
@@ -3932,6 +3931,20 @@ export namespace TreeModel {
         EXPAND_ALL_POPUP = "expand_all_popup",
         // (undocumented)
         MULTI_SELECTION = "multi_selection"
+    }
+    // (undocumented)
+    export type EngineEvent = (typeof BUILT_IN_EVENT_NAMES)[number] | (string & {});
+    // (undocumented)
+    export interface EventRowActivation {
+        // (undocumented)
+        readonly event: EngineEvent;
+        // (undocumented)
+        readonly type: "event";
+    }
+    // (undocumented)
+    export namespace EventRowActivation {
+        // (undocumented)
+        export function isAssignableFrom(activation: object): activation is EventRowActivation;
     }
     // (undocumented)
     export interface ExpandAllPopUpElement extends BaseElement {
@@ -4020,9 +4033,9 @@ export namespace TreeModel {
     // (undocumented)
     export interface FooterType {
         // (undocumented)
-        readonly majorElements: ReadonlyArray<ButtonElement>;
+        readonly leftSlot: ReadonlyArray<ButtonElement>;
         // (undocumented)
-        readonly minorElements: ReadonlyArray<ButtonElement>;
+        readonly rightSlot: ReadonlyArray<ButtonElement>;
     }
     // (undocumented)
     export interface Header extends Header {
@@ -4057,12 +4070,28 @@ export namespace TreeModel {
         BELOW = "below"
     }
     // (undocumented)
+    export interface InsertRowActivation {
+        // (undocumented)
+        readonly documentModelRef?: string;
+        // (undocumented)
+        readonly position?: InsertPosition;
+        // (undocumented)
+        readonly type: "insert";
+    }
+    // (undocumented)
+    export namespace InsertRowActivation {
+        // (undocumented)
+        export function isAssignableFrom(activation: object): activation is InsertRowActivation;
+    }
+    // (undocumented)
     export interface LocaleText {
         // (undocumented)
         readonly locale: string;
         // (undocumented)
         readonly value?: string;
     }
+    const // (undocumented)
+    BUILT_IN_EVENT_NAMES: readonly ["event_add_link", "event_delete_node", "event_delete_link", "event_expand_sub_tree", "event_collapse_sub_tree", "event_copy_node", "event_copy_node_and_children", "event_cut_node", "event_paste", "event_paste_above", "event_paste_below", "event_open_node", "event_toggle_expansion"];
     // (undocumented)
     export type ModelReference = ModelReference.DocumentModelForTree | ModelReference.RelationshipModelForTree | ModelReference.DocumentModelForRelationship;
     // (undocumented)
@@ -4151,6 +4180,16 @@ export namespace TreeModel {
         export function isAssignableFrom(element: unknown): element is MultiSelectionElement;
     }
     // (undocumented)
+    export interface NonInteractiveRowActivation {
+        // (undocumented)
+        readonly type: "non_interactive";
+    }
+    // (undocumented)
+    export namespace NonInteractiveRowActivation {
+        // (undocumented)
+        export function isAssignableFrom(activation: object): activation is NonInteractiveRowActivation;
+    }
+    // (undocumented)
     export enum PinDirection {
         // (undocumented)
         LEFT = "left",
@@ -4158,13 +4197,15 @@ export namespace TreeModel {
         RIGHT = "right"
     }
     // (undocumented)
+    export type RowActivation = EventRowActivation | InsertRowActivation | NonInteractiveRowActivation;
+    // (undocumented)
     export type Styles = ReadonlyArray<string>;
     // (undocumented)
     export interface SubHeaderType {
         // (undocumented)
-        readonly majorElements: ReadonlyArray<Element>;
+        readonly leftSlot: ReadonlyArray<Element>;
         // (undocumented)
-        readonly minorElements: ReadonlyArray<Element>;
+        readonly rightSlot: ReadonlyArray<Element>;
     }
     // (undocumented)
     export interface TreeNode {
@@ -4173,11 +4214,11 @@ export namespace TreeModel {
         readonly columns: TreeNodeColumn[];
         readonly configuration: TreeNodeConfiguration;
         readonly contextMenu?: TreeNodeContextMenu;
-        readonly defaultRowAction?: DefaultRowAction;
         readonly documentModelRef: string;
         readonly icon?: Icon;
         // (undocumented)
         readonly id: string;
+        readonly rowActivation?: RowActivation;
         readonly rowTitle?: LocalizedModelText;
         readonly styles?: Styles;
     }
@@ -4227,7 +4268,7 @@ export namespace TreeModel {
             readonly columns?: true;
             readonly actions?: true;
             readonly contextMenu?: true;
-            readonly defaultRowAction?: true;
+            readonly rowActivation?: true;
             readonly rowTitle?: true;
             readonly childRelationshipConfigurations?: true;
         };
@@ -4411,7 +4452,7 @@ export interface UiState {
 }
 
 // @public (undocumented)
-export function uiStateReducer(state: UiState | undefined, action: AnyAction): UiState;
+export function uiStateReducer(state: UiState | undefined, action: UnknownAction): UiState;
 
 // @public
 export namespace UIStateSelector {
@@ -4474,7 +4515,7 @@ export namespace UIStateSelector {
     export type NodeStateInput = SelectedNodesInput & ExpandedNodesInput & BusyNodesInput & MatchedNodesInput & MultiSelectionNodesInput;
     // (undocumented)
     export function orderedTopLevelMultiSelectedNodes(): Selector<TopLevelNode[], UiState & DataState>;
-    const nodeState: ({ id, type }: Identifier, nodePath: TreeEngineState.NodePath) => Selector<NodeState, NodeStateInput>;
+    const nodeState: (input: Identifier, nodePath: TreeEngineState.NodePath) => Selector<NodeState, NodeStateInput>;
     // (undocumented)
     export function overallMultiSelection(): Selector<TreeEngineState.MultiSelectionState, TreeEngineState>;
     // (undocumented)
@@ -4514,16 +4555,16 @@ export namespace UIStateSelector {
     }
     // (undocumented)
     export function totalMultiSelectionNodeCount(): Selector<number, MultiSelectionNodesInput>;
-        {};
+    export {};
 }
 
 // @public (undocumented)
 export function useInitialViewContextMenuModel(): {
     groups: {
-        title: undefined;
+        name: string;
         type: "add";
         actions: TreeModel.TreeNodeInsertActionContextMenu[];
-        name: string;
+        title: undefined;
     }[];
 } | undefined;
 

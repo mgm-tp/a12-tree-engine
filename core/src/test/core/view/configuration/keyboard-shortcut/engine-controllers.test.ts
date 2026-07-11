@@ -45,13 +45,13 @@ import {
 	useEngineBuiltinActionController,
 	useEngineEventActionController,
 	useEngineInsertActionController
-} from "../../../../../core/view/internal/configuration/keyboard-shortcut/engine-controllers.js";
+} from "../../../../../core/view/configuration/keyboard-shortcut/engine-controllers.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 import { TreeEngineState, UIStateSelector } from "../../../../../core/store/index.js";
 import { createEngineState } from "../../../../utils/model-utils.js";
 import { TreeModel } from "../../../../../core/models/index.js";
-import { RowActionHooks } from "../../../../../core/view/internal/components/tree-engine/sub-components/hooks/row-action-hooks.js";
-import { MultiSelectionButtonHooks } from "../../../../../core/view/internal/components/content-box/sub-components/multi-selection/multi-selection-button.js";
+import { RowActionHooks } from "../../../../../core/view/components/tree-engine/sub-components/hooks/row-action-hooks.js";
+import { MultiSelectionButtonHooks } from "../../../../../core/view/components/content-box/sub-components/multi-selection/multi-selection-button.js";
 
 function assertFunction(object: unknown): object is () => void {
 	return typeof object === "function";
@@ -276,12 +276,12 @@ describe("@com.mgmtp.a12.tree-engine.core.view.configuration.keyboard-shortcut.e
 		const customEngineState = createEngineState
 			.from(basicEngineState)
 			.withSubHeaderBox({
-				majorElements: [{ id: "0", event: "subheader-button", type: TreeModel.ElementType.BUTTON }],
-				minorElements: []
+				rightSlot: [{ id: "0", event: "subheader-button", type: TreeModel.ElementType.BUTTON }],
+				leftSlot: []
 			})
 			.withFooterBox({
-				minorElements: [{ id: "1", event: "footer-button-1", type: TreeModel.ElementType.BUTTON }],
-				majorElements: [{ id: "2", event: "footer-button-2", type: TreeModel.ElementType.BUTTON }]
+				leftSlot: [{ id: "1", event: "footer-button-1", type: TreeModel.ElementType.BUTTON }],
+				rightSlot: [{ id: "2", event: "footer-button-2", type: TreeModel.ElementType.BUTTON }]
 			})
 			.withConfigurations({
 				...basicEngineState.models.uiModel.content.configuration,

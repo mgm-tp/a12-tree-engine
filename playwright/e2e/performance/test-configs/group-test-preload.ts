@@ -33,10 +33,10 @@
 import { type Page, expect } from "@playwright/test";
 import { PlaywrightCommands } from "playwright-commands";
 
-import { generateNodes } from "../../../../services-utils/src";
+import { generateNodes } from "../../../../services-utils/src/index.js";
 
-import { ExecutionType, type GroupTestConfig } from "../types";
-import { PlaywrightUtils } from "../utils";
+import { ExecutionType, type GroupTestConfig } from "../types.js";
+import { PlaywrightUtils } from "../utils.js";
 
 export const groupTestPreload: GroupTestConfig = {
 	id: "group-test-preload",

@@ -30,10 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { type RuntimeTreeModel, type TreeModel } from "../../../../../../../core/models/index.js";
+import type { RuntimeTreeModel, TreeModel } from "../../../../../../../core/models/index.js";
 import {
 	CellSelector,
 	type RowState,

@@ -36,12 +36,12 @@ export default defineConfig({
 	testDir: "./e2e",
 	fullyParallel: false,
 	forbidOnly: !!process.env.CI,
-	retries: process.env.CI ? 1 : 0,
+	retries: process.env.CI ? 2 : 0,
 	timeout: 60000,
 	expect: {
 		timeout: 10000
 	},
-	workers: process.env.CI ? 3 : 4,
+	workers: process.env.CI ? 2 : 4,
 	reporter: process.env.CI
 		? [
 				["html", { outputFolder: "playwright-report", open: "never" }],

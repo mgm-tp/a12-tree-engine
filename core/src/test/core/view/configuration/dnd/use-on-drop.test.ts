@@ -32,7 +32,7 @@
 
 import { vi } from "vitest";
 
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js";
+import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { testHook } from "../../../../utils/test-utils.js";
@@ -45,10 +45,7 @@ import {
 	type FlattenNodeRow
 } from "../../../../../core/view/index.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import {
-	useBulkDndHandler,
-	useSingleDndHandler
-} from "../../../../../core/view/internal/configuration/dnd/use-on-drop.js";
+import { useBulkDndHandler, useSingleDndHandler } from "../../../../../core/view/configuration/dnd/use-on-drop.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.use-on-drop", () => {
 	const basicEngineState = defaultEngineState;

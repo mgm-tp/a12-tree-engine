@@ -2,7 +2,7 @@
 	"header": {
 		"id": "ScreenScreenElement",
 		"modelType": "relationship",
-		"modelVersion": "3.0.0",
+		"modelVersion": "4.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -12,12 +12,7 @@
 			}
 		],
 		"labels": [],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"purpose": "Document model",
@@ -35,10 +30,7 @@
 	},
 	"content": {
 		"duplicatesAllowed": false,
-		"associationType": "SHARED",
-		"storage": "EXTERNAL",
 		"linkDocumentModel": null,
-		"embeddedGroupPath": null,
 		"labels": [
 			{
 				"locale": "en",
@@ -54,18 +46,6 @@
 				"role": "Screen",
 				"documentModel": "DomainScreen",
 				"ordered": true,
-				"navigable": true,
-				"linkConstraints": {
-					"multiplicity": {
-						"lowerLimit": 0,
-						"unbounded": false,
-						"upperLimit": 1
-					}
-				},
-				"candidateConstraints": {
-					"population": null,
-					"populationParameters": []
-				},
 				"labels": [
 					{
 						"locale": "en",
@@ -75,24 +55,18 @@
 						"locale": "de",
 						"text": null
 					}
-				]
+				],
+				"linkConstraints": {
+					"multiplicity": {
+						"unbounded": false,
+						"upperLimit": 1
+					}
+				}
 			},
 			{
 				"role": "ScreenElement",
 				"documentModel": "DomainScreenElement",
 				"ordered": false,
-				"navigable": true,
-				"linkConstraints": {
-					"multiplicity": {
-						"lowerLimit": 0,
-						"unbounded": true,
-						"upperLimit": null
-					}
-				},
-				"candidateConstraints": {
-					"population": null,
-					"populationParameters": []
-				},
 				"labels": [
 					{
 						"locale": "en",
@@ -102,7 +76,13 @@
 						"locale": "de",
 						"text": null
 					}
-				]
+				],
+				"linkConstraints": {
+					"multiplicity": {
+						"unbounded": true,
+						"upperLimit": null
+					}
+				}
 			}
 		]
 	}

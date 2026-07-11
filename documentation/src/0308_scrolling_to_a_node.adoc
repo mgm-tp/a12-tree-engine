@@ -41,7 +41,7 @@ NOTE: The *nodesFromNodePath* can be simply retrieved by using the link:./assets
 
 [source,typescript,title="NodesFromNodePath"]
 --
-import { DataSelector } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/core/store";
+import { DataSelector } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 const { nodePath } = action.payload;
 const nodesFromNodePath = DataSelector.nodesFromNodePath(nodePath)(engineState);

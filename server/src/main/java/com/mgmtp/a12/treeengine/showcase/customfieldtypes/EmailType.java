@@ -31,20 +31,21 @@
  */
 package com.mgmtp.a12.treeengine.showcase.customfieldtypes;
 
-import com.mgmtp.a12.kernel.core.customfieldtype.ICustomFieldType;
+import com.mgmtp.a12.kernel.core.customfieldtype.ICustomFieldValidator;
 import com.mgmtp.a12.kernel.core.customfieldtype.ICustomFieldTypeCheckError;
-import com.mgmtp.a12.kernel.core.customfieldtype.ICustomFieldTypeConversionResult;
 import com.mgmtp.a12.kernel.core.customfieldtype.ICustomFieldTypeValidationParam;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-public class EmailType implements ICustomFieldType {
-    Pattern emailMatcher= Pattern.compile("^\\S+@\\S+$");
+public class EmailType implements ICustomFieldValidator {
+    Pattern emailMatcher = Pattern.compile("^\\S+@\\S+$");
 
-    public Optional<ICustomFieldTypeCheckError> validate(String value, ICustomFieldTypeValidationParam valParam, boolean isDisplayValue, Map<String, Object> map) {
-        if(emailMatcher.matcher(value).matches()) {
+    @Override
+    public Optional<ICustomFieldTypeCheckError> validate(String value, ICustomFieldTypeValidationParam valParam,
+            boolean isDisplayValue) {
+        if (emailMatcher.matcher(value).matches()) {
             return Optional.empty();
         } else {
             return Optional.of(new ICustomFieldTypeCheckError() {
@@ -59,33 +60,5 @@ public class EmailType implements ICustomFieldType {
                 }
             });
         }
-    }
-
-    public ICustomFieldTypeConversionResult convertDisplay2Internal(String displayValue, Map<String, Object> configData) {
-        return new ICustomFieldTypeConversionResult() {
-            @Override
-            public String getConvertedValue() {
-                return displayValue;
-            }
-
-            @Override
-            public Optional<String> getErrorMessage() {
-                return Optional.empty();
-            }
-        };
-    }
-
-    public ICustomFieldTypeConversionResult convertInternal2Display(String internalValue, Map<String, Object> configData) {
-        return new ICustomFieldTypeConversionResult() {
-            @Override
-            public String getConvertedValue() {
-                return internalValue;
-            }
-
-            @Override
-            public Optional<String> getErrorMessage() {
-                return Optional.empty();
-            }
-        };
     }
 }

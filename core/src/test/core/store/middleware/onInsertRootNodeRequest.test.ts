@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { type RuntimeTreeModel, type TreeModel } from "../../../../core/models/index.js";
+import type { RuntimeTreeModel, TreeModel } from "../../../../core/models/index.js";
 import { Commands, Events } from "../../../../core/store/index.js";
-import { onInsertRootNodeRequestMiddleware } from "../../../../core/store/internal/middleware/events/onInsertRootNodeRequest.js";
+import { onInsertRootNodeRequestMiddleware } from "../../../../core/store/middleware/events/onInsertRootNodeRequest.js";
 import { TreeEngineState } from "../../../../core/store/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";

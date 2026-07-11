@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type ICustomFieldTypeFactory } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldTypeFactory.js";
-import { type ICustomFieldType } from "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts/lib/main/js/custom/ICustomFieldType.js";
+import type { ICustomFieldTypeFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { ICustomFieldValidator } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { EmailType } from "./EmailType.js";
 
@@ -46,7 +46,7 @@ export class CustomFieldTypeFactory implements ICustomFieldTypeFactory {
 		return this.supportedTypeNames;
 	}
 
-	createCustomFieldType(customFieldTypeName: string): ICustomFieldType {
+	createCustomFieldType(customFieldTypeName: string): ICustomFieldValidator {
 		if (customFieldTypeName === "Email") {
 			return new EmailType();
 		} else {

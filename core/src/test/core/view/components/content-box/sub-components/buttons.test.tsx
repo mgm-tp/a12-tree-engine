@@ -31,13 +31,10 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 import { vi } from "vitest";
 
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js";
-import { Button as ButtonWidget } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/index.js";
-import { Icon } from "@com.mgmtp.a12.widgets/widgets-core/lib/icon/index.js";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import { TreeTableNodeDropPosition, Button as ButtonWidget, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeModelKeys } from "../../../../../../core/services/localization/index.js";
 import { DataSelector, ModelSelector, TreeEngineState } from "../../../../../../core/store/index.js";
@@ -49,7 +46,7 @@ import {
 	RootNodeRow,
 	KeyboardShortcut
 } from "../../../../../../core/view/index.js";
-import { Button } from "../../../../../../core/view/internal/components/content-box/sub-components/buttons.js";
+import { Button } from "../../../../../../core/view/components/content-box/sub-components/buttons.js";
 import {
 	createContextProps,
 	defaultEngineState,
@@ -57,7 +54,7 @@ import {
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
-import { type TreeModel } from "../../../../../../core/models/index.js";
+import type { TreeModel } from "../../../../../../core/models/index.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.buttons", () => {
 	const basicEngineState = defaultEngineState;

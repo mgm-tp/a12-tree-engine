@@ -1,0 +1,84 @@
+{
+	"header": {
+		"id": "TeamCandidates-overview--TeamTeam",
+		"modelType": "overview",
+		"modelVersion": "39.0.0",
+		"locales": [
+			{
+				"code": "en"
+			},
+			{
+				"code": "de"
+			}
+		],
+		"labels": [
+			{
+				"locale": "en",
+				"text": "Available Items"
+			},
+			{
+				"locale": "de",
+				"text": "Verfügbare Einträge"
+			}
+		],
+		"modelReferences": [
+			{
+				"purpose": "query-model-for-overview",
+				"modelType": "query",
+				"reference": "TeamCandidates-overview--TeamTeam-query"
+			}
+		],
+		"annotations": []
+	},
+	"content": {
+		"columns": [
+			{
+				"id": "column-f43fa",
+				"elementRef": "field_c9ad3",
+				"sortable": false,
+				"width": 1
+			},
+			{
+				"id": "column-49c6d",
+				"elementRef": "field_c2497",
+				"sortable": false,
+				"width": 1
+			}
+		],
+		"rowActionGroup": {
+			"actions": [
+				{
+					"event": "event_add_link",
+					"icon": {
+						"name": "add"
+					}
+				}
+			]
+		},
+		"subHeaderBox": {
+			"rightSlot": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "filter"
+				}
+			]
+		},
+		"footerBox": {},
+		"configuration": {
+			"pagingSize": 10,
+			"showFullTextSearch": true,
+			"enableFilter": true,
+			"filterConfiguration": {
+				"showFilterButton": true,
+				"showFilterBar": true,
+				"filterMode": "all"
+			}
+		},
+		"rowActivation": {
+			"type": "event",
+			"event": "event_add_link"
+		}
+	}
+}

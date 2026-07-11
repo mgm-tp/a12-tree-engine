@@ -34,20 +34,21 @@
 // @ts-nocheck
 
 import * as React from "react";
-import { type DraggableData, type DraggableEvent } from "react-draggable";
-import { type ReactWrapper } from "enzyme";
+import type { DraggableData, DraggableEvent } from "react-draggable";
+import type { ReactWrapper } from "enzyme";
 
 import {
 	DefaultTreeTableComponentRenderers,
 	TreeTable,
-	type TreeTableProps
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
-import { type TableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/index.js";
-import { TableTemplate, type TableTemplateProps } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/index.js";
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { TextOutput } from "@com.mgmtp.a12.widgets/widgets-core/lib/text-output/index.js";
-import { BodyRowTpl } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/main/template/table.body-row.tpl.view.js";
-import { type FlattenTreeTableNode } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.api.js";
+	type TreeTableProps,
+	type TableRenderPropsType,
+	TableTemplate,
+	type TableTemplateProps,
+	TextOutput,
+	BodyRowTpl,
+	type FlattenTreeTableNode
+} from "@com.mgmtp.a12.widgets/widgets-core";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { type RuntimeTreeModel, TreeModel } from "../../../../../core/models/index.js";
 import { type Identifier, TreeEngineState, UIStateSelector } from "../../../../../core/store/index.js";
@@ -67,9 +68,9 @@ import {
 	useRowStyling,
 	RowProgressIndicator
 } from "../../../../../core/view/index.js";
-import * as TreeEngineColumnNamespace from "../../../../../core/view/internal/components/tree-engine/use-tree-engine-columns.js";
-import * as TreeEngineDndNamespace from "../../../../../core/view/internal/configuration/dnd/use-dnd-options.js";
-import { FlattenRowHooks } from "../../../../../core/view/internal/components/tree-engine/use-flatten-rows.js";
+import * as TreeEngineColumnNamespace from "../../../../../core/view/components/tree-engine/use-tree-engine-columns.js";
+import * as TreeEngineDndNamespace from "../../../../../core/view/configuration/dnd/use-dnd-options.js";
+import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
 import { createContextProps, defaultEngineState, deLocale, enLocale } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 import { cartesianProduct, testHook } from "../../../../utils/test-utils.js";

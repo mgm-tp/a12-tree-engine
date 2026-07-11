@@ -30,25 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { DefaultTreeTableComponentRenderers } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
-import { Button } from "@com.mgmtp.a12.widgets/widgets-core/lib/button/main/button.view.js";
+import { DefaultTreeTableComponentRenderers, Button } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import {
 	createContextProps,
 	defaultEngineState,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
-import { type TreeEngineState } from "../../../../../../core/store/index.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
 import { ContextMenu, RootNodeRow, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
-import {
-	Body,
-	InitialViewBody
-} from "../../../../../../core/view/internal/components/tree-engine/sub-components/body.js";
-import { type RuntimeTreeModel } from "../../../../../../core/models/index.js";
-import { en } from "../../../../../../core/services/localization/internal/languages/en.js";
+import { Body, InitialViewBody } from "../../../../../../core/view/components/tree-engine/sub-components/body.js";
+import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
+import { en } from "../../../../../../core/services/localization/languages/en.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body", () => {

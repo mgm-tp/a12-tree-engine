@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Middleware } from "redux";
+import { isAction, type Middleware } from "redux";
 
 import { Activity, ActivityActions } from "@com.mgmtp.a12.client/client-core";
 import { buildInitialUiState } from "@com.mgmtp.a12.treeengine/treeengine-core";
@@ -38,7 +38,7 @@ import { buildInitialUiState } from "@com.mgmtp.a12.treeengine/treeengine-core";
 import { getShowcaseDisabled, getTargetNodePath } from "../../utils.js";
 
 export const extendedPushMiddleware: Middleware = () => (next) => (action) => {
-	if (ActivityActions.push.match(action)) {
+	if (isAction(action) && ActivityActions.push.match(action)) {
 		const disabled = getShowcaseDisabled();
 
 		let uiState = buildInitialUiState();

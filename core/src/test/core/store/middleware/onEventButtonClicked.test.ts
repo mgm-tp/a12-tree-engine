@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type TreeModel } from "../../../../core/models/index.js";
+import type { TreeModel } from "../../../../core/models/index.js";
 import { Events } from "../../../../core/store/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { setupMiddleware } from "../../../utils/store-utils.js";
-import { onEventButtonClickedMiddleware } from "../../../../core/store/internal/middleware/events/onEventButtonClicked.js";
+import { onEventButtonClickedMiddleware } from "../../../../core/store/middleware/events/onEventButtonClicked.js";
 
 import { nonMatchedAction, shouldCallNextMiddlewareAndReturnResultedAction } from "./shared.js";
 

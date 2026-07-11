@@ -31,13 +31,16 @@
  */
 
 import * as TypeMoq from "typemoq";
-import { type AnyAction } from "typescript-fsa";
+import type { UnknownAction } from "redux";
 
-import { type MiddlewareSetup } from "../../../utils/store-utils.js";
+import type { MiddlewareSetup } from "../../../utils/store-utils.js";
 
-export const nonMatchedAction = TypeMoq.Mock.ofType<AnyAction>().object;
+export const nonMatchedAction = TypeMoq.Mock.ofType<UnknownAction>().object;
 
-export function shouldCallNextMiddlewareAndReturnResultedAction(setupTest: () => MiddlewareSetup, action: AnyAction) {
+export function shouldCallNextMiddlewareAndReturnResultedAction(
+	setupTest: () => MiddlewareSetup,
+	action: UnknownAction
+) {
 	it("should call next middleware and return the result", function () {
 		const { invoke, next } = setupTest();
 		next.mockReturnValueOnce(action);

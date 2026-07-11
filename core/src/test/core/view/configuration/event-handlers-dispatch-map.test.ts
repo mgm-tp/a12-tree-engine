@@ -32,7 +32,7 @@
 
 import { vi } from "vitest";
 
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
+import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeModel } from "../../../../core/models/index.js";
 import { Events, type Identifier, type TreeEngineState } from "../../../../core/store/index.js";
@@ -388,16 +388,13 @@ describe("@com.mgmtp.a12.tree-engine.core.view.configuration.event-handlers-disp
 	});
 
 	describe("onRowClicked", () => {
-		describe("when node model has defaultRowAction", () => {
-			it("should dispatch onRowClicked", () => {
+		describe("when rowActivation is event with non-built-in event name", () => {
+			it("should dispatch onRowClicked with the event name", () => {
 				setupTest().onRowClicked({
 					...basicNodeRow.data,
 					nodeModel: {
 						...basicNodeRow.nodeModel,
-						defaultRowAction: {
-							custom: true,
-							event: "test"
-						}
+						rowActivation: { type: "event", event: "test" }
 					}
 				});
 
@@ -412,13 +409,144 @@ describe("@com.mgmtp.a12.tree-engine.core.view.configuration.event-handlers-disp
 			});
 		});
 
-		describe("when node model has no defaultRowAction", () => {
+		describe("when rowActivation is event", () => {
+			it("should dispatch onNodeEventButtonClicked with the event name", () => {
+				setupTest().onRowClicked({
+					...basicNodeRow.data,
+					nodeModel: {
+						...basicNodeRow.nodeModel,
+						rowActivation: { type: "event", event: "event_open_node" }
+					}
+				});
+
+				expect(dispatch).toHaveBeenCalledOnce();
+				expect(dispatch).toHaveBeenCalledWith(
+					Events.onNodeEventButtonClicked({
+						nodeIdentifier: basicNodeIdentifier,
+						nodePath: basicNodePath,
+						button: { type: "event", event: "event_open_node" }
+					})
+				);
+			});
+		});
+
+		describe("when rowActivation is insert with position above", () => {
+			it("should dispatch onInsertSiblingNodeRequest", () => {
+				setupTest().onRowClicked({
+					...basicNodeRow.data,
+					nodeModel: {
+						...basicNodeRow.nodeModel,
+						rowActivation: {
+							type: "insert",
+							position: TreeModel.InsertPosition.ABOVE,
+							documentModelRef: "DM"
+						}
+					}
+				});
+
+				expect(dispatch).toHaveBeenCalledOnce();
+				expect(dispatch).toHaveBeenCalledWith(
+					Events.onInsertSiblingNodeRequest.started({
+						documentModelId: "DM",
+						button: {
+							type: "insert",
+							position: TreeModel.InsertPosition.ABOVE,
+							documentModelRef: "DM"
+						},
+						insertPosition: {
+							target: { nodeIdentifier: basicNodeIdentifier, nodePath: basicNodePath },
+							position: TreeModel.InsertPosition.ABOVE
+						}
+					})
+				);
+			});
+		});
+
+		describe("when rowActivation is insert with position as_child", () => {
+			it("should dispatch onInsertChildNodeRequest", () => {
+				setupTest().onRowClicked({
+					...basicNodeRow.data,
+					nodeModel: {
+						...basicNodeRow.nodeModel,
+						rowActivation: {
+							type: "insert",
+							position: TreeModel.InsertPosition.AS_CHILD,
+							documentModelRef: "DM"
+						}
+					}
+				});
+
+				expect(dispatch).toHaveBeenCalledOnce();
+				expect(dispatch).toHaveBeenCalledWith(
+					Events.onInsertChildNodeRequest.started({
+						documentModelId: "DM",
+						button: {
+							type: "insert",
+							position: TreeModel.InsertPosition.AS_CHILD,
+							documentModelRef: "DM"
+						},
+						insertPosition: {
+							target: { nodeIdentifier: basicNodeIdentifier, nodePath: basicNodePath },
+							position: TreeModel.InsertPosition.AS_CHILD
+						}
+					})
+				);
+			});
+		});
+
+		describe("when rowActivation is insert with position below", () => {
+			it("should dispatch onInsertSiblingNodeRequest", () => {
+				setupTest().onRowClicked({
+					...basicNodeRow.data,
+					nodeModel: {
+						...basicNodeRow.nodeModel,
+						rowActivation: {
+							type: "insert",
+							position: TreeModel.InsertPosition.BELOW,
+							documentModelRef: "DM"
+						}
+					}
+				});
+
+				expect(dispatch).toHaveBeenCalledOnce();
+				expect(dispatch).toHaveBeenCalledWith(
+					Events.onInsertSiblingNodeRequest.started({
+						documentModelId: "DM",
+						button: {
+							type: "insert",
+							position: TreeModel.InsertPosition.BELOW,
+							documentModelRef: "DM"
+						},
+						insertPosition: {
+							target: { nodeIdentifier: basicNodeIdentifier, nodePath: basicNodePath },
+							position: TreeModel.InsertPosition.BELOW
+						}
+					})
+				);
+			});
+		});
+
+		describe("when rowActivation is non_interactive", () => {
+			it("should not dispatch anything", () => {
+				setupTest().onRowClicked({
+					...basicNodeRow.data,
+					nodeModel: {
+						...basicNodeRow.nodeModel,
+						rowActivation: { type: "non_interactive" }
+					}
+				});
+
+				expect(dispatch).not.toHaveBeenCalled();
+			});
+		});
+
+		describe("when rowActivation is absent", () => {
 			it("should dispatch onNodeSelectionChanged", () => {
 				setupTest().onRowClicked({
 					...basicNodeRow.data,
 					nodeModel: {
 						...basicNodeRow.nodeModel,
-						defaultRowAction: undefined
+						rowActivation: undefined
 					}
 				});
 

@@ -30,18 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { type DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade/lib/main/js/api.js";
-import { type Locale } from "@com.mgmtp.a12.utils/utils-localization";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { TextOutput } from "@com.mgmtp.a12.widgets/widgets-core/lib/text-output/main/text-output.view.js";
-import { CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core/lib/css-ellipsis/main/css-ellipsis.view.js";
+import { TextOutput, CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { de } from "../../../../../../../core/services/localization/internal/languages/de.js";
-import { en } from "../../../../../../../core/services/localization/internal/languages/en.js";
-import { type TreeEngineState, type Models } from "../../../../../../../core/store/index.js";
+import { de } from "../../../../../../../core/services/localization/languages/de.js";
+import { en } from "../../../../../../../core/services/localization/languages/en.js";
+import type { TreeEngineState, Models } from "../../../../../../../core/store/index.js";
 import {
 	AttachmentCell,
 	BodyCellUIValue,

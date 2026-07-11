@@ -33,8 +33,9 @@
 // tag::CustomTreeInitialization[]
 
 import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
-import { type Action, type AnyAction } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	DataSelector,
 	Events,
@@ -51,8 +52,9 @@ import { File } from "../document.js";
 import { cancelChildActivities, getInitialExpansionConfig } from "./utils.js";
 
 export function* handleOpenFormModelButtonSaga(): SagaGenerator<void> {
-	yield* takeLatest((action: AnyAction) => {
+	yield* takeLatest((action: unknown) => {
 		return (
+			isAction(action) &&
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			OPEN_FM_NODE_EVENT === action.payload.engineAction.payload.button.event

@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Bundle",
 		"modelType": "form",
-		"modelVersion": "37.4.0",
+		"modelVersion": "39.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -29,28 +29,12 @@
 				"reference": "DomainBundle"
 			},
 			{
-				"alias": "ProductCandidates-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "ProductCandidates-overview"
-			},
-			{
-				"alias": "BundleProduct_Product_LinkOverview-overview",
-				"modelType": "overview",
-				"purpose": "bindingReference",
-				"reference": "BundleProduct_Product_LinkOverview-overview"
+				"purpose": "relationship-ui",
+				"modelType": "relationship-ui",
+				"reference": "Bundle-binding-default-name_RuM"
 			}
 		],
-		"annotations": [
-			{
-				"name": "bindingConfiguration",
-				"value": "[{\"type\":\"relationship\",\"details\":{\"name\":\"default name\",\"metaInformation\":{\"version\":\"1.0.0\"},\"relationshipName\":\"BundleProduct\",\"targetRole\":\"Product\",\"components\":[{\"id\":\"-1\",\"name\":\"DualPaneSelection\",\"candidatePageSize\":5,\"models\":[{\"name\":\"ProductCandidates-overview\",\"use\":\"candidate\"},{\"name\":\"BundleProduct_Product_LinkOverview-overview\",\"use\":\"link\"}]}]},\"elementId\":\"section-aeb8e\"}]"
-			},
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		]
+		"annotations": []
 	},
 	"content": {
 		"subHeaderBox": {
@@ -191,7 +175,8 @@
 								"name": "relationship"
 							}
 						],
-						"height": 328
+						"height": 328,
+						"reference": "Bundle-binding-default-name_RuM"
 					}
 				]
 			}

@@ -31,16 +31,15 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
-import { ButtonGroup } from "@com.mgmtp.a12.widgets/widgets-core/lib/button-group/main/button-group.view.js";
+import { ButtonGroup } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { MultiSelectionActions, TreeEngineContextProvider } from "../../../../../../../core/view/index.js";
 import { createContextProps, defaultEngineState } from "../../../../../../setup/basic.spec.js";
-import { type TreeModel } from "../../../../../../../core/models/index.js";
+import type { TreeModel } from "../../../../../../../core/models/index.js";
 import { createEngineState } from "../../../../../../utils/model-utils.js";
 import { testIsNullComponent } from "../../../../../../utils/test-utils.js";
-import { Button } from "../../../../../../../core/view/internal/components/content-box/sub-components/buttons.js";
+import { Button } from "../../../../../../../core/view/components/content-box/sub-components/buttons.js";
 import { TreeModelKeys } from "../../../../../../../core/services/localization/index.js";
 
 import { defaultMultiSelectionConfig } from "./utils.test.js";

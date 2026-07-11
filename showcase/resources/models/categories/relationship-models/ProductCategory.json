@@ -2,7 +2,7 @@
 	"header": {
 		"id": "ProductCategory",
 		"modelType": "relationship",
-		"modelVersion": "3.0.0",
+		"modelVersion": "4.0.0",
 		"locales": [
 			{
 				"code": "en"
@@ -17,12 +17,7 @@
 				"text": "ProductCategory"
 			}
 		],
-		"annotations": [
-			{
-				"name": "roles",
-				"value": "anonymous"
-			}
-		],
+		"annotations": [],
 		"modelReferences": [
 			{
 				"purpose": "Document model",
@@ -46,10 +41,7 @@
 	},
 	"content": {
 		"duplicatesAllowed": true,
-		"associationType": "SHARED",
-		"storage": "EXTERNAL",
 		"linkDocumentModel": "DomainProductCategory_AdditionalFieldsModel",
-		"embeddedGroupPath": "",
 		"labels": [
 			{
 				"locale": "en",
@@ -64,18 +56,6 @@
 				"role": "Product",
 				"documentModel": "DomainProduct",
 				"ordered": false,
-				"navigable": true,
-				"linkConstraints": {
-					"multiplicity": {
-						"lowerLimit": 0,
-						"unbounded": true,
-						"upperLimit": null
-					}
-				},
-				"candidateConstraints": {
-					"population": "",
-					"populationParameters": []
-				},
 				"labels": [
 					{
 						"locale": "en",
@@ -85,24 +65,18 @@
 						"locale": "de",
 						"text": "Produkt hinzufügen"
 					}
-				]
+				],
+				"linkConstraints": {
+					"multiplicity": {
+						"unbounded": true,
+						"upperLimit": null
+					}
+				}
 			},
 			{
 				"role": "Category",
 				"documentModel": "DomainCategory",
 				"ordered": true,
-				"navigable": true,
-				"linkConstraints": {
-					"multiplicity": {
-						"lowerLimit": 0,
-						"unbounded": true,
-						"upperLimit": null
-					}
-				},
-				"candidateConstraints": {
-					"population": "",
-					"populationParameters": []
-				},
 				"labels": [
 					{
 						"locale": "en",
@@ -112,7 +86,13 @@
 						"locale": "de",
 						"text": "ist enthalten in"
 					}
-				]
+				],
+				"linkConstraints": {
+					"multiplicity": {
+						"unbounded": true,
+						"upperLimit": null
+					}
+				}
 			}
 		]
 	}

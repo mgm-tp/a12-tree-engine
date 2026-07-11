@@ -30,16 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
 import { vi } from "vitest";
 
-import { DefaultTreeTableComponentRenderers } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/main/tree-table.view.js";
 import {
+	DefaultTreeTableComponentRenderers,
 	DefaultTableComponentRenderers,
 	TableContextProvider
-} from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/table.view.js";
+} from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { DocumentUtils } from "../../../../../../core/models/internal/utils/document-utils.js";
+import { DocumentUtils } from "../../../../../../core/models/utils/document-utils.js";
 import { DataSelector, type TreeEngineState, UIStateSelector } from "../../../../../../core/store/index.js";
 import {
 	type BodyRow,
@@ -52,7 +51,7 @@ import {
 	PaginatedBodyRow,
 	PaginationButtons,
 	RootPaginationButtons
-} from "../../../../../../core/view/internal/components/tree-engine/sub-components/body-row/paginated-body-row.js";
+} from "../../../../../../core/view/components/tree-engine/sub-components/body-row/paginated-body-row.js";
 import {
 	createContextProps,
 	defaultEngineState,

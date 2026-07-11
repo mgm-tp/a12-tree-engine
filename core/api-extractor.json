@@ -1,15 +1,22 @@
 {
-	"$schema": "../node_modules/@microsoft/api-extractor/lib/schemas/api-extractor.schema.json",
+	"$schema": "../node_modules/@microsoft/api-extractor/lib-esm/schemas/api-extractor.schema.json",
 	"mainEntryPointFilePath": "<projectFolder>/lib/index.d.ts",
 	"newlineKind": "lf",
+	"compiler": {
+		"tsconfigFilePath": "<projectFolder>/tsconfig.json",
+		"overrideTsconfig": {
+			"compilerOptions": {
+				"target": "ES2024",
+				"lib": ["DOM", "DOM.Iterable", "ES2024"],
+				"skipLibCheck": true
+			}
+		}
+	},
 	"apiReport": {
 		"enabled": true,
 		"reportFolder": "<projectFolder>",
 		"reportFileName": "treeengine-core",
 		"reportTempFolder": "<projectFolder>/target/api"
-	},
-	"compiler": {
-		"tsconfigFilePath": "tsconfig.json"
 	},
 	"tsdocMetadata": {
 		"enabled": false

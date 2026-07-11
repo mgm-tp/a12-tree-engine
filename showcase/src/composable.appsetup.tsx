@@ -42,22 +42,22 @@ import type { Store } from "redux";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 
-import "@com.mgmtp.a12.widgets/widgets-core/lib/theme/basic.css";
+import "@com.mgmtp.a12.widgets/widgets-core/styles/basic.css";
 
 import { withOverviewEngine } from "@com.mgmtp.a12.overviewengine/overviewengine-core";
 import { withTreeEngine } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { withRelationshipFormEngine } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
+import { withRelationshipEngine } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
 import {
 	addCustomSagas,
-	addView,
 	addWrapper,
+	APPLICATION_MODEL_PLACEHOLDER,
 	combineFeatures,
 	createA12ApplicationSetup,
 	ModelActions,
 	NotificationViews,
+	withDynamicConfig,
 	withModel,
-	type A12ApplicationConfig,
-	type ApplicationModel
+	type A12ApplicationConfig
 } from "@com.mgmtp.a12.client/client-core";
 import { withCRUD } from "@com.mgmtp.a12.crud/crud-core";
 import { withPlatformModelLoader } from "@com.mgmtp.a12.client/client-core/modelLoader";
@@ -66,14 +66,13 @@ import { withLocalization } from "@com.mgmtp.a12.client/client-core/localization
 import { withDirtyHandling } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
 import { addDeepLinkingSagas } from "@com.mgmtp.a12.client/client-core/deepLinking";
 import { DataServicesReducerMap } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { platformAttachmentLoader } from "@com.mgmtp.a12.formengine/formengine-core";
+import { platformAttachmentLoader, withFormEngine } from "@com.mgmtp.a12.formengine/formengine-core";
 
 import { isReactScanEnabled } from "./config/react-scan.js";
-import model from "./appmodel.json" with { type: "json" };
 import { appCustomSagas } from "./sagas/index.js";
 import {
 	registerApplicationModules,
-	registerCustomFieldTypes,
+	// registerCustomFieldTypes,
 	isLinkAddedByDetailActivity,
 	createCustomSagaRegistrations,
 	getNewLinkPosition,
@@ -84,14 +83,12 @@ import { SHOWCASE_RESOURCES } from "./config/resources.js";
 import { fetchModelGraph, loadDSConfigurations, withReduxDevtool } from "./config/redux.js";
 import { withTheme } from "./config/theme.js";
 import { withSizeDetector } from "./config/size-detector.js";
-import { withApplicationFrameLayout } from "./views/application-frame-layout.js";
 import { withShowCaseContext } from "./context.js";
-import { viewComponents } from "./containerFactory.js";
 import { withDndWrapper } from "./config/dnd.js";
 import { withA11LanguageWrapper } from "./config/a11-language.js";
 
 // Register custom field types and modules
-registerCustomFieldTypes();
+// registerCustomFieldTypes();
 registerApplicationModules();
 
 scan({ enabled: isReactScanEnabled() });
@@ -117,7 +114,6 @@ const initialConfig: A12ApplicationConfig = {
 	},
 	deepLinking: { config: { applyTriggers: [ModelActions.setModelGraph] } },
 	formEngine: { sagas: { attachmentLoader: platformAttachmentLoader } },
-	relationshipEngine: {},
 	treeEngine: {
 		saga: {
 			linkCreation: { isLinkAddedByDetailActivity },
@@ -134,17 +130,15 @@ const initialConfig: A12ApplicationConfig = {
 const { store, initialActions, Component } = createA12ApplicationSetup(
 	combineFeatures(
 		combineFeatures(
-			...(Object.entries(viewComponents).map(([name, component]) => addView(name, component)) as [
-				ReturnType<typeof addView>
-			])
+			withModel(APPLICATION_MODEL_PLACEHOLDER), // not used
+			withDynamicConfig()
 		),
-
 		combineFeatures(
-			withModel(model as ApplicationModel),
 			withDataServicesConfiguration,
+			withFormEngine,
 			withOverviewEngine,
+			withRelationshipEngine,
 			withTreeEngine,
-			withRelationshipFormEngine,
 			withCRUD,
 			withPlatformModelLoader,
 
@@ -163,7 +157,7 @@ const { store, initialActions, Component } = createA12ApplicationSetup(
 			withLocalization
 		),
 
-		combineFeatures(withDirtyHandling, addDeepLinkingSagas, withReduxDevtool, withApplicationFrameLayout)
+		combineFeatures(withDirtyHandling, addDeepLinkingSagas, withReduxDevtool)
 	)(initialConfig)
 );
 

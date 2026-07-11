@@ -33,7 +33,7 @@
 import * as TypeMoq from "typemoq";
 
 import { Commands, type TreeEngineState } from "../../../../../core/store/index.js";
-import { handleSetInsertDialogState } from "../../../../../core/store/internal/reducer/handler/setDialogState.js";
+import { handleSetInsertDialogState } from "../../../../../core/store/reducer/handler/setDialogState.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.reducer.handler.setDialogState", () => {

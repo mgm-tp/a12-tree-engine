@@ -30,13 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type TestConfig } from "../types";
+import type { TestConfig } from "../types.js";
 
-import { initDefault } from "./init-default";
-import { groupTest100Nodes } from "./group-test-100-nodes";
-import { groupTest500Nodes } from "./group-test-500-nodes";
-// import { groupTest1000Nodes } from "./group-test-1000-nodes";
-import { groupTestPreload } from "./group-test-preload";
+import { initDefault } from "./init-default.js";
+import { groupTest100Nodes } from "./group-test-100-nodes.js";
+import { groupTest500Nodes } from "./group-test-500-nodes.js";
+// import { groupTest1000Nodes } from "./group-test-1000-nodes.js";
+import { groupTestPreload } from "./group-test-preload.js";
 
 export const testConfigs: TestConfig[] = [
 	initDefault,

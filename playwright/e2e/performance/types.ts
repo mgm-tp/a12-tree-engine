@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
 
 export type RawRecorder = Record<string, number[]>;
 export type AnalysedRecorder = Record<

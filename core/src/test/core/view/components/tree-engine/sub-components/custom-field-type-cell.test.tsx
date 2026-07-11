@@ -30,18 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as React from "react";
-
-import { TextOutput } from "@com.mgmtp.a12.widgets/widgets-core/lib/text-output/main/text-output.view.js";
-import { type Column } from "@com.mgmtp.a12.widgets/widgets-core/lib/table/new-api/column.api.js";
-import { type Styleable } from "@com.mgmtp.a12.widgets/widgets-core/lib/common/main/base-props.js";
-import { CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core/lib/css-ellipsis/main/css-ellipsis.view.js";
+import { TextOutput, type Column, type Styleable, CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import { createContextProps, defaultEngineState } from "../../../../../setup/basic.spec.js";
-import { CustomFieldTypeCell } from "../../../../../../core/view/internal/components/tree-engine/sub-components/custom-field-type-cell.js";
-import { type TreeEngineState } from "../../../../../../core/store/index.js";
-import { type RuntimeTreeModel } from "../../../../../../core/models/index.js";
+import { CustomFieldTypeCell } from "../../../../../../core/view/components/tree-engine/sub-components/custom-field-type-cell.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
+import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
 
 describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.custom-field-type-cell", () => {
 	const basicProps: CustomFieldTypeCell.Props = {

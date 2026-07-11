@@ -31,7 +31,6 @@
  */
 
 import type * as Enzyme from "enzyme";
-import * as React from "react";
 
 import { TreeEngineState } from "../../../../../core/store/index.js";
 import { TreeEngineContextProvider, ConfirmationDialog, DialogsRenderer } from "../../../../../core/view/index.js";

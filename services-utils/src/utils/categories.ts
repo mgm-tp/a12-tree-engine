@@ -32,7 +32,7 @@
 
 import { faker } from "@faker-js/faker";
 
-import { type JsonRpc2Request, type DocumentJsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { JsonRpc2Request, DocumentJsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import { linkEntities } from "./index.js";
 

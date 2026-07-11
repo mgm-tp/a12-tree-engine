@@ -40,7 +40,7 @@ export async function main() {
 		a12Teams(),
 		categories(),
 		modelEditor(),
-		modelEditor({ variant: "pagination", data: "multiple-pages" }),
-		modelEditor({ variant: "group-management" })
+		modelEditor({ variant: "pagination", data: "multiple-pages" })
+		// modelEditor({ variant: "group-management" }) // disabled: GM seed links non-GM DomainField to GM groups; server rejects
 	]);
 }

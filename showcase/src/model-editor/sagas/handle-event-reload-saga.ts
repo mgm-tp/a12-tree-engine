@@ -33,8 +33,9 @@
 // tag::CustomTreeInitialization[]
 
 import { put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
-import { type Action, type AnyAction } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	Events,
 	Identifier,
@@ -44,8 +45,9 @@ import {
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 export function* handleEventReloadSaga(): SagaGenerator<void> {
-	yield* takeLatest((action: AnyAction) => {
+	yield* takeLatest((action: unknown) => {
 		return (
+			isAction(action) &&
 			TreeEngineActions.event.match(action) &&
 			Events.onEventButtonClicked.match(action.payload.engineAction) &&
 			"event_reload_hidden_root" === action.payload.engineAction.payload.button.event

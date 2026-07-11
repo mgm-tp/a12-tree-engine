@@ -31,7 +31,7 @@
  */
 
 import { Commands, TreeEngineState } from "../../../../../core/store/index.js";
-import { handleSetCutNodes } from "../../../../../core/store/internal/reducer/handler/setCutNodes.js";
+import { handleSetCutNodes } from "../../../../../core/store/reducer/handler/setCutNodes.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 

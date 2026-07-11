@@ -33,7 +33,7 @@
 import * as React from "react";
 import * as KeyCode from "keycode-js";
 
-import { type Annotation } from "@com.mgmtp.a12.base/base-model-api/lib/main/header/index.js";
+import type { Annotation } from "@com.mgmtp.a12.base/base-model-api";
 import {
 	TreeEngineState,
 	type Events,
@@ -151,7 +151,7 @@ const InsertionDialog: React.FC<InsertionDialogProps> = (props) => {
 	const { ActionContentBox, Title, HeadingAddon, ModalOverlay, Icon, Button } = widgetMap;
 
 	return (
-		<ModalOverlay onClose={props.onClose} closeOnEsc>
+		<ModalOverlay onClose={props.onClose} closeOnEsc closeOnOutsideClick>
 			<ActionContentBox
 				padding="12px"
 				headingElements={<Title text="Please choose a document model to insert" />}

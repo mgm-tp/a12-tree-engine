@@ -1,18 +1,13 @@
 {
-	"extends": "../node_modules/@com.mgmtp.a12.devtools/devtools/configs/tsconfig",
+	"extends": "../tsconfig.json",
+	"references": [{ "path": "../services-utils" }],
+	"include": ["e2e/**/*.ts"],
 	"compilerOptions": {
-		"baseUrl": ".",
-		"target": "es5",
-		"lib": ["es2017", "dom"],
-		"types": ["node"],
-		"sourceMap": false,
-		"declaration": false,
-		"declarationMap": false,
-		"esModuleInterop": true,
+		"rootDir": "${configDir}",
+		"types": ["@playwright/test", "node"],
 		"noEmit": true,
 		"paths": {
 			"playwright-commands": ["./e2e/commands.ts"]
 		}
-	},
-	"include": ["e2e/**/*.ts"]
+	}
 }

@@ -32,19 +32,22 @@
 
 import { it, expect, describe } from "vitest";
 
-import { type JsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { JsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { RequestValidator } from "../../extensions/server-connector/internal/data-loaders/request-validator.js";
+import { RequestValidator } from "../../extensions/server-connector/data-loaders/request-validator.js";
+
+import {
+	createMockRequest,
+	orphanedRootListQuery,
+	hiddenRootListQuery,
+	rootTreeQuery,
+	subtreeTreeQuery,
+	listResult,
+	treeResult
+} from "../utils/data-loader-utils.js";
 
 const MOCK_MAX_REQUESTS = 3;
-
-function createMockRequest(id: string): JsonRpc2Request {
-	return {
-		jsonrpc: "2.0",
-		id,
-		method: "test"
-	} as JsonRpc2Request;
-}
+const MOCK_PAGE_SIZE = 100;
 
 describe("@com.mgmtp.a12.tree-engine.extensions.server-connector.internal.data-loaders.request-validator", () => {
 	describe("assertValidRequestCount", () => {
@@ -69,6 +72,43 @@ describe("@com.mgmtp.a12.tree-engine.extensions.server-connector.internal.data-l
 			];
 
 			expect(() => RequestValidator.assertValidRequestCount(requests, MOCK_MAX_REQUESTS)).not.toThrow();
+		});
+	});
+
+	describe("assertRootNodesWithinPageSize", () => {
+		it("should throw when an orphaned root list query exceeds the page size", () => {
+			const query = orphanedRootListQuery("q1");
+			expect(() =>
+				RequestValidator.assertRootNodesWithinPageSize(query, listResult("q1", MOCK_PAGE_SIZE + 1), MOCK_PAGE_SIZE)
+			).toThrow(RequestValidator.PageSizeLimitExceededError);
+		});
+
+		it("should throw when a root tree query exceeds the page size", () => {
+			const query = rootTreeQuery("q1");
+			expect(() =>
+				RequestValidator.assertRootNodesWithinPageSize(query, treeResult("q1", MOCK_PAGE_SIZE + 1), MOCK_PAGE_SIZE)
+			).toThrow(RequestValidator.PageSizeLimitExceededError);
+		});
+
+		it("should not throw when fullSize equals the page size", () => {
+			const query = orphanedRootListQuery("q1");
+			expect(() =>
+				RequestValidator.assertRootNodesWithinPageSize(query, listResult("q1", MOCK_PAGE_SIZE), MOCK_PAGE_SIZE)
+			).not.toThrow();
+		});
+
+		it("should not throw for hidden root list queries (they paginate)", () => {
+			const query = hiddenRootListQuery("q1");
+			expect(() =>
+				RequestValidator.assertRootNodesWithinPageSize(query, listResult("q1", MOCK_PAGE_SIZE + 50), MOCK_PAGE_SIZE)
+			).not.toThrow();
+		});
+
+		it("should not throw for subtree (child) tree queries", () => {
+			const query = subtreeTreeQuery("q1");
+			expect(() =>
+				RequestValidator.assertRootNodesWithinPageSize(query, treeResult("q1", MOCK_PAGE_SIZE + 50), MOCK_PAGE_SIZE)
+			).not.toThrow();
 		});
 	});
 });

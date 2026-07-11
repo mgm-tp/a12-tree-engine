@@ -1,5 +1,8 @@
 .idea
-.vscode
+
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 
 .npm
 node_modules
@@ -25,6 +28,7 @@ dataservices-server.log.*.gz
 TEST-performance-tree-engine.xml
 performance-results.json
 server/src/main/resources/models
+showcase-models-converters/bin
 
 # Playwright
 test-results/
@@ -40,8 +44,7 @@ playwright/.auth/
 */licenses/
 
 # AI
+.github
 .serena
 *.local.*
-*.spec.*
 *.plan.*
-.playwright-mcp

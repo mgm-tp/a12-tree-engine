@@ -31,8 +31,9 @@
  */
 
 import { type SagaGenerator, select, takeLatest } from "typed-redux-saga";
-import { type Action, type AnyAction } from "typescript-fsa";
+import { isAction } from "redux";
 
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	TreeEngineActions,
 	TreeEngineSelectors,
@@ -45,8 +46,9 @@ import { setNodesFromNodePath, setTargetNodePath } from "../utils.js";
 import { assert, MARK_AS_TARGET_NODE_EVENT } from "../helpers.js";
 
 export function* handleMarkAsTargetNodeSaga(): SagaGenerator<void> {
-	yield* takeLatest((action: AnyAction) => {
+	yield* takeLatest((action: unknown) => {
 		return (
+			isAction(action) &&
 			TreeEngineActions.event.match(action) &&
 			Events.onNodeEventButtonClicked.match(action.payload.engineAction) &&
 			action.payload.engineAction.payload.button.event === MARK_AS_TARGET_NODE_EVENT

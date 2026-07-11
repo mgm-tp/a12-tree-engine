@@ -32,8 +32,8 @@
 
 import { vi, expect, type MockInstance } from "vitest";
 
-import { type EntityCharacteristics, type RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core/lib/tree-table/index.js";
+import type { EntityCharacteristics, RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { RelationshipModelUtils } from "../../../../../core/models/index.js";
 import { type Identifier, ModelSelector, type TreeEngineState } from "../../../../../core/store/index.js";
@@ -46,7 +46,7 @@ import {
 	ForbidOrderInFixedRelationshipRule,
 	ForbidOrderTopLevelRule,
 	ReorderRootRule
-} from "../../../../../core/view/internal/configuration/dnd/can-drop-rules.js";
+} from "../../../../../core/view/configuration/dnd/can-drop-rules.js";
 
 import { createDragItem, createHoveredItem } from "./shared.js";
 
