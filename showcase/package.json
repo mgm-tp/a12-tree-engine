@@ -2,7 +2,7 @@
 	"name": "@com.mgmtp.a12.treeengine/treeengine-showcase",
 	"private": true,
 	"type": "module",
-	"version": "10.3.0",
+	"version": "10.3.1",
 	"description": "Tree Engine Showcase",
 	"author": "mgm technology partners",
 	"license": "(EUPL-1.2 OR LicenseRef-commercial)",

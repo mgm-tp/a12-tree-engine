@@ -16,7 +16,7 @@ Warranty Disclaimer (applies to either option)
 THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
 ////
 [#request-selector-map]
-== Custom RequestSelectorMap
+=== Custom RequestSelectorMap
 
 [NOTE]
 ====
@@ -26,7 +26,7 @@ This API is marked as experimental. Breaking changes *might* happen even in mino
 The `RequestSelectorMap` lets you customize how Tree Engine produces Data Services JSON‑RPC requests.
 A `DefaultRequestSelectorMap` is provided; you can inject your own to tweak queries and mutations without involving internal logic.
 
-=== What it controls
+==== What it controls
 
 The map exposes selector factories that return JSON‑RPC request objects. Tree Engine uses these exclusively for server calls.
 
@@ -42,7 +42,7 @@ The map exposes selector factories that return JSON‑RPC request objects. Tree 
 
 All methods return selectors, so you can derive values from app state inside the selector body (e.g., locale, activity). Every selector receives an `activityId` in its config to resolve contextual state.
 
-=== Injecting a custom map
+==== Injecting a custom map
 
 Inject your map via the Tree Engine data provider. If none is provided, the `DefaultRequestSelectorMap` is used.
 
@@ -53,7 +53,7 @@ include::assets/typescript/features/custom-request-selector-map.ts[tags=injectTr
 
 You can also pass the map directly when constructing a data loader if you manage loaders manually (`createA12DataServiceDataLoader(dataServicesSetting, requestSelectorMap)`).
 
-=== Example: add an extra constraint for child listing
+==== Example: add an extra constraint for child listing
 
 This example injects an additional EXACT_MATCH constraint (/category/status = Active) into `loadListChildNodes`, while delegating everything else to the default implementation.
 
@@ -62,18 +62,18 @@ This example injects an additional EXACT_MATCH constraint (/category/status = Ac
 include::assets/typescript/features/custom-request-selector-map.ts[tags=requestSelectorMap]
 ----
 
-=== Hidden root computations in `loadTreeNodes`
+==== Hidden root computations in `loadTreeNodes`
 
 When using a hidden root (i.e., a root entry with a `relationshipModel` and no explicit source), the default implementation computes the reversed role needed to traverse from the visible parent to its hidden counterpart. If you customize `loadTreeNodes`, be mindful to preserve this behavior or provide your own role resolution.
 
-=== Mutations and multi‑step operations
+==== Mutations and multi-step operations
 
 Some user actions in the tree translate to multiple underlying mutations. For example, a drag‑and‑drop move can result in `DELETE_LINK` followed by `ADD_LINK`.
 
 - The `RequestSelectorMap` gives you control over how each individual RPC request is constructed (`addLink`, `relinkDocument`, etc.).
 - If you wish a deeper customization, consider the `TreeEngineDataLoader`.
 
-=== Request Filters
+==== Request Filters
 
 This customization approach can also be used in combination with the RequestFilter API (described in the link:/docs/DATA_SERVICES/dataservices-documentation-src/index.html#json-rpc-modifying-requests[Data Services documentation]), for example to use your own operation methods.
 Customizing the `RequestFilter` alone would not be enough when the method replacement needs some context (e.g. only overriding methods in certain conditions). Using the `RequestSelectorMap` could then be used to provide this context down for the filter to use.

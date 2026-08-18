@@ -1,0 +1,69 @@
+{
+  "header": {
+    "id": "BundleProduct_Bundle____generated",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "de"
+      },
+      {
+        "code": "en"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "anonymous"
+      },
+      {
+        "name": "application",
+        "value": ""
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DomainBundle",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "DomainBundle"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "BundleProduct_Bundle____generated"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "target",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "I4",
+                "name": "Properties",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "DomainBundle"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

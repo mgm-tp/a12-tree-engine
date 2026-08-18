@@ -1,6 +1,6 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-dev-docs",
-	"version": "10.3.0",
+	"version": "10.3.1",
 	"type": "module",
 	"description": "Tree Engine documentation which includes typedoc and developer documentation",
 	"author": "mgm technology partners",

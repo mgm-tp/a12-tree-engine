@@ -1,0 +1,69 @@
+{
+  "header": {
+    "id": "TeamTeam_Child____generated",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "anonymous"
+      },
+      {
+        "name": "application",
+        "value": ""
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DomainTeam",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "DomainTeam"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "TeamTeam_Child____generated"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "target",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "I4",
+                "name": "TeamDetails",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "DomainTeam"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

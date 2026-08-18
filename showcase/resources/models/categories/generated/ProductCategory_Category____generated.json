@@ -1,0 +1,94 @@
+{
+  "header": {
+    "id": "ProductCategory_Category____generated",
+    "modelType": "document",
+    "modelVersion": "28.4.0",
+    "locales": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "de"
+      }
+    ],
+    "labels": [],
+    "annotations": [
+      {
+        "name": "roles",
+        "value": "anonymous"
+      },
+      {
+        "name": "application",
+        "value": ""
+      }
+    ],
+    "modelReferences": [
+      {
+        "alias": "DomainCategory",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "DomainCategory"
+      },
+      {
+        "alias": "DomainProductCategory_AdditionalFieldsModel",
+        "modelType": "document",
+        "purpose": "include",
+        "reference": "DomainProductCategory_AdditionalFieldsModel"
+      }
+    ]
+  },
+  "content": {
+    "modelInfo": {
+      "name": "ProductCategory_Category____generated"
+    },
+    "modelConfig": {
+      "decimalSeparator": ".",
+      "timeZone": "UTC",
+      "conditionLanguage": {
+        "code": "en_US"
+      }
+    },
+    "modelRoot": {
+      "rootGroups": [
+        {
+          "type": "Group",
+          "id": "G2",
+          "name": "target",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "I4",
+                "name": "Category",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "DomainCategory"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Group",
+          "id": "G3",
+          "name": "relationship",
+          "Group": {
+            "repeatability": 1,
+            "elements": [
+              {
+                "type": "Group",
+                "id": "I5",
+                "name": "AdditionalFields",
+                "Group": {
+                  "repeatability": 1,
+                  "modelAlias": "DomainProductCategory_AdditionalFieldsModel"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

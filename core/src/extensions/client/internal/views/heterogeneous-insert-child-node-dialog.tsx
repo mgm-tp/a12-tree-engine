@@ -69,7 +69,7 @@ export const HeterogeneousInsertChildNodeDialog: React.FC<HeterogeneousInsertChi
 	const insertTitle = useDialogInsertTitle("child");
 
 	return (
-		<ModalOverlay preventScroll onClose={onDialogClosed} closeOnEsc>
+		<ModalOverlay preventScroll onClose={onDialogClosed} closeOnEsc closeOnOutsideClick>
 			<ActionContentBox
 				padding="12px"
 				headingElements={<Title text={insertTitle} />}

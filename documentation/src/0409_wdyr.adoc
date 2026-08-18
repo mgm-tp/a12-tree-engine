@@ -32,7 +32,7 @@ There are multiple approaches to figure out the re-rendering:
 
 ===== Customized Component
 
-1. Most if not all Tree Engine component are memoized via `React.memo`. Yout custom component should also have it.
+1. Most if not all Tree Engine component are memoized via `React.memo`. Your custom component should also have it.
 
 2. Avoid re-creating component passed into the component map.
 

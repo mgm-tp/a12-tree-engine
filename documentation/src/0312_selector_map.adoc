@@ -36,4 +36,4 @@ include::assets/typescript/features/custom-selector-map.ts[tag="CustomSelectorMa
 --
 
 Note that it is mandatory to spread the `DefaultSelectorMap` when customizing
-(similar to <<view-customization/component-map, WidgetMap>> and <<view-customization/widget-map,ComponentMap>>).
+(similar to <<view-customization/component-map, ComponentMap>> and <<view-customization/widget-map, WidgetMap>>).
