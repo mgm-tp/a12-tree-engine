@@ -1,6 +1,6 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-codemod",
-	"version": "11.0.0",
+	"version": "11.0.2-SNAPSHOT",
 	"description": "Codemod for Tree Engine",
 	"author": "mgm technology partners",
 	"license": "(EUPL-1.2 OR LicenseRef-commercial)",
@@ -16,7 +16,7 @@
 		"vitest": "catalog:devLibs"
 	},
 	"dependencies": {
-		"@com.mgmtp.a12.devtools/codemod": "^1.0.0"
+		"@com.mgmtp.a12.devtools/codemod": "^2.2.2"
 	},
 	"files": [
 		"lib",

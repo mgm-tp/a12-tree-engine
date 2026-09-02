@@ -56,7 +56,7 @@ import { TreeDataUtils } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/cor
 		).resolves.toMatchInlineSnapshot(`
 			"import {
 			  TreeEngineFactories,
-			  TreeEngineSelectors, RowActionStateGetter, RowStyleGetter, TreeDataUtils } from "@com.mgmtp.a12.treeengine/treeengine-core";
+			  TreeEngineSelectors, type RowActionStateGetter, type RowStyleGetter, TreeDataUtils } from "@com.mgmtp.a12.treeengine/treeengine-core";
 			"
 		`);
 	});

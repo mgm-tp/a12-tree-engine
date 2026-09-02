@@ -17,6 +17,10 @@ THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPR
 ////
 == 2026.06
 
+=== 11.0.1
+
+No breaking changes in 11.0.1. No action required.
+
 === 11.0.0
 
 ==== React peer dependency raised to 19.2

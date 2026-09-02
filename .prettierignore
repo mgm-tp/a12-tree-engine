@@ -1,4 +1,5 @@
 generated/**
+licenses/
 package.json
 pnpm-lock.yaml
 *.api.md

@@ -66,7 +66,7 @@ import { OPEN_DM_NODE_EVENT_TWIN } from "../helpers.js";
 
 			import {
 			  TreeEngineFactories,
-			  TreeEngineSelectors, RowActionStateGetter, RowStyleGetter, TreeDataUtils } from "@com.mgmtp.a12.treeengine/treeengine-core";
+			  TreeEngineSelectors, type RowActionStateGetter, type RowStyleGetter, TreeDataUtils } from "@com.mgmtp.a12.treeengine/treeengine-core";
 			import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";
 
 			import { useShowcaseContext } from "../context.js";

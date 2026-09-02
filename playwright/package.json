@@ -1,6 +1,6 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-playwright",
-	"version": "11.0.0",
+	"version": "11.0.2-SNAPSHOT",
 	"private": true,
 	"type": "module",
 	"scripts": {
