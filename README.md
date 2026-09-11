@@ -43,7 +43,7 @@ The following tools are required in order to build this repository:
 | [JDK](https://openjdk.org/)             |    `21` |
 | [Node](https://nodejs.org/)             |  `22.x` |
 | [pnpm](https://pnpm.io/)                |   `9.x` |
-| [Gradle](https://gradle.org) (optional) |   `8.x` |
+| [Gradle](https://gradle.org) (optional) |   `9.x` |
 
 #### How to Build
 

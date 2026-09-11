@@ -2,8 +2,8 @@
 	"name": "root",
 	"private": true,
 	"license": "(EUPL-1.2 OR LicenseRef-commercial)",
-	"version": "10.3.1",
-	"a12Version": "2025.06-ext5",
+	"version": "10.3.2",
+	"a12Version": "2025.06-ext7",
 	"type": "module",
 	"scripts": {
 		"clean": "pnpm -r --parallel clean",
@@ -47,14 +47,5 @@
 		"typed-redux-saga": "catalog:libs",
 		"typescript": "catalog:libs"
 	},
-	"packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d",
-	"pnpm": {
-		"overrides": {
-			"react-redux>react": "^19",
-			"@com.mgmtp.a12.widgets/widgets-core": "38.3.0"
-		},
-		"patchedDependencies": {
-			"react-dnd@16.0.1": "patches/react-dnd@16.0.1.patch"
-		}
-	}
+	"packageManager": "pnpm@11.22.0"
 }

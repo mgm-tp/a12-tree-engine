@@ -2,32 +2,50 @@
 loglevel: info
 strictPeerDependencies: false
 lockfileIncludeTarballUrl: false
+# A12 components are released on our own schedule and integrated the same day,
+# so they cannot satisfy the release-age policy that applies to third parties.
+minimumReleaseAgeExclude:
+  - "@com.mgmtp.a12.*/*"
 
 packages:
   - ./*
 catalogs:
-  a12Libs:
-    "@com.mgmtp.a12.base/base-model-api": "^29.3.0"
-    "@com.mgmtp.a12.client/client-core": "^16.2.1"
-    "@com.mgmtp.a12.client/client-application-model-migration": "^16.2.1"
-    "@com.mgmtp.a12.crud/crud-core": "^2.3.0"
-    "@com.mgmtp.a12.dataservices/dataservices-access": "^38.4.0"
+  a12:
+    "@com.mgmtp.a12.base/base-model-api": "^29.3.2"
+    "@com.mgmtp.a12.client/client-core": "^16.2.2"
+    "@com.mgmtp.a12.client/client-application-model-migration": "^16.2.2"
+    "@com.mgmtp.a12.crud/crud-core": "^2.3.2"
+    "@com.mgmtp.a12.dataservices/dataservices-access": "^38.4.5"
     "@com.mgmtp.a12.expression/expression-core": "^2.0.6"
-    "@com.mgmtp.a12.formengine/formengine-core": "^38.4.0"
-    "@com.mgmtp.a12.formengine/formengine-model-migration": "^38.4.0"
-    "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "^30.8.1"
-    "@com.mgmtp.a12.kernel/kernel-md-facade": "^30.8.1"
+    "@com.mgmtp.a12.formengine/formengine-core": "^38.4.3"
+    "@com.mgmtp.a12.formengine/formengine-model-migration": "^38.4.3"
+    "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "^30.8.6"
+    "@com.mgmtp.a12.kernel/kernel-md-facade": "^30.8.6"
     "@com.mgmtp.a12.overviewengine/overviewengine-core": "^38.3.0"
     "@com.mgmtp.a12.overviewengine/overviewengine-model-migration": "^38.3.0"
     "@com.mgmtp.a12.migrationtool/migrationtool-utils": "^2.1.1"
     "@com.mgmtp.a12.migrationtool/migrationtool-core": "^2.1.1"
-    "@com.mgmtp.a12.relationshipengine/relationshipengine-core": "^2.3.0"
+    "@com.mgmtp.a12.relationshipengine/relationshipengine-core": "^2.3.2"
     "@com.mgmtp.a12.utils/utils-collections": "^6.2.0"
-    "@com.mgmtp.a12.utils/utils-connector": "^8.2.1"
-    "@com.mgmtp.a12.utils/utils-localization": "^7.2.0"
-    "@com.mgmtp.a12.utils/utils-localization-react": "^7.2.0"
-    "@com.mgmtp.a12.utils/utils-logging": "^6.2.0"
-    "@com.mgmtp.a12.widgets/widgets-core": "^38.3.0"
+    "@com.mgmtp.a12.utils/utils-connector": "^8.2.4"
+    "@com.mgmtp.a12.utils/utils-localization": "^7.2.1"
+    "@com.mgmtp.a12.utils/utils-localization-react": "^7.2.1"
+    "@com.mgmtp.a12.utils/utils-logging": "^6.2.1"
+    "@com.mgmtp.a12.widgets/widgets-core": "^38.3.6"
+  # Ranges published in peerDependencies. Deliberately looser than the a12
+  # catalog above, which pins what we build and test against.
+  a12ranges:
+    "@com.mgmtp.a12.base/base-model-api": "^29.0.0"
+    "@com.mgmtp.a12.client/client-core": "^16.1.0"
+    "@com.mgmtp.a12.dataservices/dataservices-access": "^38.1.0"
+    "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": "^30.1.0"
+    "@com.mgmtp.a12.kernel/kernel-md-facade": "^30.1.0"
+    "@com.mgmtp.a12.relationshipengine/relationshipengine-core": "^2.1.0"
+    "@com.mgmtp.a12.utils/utils-connector": "^8.0.1"
+    "@com.mgmtp.a12.utils/utils-localization": "^7.0.0"
+    "@com.mgmtp.a12.utils/utils-localization-react": "^7.0.0"
+    "@com.mgmtp.a12.utils/utils-logging": "^6.0.1"
+    "@com.mgmtp.a12.widgets/widgets-core": "^38.0.0"
   libs:
     "@types/react": "^19.0.10"
     "@types/react-dom": "^19.0.4"
@@ -61,3 +79,12 @@ catalogs:
     "rimraf": "^6.0.1"
     "ts-node": "^10.9.2"
     "vitest": "^4.0.17"
+overrides:
+  "react-redux>react": "^19"
+patchedDependencies:
+  "react-dnd@16.0.1": patches/react-dnd@16.0.1.patch
+allowBuilds:
+  "@swc/core": true
+  core-js: true
+  esbuild: true
+  typemoq: true

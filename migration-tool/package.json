@@ -1,6 +1,6 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-model-migration",
-	"version": "10.3.1",
+	"version": "10.3.2",
 	"type": "module",
 	"description": "Tree Model Migration Tool",
 	"author": "mgm technology partners",
@@ -19,12 +19,12 @@
 		"migrate": "./bin/tree-model-migration .."
 	},
 	"dependencies": {
-		"@com.mgmtp.a12.migrationtool/migrationtool-core": "catalog:a12Libs"
+		"@com.mgmtp.a12.migrationtool/migrationtool-core": "catalog:a12"
 	},
 	"devDependencies": {
-		"@com.mgmtp.a12.base/base-model-api": "catalog:a12Libs",
-		"@com.mgmtp.a12.migrationtool/migrationtool-utils": "catalog:a12Libs",
-		"@com.mgmtp.a12.utils/utils-localization": "catalog:a12Libs",
+		"@com.mgmtp.a12.base/base-model-api": "catalog:a12",
+		"@com.mgmtp.a12.migrationtool/migrationtool-utils": "catalog:a12",
+		"@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
 		"@types/node": "catalog:devLibs",
 		"@types/semver": "^7.7.1",
 		"rimraf": "catalog:devLibs",

@@ -140,14 +140,19 @@ function* handlePaste(action: EngineAction) {
 			}
 		}
 
+		const targetParent = target ? DataSelector.parent(target)(dataState) : undefined;
+		// Pasting above/below attaches the nodes to the target's parent, not to the target itself.
+		const pasteAsSibling = position === TreeTableNodeDropPosition.TOP || position === TreeTableNodeDropPosition.BOTTOM;
+		const pasteParent = pasteAsSibling ? targetParent : target;
+
 		const preloadChildNodes = UIStateSelector.preloadChildNodes()(uiState);
 		if (preloadChildNodes) {
 			let addedDataHolders: TreeEngineDataHolder[];
 
-			if (target) {
+			if (pasteParent) {
 				addedDataHolders = yield* call(createAddGrandChildDataHolders, {
 					activityId,
-					descriptorPredicate: ({ source }: Activity.DataHolderDescriptor) => source === target?.nodeIdentifier.id
+					descriptorPredicate: ({ source }: Activity.DataHolderDescriptor) => source === pasteParent.nodeIdentifier.id
 				});
 			} else {
 				addedDataHolders = yield* call(createAddGrandChildDataHolders, {
@@ -172,7 +177,6 @@ function* handlePaste(action: EngineAction) {
 		}
 
 		const copyNodeResult = results?.length === 1 && results[0].type === "COPY_NODE" ? results[0] : undefined;
-		const targetParent = target ? DataSelector.parent(target)(dataState) : undefined;
 
 		if (copyNodeResult) {
 			const newLinkIdentifiers = copyNodeResult.payload.newLinkIdentifiers;
