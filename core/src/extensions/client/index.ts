@@ -31,13 +31,14 @@
  */
 
 import type * as React from "react";
+
 import type { Middleware } from "redux";
 import type { SagaGenerator } from "typed-redux-saga";
 
 import type { ActivityReducers, Module, DataProvider, View } from "@com.mgmtp.a12.client/client-core";
 
-import { createTreeEngineClientDataReducers } from "./data-reducers/index.js";
 import { createLinkFormEngineDataProvider } from "./data-providers/link-form-engine-data-provider.js";
+import { createTreeEngineClientDataReducers } from "./data-reducers/index.js";
 import { createTreeEngineClientMiddlewares } from "./middlewares/index.js";
 import { createTreeEngineSagas } from "./sagas/index.js";
 import type { TreeEngineSaga } from "./sagas/saga-setting.js";

@@ -33,8 +33,8 @@
 import * as React from "react";
 
 import { TreeEngineError } from "../../../../error/tree-engine-error.js";
-import { TreeModelKeys } from "../../../../services/localization/tree-model-keys.js";
 import { TreeModel } from "../../../../models/tree-model.js";
+import { TreeModelKeys } from "../../../../services/localization/tree-model-keys.js";
 import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
 
 import { hasMultiSelectionComponents } from "./multi-selection/utils.js";
@@ -52,6 +52,26 @@ export function useSubActionBarElements(): Record<"leftSlot" | "rightSlot", Reac
 			rightSlot: groupRender([...rightSlot])
 		}),
 		[groupRender, leftSlot, rightSlot]
+	);
+}
+
+/**
+ * Whether the tree offers full-text search: a `SearchElement` is modeled in a sub-header slot,
+ * `showFullTextSearch` is set, and the expansion strategy is `tree`.
+ *
+ * @internal
+ */
+export function useIsSearchEnabled(): boolean {
+	const leftSlot = useTreeEngineState((state) => state.models.uiModel.content.subHeaderBox.leftSlot);
+	const rightSlot = useTreeEngineState((state) => state.models.uiModel.content.subHeaderBox.rightSlot);
+	const configuration = useTreeEngineState((state) => state.models.uiModel.content.configuration);
+
+	return React.useMemo(
+		() =>
+			!!configuration.showFullTextSearch &&
+			TreeModel.ExpansionStrategy.Tree.isAssignableFrom(configuration.expansionStrategy) &&
+			[...leftSlot, ...rightSlot].some(TreeModel.SearchElement.isAssignableFrom),
+		[configuration.showFullTextSearch, configuration.expansionStrategy, leftSlot, rightSlot]
 	);
 }
 
@@ -86,6 +106,9 @@ const subHeaderBoxButtonKey = TreeModelKeys.getSubHeaderBoxButtonsKey();
 function useElementRenderer() {
 	const ExpandAllPopUp = useTreeEngineContext((context) => context.componentMap.ExpandAllPopUp);
 	const MultiSelectionPanel = useTreeEngineContext((context) => context.componentMap.MultiSelectionPanel);
+	const SearchBar = useTreeEngineContext((context) => context.componentMap.SearchBar);
+	const SearchResultViewToggle = useTreeEngineContext((context) => context.componentMap.SearchResultViewToggle);
+	const ColumnVisibilityButton = useTreeEngineContext((context) => context.componentMap.ColumnVisibilityButton);
 	const Button = useTreeEngineContext((context) => context.componentMap.Button);
 
 	return React.useCallback(
@@ -98,13 +121,26 @@ function useElementRenderer() {
 				return <ExpandAllPopUp key="expand-all-popup" />;
 			}
 
+			if (TreeModel.SearchElement.isAssignableFrom(element)) {
+				return (
+					<React.Fragment key="search-bar">
+						<SearchBar />
+						<SearchResultViewToggle />
+					</React.Fragment>
+				);
+			}
+
+			if (TreeModel.ColumnVisibilityElement.isAssignableFrom(element)) {
+				return <ColumnVisibilityButton key="column-visibility" />;
+			}
+
 			if (TreeModel.ButtonElement.isAssignableFrom(element)) {
 				return <Button key={element.id} element={element} componentKeys={subHeaderBoxButtonKey} />;
 			}
 
 			throw TreeEngineError.TypeError("TreeEngine.Model", { expect: "TreeModel.Element", actual: element });
 		},
-		[Button, ExpandAllPopUp, MultiSelectionPanel]
+		[Button, ColumnVisibilityButton, ExpandAllPopUp, MultiSelectionPanel, SearchBar, SearchResultViewToggle]
 	);
 }
 
@@ -113,6 +149,22 @@ function visibilityFilter(elements: TreeModel.Element[], configuration: TreeMode
 		if (
 			TreeModel.MultiSelectionElement.isAssignableFrom(element) &&
 			!hasMultiSelectionComponents(configuration.multiSelection)
+		) {
+			return false;
+		}
+		// The element only places the input; `showFullTextSearch` decides whether it is offered at
+		// all, and search is supported for the `tree` strategy only.
+		if (
+			TreeModel.SearchElement.isAssignableFrom(element) &&
+			(!configuration.showFullTextSearch ||
+				!TreeModel.ExpansionStrategy.Tree.isAssignableFrom(configuration.expansionStrategy))
+		) {
+			return false;
+		}
+
+		if (
+			TreeModel.ColumnVisibilityElement.isAssignableFrom(element) &&
+			!configuration.enableUserDefinedColumnVisibility
 		) {
 			return false;
 		}

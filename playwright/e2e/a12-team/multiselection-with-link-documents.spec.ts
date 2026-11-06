@@ -30,10 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/api.js";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { Selector } from "../selectors.js";
 
@@ -42,11 +40,10 @@ import { A12TeamUtils } from "./utils.js";
 test.describe("multiselection with link documents", () => {
 	let commands: PlaywrightCommands;
 	let utils: A12TeamUtils;
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new A12TeamUtils(page);
-		await cleanDocumentsData({ showcases: "a12-teams" });
-		await seedData({ preset: "a12-teams" });
+		await seed({ preset: "a12-teams" });
 	});
 
 	test("should work", async ({ page }) => {

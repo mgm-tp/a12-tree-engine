@@ -32,23 +32,23 @@
 
 import { vi } from "vitest";
 
-import { defaultEngineState, type PartialEventHandlerContextProps } from "../../../../setup/basic.spec.js";
-import { testHook, testRowHook } from "../../../../utils/test-utils.js";
+import { TreeModel } from "../../../../../core/models/index.js";
+import type { RowState } from "../../../../../core/store/index.js";
+import { RowActionHooks } from "../../../../../core/view/components/tree-engine/sub-components/hooks/row-action-hooks.js";
+import {
+	useRowActions,
+	useNodeActionController,
+	useNodeBuiltinActionController
+} from "../../../../../core/view/configuration/keyboard-shortcut/node-controllers.js";
 import {
 	type FlattenNodeRow,
 	KeyboardShortcut,
 	RowCheckboxHandler,
 	type TreeEngineRowContext
 } from "../../../../../core/view/index.js";
+import { defaultEngineState, type PartialEventHandlerContextProps } from "../../../../setup/basic.spec.js";
 import { mockType, type Stub } from "../../../../utils/mock-utils.js";
-import {
-	useRowActions,
-	useNodeActionController,
-	useNodeBuiltinActionController
-} from "../../../../../core/view/configuration/keyboard-shortcut/node-controllers.js";
-import { TreeModel } from "../../../../../core/models/index.js";
-import type { RowState } from "../../../../../core/store/index.js";
-import { RowActionHooks } from "../../../../../core/view/components/tree-engine/sub-components/hooks/row-action-hooks.js";
+import { testHook, testRowHook } from "../../../../utils/test-utils.js";
 
 function assertFunction(object: unknown): object is () => void {
 	return typeof object === "function";

@@ -36,12 +36,12 @@ import { ButtonGroupContainer } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeModel } from "../../../../../../core/models/index.js";
 import { TreeModelKeys } from "../../../../../../core/services/localization/tree-model-keys.js";
-import { TreeEngineContextProvider, FooterBox } from "../../../../../../core/view/index.js";
 import { Button } from "../../../../../../core/view/components/content-box/sub-components/buttons.js";
+import { TreeEngineContextProvider, FooterBox } from "../../../../../../core/view/index.js";
 import { createContextProps, defaultEngineState } from "../../../../../setup/basic.spec.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.footer-box", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.footer-box", () => {
 	const basicEngineState = defaultEngineState;
 	const customRightElements: TreeModel.ButtonElement[] = [
 		{ id: "0", event: "A", type: TreeModel.ElementType.BUTTON },

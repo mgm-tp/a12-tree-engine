@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 test.describe.skip("scroll to pasted or dropped node - multiple nodes", () => {
@@ -44,12 +42,11 @@ test.describe.skip("scroll to pasted or dropped node - multiple nodes", () => {
 
 	test.use({ viewport: { width: 1280, height: 600 } });
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new ModelEditorUtils(page);
 
-		await cleanDocumentsData({ showcases: ["model-editor"] });
-		await seedData({ preset: "model-editor" });
+		await seed({ preset: "model-editor", force: true });
 		await utils.navigateToFileExplorer();
 	});
 
@@ -90,7 +87,7 @@ test.describe.skip("scroll to pasted or dropped node - multiple nodes", () => {
 
 			// Scroll to first copy then paste above and below node
 			await commands.buttonByDescription(commands.getRow("E:"), "Insert a directory as child", "*").click();
-			await utils.fillDriveForm(["Data", "sa", "sa"]);
+			await utils.fillNameOwnerGroupForm(["Data", "sa", "sa"]);
 			await page.getByRole("button", { name: "Save" }).click();
 			await commands.waitUntilLoaded();
 			await expect(commands.getRow("Data")).toBeVisible();

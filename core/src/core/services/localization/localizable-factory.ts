@@ -30,6 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import {
 	type Localizable,
@@ -40,13 +41,12 @@ import {
 	localizableKeyFromSegments,
 	localizableFromLocalizationTreeMap
 } from "@com.mgmtp.a12.utils/utils-localization";
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 
-import { RESOURCE_KEYS } from "./languages/keys.js";
 import { DocumentModelKeys } from "./document-model-keys.js";
-import { TreeModelKeys } from "./tree-model-keys.js";
-import { en } from "./languages/en.js";
 import { de } from "./languages/de.js";
+import { en } from "./languages/en.js";
+import { RESOURCE_KEYS } from "./languages/keys.js";
+import { TreeModelKeys } from "./tree-model-keys.js";
 
 export namespace LocalizableFactory {
 	export function createResourceLocalizables(resourceKey: string, args?: LocalizableArgs): Localizable[] {

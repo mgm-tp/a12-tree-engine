@@ -30,11 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "vitest";
 import semverSatisfies from "semver/functions/satisfies.js";
+import { test, expect } from "vitest";
 
 import corePackageJson from "../../core/package.json" with { type: "json" };
-
 import { MIGRATION_PARAMETERS } from "../src/internal/config.js";
 
 test("model version compatibility", async () => {

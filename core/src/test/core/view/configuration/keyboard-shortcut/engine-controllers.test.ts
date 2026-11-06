@@ -32,26 +32,26 @@
 
 import { beforeAll, vi } from "vitest";
 
-import { defaultEngineState } from "../../../../setup/basic.spec.js";
-import { testHook } from "../../../../utils/test-utils.js";
-import {
-	ButtonsHooks,
-	ExpandAllPopUpHooks,
-	KeyboardShortcut,
-	OverallCheckboxHooks
-} from "../../../../../core/view/index.js";
+import { TreeModel } from "../../../../../core/models/index.js";
+import { TreeEngineState, UIStateSelector } from "../../../../../core/store/index.js";
+import { MultiSelectionButtonHooks } from "../../../../../core/view/components/content-box/sub-components/multi-selection/multi-selection-button.js";
+import { RowActionHooks } from "../../../../../core/view/components/tree-engine/sub-components/hooks/row-action-hooks.js";
 import {
 	useEngineEventActions,
 	useEngineBuiltinActionController,
 	useEngineEventActionController,
 	useEngineInsertActionController
 } from "../../../../../core/view/configuration/keyboard-shortcut/engine-controllers.js";
+import {
+	ButtonsHooks,
+	ExpandAllPopUpHooks,
+	KeyboardShortcut,
+	OverallCheckboxHooks
+} from "../../../../../core/view/index.js";
+import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { TreeEngineState, UIStateSelector } from "../../../../../core/store/index.js";
 import { createEngineState } from "../../../../utils/model-utils.js";
-import { TreeModel } from "../../../../../core/models/index.js";
-import { RowActionHooks } from "../../../../../core/view/components/tree-engine/sub-components/hooks/row-action-hooks.js";
-import { MultiSelectionButtonHooks } from "../../../../../core/view/components/content-box/sub-components/multi-selection/multi-selection-button.js";
+import { testHook } from "../../../../utils/test-utils.js";
 
 function assertFunction(object: unknown): object is () => void {
 	return typeof object === "function";

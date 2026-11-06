@@ -32,14 +32,14 @@
 
 import * as React from "react";
 
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
-import { TreeEngineState } from "../../../../store/store.js";
-import { UIStateSelector } from "../../../../store/selectors/ui-state.js";
 import { RESOURCE_KEYS } from "../../../../services/localization/languages/keys.js";
 import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
+import { UIStateSelector } from "../../../../store/selectors/ui-state.js";
+import { TreeEngineState } from "../../../../store/store.js";
+import { useBuiltinShortcut } from "../../../configuration/keyboard-shortcut/hooks.js";
 import { KeyboardShortcut } from "../../../configuration/keyboard-shortcut/types.js";
 import { KeyboardShortcutUtils } from "../../../configuration/keyboard-shortcut/utils.js";
-import { useBuiltinShortcut } from "../../../configuration/keyboard-shortcut/hooks.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
 
 export namespace OverallCheckbox {
 	export interface Props {}

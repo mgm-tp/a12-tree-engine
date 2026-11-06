@@ -31,17 +31,18 @@
  */
 
 import * as React from "react";
+
+// tag::main[]
 import dayjs from "dayjs";
 
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
-// tag::main[]
-import { LocalizerContext, type LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
 	defaultValueConversion,
 	type ValueConversion
 } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext, type LocalizerContextProps } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 export const LocalizationProvider: React.FC = () => {
 	const locale = useProjectLocale();

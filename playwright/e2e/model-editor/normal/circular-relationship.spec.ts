@@ -30,24 +30,21 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/api.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 test.describe("circular relationship and node with different levels", () => {
 	let commands: PlaywrightCommands;
 	let utils: ModelEditorUtils;
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new ModelEditorUtils(page);
 
-		await cleanDocumentsData({ showcases: ["model-editor"] });
-		await seedData({ preset: "circular-nodes" });
+		await seed({ preset: "circular-nodes", force: true });
 		await utils.navigateToFileExplorer();
 	});
 

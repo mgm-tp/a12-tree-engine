@@ -33,12 +33,12 @@
 import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { DataSelector } from "../../../store/selectors/data.js";
-import { type DataState, Identifier, type ModelsState, TreeEngineState } from "../../../store/store.js";
-import { ModelSelector } from "../../../store/selectors/models.js";
-import { type FlattenNodeRow, RootNodeRow } from "../../components/tree-engine/sub-components/types.js";
-import { RelationshipModelUtils } from "../../../models/utils/relationship-utils.js";
 import { TreeEngineError } from "../../../error/tree-engine-error.js";
+import { RelationshipModelUtils } from "../../../models/utils/relationship-utils.js";
+import { DataSelector } from "../../../store/selectors/data.js";
+import { ModelSelector } from "../../../store/selectors/models.js";
+import { type DataState, Identifier, type ModelsState, TreeEngineState } from "../../../store/store.js";
+import { type FlattenNodeRow, RootNodeRow } from "../../components/tree-engine/sub-components/types.js";
 
 import type { CanDropResult, DragObject, HoveredObject } from "./configuration.js";
 import { DndUtils } from "./utils.js";
@@ -105,13 +105,8 @@ export const MakeRootRule: CanDropRule = {
 			} else {
 				// Default instance
 				const { root } = ModelSelector.uiModel()(engineState).content.configuration;
-				if (dragNodeModel.documentModelRef === root.documentModelRef) {
-					return true;
-				}
-
 				// Support heterogeneity
-				const subTypes = ModelSelector.subtypeModelsByName(root.documentModelRef)(engineState);
-				return subTypes.some(({ modelId }) => modelId === dragNodeModel.documentModelRef);
+				return ModelSelector.isSameOrSubtypeOf(root.documentModelRef, dragNodeModel.documentModelRef)(engineState);
 			}
 		}
 		return "no-statement";

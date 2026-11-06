@@ -31,8 +31,10 @@
  */
 
 import * as React from "react";
+
 import { css, useTheme, styled } from "styled-components";
 
+import type { Placeholder } from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	StyledLink,
 	type TableContextType,
@@ -46,17 +48,15 @@ import {
 	HiddenText,
 	type TableRenderPropsType
 } from "@com.mgmtp.a12.widgets/widgets-core";
-import type { Placeholder } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { DocumentModelUtils, TreeModelUtils, DocumentUtils } from "../../../../../models/shared.js";
-import { LocalizerHooks } from "../../../../../services/localization/localizer-hooks.js";
 import { RESOURCE_KEYS } from "../../../../../services/localization/languages/keys.js";
+import { LocalizerHooks } from "../../../../../services/localization/localizer-hooks.js";
+import { MultiSelectGroup } from "../../../../../services/multi-select/multi-select.js";
 import { DataSelector } from "../../../../../store/selectors/data.js";
 import { ModelSelector } from "../../../../../store/selectors/models.js";
 import { UIStateSelector } from "../../../../../store/selectors/ui-state.js";
 import { useTreeEngineContext, useTreeEngineState } from "../../../../context/tree-engine-context.js";
-import { MultiSelectGroup } from "../../../../../services/multi-select/multi-select.js";
-
 import { type FlattenNodeRow, PaginatedRow, TreeEngineDataColumn } from "../types.js";
 
 export namespace PaginatedBodyRow {
@@ -220,7 +220,7 @@ export const PaginationButtons: React.FC<PaginationButtons.Props> = React.memo(f
 		}
 		try {
 			return DocumentModelUtils.findByPath(documentModel, documentModelPath);
-		} catch (e) {
+		} catch {
 			return undefined;
 		}
 	}, [documentModel, documentModelPath]);

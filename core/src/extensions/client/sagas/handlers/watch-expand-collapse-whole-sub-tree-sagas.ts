@@ -34,14 +34,13 @@ import { type SagaGenerator, call, put, select, takeLatest } from "typed-redux-s
 
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
-import { TreeEngineActions } from "../../actions.js";
-import { Commands, Events } from "../../../../core/store/actions.js";
-import { TreeEngineState } from "../../../../core/store/store.js";
-import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
-import { TreeEngineSelectors } from "../../selectors.js";
-import type { TreeEngineOperation } from "../../operation.js";
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-
+import { Commands, Events } from "../../../../core/store/actions.js";
+import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
+import { TreeEngineState } from "../../../../core/store/store.js";
+import { TreeEngineActions } from "../../actions.js";
+import type { TreeEngineOperation } from "../../operation.js";
+import { TreeEngineSelectors } from "../../selectors.js";
 import { SagaUtils } from "../saga-utils.js";
 
 /** @internal */
@@ -157,7 +156,7 @@ function* handleCollapseSubTree(
 	const newExpandedNodes = { ...expandedNodes };
 	Object.keys(expandedNodes).forEach((pathString) => {
 		if (pathString.startsWith(parentPathString)) {
-			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+			// oxlint-disable-next-line no-dynamic-delete
 			delete newExpandedNodes[pathString];
 		}
 	});

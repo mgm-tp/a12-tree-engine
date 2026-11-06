@@ -32,8 +32,6 @@
 
 import { type SagaGenerator, all, call, put, race, select, take } from "typed-redux-saga";
 
-import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 import {
 	ActivityActions,
 	ActivitySelectors,
@@ -41,23 +39,24 @@ import {
 	type Selector,
 	StoreSagas
 } from "@com.mgmtp.a12.client/client-core";
+import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { RelationshipModelUtils } from "../../../../core/models/utils/relationship-utils.js";
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import type { RuntimeTreeModel } from "../../../../core/models/tree-model.js";
-import { LocalizableFactory } from "../../../../core/services/localization/localizable-factory.js";
+import { RelationshipModelUtils } from "../../../../core/models/utils/relationship-utils.js";
 import { RESOURCE_KEYS } from "../../../../core/services/localization/languages/keys.js";
-import { DataSelector } from "../../../../core/store/selectors/data.js";
+import { LocalizableFactory } from "../../../../core/services/localization/localizable-factory.js";
 import { Events } from "../../../../core/store/actions.js";
-import { Identifier, TreeEngineState } from "../../../../core/store/store.js";
+import { DataSelector } from "../../../../core/store/selectors/data.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
+import { Identifier, TreeEngineState } from "../../../../core/store/store.js";
 import { TreeDataUtils } from "../../../../core/store/utils.js";
 import { TreeEngineActions } from "../../actions.js";
 import { TreeEngineActivity, TreeEngineDataHolder } from "../../data-holder.js";
 import { TreeEngineOperation } from "../../operation.js";
 import { TreeEngineSelectors } from "../../selectors.js";
 import { logger } from "../../utils.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-
 import { SagaUtils } from "../saga-utils.js";
 
 /** @internal */

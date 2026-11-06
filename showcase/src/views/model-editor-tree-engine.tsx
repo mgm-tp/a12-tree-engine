@@ -31,9 +31,15 @@
  */
 
 import * as React from "react";
+
 import * as KeyCode from "keycode-js";
 
 import type { Annotation } from "@com.mgmtp.a12.base/base-model-api";
+import {
+	defaultVariantSelectionMapper,
+	VariantSelection,
+	type VariantSelectionItem
+} from "@com.mgmtp.a12.client/client-core/heterogeneity";
 import {
 	TreeEngineState,
 	type Events,
@@ -45,16 +51,11 @@ import {
 	useTreeEngineState,
 	TreeEngineFactories
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import {
-	defaultVariantSelectionMapper,
-	VariantSelection,
-	type VariantSelectionItem
-} from "@com.mgmtp.a12.client/client-core/heterogeneity";
 import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
+import { useShowcaseContext } from "../context.js";
 import { assert } from "../helpers.js";
 import { engineShortcuts, nodeShortcuts } from "../utils.js";
-import { useShowcaseContext } from "../context.js";
 
 namespace ModelEditorTreeEngine {
 	export type Props = TreeEngineFactories.ViewComponentProps;

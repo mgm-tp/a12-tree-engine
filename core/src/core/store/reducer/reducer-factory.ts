@@ -35,20 +35,24 @@ import type { UnknownAction } from "redux";
 import { Commands, Events } from "../actions.js";
 import type { DataState, UiState } from "../store.js";
 
-import { handleResetClipboard } from "./handler/resetClipboard.js";
-import { handleSetCopiedNodes } from "./handler/setCopiedNodes.js";
-import { handleSetColumnWidths } from "./handler/setColumnWidths.js";
-import { handleSetInsertDialogState } from "./handler/setDialogState.js";
-import { handleSetExpandedNodes } from "./handler/setExpandedNodes.js";
-import { handleSetSelectedNodes } from "./handler/setSelectedNodes.js";
-import { handleSetMultiSelectionNodes } from "./handler/setMultiSelectionNodes.js";
-import { handleSetExpandedMultiSelectionPanel } from "./handler/setExpandedMultiSelectionPanel.js";
-import { handleSetScrollToNode } from "./handler/setScrollToNode.js";
-import { handleSetCutNodes } from "./handler/setCutNodes.js";
-import { handleSetPreloadChildNodes } from "./handler/setPreloadChildNodes.js";
-import { handleSetDisabled } from "./handler/setDisabled.js";
 import { handleMultiSelectionEvents } from "./handler/handleMultiSelectionEvents.js";
+import { handleResetClipboard } from "./handler/resetClipboard.js";
+import { handleSetColumnVisibility } from "./handler/setColumnVisibility.js";
+import { handleSetColumnWidths } from "./handler/setColumnWidths.js";
+import { handleSetCopiedNodes } from "./handler/setCopiedNodes.js";
+import { handleSetCutNodes } from "./handler/setCutNodes.js";
+import { handleSetInsertDialogState } from "./handler/setDialogState.js";
+import { handleSetDisabled } from "./handler/setDisabled.js";
+import { handleSetExpandedMultiSelectionPanel } from "./handler/setExpandedMultiSelectionPanel.js";
+import { handleSetExpandedNodes } from "./handler/setExpandedNodes.js";
+import { handleSetMultiSelectionNodes } from "./handler/setMultiSelectionNodes.js";
+import { handleSetPreloadChildNodes } from "./handler/setPreloadChildNodes.js";
 import { handleSetReadonly } from "./handler/setReadonly.js";
+import { handleSetScrollToNode } from "./handler/setScrollToNode.js";
+import { handleSetSearchResult } from "./handler/setSearchResult.js";
+import { handleSetSearchResultView } from "./handler/setSearchResultView.js";
+import { handleSetSelectedNodes } from "./handler/setSelectedNodes.js";
+import { handleSetShowMobileSearchBar } from "./handler/setShowMobileSearchBar.js";
 
 export function buildInitialDataState(): DataState {
 	return {
@@ -57,7 +61,7 @@ export function buildInitialDataState(): DataState {
 	};
 }
 
-export function dataStateReducer(state: DataState | undefined, action: UnknownAction): DataState {
+export function dataStateReducer(state: DataState | undefined, _action: UnknownAction): DataState {
 	if (state === undefined) {
 		return buildInitialDataState();
 	}
@@ -68,6 +72,7 @@ const initialUiState: UiState = {
 	pageSizeMap: {},
 	expandedNodes: {},
 	matchedNodes: {},
+	searchString: "",
 	query: "",
 	selectedNodes: {},
 	dialog: null,
@@ -94,6 +99,8 @@ export function uiStateReducer(state: UiState | undefined, action: UnknownAction
 		return handleSetInsertDialogState(state, action);
 	} else if (Commands.setColumnWidths.match(action)) {
 		return handleSetColumnWidths(state, action);
+	} else if (Commands.setColumnVisibility.match(action)) {
+		return handleSetColumnVisibility(state, action);
 	} else if (Commands.setMultiSelectionNodes.match(action)) {
 		return handleSetMultiSelectionNodes(state, action);
 	} else if (Commands.setExpandedMultiSelectionPanel.match(action)) {
@@ -110,6 +117,12 @@ export function uiStateReducer(state: UiState | undefined, action: UnknownAction
 		return handleSetDisabled(state, action);
 	} else if (Commands.setReadonly.match(action)) {
 		return handleSetReadonly(state, action);
+	} else if (Commands.setSearchResult.match(action)) {
+		return handleSetSearchResult(state, action);
+	} else if (Commands.setShowMobileSearchBar.match(action)) {
+		return handleSetShowMobileSearchBar(state, action);
+	} else if (Commands.setSearchResultView.match(action)) {
+		return handleSetSearchResultView(state, action);
 	} else if (Commands.resetClipboard.match(action)) {
 		return handleResetClipboard(state, action);
 	} else if (

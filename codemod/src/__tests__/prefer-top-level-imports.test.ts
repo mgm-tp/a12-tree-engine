@@ -37,8 +37,8 @@ import { testRecipe } from "@com.mgmtp.a12.devtools/codemod";
 import { preferTopLevelImportsRecipe } from "../recipes/prefer-top-level-imports.js";
 
 describe("preferTopLevelImports", () => {
-	it("should migrate properly", () => {
-		expect(
+	it("should migrate properly", async () => {
+		await expect(
 			testRecipe(
 				preferTopLevelImportsRecipe,
 				`import * as React from "react";

@@ -30,13 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import type { DataProvider } from "@com.mgmtp.a12.client/client-core";
+import type { Query } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import {
 	DefaultRequestSelectorMap,
 	TreeEngineServerConnectorFactories,
 	type RequestSelectorMap
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import type { Query } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import type { DataProvider } from "@com.mgmtp.a12.client/client-core";
 
 // tag::requestSelectorMap[]
 export const customRequestSelectorMap: RequestSelectorMap = {

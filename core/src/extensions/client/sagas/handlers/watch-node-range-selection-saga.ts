@@ -34,15 +34,14 @@ import { call, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
-import { TreeEngineActions } from "../../actions.js";
-import { DataSelector } from "../../../../core/store/selectors/data.js";
-import { Events } from "../../../../core/store/actions.js";
-import { TreeEngineState } from "../../../../core/store/store.js";
-import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import { TreeEngineSelectors } from "../../selectors.js";
+import { Events } from "../../../../core/store/actions.js";
+import { DataSelector } from "../../../../core/store/selectors/data.js";
+import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
+import { TreeEngineState } from "../../../../core/store/store.js";
 import type { BaseNode } from "../../../server-connector/shared.js";
-
+import { TreeEngineActions } from "../../actions.js";
+import { TreeEngineSelectors } from "../../selectors.js";
 import { SagaUtils } from "../saga-utils.js";
 
 import { getNextMultiSelectionNodesValues, handleMultiSelection } from "./watch-node-multi-selection-saga.js";

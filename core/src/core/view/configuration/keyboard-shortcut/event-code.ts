@@ -29,6 +29,7 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import * as KeyCode from "keycode-js";
 
 /** Human-readable label for a keyboard event code (leaf helper, shared by types and utils). */

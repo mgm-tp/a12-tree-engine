@@ -32,14 +32,14 @@
 
 import type * as Enzyme from "enzyme";
 
+import { TreeModel } from "../../../../../core/models/index.js";
 import { TreeEngineState } from "../../../../../core/store/index.js";
 import { TreeEngineContextProvider, ConfirmationDialog, DialogsRenderer } from "../../../../../core/view/index.js";
 import { createContextProps, defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { TreeModel } from "../../../../../core/models/index.js";
 import { testIsNullComponent } from "../../../../utils/test-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.dialogs.dialog-renderer", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.dialogs.dialog-renderer", () => {
 	const basicEngineState = defaultEngineState;
 
 	function setupTest(customEngineState?: Partial<TreeEngineState>): Enzyme.ReactWrapper {

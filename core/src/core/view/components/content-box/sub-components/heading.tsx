@@ -32,13 +32,15 @@
 
 import * as React from "react";
 
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
-import { TreeModelKeys } from "../../../../services/localization/tree-model-keys.js";
-import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
-import { ModelSelector } from "../../../../store/selectors/models.js";
 import { TreeModel } from "../../../../models/tree-model.js";
+import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
+import { TreeModelKeys } from "../../../../services/localization/tree-model-keys.js";
+import { ModelSelector } from "../../../../store/selectors/models.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
+import { isColumnVisibilityAvailable } from "../../column-visibility/column-visibility.js";
 
 import { ExpandAllPopUpHooks } from "./expand-all-pop-up.js";
+import { useIsSearchEnabled } from "./sub-action-bar-hooks.js";
 
 export namespace Heading {
 	export interface Props {
@@ -48,66 +50,51 @@ export namespace Heading {
 
 /** @internal */
 export const Heading: React.ComponentType<Heading.Props> = React.memo(function Heading({ ariaLevel }) {
-	const uiModel = useTreeEngineState(ModelSelector.uiModel());
-	const headerLabels = React.useMemo(() => uiModel.header.labels, [uiModel]);
-	const localizedTreeElement = LocalizerHooks.useLocalizedTreeElement();
 	const WidgetHeading = useTreeEngineContext((context) => context.widgetMap.Heading);
 	const HeadingAddon = useTreeEngineContext((context) => context.widgetMap.HeadingAddon);
 	const Title = useTreeEngineContext((context) => context.widgetMap.Title);
 	const Subtitle = useTreeEngineContext((context) => context.widgetMap.Subtitle);
 	const PopUpMenu = useTreeEngineContext((context) => context.widgetMap.PopUpMenu);
 	const HiddenText = useTreeEngineContext((context) => context.widgetMap.HiddenText);
-	const labelHidden = React.useMemo<boolean | undefined>(
-		() => uiModel.content.configuration.labelHidden,
-		[uiModel.content.configuration.labelHidden]
-	);
-	const hiddenText = React.useMemo<string>(() => {
-		if (!labelHidden) {
-			return "";
-		}
+	const SearchButton = useTreeEngineContext((context) => context.componentMap.SearchButton);
 
-		return localizedTreeElement(TreeModelKeys.getHeaderLabelsKey(), headerLabels);
-	}, [localizedTreeElement, labelHidden, headerLabels]);
+	const { labelHidden, label, subtitle } = useHeadingTexts();
+	const mobileButtons = useMobileButtons();
 
-	const title = React.useMemo(() => {
-		if (labelHidden) {
-			return "";
-		}
+	// The sub-header is not rendered in small view, so search gets a toggle beside the pop-up menu
+	// (where the Overview Engine puts it) that reveals the search bar below the heading.
+	const smallView = useTreeEngineContext((context) => context.smallView);
+	const searchEnabled = useIsSearchEnabled();
+	const showSearchToggle = !!smallView && searchEnabled;
 
-		return localizedTreeElement(TreeModelKeys.getHeaderLabelsKey(), headerLabels);
-	}, [labelHidden, localizedTreeElement, headerLabels]);
+	const showColumnVisibility = useShowColumnVisibilityInSmallView();
+	const ColumnVisibilityButton = useTreeEngineContext((context) => context.componentMap.ColumnVisibilityButton);
 
-	const subtitle = React.useMemo(() => {
-		if (!title) {
-			return "";
-		}
-
-		return localizedTreeElement(TreeModelKeys.getHeaderSubtitleKey(), uiModel.content.configuration.subtitle);
-	}, [localizedTreeElement, title, uiModel.content.configuration.subtitle]);
-
-	const mobilesButtons = useMobileButtons();
-
-	const childrenOnly = React.useMemo(() => {
-		return labelHidden && !mobilesButtons.length;
-	}, [labelHidden, mobilesButtons.length]);
+	const hasSuffixes = showSearchToggle || showColumnVisibility || mobileButtons.length > 0;
 
 	return (
 		<WidgetHeading
 			suffixes={
-				mobilesButtons.length > 0 && (
-					<HeadingAddon>
-						<PopUpMenu>{mobilesButtons}</PopUpMenu>
-					</HeadingAddon>
+				hasSuffixes && (
+					<>
+						{showSearchToggle && <SearchButton />}
+						{showColumnVisibility && <ColumnVisibilityButton />}
+						{mobileButtons.length > 0 && (
+							<HeadingAddon>
+								<PopUpMenu>{mobileButtons}</PopUpMenu>
+							</HeadingAddon>
+						)}
+					</>
 				)
 			}
-			childrenOnly={childrenOnly}>
+			childrenOnly={labelHidden && !hasSuffixes}>
 			{labelHidden ? (
-				<HiddenText role={"heading"} ariaLevel={ariaLevel}>
-					{hiddenText}
+				<HiddenText role="heading" ariaLevel={ariaLevel}>
+					{label}
 				</HiddenText>
 			) : (
 				<>
-					<Title ariaLevel={ariaLevel} text={title} />
+					<Title ariaLevel={ariaLevel} text={label} />
 					<Subtitle text={subtitle} />
 				</>
 			)}
@@ -115,6 +102,46 @@ export const Heading: React.ComponentType<Heading.Props> = React.memo(function H
 	);
 });
 
+/**
+ * The localized heading texts. `label` is rendered as the title, or as hidden text when the model
+ * hides the label; the subtitle is dropped along with an empty label.
+ */
+function useHeadingTexts(): { labelHidden?: boolean; label: string; subtitle: string } {
+	const uiModel = useTreeEngineState(ModelSelector.uiModel());
+	const localizedTreeElement = LocalizerHooks.useLocalizedTreeElement();
+
+	const { labelHidden, subtitle: subtitleModel } = uiModel.content.configuration;
+	const headerLabels = uiModel.header.labels;
+
+	const label = React.useMemo(
+		() => localizedTreeElement(TreeModelKeys.getHeaderLabelsKey(), headerLabels),
+		[localizedTreeElement, headerLabels]
+	);
+
+	const subtitle = React.useMemo(
+		() => (labelHidden || !label ? "" : localizedTreeElement(TreeModelKeys.getHeaderSubtitleKey(), subtitleModel)),
+		[localizedTreeElement, labelHidden, label, subtitleModel]
+	);
+
+	return { labelHidden, label, subtitle };
+}
+
+/**
+ * In small view the sub action bar is not rendered, so the column visibility trigger moves into
+ * the heading — as its own icon next to the overflow menu.
+ */
+function useShowColumnVisibilityInSmallView(): boolean {
+	const smallView = useTreeEngineContext((context) => context.smallView);
+	const available = useTreeEngineState((state) => isColumnVisibilityAvailable(state.models.uiModel));
+
+	return smallView && available;
+}
+
+/**
+ * The sub-header elements re-rendered as pop-up menu entries for small view, where the sub-header
+ * itself is not shown. Only the element types that work as menu entries are carried over — the
+ * search bar is offered through the heading's search toggle instead.
+ */
 function useMobileButtons(): React.ReactElement[] {
 	const ComponentButton = useTreeEngineContext((context) => context.componentMap.Button);
 	const WidgetButton = useTreeEngineContext((context) => context.widgetMap.Button);
@@ -127,29 +154,30 @@ function useMobileButtons(): React.ReactElement[] {
 	const collapseAllButtonProps = ExpandAllPopUpHooks.useExpandAllButtonProps("collapse");
 
 	return React.useMemo(() => {
-		const result: React.ReactElement[] = [];
-
 		if (!smallView) {
-			return result;
+			return [];
 		}
 
-		[...leftSlot, ...rightSlot].forEach((element) => {
+		return [...leftSlot, ...rightSlot].flatMap((element) => {
 			if (TreeModel.ButtonElement.isAssignableFrom(element)) {
-				result.push(
+				return [
 					<ComponentButton
 						key={element.id}
-						element={{ ...element, labelHidden: undefined }} // to show button label in pop up menu in small view only
+						element={{ ...element, labelHidden: undefined }}
 						componentKeys={TreeModelKeys.getSubHeaderBoxButtonsKey()}
 						labelFallback
 					/>
-				);
+				];
 			}
 
 			if (TreeModel.ExpandAllPopUpElement.isAssignableFrom(element)) {
-				result.push(<WidgetButton {...expandAllButtonProps} />, <WidgetButton {...collapseAllButtonProps} />);
+				return [
+					<WidgetButton key="expand" {...expandAllButtonProps} />,
+					<WidgetButton key="collapse" {...collapseAllButtonProps} />
+				];
 			}
-		});
 
-		return result;
+			return [];
+		});
 	}, [ComponentButton, WidgetButton, collapseAllButtonProps, expandAllButtonProps, leftSlot, rightSlot, smallView]);
 }

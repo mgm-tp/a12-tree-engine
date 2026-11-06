@@ -30,15 +30,16 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { defaultEngineState } from "../../../../../setup/basic.spec.js";
 import { type RuntimeTreeModel, TreeModel } from "../../../../../../core/models/index.js";
 import type { TreeEngineState } from "../../../../../../core/store/index.js";
-import { BaseRowActionGroup, RootNodeRow } from "../../../../../../core/view/index.js";
 import { VirtualRootRowActionsGroup } from "../../../../../../core/view/components/tree-engine/sub-components/virtual-root-row-actions-group.js";
+import { BaseRowActionGroup, RootNodeRow, type TreeEngineRowContext } from "../../../../../../core/view/index.js";
+import { defaultEngineState } from "../../../../../setup/basic.spec.js";
+import { mockType } from "../../../../../utils/mock-utils.js";
 
 import { BodyCellWrapper } from "./body-cell/shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.virtual-root-row-actions-group", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.virtual-root-row-actions-group", () => {
 	const basicEngineState = defaultEngineState;
 	const basicRootNodeRow = RootNodeRow.create();
 
@@ -52,7 +53,11 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 	) {
 		return mount(<VirtualRootRowActionsGroup {...basicRowActionGroupProps} {...rowActionsGroupProps} />, {
 			wrappingComponent: BodyCellWrapper,
-			wrappingComponentProps: { customEngineState } as BodyCellWrapper.Props
+			// The rendered row actions read the row context, so it has to be provided even for the virtual root.
+			wrappingComponentProps: {
+				customEngineState,
+				rowContextProps: mockType<TreeEngineRowContext.Type>({})
+			} as BodyCellWrapper.Props
 		});
 	}
 

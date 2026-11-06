@@ -67,7 +67,7 @@ export namespace TreeDataUtils {
 	export function deleteNodeData(data: TreeEngineState.Data, node: TreeEngineState.Node): TreeEngineState.Data {
 		const { type, id } = node.identifier;
 		const nodesByType: TreeEngineState.NodeMap<TreeEngineState.Entity> = { ...data[type] };
-		// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+		// oxlint-disable-next-line no-dynamic-delete
 		delete nodesByType[id];
 		return {
 			...data,
@@ -109,7 +109,7 @@ export namespace TreeDataUtils {
 	export function deleteLinkData(data: TreeEngineState.Data, linkIdentifier: Identifier): TreeEngineState.Data {
 		const { type, id } = linkIdentifier;
 		const nodesByType: TreeEngineState.NodeMap<TreeEngineState.Entity> = { ...data[type] };
-		// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+		// oxlint-disable-next-line no-dynamic-delete
 		delete nodesByType[id];
 		return {
 			...data,

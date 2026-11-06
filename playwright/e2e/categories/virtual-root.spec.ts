@@ -30,10 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/index.js";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { Selector } from "../selectors.js";
 
@@ -43,14 +41,12 @@ test.describe("virtual root", () => {
 	let utils: CategoriesUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		utils = new CategoriesUtils(page);
 		commands = new PlaywrightCommands(page);
 
-		await cleanDocumentsData({
-			showcases: ["categories"]
-		});
-		await seedData({ preset: "categories" });
+		// The test opens the insert form and asserts its title, but never saves it.
+		await seed({ preset: "categories" });
 
 		await page.goto("");
 		await utils.navigate("Virtual Scroll");

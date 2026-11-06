@@ -35,9 +35,9 @@ import { main as runWaitOn } from "../wait-on.js";
 import { main as a12Teams } from "./presets/a12-teams.js";
 import { main as categories } from "./presets/categories.js";
 import { main as categoriesSlim } from "./presets/categories.js";
-import { main as modelEditor } from "./presets/model-editor.js";
 import { main as circularNodes } from "./presets/circular-nodes.js";
 import { main as defaultPreset } from "./presets/default-preset.js";
+import { main as modelEditor } from "./presets/model-editor.js";
 import type { ModelEditorParams } from "./presets/model-editor.js";
 
 export interface WaitOnParams extends ModelEditorParams {

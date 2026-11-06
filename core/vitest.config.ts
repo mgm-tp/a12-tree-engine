@@ -30,31 +30,90 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import { fileURLToPath } from "node:url";
+
+import pluginReact from "@vitejs/plugin-react";
+import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
 
-const pool = process.env.CI ? "forks" : "vmForks";
+const cheerioStub = fileURLToPath(new URL("./src/test/setup/cheerio-stub.ts", import.meta.url));
+const reactDomTestUtilsShim = fileURLToPath(new URL("./src/test/setup/react-dom-test-utils-shim.ts", import.meta.url));
 
 export default defineConfig({
-	/** Suppress annoying unsupported es2025 warning message from esbuild, which might crash Jenkins instance */
-	esbuild: { tsconfigRaw: { compilerOptions: { target: "es2024", useDefineForClassFields: true } } },
 	test: {
 		include: ["src/test/**/*.test.{ts,tsx}"],
-		exclude: [
-			"src/test/core/services/converter/**.test.ts",
-			"src/test/core/view/components/tree-engine/tree-engine-renderer.test.tsx"
-		],
-		pool,
-		environment: "jsdom",
-		setupFiles: ["./src/test/setup/enzyme.ts"],
+		setupFiles: ["./src/test/setup/vitest.ts"],
 		reporters: ["default", "junit"],
 		outputFile: {
 			junit: "./target/TEST-tree-engine.xml"
 		},
+		maxWorkers: process.env.CI ? 2 : "50%",
+		pool: "forks",
 		globals: true,
+		retry: process.env.CI ? 1 : 0,
+		testTimeout: 20000,
 		coverage: {
 			enabled: true,
 			reporter: ["text", "html"],
 			reportsDirectory: "./target/coverage"
+		},
+		browser: {
+			enabled: true,
+			headless: true,
+			screenshotFailures: false,
+			provider: playwright(),
+			instances: [
+				{
+					browser: "chromium",
+					viewport: { width: 1280, height: 720 }
+				}
+			]
 		}
-	}
+	},
+	/*
+	 * Dependencies discovered mid-run make the optimizer restart the browser, which aborts whatever
+	 * was in flight. Everything the suite pulls in is listed up front so a cold run stays one pass.
+	 */
+	optimizeDeps: {
+		include: [
+			"@cfaester/enzyme-adapter-react-18",
+			"@com.mgmtp.a12.base/base-model-api",
+			"@com.mgmtp.a12.client/client-core",
+			"@com.mgmtp.a12.client/client-core/a12internal",
+			"@com.mgmtp.a12.client/client-core/heterogeneity",
+			"@com.mgmtp.a12.client/client-core/modelLoader",
+			"@com.mgmtp.a12.client/typescript-fsa-redux-5-compat",
+			"@com.mgmtp.a12.dataservices/dataservices-access",
+			"@com.mgmtp.a12.kernel/kernel-md-facade",
+			"@com.mgmtp.a12.relationshipengine/relationshipengine-core",
+			"@com.mgmtp.a12.utils/utils-localization",
+			"@com.mgmtp.a12.utils/utils-localization-react",
+			"@com.mgmtp.a12.utils/utils-logging",
+			"@com.mgmtp.a12.widgets/widgets-core",
+			"@testing-library/jest-dom/vitest",
+			"@testing-library/react",
+			"enzyme",
+			"keycode-js",
+			"react-dnd",
+			"react-redux",
+			"redux",
+			"reselect",
+			"styled-components",
+			"typed-redux-saga",
+			"typemoq"
+		]
+	},
+	resolve: {
+		/** Modules the Enzyme stack expects but the browser cannot serve - see each replacement for why. */
+		alias: [
+			{ find: /^cheerio\/lib\/utils$/, replacement: cheerioStub },
+			{ find: /^cheerio$/, replacement: cheerioStub },
+			{ find: /^react-dom\/test-utils$/, replacement: reactDomTestUtilsShim }
+		]
+	},
+	define: {
+		global: "window",
+		SC_DISABLE_SPEEDY: false
+	},
+	plugins: [pluginReact()]
 });

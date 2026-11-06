@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 test.describe("dnd", () => {
@@ -43,12 +41,11 @@ test.describe("dnd", () => {
 	let utils: ModelEditorUtils;
 
 	test.describe("Dragged node wants to be sibling of top level node", () => {
-		test.beforeEach(async ({ page }) => {
+		test.beforeEach(async ({ page, seed }) => {
 			commands = new PlaywrightCommands(page);
 			utils = new ModelEditorUtils(page);
 
-			await cleanDocumentsData({ showcases: ["model-editor"] });
-			await seedData({ preset: "model-editor" });
+			await seed({ preset: "model-editor", force: true });
 			await utils.navigateToFileExplorer();
 
 			const personJsonRows = commands.getRows(undefined, "Person.json");
@@ -109,12 +106,11 @@ test.describe("dnd", () => {
 	});
 
 	test.describe("Drag and drop node is placed on top of sibling of same type if predecessor link ref is undefined", () => {
-		test.beforeEach(async ({ page }) => {
+		test.beforeEach(async ({ page, seed }) => {
 			commands = new PlaywrightCommands(page);
 			utils = new ModelEditorUtils(page);
 
-			await cleanDocumentsData({ showcases: ["model-editor"] });
-			await seedData({ preset: "model-editor" });
+			await seed({ preset: "model-editor", force: true });
 			await utils.navigateToFileExplorer();
 			await commands.waitUntilLoaded();
 		});
@@ -207,11 +203,10 @@ test.describe("dnd", () => {
 	});
 
 	test.describe("Drag and drop to blank area below tree in case of non virtual root", () => {
-		test.beforeEach(async ({ page }) => {
+		test.beforeEach(async ({ page, seed }) => {
 			commands = new PlaywrightCommands(page);
 			utils = new ModelEditorUtils(page);
-			await cleanDocumentsData({ showcases: ["model-editor"] });
-			await seedData({ preset: "model-editor" });
+			await seed({ preset: "model-editor", force: true });
 			await utils.navigateToFileExplorer();
 			await commands
 				.buttonByDescription(commands.getRow("DomainPerson.json"), "Open document modeler with non virtual root")
@@ -272,12 +267,11 @@ test.describe("dnd", () => {
 	});
 
 	test.describe("Drag and drop for relationship model GroupElement", () => {
-		test.beforeEach(async ({ page }) => {
+		test.beforeEach(async ({ page, seed }) => {
 			commands = new PlaywrightCommands(page);
 			utils = new ModelEditorUtils(page);
 
-			await cleanDocumentsData({ showcases: ["model-editor"] });
-			await seedData({ preset: "model-editor" });
+			await seed({ preset: "model-editor", force: true });
 			await utils.navigateToFileExplorer();
 			await commands.buttonByDescription(commands.getRow("DomainPerson.json"), "Open document model").click();
 			await commands.waitUntilLoaded();

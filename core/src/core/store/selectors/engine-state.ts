@@ -31,7 +31,6 @@
  */
 
 import { TreeEngineError } from "../../error/tree-engine-error.js";
-
 import type { DataState, ModelsState, TreeEngineState, UiState } from "../store.js";
 
 /** @internal */

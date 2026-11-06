@@ -2,7 +2,7 @@
 	"header": {
 		"id": "a12-teams-tree",
 		"modelType": "tree",
-		"modelVersion": "11.0.0",
+		"modelVersion": "11.1.0",
 		"locales": [
 			{
 				"code": "en"
@@ -116,10 +116,16 @@
 					"affectedNodeRefs": ["node-12feda"]
 				},
 				"type": "level_by_level"
-			}
+			},
+			"enableUserDefinedColumnVisibility": true,
+			"screenReaderColumnRef": "column-2em45w"
 		},
 		"subHeaderBox": {
-			"rightSlot": [],
+			"rightSlot": [
+				{
+					"type": "column_visibility"
+				}
+			],
 			"leftSlot": [
 				{
 					"type": "multi_selection"

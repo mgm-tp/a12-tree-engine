@@ -31,12 +31,14 @@
  */
 
 import * as React from "react";
+
 import { vi } from "vitest";
 
 import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { Locale, LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
 import { TreeTableNodeDropPosition, Button, List } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { TreeModel } from "../../../../../../core/models/index.js";
 import {
 	DataSelector,
 	ModelSelector,
@@ -51,11 +53,10 @@ import {
 } from "../../../../../../core/view/index.js";
 import { defaultEngineState, deLocale, type PartialEventHandlerContextProps } from "../../../../../setup/basic.spec.js";
 import { mockType, type Stub } from "../../../../../utils/mock-utils.js";
-import { TreeModel } from "../../../../../../core/models/index.js";
 
 import { BodyCellWrapper, teamIdentifier, teamNodeModel } from "./body-cell/shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.row-action", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.row-action", () => {
 	const basicEngineState = defaultEngineState;
 	const basicNodeIdentifier = {
 		id: "DomainTeam/1",
@@ -311,21 +312,17 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 					button.props()?.onClick?.(mockType<React.MouseEvent<HTMLElement>>());
 
 					if (isEventButton) {
-						expect(
-							expect(onNodeEventButtonClicked).toHaveBeenCalledWith({
-								nodeIdentifier: testCase.rowActionProps.row.data.nodeIdentifier,
-								nodePath: testCase.rowActionProps.row.data.nodePath,
-								button: testCase.rowActionProps.rowActionModel
-							})
-						).toBe(true);
+						expect(onNodeEventButtonClicked).toHaveBeenCalledWith({
+							nodeIdentifier: testCase.rowActionProps.row.data.nodeIdentifier,
+							nodePath: testCase.rowActionProps.row.data.nodePath,
+							button: testCase.rowActionProps.rowActionModel
+						});
 					} else {
-						expect(
-							expect(onInsertChildNodeButtonClicked).toHaveBeenCalledWith({
-								nodeIdentifier: testCase.rowActionProps.row.data.nodeIdentifier,
-								nodePath: testCase.rowActionProps.row.data.nodePath,
-								button: testCase.rowActionProps.rowActionModel
-							})
-						).toBe(true);
+						expect(onInsertChildNodeButtonClicked).toHaveBeenCalledWith({
+							nodeIdentifier: testCase.rowActionProps.row.data.nodeIdentifier,
+							nodePath: testCase.rowActionProps.row.data.nodePath,
+							button: testCase.rowActionProps.rowActionModel
+						});
 					}
 				});
 			});
@@ -390,21 +387,17 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 						item.at(0).props()?.onClick?.(mockType<React.MouseEvent<HTMLElement>>());
 
 						if (isEventButton) {
-							expect(
-								expect(onNodeEventButtonClicked).toHaveBeenCalledWith({
-									nodeIdentifier: testCase.rowActionProps.row.data.nodeIdentifier,
-									nodePath: testCase.rowActionProps.row.data.nodePath,
-									button: testCase.rowActionProps.rowActionModel
-								})
-							).toBe(true);
+							expect(onNodeEventButtonClicked).toHaveBeenCalledWith({
+								nodeIdentifier: testCase.rowActionProps.row.data.nodeIdentifier,
+								nodePath: testCase.rowActionProps.row.data.nodePath,
+								button: testCase.rowActionProps.rowActionModel
+							});
 						} else {
-							expect(
-								expect(onInsertChildNodeButtonClicked).toHaveBeenCalledWith({
-									nodeIdentifier: testCase.rowActionProps.row.data.nodeIdentifier,
-									nodePath: testCase.rowActionProps.row.data.nodePath,
-									button: testCase.rowActionProps.rowActionModel
-								})
-							).toBe(true);
+							expect(onInsertChildNodeButtonClicked).toHaveBeenCalledWith({
+								nodeIdentifier: testCase.rowActionProps.row.data.nodeIdentifier,
+								nodePath: testCase.rowActionProps.row.data.nodePath,
+								button: testCase.rowActionProps.rowActionModel
+							});
 						}
 					});
 				});
@@ -451,7 +444,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 					const result = setupTest(normalEventActionProps, undefined, getRowUIState({ busy: false }));
 					const button = result.find(Button);
 
-					expect(button.props().disabled).toBe(false);
+					expect(button.props().disabled).toBeFalsy();
 				});
 			});
 
@@ -464,7 +457,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 					);
 					const button = result.find(Button);
 
-					expect(button.props().disabled).toBe(false);
+					expect(button.props().disabled).toBeFalsy();
 				});
 			});
 
@@ -513,7 +506,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
 						getRowUIState({ busy: false })
 					);
-					expect(result.find(Button).props().disabled).toBe(false);
+					expect(result.find(Button).props().disabled).toBeFalsy();
 				});
 
 				it("should be false for event_collapse_whole_tree", () => {
@@ -529,7 +522,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 						{ multiSelectionNodes: { [rootNodePath]: TreeEngineState.MultiSelectionState.SELECTED } },
 						getRowUIState({ busy: false })
 					);
-					expect(result.find(Button).props().disabled).toBe(false);
+					expect(result.find(Button).props().disabled).toBeFalsy();
 				});
 
 				it("should be false for event_expand_sub_tree", () => {
@@ -785,7 +778,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 						const result = setupTest(pasteActionButtonProps, { clipboard }, rowContext, contextProps);
 						const button = result.find(Button);
 
-						expect(button.props().disabled).toBe(false);
+						expect(button.props().disabled).toBeFalsy();
 					});
 
 					it("should be disabled when the node is undefined (deleted or moved)", () => {
@@ -828,7 +821,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 					const result = setupTest(normalInsertSiblingActionProps, undefined, getRowUIState({ busy: false }));
 					const button = result.find(Button);
 
-					expect(button.props().disabled).toBe(false);
+					expect(button.props().disabled).toBeFalsy();
 				});
 			});
 
@@ -841,7 +834,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 					);
 					const button = result.find(Button);
 
-					expect(button.props().disabled).toBe(false);
+					expect(button.props().disabled).toBeFalsy();
 				});
 			});
 
@@ -899,7 +892,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 			expect(button.props().buttonAttributes?.["aria-label"]).toBe(expected.ariaLabel);
 		};
 		describe("given labelHidden = true", () => {
-			it("should not render label, but render title and ariaLabel correctly", () => {
+			describe("should not render label, but render title and ariaLabel correctly", () => {
 				it("for NodeEventActionButton", () => {
 					const basedElement: TreeModel.TreeNodeActionButton = {
 						...normalEventActionProps.rowActionModel,

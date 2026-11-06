@@ -35,7 +35,6 @@ import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DocumentModelUtils, DocumentUtils } from "../../models/shared.js";
 import { MultiSelectGroup } from "../../services/multi-select/multi-select.js";
-
 import type { DataState, Identifier } from "../store.js";
 
 import { DataSelector } from "./data.js";

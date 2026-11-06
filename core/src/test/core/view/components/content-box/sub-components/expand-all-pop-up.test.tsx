@@ -31,6 +31,7 @@
  */
 
 import * as React from "react";
+
 import { vi } from "vitest";
 
 import { Button, Icon, PopUpMenu, List } from "@com.mgmtp.a12.widgets/widgets-core";
@@ -39,7 +40,7 @@ import { ExpandAllPopUp, TreeEngineContextProvider } from "../../../../../../cor
 import { createContextProps, defaultEngineState } from "../../../../../setup/basic.spec.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.expand-all-popup", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.expand-all-popup", () => {
 	const basicEngineState = defaultEngineState;
 	const onEventButtonClicked = vi.fn();
 
@@ -102,7 +103,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 			expect(onEventButtonClicked).toHaveBeenCalledOnce();
 			expect(onEventButtonClicked).toHaveBeenCalledWith(
 				expect.objectContaining({
-					button: { event: "event_expand_whole_tree" }
+					button: { event: "event_expand_whole_tree", id: "event_expand_whole_tree" }
 				})
 			);
 
@@ -112,7 +113,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 			expect(onEventButtonClicked).toHaveBeenCalledOnce();
 			expect(onEventButtonClicked).toHaveBeenCalledWith(
 				expect.objectContaining({
-					button: { event: "event_collapse_whole_tree" }
+					button: { event: "event_collapse_whole_tree", id: "event_collapse_whole_tree" }
 				})
 			);
 		});

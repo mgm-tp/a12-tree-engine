@@ -30,12 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { cleanDocumentsData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 // These tests should be run step by step. Don't change their orders.
@@ -43,10 +42,11 @@ test.describe("basic work flow", () => {
 	let utils: ModelEditorUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeAll(async () => {
+	test.beforeAll(async ({ invalidateSeed }) => {
 		await cleanDocumentsData({
 			showcases: ["model-editor"]
 		});
+		invalidateSeed("model-editor");
 	});
 
 	test.beforeEach(async ({ page }) => {
@@ -61,7 +61,7 @@ test.describe("basic work flow", () => {
 		// Setup a basic file explorer tree
 		// Create a computer
 		await page.locator("#button-ed2312").click();
-		await utils.fillComputerForm(["My Computer", "sa", "sa"]);
+		await utils.fillNameOwnerGroupForm(["My Computer", "sa", "sa"]);
 		await page.getByRole("button", { name: "Save" }).click();
 		await commands.waitUntilLoaded();
 		await expect(commands.getRow("My Computer")).toBeVisible();
@@ -69,7 +69,7 @@ test.describe("basic work flow", () => {
 		// Add drive C: to My Computer
 		await commands.buttonByDescription(commands.getRow("My Computer"), "Insert a child", "*").click();
 		await page.locator(Selector.DIALOG_NODE_TITLE).filter({ hasText: "DomainDrive" }).click();
-		await utils.fillDriveForm(["C:", "sa", "sa"]);
+		await utils.fillNameOwnerGroupForm(["C:", "sa", "sa"]);
 		await page.getByRole("button", { name: "Save" }).click();
 		await commands.waitUntilLoaded();
 		await expect(commands.getRow("C:")).toBeVisible();
@@ -199,7 +199,8 @@ test.describe("basic work flow", () => {
 				page.locator(Selector.POPUP_MENU).locator(Selector.LIST_ITEM, { hasText: modelName })
 			).toContainClass("list-item--disabled");
 		}
-		await commands.clickPopUpMenu(rootGroupName);
+		await page.keyboard.press("Escape");
+		await expect(page.locator(Selector.POPUP_MENU)).toHaveCount(0);
 
 		// Add sibling for hidden root node
 		await utils.addGroup("root group above", rootGroupName);
@@ -216,7 +217,8 @@ test.describe("basic work flow", () => {
 		]) {
 			await expect(page.locator(Selector.POPUP_MENU).getByRole("button", { name: modelName })).toBeVisible();
 		}
-		await commands.clickPopUpMenu(fullNameField);
+		await page.keyboard.press("Escape");
+		await expect(page.locator(Selector.POPUP_MENU)).toHaveCount(0);
 
 		// Add siblings for Full Name
 		await utils.addField("field below", fullNameField);

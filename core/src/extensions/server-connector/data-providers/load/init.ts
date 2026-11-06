@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type SagaGenerator, call, put, select, all } from "typed-redux-saga";
 import type { UnknownAction } from "redux";
+import { type SagaGenerator, call, put, select, all } from "typed-redux-saga";
 
 import {
 	ActivitySelectors,
@@ -42,24 +42,23 @@ import {
 	Model
 } from "@com.mgmtp.a12.client/client-core";
 
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { type RuntimeTreeModel, TreeModel } from "../../../../core/models/tree-model.js";
-import { TreeEngineActions } from "../../../client/actions.js";
-import { TreeEngineDataHolder } from "../../../client/data-holder.js";
-import { TreeEngineSelectors } from "../../../client/selectors.js";
 import { Commands } from "../../../../core/store/actions.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
 import type { Identifier, ModelsState, UiState } from "../../../../core/store/store.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import { getRootNodesFromDataHolder } from "../../shared.js";
+import { TreeEngineActions } from "../../../client/actions.js";
+import { TreeEngineDataHolder } from "../../../client/data-holder.js";
+import { TreeEngineSelectors } from "../../../client/selectors.js";
 import type { TreeEngineDataLoader } from "../../data-loaders/data-loader.js";
-
-import type { LoadPayload } from "../utils.js";
-import { handleLoad } from "../resolver/handle-load.js";
+import { getRootNodesFromDataHolder } from "../../shared.js";
 import { createTreeQueries } from "../resolver/create-queries.js";
+import { handleLoad } from "../resolver/handle-load.js";
+import type { LoadPayload } from "../utils.js";
 
+import { expandToNode } from "./handle-expand-to-node.js";
 import { ExpansionType, handleExpansions } from "./handle-expansions.js";
 import { createRootNodeDataHolder } from "./utils.js";
-import { expandToNode } from "./handle-expand-to-node.js";
 
 /** @internal */
 export interface InitParam {
@@ -163,7 +162,7 @@ export function* init(params: InitParam): SagaGenerator<TreeEngineDataHolder[]> 
 				dataLoader,
 				preloadChildNodes
 			});
-		} catch (error) {
+		} catch {
 			yield* put(TreeEngineActions.command({ activityId, engineAction: Commands.setScrollToNode(undefined) }));
 			yield* put(
 				ActivityActions.error({

@@ -37,16 +37,16 @@ import {
 	type DynamicConfiguration,
 	ModuleRegistryProvider
 } from "@com.mgmtp.a12.client/client-core";
-// import { DocumentRtCustomExtensionService } from "@com.mgmtp.a12.kernel/kernel-md-facade";
-import type { NewLinkPositionParams, TreeEngineSaga } from "@com.mgmtp.a12.treeengine/treeengine-core";
 import { Relationship } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { GeneratedCodeRtConfig } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { NewLinkPositionParams, TreeEngineSaga } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
-import { dataModelerModule } from "./model-editor/module.js";
-import { categoriesModule } from "./categories/module.js";
-// import { CustomFieldTypeFactory } from "./custom-field-types/customFieldTypeFactory.js";
-import { assert } from "./helpers.js";
-import { ShowcaseConfigModule } from "./showcase-module.js";
 import { teamModule } from "./a12team/module.js";
+import { categoriesModule } from "./categories/module.js";
+import { CustomFieldTypeFactory } from "./custom-field-types/customFieldTypeFactory.js";
+import { assert } from "./helpers.js";
+import { dataModelerModule } from "./model-editor/module.js";
+import { ShowcaseConfigModule } from "./showcase-module.js";
 
 export const applicationModules: DynamicConfiguration[] = [
 	ShowcaseConfigModule,
@@ -63,10 +63,16 @@ export function registerApplicationModules(): void {
 	applicationModules.forEach((module) => ModuleRegistryProvider.getInstance().addModule(module));
 }
 
-// export function registerCustomFieldTypes(): void {
-// 	// FIXME: This service is deprecated. Provide the custom field types to the Kernel APIs directly instead (see GeneratedCodeRtConfig.customFieldTypeFactory).
-// 	DocumentRtCustomExtensionService.registerCustomFieldTypes(new CustomFieldTypeFactory());
-// }
+const kernelOptions: GeneratedCodeRtConfig = { customFieldTypeFactory: new CustomFieldTypeFactory() };
+
+/**
+ * Provides the showcase's custom field types (e.g. `Email` on `DomainPerson`) to Kernel validation and computation.
+ *
+ * Without it, the generated Kernel code throws `Custom field validator '<name>' missing.` and the form cannot be saved.
+ */
+export function provideKernelOptions(): GeneratedCodeRtConfig {
+	return kernelOptions;
+}
 
 // tag::LinkCreationSetting2[]
 export function* isLinkAddedByDetailActivity(

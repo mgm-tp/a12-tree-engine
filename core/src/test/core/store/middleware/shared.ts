@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as TypeMoq from "typemoq";
 import type { UnknownAction } from "redux";
+import * as TypeMoq from "typemoq";
 
 import type { MiddlewareSetup } from "../../../utils/store-utils.js";
 

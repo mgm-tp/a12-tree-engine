@@ -30,15 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { Activity, type ActivityReducers } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { buildInitialUiState, uiStateReducer } from "../../../core/store/reducer/reducer-factory.js";
 import { isUiState } from "../../../core/store/shared.js";
-
 import { TreeEngineActions } from "../actions.js";
-import type { TreeEngineDataHolder } from "../data-holder.js";
 import { UI_STATE_SLICE } from "../constants.js";
+import type { TreeEngineDataHolder } from "../data-holder.js";
 
 /** @internal */
 export const uiStateDataReducer: ActivityReducers.DataReducer = {

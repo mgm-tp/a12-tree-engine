@@ -71,15 +71,26 @@ export interface UiState {
 
 	readonly expandedNodes: TreeEngineState.ExpandedNodes;
 
+	/** The submitted full-text search term; unset or empty while no search is active. */
+	readonly searchString?: string;
+
 	readonly query: string;
 
 	readonly matchedNodes: TreeEngineState.MatchedNodes;
+
+	/** The result view the user picked, if any — ignored when the model does not offer it. */
+	readonly searchResultView?: TreeModel.SearchResultView;
+
+	/** Whether the small-view search bar is revealed (toggled from the heading). */
+	readonly showMobileSearchBar?: boolean;
 
 	readonly busyNodes?: TreeEngineState.BusyNodes;
 
 	readonly dialog: TreeEngineState.Dialog;
 
 	readonly columnWidths?: TreeEngineState.ColumnWidths;
+
+	readonly columnVisibility?: TreeEngineState.ColumnVisibility;
 
 	readonly expandedMultiSelectionPanel: boolean;
 
@@ -272,15 +283,10 @@ export namespace TreeEngineState {
 		children?: SubLevelMultiSelectedNode[];
 	}
 
-	/**
-	 *
-	 */
+	/** The nodes the active search term matches, per document model — as the server reported them. */
 	export interface MatchedNodes {
 		readonly [type: string]: NodeMap<MatchedNode>;
 	}
-	/**
-	 *
-	 */
 	export interface MatchedNode {
 		matchCount: number;
 	}
@@ -301,6 +307,14 @@ export namespace TreeEngineState {
 	 */
 	export interface ColumnWidths {
 		readonly [columnId: string]: TreeModel.Width | undefined;
+	}
+
+	/**
+	 * Visibility overrides keyed by column `id`. A missing entry means "use the modelled
+	 * default" ({@link TreeModel.Column.initiallyHidden}).
+	 */
+	export interface ColumnVisibility {
+		readonly [columnId: string]: boolean | undefined;
 	}
 
 	/**

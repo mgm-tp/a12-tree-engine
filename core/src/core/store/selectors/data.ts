@@ -32,7 +32,6 @@
 
 import { TreeEngineError } from "../../error/tree-engine-error.js";
 import { LinkDescriptorUtils } from "../../models/utils/relationship-utils.js";
-
 import { type DataState, Identifier, TreeEngineState } from "../store.js";
 import { TreeDataUtils } from "../utils.js";
 

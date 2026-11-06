@@ -36,11 +36,12 @@ import type { ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { RESOURCE_KEYS } from "../../../../services/localization/languages/keys.js";
 import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
-import { KeyboardShortcutUtils } from "../../../configuration/keyboard-shortcut/utils.js";
-import { KeyboardShortcut } from "../../../configuration/keyboard-shortcut/types.js";
-import { useBuiltinShortcut } from "../../../configuration/keyboard-shortcut/hooks.js";
+import { SearchSelector } from "../../../../store/selectors/search.js";
 import { UIStateSelector } from "../../../../store/selectors/ui-state.js";
+import { useBuiltinShortcut } from "../../../configuration/keyboard-shortcut/hooks.js";
+import { KeyboardShortcut } from "../../../configuration/keyboard-shortcut/types.js";
+import { KeyboardShortcutUtils } from "../../../configuration/keyboard-shortcut/utils.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
 
 export namespace ExpandAllPopUp {
 	export interface Props {}
@@ -51,6 +52,7 @@ export const ExpandAllPopUp: React.FC<ExpandAllPopUp.Props> = () => {
 	const [isOpen, setIsOpen] = React.useState(false);
 
 	const disabled = useTreeEngineState(UIStateSelector.disabled());
+	const bulkExpansionDisabled = useTreeEngineState(SearchSelector.isReducedView());
 
 	const expandShortcut = useBuiltinShortcut(KeyboardShortcut.EngineBuiltinAction.EXPAND_WHOLE_TREE);
 	const collapseShortcut = useBuiltinShortcut(KeyboardShortcut.EngineBuiltinAction.COLLAPSE_WHOLE_TREE);
@@ -63,7 +65,10 @@ export const ExpandAllPopUp: React.FC<ExpandAllPopUp.Props> = () => {
 	const Icon = useTreeEngineContext((context) => context.widgetMap.Icon);
 
 	return (
-		<PopUpMenu icon={<Icon>{isOpen ? "clear" : "menu"}</Icon>} onVisibilityChange={setIsOpen} disabled={disabled}>
+		<PopUpMenu
+			icon={<Icon>{isOpen ? "clear" : "menu"}</Icon>}
+			onVisibilityChange={setIsOpen}
+			disabled={disabled || bulkExpansionDisabled}>
 			<List>
 				<ListItem
 					{...expandProps}
@@ -82,7 +87,7 @@ export const ExpandAllPopUp: React.FC<ExpandAllPopUp.Props> = () => {
 	);
 };
 
-type ExpandAllButtonProps = Pick<ButtonProps, "label" | "onClick" | "icon">;
+type ExpandAllButtonProps = Pick<ButtonProps, "label" | "onClick" | "icon" | "disabled">;
 
 /** @internal */
 export namespace ExpandAllPopUpHooks {
@@ -90,22 +95,26 @@ export namespace ExpandAllPopUpHooks {
 		const Icon = useTreeEngineContext((context) => context.widgetMap.Icon);
 		const localizedResource = LocalizerHooks.useLocalizedResource();
 		const onClick = useWholeTreeExpansionHandler(type);
+		// Bulk expansion is off in the reduced search result view.
+		const disabled = useTreeEngineState(SearchSelector.isReducedView());
 
 		return React.useMemo(() => {
 			if (type === "expand") {
 				return {
 					label: localizedResource(RESOURCE_KEYS.treeEngine.wholeTreeExpansion.expandAll),
 					icon: <Icon>unfold_more</Icon>,
-					onClick
+					onClick,
+					disabled
 				};
 			} else {
 				return {
 					label: localizedResource(RESOURCE_KEYS.treeEngine.wholeTreeExpansion.collapseAll),
 					icon: <Icon>unfold_less</Icon>,
-					onClick
+					onClick,
+					disabled
 				};
 			}
-		}, [type, localizedResource, Icon, onClick]);
+		}, [type, localizedResource, Icon, onClick, disabled]);
 	}
 
 	export function useWholeTreeExpansionHandler(type: "expand" | "collapse") {

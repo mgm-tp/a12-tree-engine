@@ -2,7 +2,7 @@
 	"header": {
 		"id": "categories-tree-multi-level",
 		"modelType": "tree",
-		"modelVersion": "11.0.0",
+		"modelVersion": "11.1.0",
 		"locales": [
 			{
 				"code": "en"
@@ -160,6 +160,7 @@
 			"hierarchicalColumnRef": "column-87bd8",
 			"rootRef": "crc-f7f64",
 			"enableColumnsResize": true,
+			"showFullTextSearch": true,
 			"rowHeight": 70,
 			"actionColumnWidth": 1.7,
 			"expansionStrategy": {
@@ -178,10 +179,18 @@
 						"maxDepth": 0
 					}
 				]
-			}
+			},
+			"enableUserDefinedColumnVisibility": true
 		},
 		"subHeaderBox": {
-			"rightSlot": [],
+			"rightSlot": [
+				{
+					"type": "search"
+				},
+				{
+					"type": "column_visibility"
+				}
+			],
 			"leftSlot": [
 				{
 					"type": "multi_selection"

@@ -30,10 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/api.js";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { InsertSiblingPosition } from "../types.js";
 
@@ -42,12 +39,11 @@ import { A12TeamUtils } from "./utils.js";
 test.describe("add siblings", () => {
 	let utils: A12TeamUtils;
 	let commands: PlaywrightCommands;
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new A12TeamUtils(page);
 		// Clean and seed data using services-utils API
-		await cleanDocumentsData({ showcases: "a12-teams" });
-		await seedData({ preset: "a12-teams" });
+		await seed({ preset: "a12-teams", force: true });
 
 		// Initialize utils and navigate to A12 team page
 		await utils.visitA12Team();

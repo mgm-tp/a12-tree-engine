@@ -35,8 +35,8 @@ import { Commands, Events, type Identifier, TreeEngineState } from "../../../../
 import { onInsertSiblingNodeRequestMiddleware } from "../../../../core/store/middleware/events/onInsertSiblingNodeRequest.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
-import { setupMiddleware } from "../../../utils/store-utils.js";
 import { createMockPerson } from "../../../utils/state-utils.js";
+import { setupMiddleware } from "../../../utils/store-utils.js";
 
 import { nonMatchedAction, shouldCallNextMiddlewareAndReturnResultedAction } from "./shared.js";
 

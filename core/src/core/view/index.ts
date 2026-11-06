@@ -30,11 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+export * from "./components/column-visibility/index.js";
 export * from "./components/content-box/content-box-renderer.js";
 export * from "./components/content-box/sub-components/footer-box.js";
 export * from "./components/content-box/sub-components/heading.js";
 export * from "./components/content-box/sub-components/sub-action-bar.js";
 export * from "./components/content-box/sub-components/expand-all-pop-up.js";
+export * from "./components/content-box/sub-components/search-bar.js";
+export * from "./components/content-box/sub-components/search-result-view-toggle.js";
 export * from "./components/content-box/sub-components/multi-selection/index.js";
 export * from "./components/content-box/sub-components/buttons.js";
 export * from "./components/dialogs/dialog-renderer.js";
@@ -45,6 +48,7 @@ export * from "./components/dialogs/sub-components/confirmation-dialog.js";
 export * from "./components/tree-engine/tree-engine-renderer.js";
 export * from "./components/tree-engine/sub-components/attachment-cell.js";
 export * from "./components/tree-engine/sub-components/body.js";
+export * from "./components/tree-engine/sub-components/tree-body-state.js";
 export * from "./components/tree-engine/sub-components/initial-view-hooks.js";
 export * from "./components/tree-engine/sub-components/body-cell.js";
 export * from "./components/tree-engine/sub-components/custom-field-type-cell.js";

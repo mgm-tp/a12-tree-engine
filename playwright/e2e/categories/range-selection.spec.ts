@@ -30,10 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/index.js";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { CategoriesUtils } from "./utils.js";
 
@@ -41,15 +38,16 @@ test.describe("range-selection", () => {
 	let utils: CategoriesUtils;
 	let commands: PlaywrightCommands;
 
+	// The suite only selects rows, so one dataset serves all ten tests.
+	test.beforeAll(async ({ seed }) => {
+		await seed({
+			preset: "categories-slim"
+		});
+	});
+
 	test.beforeEach(async ({ page }) => {
 		utils = new CategoriesUtils(page);
 		commands = new PlaywrightCommands(page);
-		await cleanDocumentsData({
-			showcases: ["categories"]
-		});
-		await seedData({
-			preset: "categories-slim"
-		});
 		await page.goto("");
 		await utils.navigate();
 	});

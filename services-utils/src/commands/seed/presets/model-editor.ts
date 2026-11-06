@@ -61,12 +61,22 @@ import {
 	linkScreenToFile,
 	rpcRequest
 } from "../../../utils/index.js";
-
-import group1Json from "../documents/model-editor/Group-1.json" with { type: "json" };
-import group2Json from "../documents/model-editor/Group-2.json" with { type: "json" };
-import group3Json from "../documents/model-editor/Group-3.json" with { type: "json" };
-import group4Json from "../documents/model-editor/Group-4.json" with { type: "json" };
-import group5Json from "../documents/model-editor/Group-5.json" with { type: "json" };
+import detachedRepeat1Json from "../documents/model-editor/DetachedRepeat-1.json" with { type: "json" };
+import computerJson from "../documents/model-editor/DomainComputer-1.json" with { type: "json" };
+import dir1Json from "../documents/model-editor/DomainDirectory-1.json" with { type: "json" };
+import dir2Json from "../documents/model-editor/DomainDirectory-2.json" with { type: "json" };
+import dir3Json from "../documents/model-editor/DomainDirectory-3.json" with { type: "json" };
+import drive1Json from "../documents/model-editor/DomainDrive-1.json" with { type: "json" };
+import drive2Json from "../documents/model-editor/DomainDrive-2.json" with { type: "json" };
+import drive3Json from "../documents/model-editor/DomainDrive-3.json" with { type: "json" };
+import file1Json from "../documents/model-editor/DomainFile-1.json" with { type: "json" };
+import file2Json from "../documents/model-editor/DomainFile-2.json" with { type: "json" };
+import file3Json from "../documents/model-editor/DomainFile-3.json" with { type: "json" };
+import file4Json from "../documents/model-editor/DomainFile-4.json" with { type: "json" };
+import file5Json from "../documents/model-editor/DomainFile-5.json" with { type: "json" };
+import file6Json from "../documents/model-editor/DomainFile-6.json" with { type: "json" };
+import file7Json from "../documents/model-editor/DomainFile-7.json" with { type: "json" };
+import file8Json from "../documents/model-editor/DomainFile-8.json" with { type: "json" };
 import field1Json from "../documents/model-editor/Field-1.json" with { type: "json" };
 import field2Json from "../documents/model-editor/Field-2.json" with { type: "json" };
 import field3Json from "../documents/model-editor/Field-3.json" with { type: "json" };
@@ -76,28 +86,17 @@ import field6Json from "../documents/model-editor/Field-6.json" with { type: "js
 import field7Json from "../documents/model-editor/Field-7.json" with { type: "json" };
 import field8Json from "../documents/model-editor/Field-8.json" with { type: "json" };
 import field9Json from "../documents/model-editor/Field-9.json" with { type: "json" };
-import screen1Json from "../documents/model-editor/Screen-1.json" with { type: "json" };
-import screen2Json from "../documents/model-editor/Screen-2.json" with { type: "json" };
-import screen3Json from "../documents/model-editor/Screen-3.json" with { type: "json" };
-import detachedRepeat1Json from "../documents/model-editor/DetachedRepeat-1.json" with { type: "json" };
+import group1Json from "../documents/model-editor/Group-1.json" with { type: "json" };
+import group2Json from "../documents/model-editor/Group-2.json" with { type: "json" };
+import group3Json from "../documents/model-editor/Group-3.json" with { type: "json" };
+import group4Json from "../documents/model-editor/Group-4.json" with { type: "json" };
+import group5Json from "../documents/model-editor/Group-5.json" with { type: "json" };
 import inlineRepeat1Json from "../documents/model-editor/InlineRepeat-1.json" with { type: "json" };
 import inlineRepeat2Json from "../documents/model-editor/InlineRepeat-2.json" with { type: "json" };
 import inlineRepeat3Json from "../documents/model-editor/InlineRepeat-3.json" with { type: "json" };
-import computerJson from "../documents/model-editor/DomainComputer-1.json" with { type: "json" };
-import drive1Json from "../documents/model-editor/DomainDrive-1.json" with { type: "json" };
-import drive2Json from "../documents/model-editor/DomainDrive-2.json" with { type: "json" };
-import drive3Json from "../documents/model-editor/DomainDrive-3.json" with { type: "json" };
-import dir1Json from "../documents/model-editor/DomainDirectory-1.json" with { type: "json" };
-import dir2Json from "../documents/model-editor/DomainDirectory-2.json" with { type: "json" };
-import dir3Json from "../documents/model-editor/DomainDirectory-3.json" with { type: "json" };
-import file1Json from "../documents/model-editor/DomainFile-1.json" with { type: "json" };
-import file2Json from "../documents/model-editor/DomainFile-2.json" with { type: "json" };
-import file3Json from "../documents/model-editor/DomainFile-3.json" with { type: "json" };
-import file4Json from "../documents/model-editor/DomainFile-4.json" with { type: "json" };
-import file5Json from "../documents/model-editor/DomainFile-5.json" with { type: "json" };
-import file6Json from "../documents/model-editor/DomainFile-6.json" with { type: "json" };
-import file7Json from "../documents/model-editor/DomainFile-7.json" with { type: "json" };
-import file8Json from "../documents/model-editor/DomainFile-8.json" with { type: "json" };
+import screen1Json from "../documents/model-editor/Screen-1.json" with { type: "json" };
+import screen2Json from "../documents/model-editor/Screen-2.json" with { type: "json" };
+import screen3Json from "../documents/model-editor/Screen-3.json" with { type: "json" };
 
 import LinkPosition = Relationship.LinkPosition;
 

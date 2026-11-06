@@ -32,18 +32,18 @@
 
 import { isAction, type UnknownAction } from "redux";
 
+import { Activity, ActivityActions } from "@com.mgmtp.a12.client/client-core";
 import {
 	type Action,
 	type ActionCreator,
-	actionCreatorFactory as actionCreatorFactory
+	actionCreatorFactory
 } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
-import { Activity, ActivityActions } from "@com.mgmtp.a12.client/client-core";
 
 import { buildInitialUiState } from "../../core/store/reducer/reducer-factory.js";
 import type { UiState } from "../../core/store/store.js";
 
-import type { TreeEngineDataHolder } from "./data-holder.js";
 import { UI_STATE_SLICE } from "./constants.js";
+import type { TreeEngineDataHolder } from "./data-holder.js";
 
 export namespace TreeEngineActions {
 	/**
@@ -53,7 +53,7 @@ export namespace TreeEngineActions {
 	 */
 	export function createActivity(
 		createActivityPayload: ActivityActions.CreatePayload,
-		initialUiState?: Pick<UiState, "scrollToNode" | "initialExpansion" | "disabled" | "readonly">
+		initialUiState?: Pick<UiState, "scrollToNode" | "initialExpansion" | "disabled" | "readonly" | "columnVisibility">
 	): Action<ActivityActions.PushPayload> {
 		const sourceAction = ActivityActions.create(createActivityPayload);
 		const defaultDataHolder = Activity.findDefaultDataHolder(sourceAction.payload.activity);

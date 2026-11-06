@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import { TreeModel } from "../../../../core/models/index.js";
 import { Commands, Events, TreeEngineState } from "../../../../core/store/index.js";
 import { onMultiSelectionButtonClickedMiddleware } from "../../../../core/store/middleware/events/onMultiSelectionButtonClicked.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
-import { setupMiddleware } from "../../../utils/store-utils.js";
 import { createEngineState } from "../../../utils/model-utils.js";
-import { TreeModel } from "../../../../core/models/index.js";
+import { setupMiddleware } from "../../../utils/store-utils.js";
 
 import { nonMatchedAction, shouldCallNextMiddlewareAndReturnResultedAction } from "./shared.js";
 

@@ -32,8 +32,8 @@
 
 import type { Annotation } from "@com.mgmtp.a12.base/base-model-api";
 
-import { TreeModel } from "./tree-model.js";
 import { InvalidTreeModelError, MissingPropertyError } from "./errors.js";
+import { TreeModel } from "./tree-model.js";
 
 /**
  * Check if the input object is a valid instance of {@link TreeModel}

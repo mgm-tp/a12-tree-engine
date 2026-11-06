@@ -34,7 +34,6 @@ import type { SupportedRequest } from "@com.mgmtp.a12.dataservices/dataservices-
 
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import type { TreeEngineOperation } from "../../../client/operation.js";
-
 import type { JsonRpc } from "../json-rpc.js";
 
 /**

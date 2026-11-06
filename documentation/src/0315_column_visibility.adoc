@@ -1,0 +1,112 @@
+////
+SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
+Copyright (c) 2012-2026 mgm technology partners GmbH
+Dual License
+This source file is part of the mgm A12 Platform and available under a choice of two different licenses:
+1. Open-Source License - EUPL v1.2
+You may redistribute and/or modify this file under the terms of the European Union Public License, version 1.2 - see https://eupl.eu/.
+2. Commercial License
+Alternatively, you may obtain a commercial license from mgm technology partners GmbH, that permits use of this software under different terms (including support and maintenance services).
+
+Please contact a12-license@mgm-tp.com for more information.
+
+You must select and comply with exactly one of the above license options.
+
+Warranty Disclaimer (applies to either option)
+THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
+////
+[#column-visibility]
+=== User-Defined Column Visibility
+
+The column visibility panel lets end users show and hide columns at runtime.
+It offers one checkbox per column in `content.columns`, apart from the exceptions below.
+
+The action column and the multi-selection column are never listed, as neither is modelled as a column.
+The Tree Engine additionally never lists the column referenced by `configuration.hierarchicalColumnRef`: it carries the indentation, the node icon and the expand/collapse toggle, so hiding it would leave the tree un-navigable.
+That column therefore always stays visible, and `initiallyHidden` on it is ignored.
+
+==== Configuration
+
+[cols="1,1,3"]
+|===
+| Property | Type | Description
+
+| `configuration.enableUserDefinedColumnVisibility`
+| `true`
+| Enables the feature. Unset by default, so existing models are unaffected. Without the trigger element below, nothing renders.
+
+| `column_visibility` element in `subHeaderBox`
+| `ElementType`
+| Places the trigger in the left or right slot; either one works. Without the flag above, nothing renders.
+
+| `initiallyHidden` on a column
+| `true`
+| Hides the column on load; the end user can show it again at runtime.
+|===
+
+[source,json,options="nowrap",title="Tree Model"]
+----
+{
+  "content": {
+    "configuration": { "enableUserDefinedColumnVisibility": true, "hierarchicalColumnRef": "column-1" },
+    "subHeaderBox": { "rightSlot": [{ "type": "column_visibility" }] },
+    "columns": [
+      { "id": "column-1", "name": "Name", "width": 2 },
+      { "id": "column-2", "name": "Description", "width": 1, "initiallyHidden": true }
+    ]
+  }
+}
+----
+
+[#column-visibility-events]
+==== Event Handlers
+
+`onColumnVisibilityChanged` is registered in `eventHandlers` of the Tree Engine and receives `{ columnVisibility }`, the complete resulting map, on every toggle and on reset.
+
+[WARNING]
+====
+Supplying the handler *replaces* the engine's own dispatch.
+Forward the event as shown below, otherwise toggling a checkbox no longer updates the tree.
+====
+
+[source,typescript,options="nowrap",title="src/views/custom-a12-team-tree-engine.tsx"]
+----
+include::assets/generated/typescript/showcase/views/custom-a12-team-tree-engine.tsx[tags="onColumnVisibilityChanged"]
+----
+
+The engine persists nothing, so a reload always starts from the modelled default.
+To keep a selection, store it in the handler:
+
+[source,typescript,options="nowrap",title="src/a12team/column-visibility-storage.ts"]
+----
+include::assets/generated/typescript/showcase/a12team/column-visibility-storage.ts[tags="columnVisibilityPersistence"]
+----
+
+and feed it back as the initial `columnVisibility` of the ui state, so the tree paints the stored selection on its first render instead of correcting itself afterwards:
+
+[source,typescript,options="nowrap",title="src/a12team/middlewares/column-visibility-middleware.ts"]
+----
+include::assets/generated/typescript/showcase/a12team/middlewares/column-visibility-middleware.ts[tags="columnVisibilityRestore"]
+----
+
+[#column-visibility-state]
+==== Reading and Setting the State
+
+link:./assets/generated/typedoc/functions/core_store.UIStateSelector.columnVisibility.html[UIStateSelector.columnVisibility] reads the visibility state and link:./assets/generated/typedoc/variables/core_store.Commands.setColumnVisibility.html[Commands.setColumnVisibility] writes it.
+
+The map holds one entry per column, keyed by column id; a column missing from it follows the modelled default.
+
+[NOTE]
+====
+Because the initial visibility can be defined in the Tree Model through `initiallyHidden`, the initial
+`columnVisibility` passed to the Tree Engine should be based on what is defined there.
+link:./assets/generated/typedoc/functions/core_view.getInitialColumnVisibility.html[getInitialColumnVisibility] is provided to get it from the Tree Model.
+====
+
+"Reset" writes that same map, so the view returns to the modelled state — a column marked `initiallyHidden` becomes hidden again rather than visible.
+
+[NOTE]
+====
+Dispatching `Commands.setColumnVisibility` goes straight to the store and does not pass through
+`onColumnVisibilityChanged`. An application that persists the selection has to do so on this path as well.
+====

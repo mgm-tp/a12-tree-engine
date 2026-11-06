@@ -32,14 +32,14 @@
 
 import { put, type SagaGenerator } from "typed-redux-saga";
 
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import { convertThumbnailResponse, setThumbnails } from "@com.mgmtp.a12.client/client-core/a12internal";
+import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { DataOperation } from "../../data-loaders/data-loader.js";
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
+import { DocumentModelUtils } from "../../../../core/models/shared.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
 import type { ModelsState } from "../../../../core/store/store.js";
-import { DocumentModelUtils } from "../../../../core/models/shared.js";
+import { DataOperation } from "../../data-loaders/data-loader.js";
 
 /**
  * @internal

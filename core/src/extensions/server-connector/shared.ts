@@ -36,7 +36,6 @@ import { TreeEngineError } from "../../core/error/tree-engine-error.js";
 import { LinkDescriptorUtils } from "../../core/models/utils/relationship-utils.js";
 import { Identifier, type TreeEngineState } from "../../core/store/store.js";
 import { TreeDataUtils } from "../../core/store/utils.js";
-
 import { TreeEngineActivity, TreeEngineDataHolder } from "../client/data-holder.js";
 
 /** @internal */
@@ -55,7 +54,10 @@ export function extractChildNodesFromDataHolder(dataHolder: TreeEngineDataHolder
 	if (TreeEngineDataHolder.Descriptor.RootNodes.isAssignableFrom(dataHolder.descriptor) && !parent) {
 		return children.map((identifier) => ({ nodePath: [identifier], nodeIdentifier: identifier }));
 	}
-	if (!parent) {
+	// A hidden root instance is no row of the tree, but it is the parent of the rows its holder
+	// carries — and the descriptor names it, so a caller does not have to pass it in.
+	const parentNode = parent ?? hiddenRootNode(dataHolder.descriptor);
+	if (!parentNode) {
 		throw TreeEngineError.NotFoundError("TreeEngine.ParentNode");
 	}
 	return children.map((identifier) => {
@@ -66,19 +68,24 @@ export function extractChildNodesFromDataHolder(dataHolder: TreeEngineDataHolder
 		const { linkRef } = link;
 		const nodeIdentifier = LinkDescriptorUtils.getNodeIdentifierFromOtherSide(
 			linkRef.linkDescriptor,
-			parent.nodeIdentifier
+			parentNode.nodeIdentifier
 		);
 		if (linkRef.id === null || linkRef.id === undefined || !nodeIdentifier) {
 			throw TreeEngineError.TypeError("TreeEngine.LinkRef", { expect: "Defined link id", actual: linkRef.id });
 		}
 
 		const linkIdentifier: Identifier = { id: linkRef.id, type: linkRef.linkDescriptor.relationshipModel };
-		let nodePath = [nodeIdentifier];
-		if (parent) {
-			nodePath = [...parent.nodePath, linkIdentifier];
-		}
-		return { nodeIdentifier, nodePath };
+		return { nodeIdentifier, nodePath: [...parentNode.nodePath, linkIdentifier] };
 	});
+}
+
+/** The hidden root instance a `HIDDEN_ROOT_NODES` holder hangs its rows under. */
+function hiddenRootNode(descriptor: TreeEngineDataHolder["descriptor"]): BaseNode | undefined {
+	if (!TreeEngineDataHolder.Descriptor.HiddenRootNodes.isAssignableFrom(descriptor)) {
+		return undefined;
+	}
+	const nodeIdentifier = Identifier.from(descriptor.source);
+	return { nodeIdentifier, nodePath: [nodeIdentifier] };
 }
 
 /** @internal */

@@ -32,23 +32,23 @@
 
 import { all, call, put, type SagaGenerator, select } from "typed-redux-saga";
 
-import type { Action, Success } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySagas, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
+import type { Action, Success } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
+import { TreeEngineError } from "../../../../../../core/error/tree-engine-error.js";
 import { Events } from "../../../../../../core/store/actions.js";
 import { Identifier } from "../../../../../../core/store/store.js";
+import { TreeEngineActions } from "../../../../actions.js";
 import type { TreeEngineOperation } from "../../../../operation.js";
+import { maybeAsyncFnWrapper } from "../../../../utils.js";
 import type { TreeEngineSaga } from "../../../saga-setting.js";
 import { SagaUtils } from "../../../saga-utils.js";
-import { maybeAsyncFnWrapper } from "../../../../utils.js";
 import { createAddDirectChildDataHolders } from "../../watch-node-expansion-saga.js";
-import { TreeEngineActions } from "../../../../actions.js";
-import { TreeEngineError } from "../../../../../../core/error/tree-engine-error.js";
-
 import { createUpdatePageSizeActionForAddedNode } from "../create-update-page-size-action-for-added-node.js";
 import { handleCreateDetailActivitySaga } from "../handle-create-detail-activity-saga.js";
 import { isLinkAddedByDetailActivity } from "../is-link-added-by-detail-activity.js";
 import { linkCreatedDocument } from "../link-created-document.js";
+import { refreshActiveSearch } from "../refresh-active-search.js";
 
 /** @internal */
 export interface Config {
@@ -161,6 +161,8 @@ function* handleSaveStarted(detailActivityId: string, config?: Config): SagaGene
 		if (addLinkOperation) {
 			yield* call(SagaUtils.saveActivity, treeEngineActivityId, { operations: [addLinkOperation] });
 		}
+
+		yield* call(refreshActiveSearch, treeEngineActivityId);
 
 		return true;
 	} finally {

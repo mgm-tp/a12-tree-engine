@@ -32,18 +32,19 @@
 
 import * as React from "react";
 
-import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { type RuntimeTreeModel, TreeModel } from "../../../models/tree-model.js";
+import { TreeEngineError } from "../../../error/tree-engine-error.js";
 import { DocumentModelUtils, TreeModelUtils } from "../../../models/shared.js";
+import { type RuntimeTreeModel, TreeModel } from "../../../models/tree-model.js";
 import { LocalizerHooks } from "../../../services/localization/localizer-hooks.js";
 import { TreeModelKeys } from "../../../services/localization/tree-model-keys.js";
 import { ModelSelector } from "../../../store/selectors/models.js";
 import { UIStateSelector } from "../../../store/selectors/ui-state.js";
 import { useTreeEngineContext, useTreeEngineState } from "../../context/tree-engine-context.js";
-import { TreeEngineError } from "../../../error/tree-engine-error.js";
+import { isColumnVisible } from "../column-visibility/column-visibility.js";
 
 import {
 	RootNodeRow,
@@ -64,6 +65,7 @@ export function useTreeEngineColumns(): TreeEngineColumn[] {
 	const VirtualRootRowActionsGroup = useTreeEngineContext((context) => context.componentMap.VirtualRootRowActionsGroup);
 
 	const columnWidths = useTreeEngineState(UIStateSelector.columnWidths());
+	const columnVisibility = useTreeEngineState(UIStateSelector.columnVisibility());
 	const uiModel = useTreeEngineState(ModelSelector.uiModel());
 
 	const expandedMultiSelectionPanel = useTreeEngineState(UIStateSelector.expandedMultiSelectionPanel());
@@ -72,14 +74,20 @@ export function useTreeEngineColumns(): TreeEngineColumn[] {
 		modelGraph: { relationshipModels }
 	} = useTreeEngineState(ModelSelector.models());
 
+	const visibleColumns = React.useMemo(() => {
+		return uiModel.content.columns.filter((column) =>
+			isColumnVisible(column, uiModel.content.configuration, columnVisibility)
+		);
+	}, [uiModel, columnVisibility]);
+
 	const hierarchicalColumnIndex = React.useMemo(() => {
-		return uiModel.content.columns.findIndex(({ id }) => uiModel.content.configuration.hierarchicalColumnRef === id);
-	}, [uiModel]);
+		return visibleColumns.findIndex(({ id }) => uiModel.content.configuration.hierarchicalColumnRef === id);
+	}, [visibleColumns, uiModel]);
 
 	const localizedTreeElement = LocalizerHooks.useLocalizedTreeElement();
 
 	return React.useMemo(() => {
-		const columns: TreeEngineColumn[] = uiModel.content.columns.map<TreeEngineDataColumn>((column, index) => {
+		const columns: TreeEngineColumn[] = visibleColumns.map<TreeEngineDataColumn>((column, index) => {
 			let headerHorizontalAlignment = column.alignment?.header?.horizontal;
 			let contentHorizontalAlignment = column.alignment?.content?.horizontal;
 			if (
@@ -141,7 +149,7 @@ export function useTreeEngineColumns(): TreeEngineColumn[] {
 					RootNodeRow.isAssignableFrom(row) ? (
 						<VirtualRootBodyCell columnRef={column.id} row={row} />
 					) : (
-						<BodyCell columnRef={column.id} row={row} />
+						<BodyCell columnRef={column.id} row={row} alignment={specificHorizontalAlignment.body} />
 					),
 				columnModel: column
 			};
@@ -189,6 +197,7 @@ export function useTreeEngineColumns(): TreeEngineColumn[] {
 		return columns;
 	}, [
 		uiModel,
+		visibleColumns,
 		expandedMultiSelectionPanel,
 		hierarchicalColumnIndex,
 		documentModels,

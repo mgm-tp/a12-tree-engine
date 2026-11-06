@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 test.describe.skip("scroll to pasted or dropped node with pagination", () => {
@@ -44,18 +42,15 @@ test.describe.skip("scroll to pasted or dropped node with pagination", () => {
 
 	test.use({ viewport: { width: 1280, height: 480 } });
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new ModelEditorUtils(page);
 
-		await cleanDocumentsData({
-			showcases: ["model-editor"],
-			variant: "pagination"
-		});
-		await seedData({
+		await seed({
 			preset: "model-editor",
 			variant: "pagination",
-			data: "simple"
+			data: "simple",
+			force: true
 		});
 		await utils.navigateToFileExplorer("Pagination");
 	});

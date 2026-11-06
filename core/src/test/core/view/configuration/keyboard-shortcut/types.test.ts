@@ -31,10 +31,11 @@
  */
 
 import type * as React from "react";
+
 import * as KeyCode from "keycode-js";
 
-import { KeyboardShortcut } from "../../../../../core/view/index.js";
 import { KeyboardShortcutUtils } from "../../../../../core/view/configuration/keyboard-shortcut/utils.js";
+import { KeyboardShortcut } from "../../../../../core/view/index.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 
 type Event = React.KeyboardEvent<HTMLElement>;

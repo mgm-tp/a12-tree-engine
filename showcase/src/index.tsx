@@ -37,21 +37,22 @@ import "./config/logging.js";
 import "./config/server-connector.js";
 import "@com.mgmtp.a12.widgets/widgets-core/styles/basic.css";
 
-import { scan } from "react-scan";
 import * as React from "react";
-import ReactDOM from "react-dom/client";
 import { Provider, useSelector } from "react-redux";
+import { scan } from "react-scan";
+
+import ReactDOM from "react-dom/client";
 
 import { ApplicationSelectors, DynamicRegionUi, NotificationViews, ViewViews } from "@com.mgmtp.a12.client/client-core";
 import { DirtyHandlingViews } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
 
-import { isReactScanEnabled } from "./config/react-scan.js";
 import { setup } from "./appsetup.js";
-import { ShowcaseContextProvider } from "./context.js";
+import { A11LanguageWrapper } from "./config/a11-language.js";
+import { DndWrapper } from "./config/dnd.js";
+import { isReactScanEnabled } from "./config/react-scan.js";
 import { SizeDetector } from "./config/size-detector.js";
 import { ThemeWrapper } from "./config/theme.js";
-import { DndWrapper } from "./config/dnd.js";
-import { A11LanguageWrapper } from "./config/a11-language.js";
+import { ShowcaseContextProvider } from "./context.js";
 
 const { config, initialStoreActions } = setup();
 

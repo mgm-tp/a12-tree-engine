@@ -48,7 +48,6 @@ import { TreeEngineOperation } from "../../../client/operation.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
 import type { RequestSelectorMap } from "../../request-selector-map.js";
 import { type DocumentProcessors, JsonRpc } from "../../types.js";
-
 import type { A12DataServicesSetting } from "../a12-data-services-setting.js";
 import { RequestId } from "../request-id.js";
 import { getNewLinkPosition } from "../utils.js";

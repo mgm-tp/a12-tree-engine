@@ -35,40 +35,41 @@ import { call, type SagaGenerator } from "typed-redux-saga";
 import { maybeAsyncFnWrapper } from "../utils.js";
 
 import { watchChildNodeCreationSaga } from "./handlers/create-document/child/watch-child-node-creation-saga.js";
-import { watchSiblingNodeCreationSaga } from "./handlers/create-document/sibling/watch-sibling-node-creation-saga.js";
 import { watchRootNodeCreationSaga } from "./handlers/create-document/root/watch-root-node-creation-saga.js";
-import { watchChildLinksCreationSaga } from "./handlers/watch-child-links-creation-saga.js";
-import { watchDndNodesSaga } from "./handlers/dnd/watch-dnd-nodes-saga.js";
+import { watchSiblingNodeCreationSaga } from "./handlers/create-document/sibling/watch-sibling-node-creation-saga.js";
 import { watchDndNodeSaga } from "./handlers/dnd/watch-dnd-node-saga.js";
-import { watchLinkDeletionSaga } from "./handlers/watch-link-deletion-saga.js";
-import { watchLoadAllNodesSaga } from "./handlers/watch-load-all-nodes-saga.js";
-import { watchLoadMoreNodesSaga } from "./handlers/watch-load-more-nodes-saga.js";
-import { watchNodeDeletionSaga } from "./handlers/watch-node-deletion-saga.js";
-import { watchNodeRowSelectionSaga } from "./handlers/watch-node-row-selection-saga.js";
-import { watchNodesDeletionSaga } from "./handlers/watch-nodes-deletion-saga.js";
+import { watchDndNodesSaga } from "./handlers/dnd/watch-dnd-nodes-saga.js";
+import { watchAddWarningSaga } from "./handlers/watch-add-warning-saga.js";
+import { watchChildLinksCreationSaga } from "./handlers/watch-child-links-creation-saga.js";
 import { watchCopyNodeSaga } from "./handlers/watch-copy-node-saga.js";
 import { watchCopyNodesSaga } from "./handlers/watch-copy-nodes-saga.js";
+import { watchCutNodeSaga } from "./handlers/watch-cut-node-saga.js";
+import { watchCutNodesSaga } from "./handlers/watch-cut-nodes-saga.js";
 import {
 	watchCollapseSubTreeSaga,
 	watchCollapseWholeTreeSaga,
 	watchExpandSubTreeSaga,
 	watchExpandWholeTreeSaga
 } from "./handlers/watch-expand-collapse-whole-sub-tree-sagas.js";
+import { watchLinkDeletionSaga } from "./handlers/watch-link-deletion-saga.js";
+import { watchLoadAllNodesSaga } from "./handlers/watch-load-all-nodes-saga.js";
+import { watchLoadMoreNodesSaga } from "./handlers/watch-load-more-nodes-saga.js";
+import { watchNodeDeletionSaga } from "./handlers/watch-node-deletion-saga.js";
 import { watchNodeExpansionSaga } from "./handlers/watch-node-expansion-saga.js";
 import {
 	watchNodeMultiSelectionSaga,
 	watchOverallMultiSelectionSaga
 } from "./handlers/watch-node-multi-selection-saga.js";
+import { watchNodeOpenSaga } from "./handlers/watch-node-open-saga.js";
+import { watchRangeSelectionSaga } from "./handlers/watch-node-range-selection-saga.js";
+import { watchNodeRowSelectionSaga } from "./handlers/watch-node-row-selection-saga.js";
+import { watchNodesDeletionSaga } from "./handlers/watch-nodes-deletion-saga.js";
 import { watchPasteSaga } from "./handlers/watch-paste-saga.js";
 import { watchReloadSaga } from "./handlers/watch-reload-saga.js";
 import { watchScrollToNodeSaga } from "./handlers/watch-scroll-to-node-saga.js";
-import type { TreeEngineSaga } from "./saga-setting.js";
-import { watchCutNodesSaga } from "./handlers/watch-cut-nodes-saga.js";
-import { watchCutNodeSaga } from "./handlers/watch-cut-node-saga.js";
-import { watchAddWarningSaga } from "./handlers/watch-add-warning-saga.js";
-import { watchRangeSelectionSaga } from "./handlers/watch-node-range-selection-saga.js";
-import { watchNodeOpenSaga } from "./handlers/watch-node-open-saga.js";
+import { watchSearchSaga } from "./handlers/watch-search-saga.js";
 import { watchToggleExpansionSaga } from "./handlers/watch-toggle-expansion-saga.js";
+import type { TreeEngineSaga } from "./saga-setting.js";
 
 export function createDefaultSagasMap(setting: TreeEngineSaga.Setting) {
 	return {
@@ -106,6 +107,7 @@ export function createDefaultSagasMap(setting: TreeEngineSaga.Setting) {
 
 		watchLoadMoreNodesSaga: fn(watchLoadMoreNodesSaga),
 		watchLoadAllNodesSaga: fn(watchLoadAllNodesSaga),
+		watchSearchSaga: fn(watchSearchSaga),
 		watchNodeOpen: fn(watchNodeOpenSaga),
 		watchToggleExpansion: fn(watchToggleExpansionSaga)
 	};

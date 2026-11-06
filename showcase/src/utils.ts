@@ -33,13 +33,13 @@
 import * as KeyCode from "keycode-js";
 import type { Dispatch } from "redux";
 
+import { type Activity, ApplicationActions } from "@com.mgmtp.a12.client/client-core";
 import {
 	TreeEngineState,
 	KeyboardShortcut,
 	TreeModel,
 	type Identifier
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { type Activity, ApplicationActions } from "@com.mgmtp.a12.client/client-core";
 
 import { SHOWCASE_RESOURCE_KEYS } from "./config/resources.js";
 

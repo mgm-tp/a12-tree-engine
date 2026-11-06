@@ -42,9 +42,8 @@ import {
 	TreeEngineSelectors
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
-import { File } from "../model-editor/document.js";
-import { engineShortcuts, nodeShortcuts } from "../utils.js";
 import { SHOWCASE_RESOURCE_KEYS } from "../config/resources.js";
+import { useShowcaseContext } from "../context.js";
 import {
 	OPEN_DM_NODE_EVENT,
 	OPEN_DM_NODE_NON_VIRTUAL_ROOT_EVENT,
@@ -54,7 +53,8 @@ import {
 	OPEN_DM_WITH_TEMPORARY_REPLACEMENT_NODE_EVENT,
 	OPEN_FM_NODE_EVENT
 } from "../helpers.js";
-import { useShowcaseContext } from "../context.js";
+import { File } from "../model-editor/document.js";
+import { engineShortcuts, nodeShortcuts } from "../utils.js";
 
 namespace FileExplorerTreeEngine {
 	export type Props = TreeEngineFactories.ViewComponentProps;

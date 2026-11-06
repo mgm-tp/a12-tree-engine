@@ -32,10 +32,10 @@
 
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
-import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import type { Events } from "../../../../../core/store/index.js";
-import { mockType } from "../../../../utils/mock-utils.js";
 import { handleMultiSelectionEvents } from "../../../../../core/store/reducer/handler/handleMultiSelectionEvents.js";
+import { defaultEngineState } from "../../../../setup/basic.spec.js";
+import { mockType } from "../../../../utils/mock-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.reducer.handler.handleMultiSelectionEvents", () => {
 	const { data, root, ...uiState } = defaultEngineState;

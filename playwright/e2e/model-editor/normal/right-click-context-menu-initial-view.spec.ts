@@ -30,12 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { cleanDocumentsData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 test.describe.skip("right click context menu on initial view on Group Management", () => {
@@ -44,11 +43,12 @@ test.describe.skip("right click context menu on initial view on Group Management
 	const x = 500;
 	const y = 500;
 
-	test.beforeAll(async () => {
+	test.beforeAll(async ({ invalidateSeed }) => {
 		await cleanDocumentsData({
 			showcases: ["model-editor"],
 			variant: "group-management"
 		});
+		invalidateSeed("model-editor");
 	});
 
 	test.beforeEach(async ({ page }) => {

@@ -31,25 +31,26 @@
  */
 
 import * as React from "react";
-import { vi } from "vitest";
+
 import type * as Enzyme from "enzyme";
 import { VALUE_ESCAPE } from "keycode-js";
+import { vi } from "vitest";
 
 import { AttachedPortal, List } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { en } from "../../../../../../core/services/localization/languages/en.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
 import { InitialViewRightClickContextMenuProvider } from "../../../../../../core/view/components/tree-engine/sub-components/initial-view-right-click-context-menu-provider.js";
+import { RowAction, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import {
 	createContextProps,
 	defaultEngineState,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
-import type { TreeEngineState } from "../../../../../../core/store/index.js";
-import { RowAction, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
-import { en } from "../../../../../../core/services/localization/languages/en.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.initial-view-right-click-context-menu-provider", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.initial-view-right-click-context-menu-provider", () => {
 	const basicEngineState = createEngineState
 		.from(defaultEngineState)
 		.withConfigurations({
@@ -127,18 +128,24 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 			expect(menuItems).have.to.length(2);
 		});
 
+		// Handlers invoked directly rather than through Enzyme need their own act() so that the state
+		// update they trigger is flushed before the wrapper is re-read.
 		it("should close context menu on outside click", () => {
-			wrapper.find(AttachedPortal).props().onClickOutside?.(mockType<Event>());
+			React.act(() => {
+				wrapper.find(AttachedPortal).props().onClickOutside?.(mockType<Event>());
+			});
 			wrapper.update();
 
 			expect(wrapper.find(AttachedPortal).exists()).toBe(false);
 		});
 
 		it("should close context menu on escape key press", () => {
-			wrapper
-				.find(AttachedPortal)
-				.props()
-				.onKeyDown?.(mockType<React.KeyboardEvent<HTMLElement>>({ key: VALUE_ESCAPE }));
+			React.act(() => {
+				wrapper
+					.find(AttachedPortal)
+					.props()
+					.onKeyDown?.(mockType<React.KeyboardEvent<HTMLElement>>({ key: VALUE_ESCAPE }));
+			});
 
 			wrapper.update();
 

@@ -145,10 +145,21 @@ In the current iteration, projects do not need it for the engine to work correct
 |Match on `linkForm: "true"` to distinguish the link document form from a regular edit activity.
 |===
 
-NOTE: With the new Relationship Engine integration, child and sibling node creation additionally propagate
+[NOTE]
+====
+With the new Relationship Engine integration, child and sibling node creation additionally propagate
 `parentInstance`, `parentRelationshipName`, and `parentRelationshipRole` (sibling creation also
-propagates `predecessor`) into the descriptor, to combine create document and link process into one step. 
+propagates `predecessor`) into the descriptor, to combine create document and link process into one step.
 These keys are extra payload, Application Model match conditions do not need to include them.
+
+If the opened child or sibling detail activity never produces a Relationship Engine changelog signal
+(for example, the child's form model references no relationship-ui model), Tree Engine takes over
+link creation at save time using its own `ADD_LINK`, exactly as in Form-Engine-only setups. The
+relationship-ui reference therefore remains optional. See
+<<#advanced/disable-link-creation,Disable Link Creation in Tree Engine>> for the separate, explicit
+`linkCreationSetting` opt-out — that setting disables Tree Engine's link creation deliberately, whereas
+this fallback only activates automatically when Relationship Engine never claims the activity.
+====
 
 NOTE: When using a SME-generated Master Details Model, the `engine` key in activity descriptors originates from the MDM-generated initial activity descriptor, not from Tree Engine itself.
 See link:/docs/crud/crud-dev-docs/index.html#activity-descriptors-mdm[CRUD's Activity Descriptors: With Master Details Model] for the match condition requirements in that context.

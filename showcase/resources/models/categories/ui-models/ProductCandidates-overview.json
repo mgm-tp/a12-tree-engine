@@ -2,7 +2,7 @@
 	"header": {
 		"id": "ProductCandidates-overview",
 		"modelType": "overview",
-		"modelVersion": "39.0.0",
+		"modelVersion": "39.1.0",
 		"locales": [
 			{
 				"code": "en"

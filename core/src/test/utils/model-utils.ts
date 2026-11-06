@@ -30,12 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { ModelGraph, RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import type { TreeModel, RuntimeTreeModel } from "../../core/models/index.js";
 import type { TreeEngineState } from "../../core/store/index.js";
-
 import { defaultEngineState } from "../setup/basic.spec.js";
 
 import { mockType } from "./mock-utils.js";

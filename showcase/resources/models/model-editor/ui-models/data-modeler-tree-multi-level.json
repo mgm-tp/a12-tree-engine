@@ -2,7 +2,7 @@
 	"header": {
 		"id": "data-modeler-tree-multi-level",
 		"modelType": "tree",
-		"modelVersion": "11.0.0",
+		"modelVersion": "11.1.0",
 		"locales": [
 			{
 				"code": "en"
@@ -204,6 +204,7 @@
 			"hierarchicalColumnRef": "column-ab0e2",
 			"rootRef": "crc-6040e",
 			"enableColumnsResize": true,
+			"showFullTextSearch": true,
 			"expansionStrategy": {
 				"type": "tree",
 				"expansionDepths": [
@@ -401,6 +402,9 @@
 		},
 		"subHeaderBox": {
 			"rightSlot": [
+				{
+					"type": "search"
+				},
 				{
 					"type": "multi_selection"
 				},

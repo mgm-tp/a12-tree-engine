@@ -31,8 +31,8 @@
  */
 
 import { DataSelector } from "../../../store/selectors/data.js";
-import { type DataState, Identifier, type ModelsState, TreeEngineState } from "../../../store/store.js";
 import { ModelSelector } from "../../../store/selectors/models.js";
+import { type DataState, Identifier, type ModelsState, TreeEngineState } from "../../../store/store.js";
 import { type FlattenNodeRow, RootNodeRow } from "../../components/tree-engine/sub-components/types.js";
 
 /** @internal */

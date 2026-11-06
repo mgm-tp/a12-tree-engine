@@ -29,18 +29,18 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import * as React from "react";
 
 import { createContext, useContextSelector } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type { TreeEngineState } from "../../store/store.js";
-import type { Selector as BaseSelector } from "../../store/selectors/selector.js";
 import type { Converter } from "../../services/converter/shared.js";
-
+import type { Selector as BaseSelector } from "../../store/selectors/selector.js";
+import type { TreeEngineState } from "../../store/store.js";
 import type { RowActionStateGetter, RowStyleGetter } from "../components/tree-engine/sub-components/types.js";
 import type { DndConfiguration } from "../configuration/dnd/configuration.js";
-import type { SelectorMap } from "../configuration/selector-map.js";
 import type { KeyboardShortcut } from "../configuration/keyboard-shortcut/types.js";
+import type { SelectorMap } from "../configuration/selector-map.js";
 
 import type { TreeEngineContextProvider } from "./tree-engine-context-provider.js";
 
@@ -67,6 +67,11 @@ export namespace TreeEngineContext {
 		readonly keyboardShortcuts?: KeyboardShortcut[];
 		readonly uiIdPrefix?: string;
 		readonly dndConfiguration: DndConfiguration;
+		/**
+		 * The id of `configuration.screenReaderColumnRef`, or of the hierarchical column when unset,
+		 * but only while that column is visible.
+		 */
+		readonly screenReaderColumnId?: string;
 		/** @internal */
 		readonly converter: Converter;
 		/** @internal */

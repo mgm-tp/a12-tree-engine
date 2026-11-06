@@ -32,8 +32,8 @@
 
 import * as React from "react";
 
-import type { Column, Styleable } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { Column, Styleable } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
 

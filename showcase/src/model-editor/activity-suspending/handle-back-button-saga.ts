@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 import { isAction } from "redux";
+import { put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { Events, TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 import { BACK_ENGINE_EVENT } from "../../helpers.js";

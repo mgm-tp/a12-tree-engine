@@ -30,11 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { cleanDocumentsData } from "../../../services-utils/src/index.js";
-
 import { Selector } from "../selectors.js";
 
 import { A12TeamUtils } from "./utils.js";
@@ -42,12 +41,13 @@ import { A12TeamUtils } from "./utils.js";
 test.describe("basic work flow", () => {
 	let utils: A12TeamUtils;
 	let commands: PlaywrightCommands;
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, invalidateSeed }) => {
 		utils = new A12TeamUtils(page);
 		commands = new PlaywrightCommands(page);
 		await cleanDocumentsData({
 			showcases: ["a12-teams"]
 		});
+		invalidateSeed("a12-teams");
 
 		await utils.visitA12Team();
 	});

@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 /*
@@ -46,12 +44,8 @@ test.describe("multi-selection", () => {
 	let commands: PlaywrightCommands;
 	let utils: ModelEditorUtils;
 
-	test.beforeAll(async () => {
-		await cleanDocumentsData({
-			showcases: ["model-editor"],
-			variant: "pagination"
-		});
-		await seedData({
+	test.beforeAll(async ({ seed }) => {
+		await seed({
 			preset: "model-editor",
 			variant: "pagination",
 			data: "simple"
@@ -63,7 +57,7 @@ test.describe("multi-selection", () => {
 		utils = new ModelEditorUtils(page);
 	});
 
-	test("should work properly", async ({ page }) => {
+	test("should work properly", async () => {
 		await utils.navigateToFileExplorer("Pagination");
 		await commands.buttonByDescription(commands.getRow("DomainPerson.json"), "Open document model").click();
 		await commands.waitUntilLoaded();

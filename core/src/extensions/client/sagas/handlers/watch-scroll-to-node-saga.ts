@@ -32,16 +32,16 @@
 
 import { type SagaGenerator, call, put, takeLatest, select } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySagas, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
-import { TreeEngineActions } from "../../actions.js";
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { Commands, Events } from "../../../../core/store/actions.js";
 import { TreeEngineState } from "../../../../core/store/store.js";
+import { TreeEngineActions } from "../../actions.js";
 import type { TreeEngineOperation } from "../../operation.js";
-import { findNextNode, getCurrentNode, SagaUtils } from "../../shared.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { TreeEngineSelectors } from "../../selectors.js";
+import { findNextNode, getCurrentNode, SagaUtils } from "../../shared.js";
 
 /** @internal */
 export function* watchScrollToNodeSaga(activityId: string): SagaGenerator<void> {

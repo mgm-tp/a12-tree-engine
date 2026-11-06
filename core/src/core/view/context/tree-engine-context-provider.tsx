@@ -34,21 +34,21 @@ import * as React from "react";
 
 import { useWindowSize, type Container } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { type DataState, type ModelsState, TreeEngineState } from "../../store/store.js";
+import { useConverter } from "../../services/converter/shared.js";
 import { ModelSelector } from "../../store/selectors/models.js";
 import { UIStateSelector } from "../../store/selectors/ui-state.js";
-import { useConverter } from "../../services/converter/shared.js";
-
+import { type DataState, type ModelsState, TreeEngineState } from "../../store/store.js";
+import { resolveScreenReaderColumnId } from "../components/tree-engine/sub-components/a11y-utils.js";
 import type { RowActionStateGetter, RowStyleGetter } from "../components/tree-engine/sub-components/types.js";
 import { type ComponentMap, DefaultComponentMap } from "../configuration/component-map.js";
 import { defaultDndConfiguration, type DndConfiguration } from "../configuration/dnd/configuration.js";
 import type { EventHandlersDispatchMap } from "../configuration/event-handlers-dispatch-map.js";
+import type { KeyboardShortcut } from "../configuration/keyboard-shortcut/types.js";
 import { DefaultSelectorMap, type SelectorMap } from "../configuration/selector-map.js";
 import { DefaultWidgetMap, type WidgetMap } from "../configuration/widget-map.js";
-import type { KeyboardShortcut } from "../configuration/keyboard-shortcut/types.js";
 
-import { TreeEngineContext } from "./tree-engine-context.js";
 import { A11YLanguageContextProvider } from "./a11y-language-context-provider.js";
+import { TreeEngineContext } from "./tree-engine-context.js";
 import { TreeInternalContextProvider } from "./tree-internal-context-provider.js";
 
 export namespace TreeEngineContextProvider {
@@ -172,6 +172,11 @@ export const TreeEngineContextProvider: React.FC<TreeEngineContextProvider.Props
 		return UIStateSelector.overallMultiSelection()(state) !== TreeEngineState.MultiSelectionState.DESELECTED;
 	}, [state]);
 
+	const screenReaderColumnId = React.useMemo(
+		() => resolveScreenReaderColumnId(models.uiModel, state.columnVisibility),
+		[models.uiModel, state.columnVisibility]
+	);
+
 	return (
 		<TreeEngineContext.Provider
 			value={{
@@ -187,6 +192,7 @@ export const TreeEngineContextProvider: React.FC<TreeEngineContextProvider.Props
 				rowActionStateGetter,
 				rowStyling,
 				overallMultiSelection,
+				screenReaderColumnId,
 				smallView: props?.smallView ?? (breakPoint?.size === "sm" || breakPoint?.size === "xs"),
 				busy,
 				ariaLevel: props.ariaLevel ?? 1,

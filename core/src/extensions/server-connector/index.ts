@@ -34,9 +34,9 @@ import type { Module, DataProvider } from "@com.mgmtp.a12.client/client-core";
 
 import type { MaybeAsync } from "../client/index.js";
 
+import type { A12DataServicesSetting } from "./data-loaders/a12-data-services-setting.js";
 import type { TreeEngineDataLoader } from "./data-loaders/data-loader.js";
 import { createTreeEngineDataProvider } from "./data-providers/index.js";
-import type { A12DataServicesSetting } from "./data-loaders/a12-data-services-setting.js";
 import type { RequestSelectorMap } from "./request-selector-map.js";
 
 export namespace TreeEngineServerConnectorFactories {

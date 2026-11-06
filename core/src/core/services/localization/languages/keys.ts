@@ -84,6 +84,14 @@ export const RESOURCE_KEYS = {
 			"pageSizeLimitExceeded": {
 				"title": "",
 				"message": ""
+			},
+			"searchError": {
+				"title": "",
+				"message": ""
+			},
+			"searchNotAvailable": {
+				"title": "",
+				"message": ""
 			}
 		},
 		"dialog": {
@@ -133,6 +141,14 @@ export const RESOURCE_KEYS = {
 			"expandAll": "",
 			"collapseAll": ""
 		},
+		"columnVisibility": {
+			"title": "",
+			"openColumnVisibility": "",
+			"closeColumnVisibility": "",
+			"reset": "",
+			"closeButtonTitle": "",
+			"customizedBadgeTitle": ""
+		},
 		"multiSelection": {
 			"multiSelectionButton": {
 				"expandTitle": "",
@@ -143,6 +159,17 @@ export const RESOURCE_KEYS = {
 			"summary": ""
 		},
 		"circularWarning": "",
+		"search": {
+			"placeholder": "",
+			"searchButton": "",
+			"clearButton": "",
+			"emptyResult": "",
+			"searchButtonMinLengthTitle": "",
+			"resultsOnly": "",
+			"showCompleteTree": "",
+			"showSearch": "",
+			"hideSearch": ""
+		},
 		"initialView": {
 			"message": "",
 			"addButton": {

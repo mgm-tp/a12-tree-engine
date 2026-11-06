@@ -34,18 +34,18 @@ import * as React from "react";
 
 import type { ActionContentboxProps, Container } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { useTreeEngineContext, useTreeEngineState } from "../../context/tree-engine-context.js";
-import { KeyboardShortcut } from "../../configuration/keyboard-shortcut/types.js";
+import { RESOURCE_KEYS } from "../../../services/localization/languages/keys.js";
+import { LocalizableFactory } from "../../../services/localization/localizable-factory.js";
 import {
 	useEngineBuiltinActionController,
 	useEngineEventActionController,
 	useEngineInsertActionController
 } from "../../configuration/keyboard-shortcut/engine-controllers.js";
 import { useKeyDown } from "../../configuration/keyboard-shortcut/hooks.js";
-import { LocalizableFactory } from "../../../services/localization/localizable-factory.js";
-import { RESOURCE_KEYS } from "../../../services/localization/languages/keys.js";
+import { KeyboardShortcut } from "../../configuration/keyboard-shortcut/types.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../context/tree-engine-context.js";
 
-import { useSubActionBarElements } from "./sub-components/sub-action-bar-hooks.js";
+import { useIsSearchEnabled, useSubActionBarElements } from "./sub-components/sub-action-bar-hooks.js";
 
 export namespace ContentBoxRenderer {
 	export type Props = Container;
@@ -61,13 +61,22 @@ export const ContentBoxRenderer: React.FC<ContentBoxRenderer.Props> = React.memo
 	const ContentBox = useTreeEngineContext((context) => context.widgetMap.ContentBox);
 
 	const { leftSlot: headerLeftSlot, rightSlot: headerRightSlot } = useSubActionBarElements();
+	const MobileSearchBar = useTreeEngineContext((context) => context.componentMap.MobileSearchBar);
+	const searchEnabled = useIsSearchEnabled();
+
 	const subActionBar: ActionContentboxProps.Buttons | undefined = React.useMemo(() => {
-		if ((headerLeftSlot.length || headerRightSlot.length) && !smallView) {
+		// Small view has no room for the modeled sub-header; its actions move into the heading's
+		// pop-up menu, and search becomes a row that the heading's toggle shows and hides.
+		if (smallView) {
+			return searchEnabled ? <MobileSearchBar /> : undefined;
+		}
+
+		if (headerLeftSlot.length || headerRightSlot.length) {
 			return <SubActionBar />;
 		}
 
 		return undefined;
-	}, [headerLeftSlot.length, headerRightSlot.length, smallView, SubActionBar]);
+	}, [headerLeftSlot.length, headerRightSlot.length, smallView, SubActionBar, MobileSearchBar, searchEnabled]);
 
 	const hasFooterElements = useTreeEngineState(
 		(state) =>

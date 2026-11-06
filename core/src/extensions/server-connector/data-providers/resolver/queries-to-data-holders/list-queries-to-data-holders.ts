@@ -30,19 +30,18 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { Activity } from "@com.mgmtp.a12.client/client-core";
+import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
+import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
 import { LinkDescriptorUtils } from "../../../../../core/models/utils/relationship-utils.js";
-import { Identifier, type ModelsState, type TreeEngineState } from "../../../../../core/store/store.js";
 import { ModelSelector } from "../../../../../core/store/selectors/models.js";
+import { Identifier, type ModelsState, type TreeEngineState } from "../../../../../core/store/store.js";
 import { TreeDataUtils } from "../../../../../core/store/utils.js";
 import { TreeEngineDataHolder } from "../../../../client/data-holder.js";
 import type { DataOperation } from "../../../data-loaders/data-loader.js";
 import type { DocumentProcessors } from "../../../types.js";
-import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
 import { type BasePayload, DocumentWithRelationship } from "../../utils.js";
-
 import { createQueryResultDataHolders } from "../create-query-result-data-holders.js";
 
 /** @internal */

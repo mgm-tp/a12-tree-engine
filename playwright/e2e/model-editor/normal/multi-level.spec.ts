@@ -30,10 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { ModelEditorUtils } from "../utils.js";
 
@@ -41,9 +39,8 @@ test.describe("model editor - multi level rendering", () => {
 	let commands: PlaywrightCommands;
 	let utils: ModelEditorUtils;
 
-	test.beforeAll(async () => {
-		await cleanDocumentsData({ showcases: ["model-editor"] });
-		await seedData({ preset: "model-editor" });
+	test.beforeAll(async ({ seed }) => {
+		await seed({ preset: "model-editor" });
 	});
 
 	test.beforeEach(async ({ page }) => {

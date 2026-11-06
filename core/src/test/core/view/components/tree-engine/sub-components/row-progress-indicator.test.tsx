@@ -45,7 +45,7 @@ import { testIsNullComponent } from "../../../../../utils/test-utils.js";
 
 import { BodyCellWrapper } from "./body-cell/shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.row-progress-indicator", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.row-progress-indicator", () => {
 	const basicNodeRow = mockType<FlattenNodeRow>({
 		data: {
 			nodeIdentifier: mockType<Identifier>()

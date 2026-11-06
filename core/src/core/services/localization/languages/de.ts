@@ -58,6 +58,14 @@ export const de: typeof RESOURCE_KEYS = {
 			"pageSizeLimitExceeded": {
 				"title": "Baum kann nicht geladen werden",
 				"message": "Maximale Anzahl der Wurzelknoten überschritten. Maximum erlaubt: $limit$. Erhöhen Sie das maximale Seitenlimit."
+			},
+			"searchError": {
+				"title": "Suche fehlgeschlagen",
+				"message": "Die Suche konnte nicht ausgeführt werden. Bitte versuchen Sie es erneut."
+			},
+			"searchNotAvailable": {
+				"title": "Baum kann nicht durchsucht werden",
+				"message": "Der Baum enthält kein durchsuchbares Dokumentmodell."
 			}
 		},
 		"notification": {
@@ -116,6 +124,14 @@ export const de: typeof RESOURCE_KEYS = {
 			"expandAll": "Alles aufklappen",
 			"collapseAll": "Alles zuklappen"
 		},
+		"columnVisibility": {
+			"title": "Spaltensichtbarkeit",
+			"openColumnVisibility": "Spaltensichtbarkeit öffnen",
+			"closeColumnVisibility": "Spaltensichtbarkeit schließen",
+			"reset": "Zurücksetzen",
+			"closeButtonTitle": "Schließen",
+			"customizedBadgeTitle": "Spaltensichtbarkeit geändert"
+		},
 		"multiSelection": {
 			"multiSelectionButton": {
 				"expandTitle": "Öffne Funktionen für Massenbearbeitung	",
@@ -126,6 +142,17 @@ export const de: typeof RESOURCE_KEYS = {
 			"summary": "$amount$ Knoten"
 		},
 		"circularWarning": "Eine kreisförmige Link-Struktur wurde entdeckt, dadurch sind bestimmte Funktionen für wiederholte Knoten nicht verfügbar.",
+		"search": {
+			"placeholder": "Suchen...",
+			"searchButton": "Suchen",
+			"clearButton": "Suche löschen",
+			"emptyResult": "Keine Ergebnisse für Ihre Suche gefunden.",
+			"searchButtonMinLengthTitle": "Mindestens $count$ Zeichen eingeben",
+			"resultsOnly": "Nur Ergebnisse",
+			"showCompleteTree": "Kompletten Baum anzeigen",
+			"showSearch": "Suche anzeigen",
+			"hideSearch": "Suche ausblenden"
+		},
 		"initialView": {
 			"message": "Fügen Sie ein neues Element zum Baum hinzu.",
 			"addButton": {

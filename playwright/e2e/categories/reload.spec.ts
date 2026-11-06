@@ -30,11 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect, type Page } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect, type Page } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/index.js";
-
+import { cleanDocumentsData } from "../../../services-utils/src/index.js";
 import { Selector } from "../selectors.js";
 
 import { CategoriesUtils } from "./utils.js";
@@ -43,13 +42,8 @@ test.describe("reload", () => {
 	let utils: CategoriesUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeAll(async () => {
-		await cleanDocumentsData({
-			showcases: ["categories"]
-		});
-		await seedData({
-			preset: "categories"
-		});
+	test.beforeAll(async ({ seed }) => {
+		await seed({ preset: "categories", force: true });
 	});
 
 	test.beforeEach(async ({ page }) => {
@@ -59,7 +53,7 @@ test.describe("reload", () => {
 		await utils.navigate();
 	});
 
-	test("should reload properly while simulating the external change to the tree", async ({ page }) => {
+	test("should reload properly while simulating the external change to the tree", async ({ page, invalidateSeed }) => {
 		// Verify initial state
 		await expect(commands.getRow("Samsung Galaxy A51")).toBeVisible();
 		await expect(commands.getRow("Samsung high-end phones")).toBeVisible();
@@ -117,6 +111,7 @@ test.describe("reload", () => {
 		await cleanDocumentsData({
 			showcases: ["categories"]
 		});
+		invalidateSeed("categories");
 		await page.locator(`${Selector.SUB_HEADER} button[aria-label="Reload whole tree"]`).click();
 		await commands.waitUntilLoaded();
 		const rows = commands.getRows();

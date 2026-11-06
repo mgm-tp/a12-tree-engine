@@ -40,10 +40,10 @@ The following tools are required in order to build this repository:
 
 | Tool                                    | Version |
 | --------------------------------------- | ------: |
-| [JDK](https://openjdk.org/)             |    `21` |
-| [Node](https://nodejs.org/)             |  `22.x` |
-| [pnpm](https://pnpm.io/)                |   `9.x` |
-| [Gradle](https://gradle.org) (optional) |   `8.x` |
+| [JDK](https://openjdk.org/)             |    `25` |
+| [Node](https://nodejs.org/)             |  `24.x` |
+| [pnpm](https://pnpm.io/)                |  `11.x` |
+| [Gradle](https://gradle.org) (optional) |   `9.x` |
 
 #### How to Build
 

@@ -30,14 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import Fs from "node:fs/promises";
 import Path from "node:path";
 import { inspect } from "node:util";
-import Fs from "node:fs/promises";
 
 import { isModelInstance, type Model } from "@com.mgmtp.a12.base/base-model-api";
 
 import { bulkModelUploadRequest } from "../../utils/index.js";
-
 import { main as runWaitOn } from "../wait-on.js";
 
 export interface UploadParams {

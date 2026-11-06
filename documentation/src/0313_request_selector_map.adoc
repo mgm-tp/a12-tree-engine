@@ -18,11 +18,6 @@ THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT WARRANTY OF ANY KIND, WHETHER EXPR
 [#request-selector-map]
 === Custom RequestSelectorMap
 
-[NOTE]
-====
-This API is marked as experimental. Breaking changes *might* happen even in minor releases.
-====
-
 The `RequestSelectorMap` lets you customize how Tree Engine produces Data Services JSON-RPC requests.
 A `DefaultRequestSelectorMap` is provided; you can inject your own to tweak queries and mutations without involving internal logic.
 

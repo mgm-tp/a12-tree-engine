@@ -35,11 +35,11 @@ import * as path from "path";
 
 import { test } from "@playwright/test";
 
-import { testConfigs } from "./test-configs/index.js";
-import { run } from "./run.js";
-import type { RawRecorder } from "./types.js";
-import { convert } from "./convert.js";
 import { REPORT_FILE_NAME, REPORT_JSON_FILE_NAME } from "./config.js";
+import { convert } from "./convert.js";
+import { run } from "./run.js";
+import { testConfigs } from "./test-configs/index.js";
+import type { RawRecorder } from "./types.js";
 
 test.describe("Performance test", () => {
 	const rawRecorder: RawRecorder = {};

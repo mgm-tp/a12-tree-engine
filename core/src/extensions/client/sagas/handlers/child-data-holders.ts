@@ -29,16 +29,17 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import { type SagaGenerator, call, select } from "typed-redux-saga";
 
 import type { Activity } from "@com.mgmtp.a12.client/client-core";
 
-import { TreeModel } from "../../../../core/models/tree-model.js";
-import { type Identifier, type ModelsState, TreeEngineState } from "../../../../core/store/store.js";
-import { ModelSelector } from "../../../../core/store/selectors/models.js";
-import { TreeEngineSelectors } from "../../selectors.js";
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
+import { TreeModel } from "../../../../core/models/tree-model.js";
+import { ModelSelector } from "../../../../core/store/selectors/models.js";
+import { type Identifier, type ModelsState, TreeEngineState } from "../../../../core/store/store.js";
 import type { TreeEngineDataHolder } from "../../data-holder.js";
+import { TreeEngineSelectors } from "../../selectors.js";
 
 /** @internal */
 export function* createAddGrandChildDataHolders(params: {

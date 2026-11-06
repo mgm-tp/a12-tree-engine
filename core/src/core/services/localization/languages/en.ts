@@ -58,6 +58,14 @@ export const en: typeof RESOURCE_KEYS = {
 			"pageSizeLimitExceeded": {
 				"title": "Cannot Load Tree",
 				"message": "Maximum number of root nodes exceeded. Maximum allowed is $limit$. Increase the maximum page size limit."
+			},
+			"searchError": {
+				"title": "Search Failed",
+				"message": "The search could not be executed. Please try again."
+			},
+			"searchNotAvailable": {
+				"title": "Cannot Search Tree",
+				"message": "The tree has no searchable document model."
 			}
 		},
 		"notification": {
@@ -116,6 +124,14 @@ export const en: typeof RESOURCE_KEYS = {
 			"expandAll": "Expand All",
 			"collapseAll": "Collapse All"
 		},
+		"columnVisibility": {
+			"title": "Column visibility",
+			"openColumnVisibility": "Open column visibility",
+			"closeColumnVisibility": "Close column visibility",
+			"reset": "Reset",
+			"closeButtonTitle": "Close",
+			"customizedBadgeTitle": "Column visibility changed"
+		},
 		"multiSelection": {
 			"multiSelectionButton": {
 				"expandTitle": "Expand functions for bulk operation",
@@ -126,6 +142,17 @@ export const en: typeof RESOURCE_KEYS = {
 			"summary": "$amount$ nodes"
 		},
 		"circularWarning": "Circular link structures detected, certain features will be disabled on repeated nodes.",
+		"search": {
+			"placeholder": "Search...",
+			"searchButton": "Search",
+			"clearButton": "Clear search",
+			"emptyResult": "No results found for your search.",
+			"searchButtonMinLengthTitle": "Enter at least $count$ characters",
+			"resultsOnly": "Results only",
+			"showCompleteTree": "Show complete Tree",
+			"showSearch": "Show search",
+			"hideSearch": "Hide search"
+		},
 		"initialView": {
 			"message": "Add a new element to the tree.",
 			"addButton": {

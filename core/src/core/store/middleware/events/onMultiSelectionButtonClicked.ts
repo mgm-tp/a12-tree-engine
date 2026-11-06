@@ -33,8 +33,8 @@
 import type { Middleware } from "redux";
 
 import { Commands, Events } from "../../actions.js";
-import { UIStateSelector } from "../../selectors/ui-state.js";
 import { ModelSelector } from "../../selectors/models.js";
+import { UIStateSelector } from "../../selectors/ui-state.js";
 import { TreeEngineState } from "../../store.js";
 
 /**

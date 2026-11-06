@@ -31,13 +31,13 @@
  */
 
 import fs from "fs/promises";
-import path from "path";
-import { test } from "node:test";
 import assert from "node:assert";
+import { test } from "node:test";
+import path from "path";
 
 import Config from "./config.js";
 
-test("validate copyrights", async () => {
+void test("validate copyrights", async () => {
 	const filePath = path.join(Config.outDir, "index.html");
 	const content = await fs.readFile(filePath, "utf8");
 

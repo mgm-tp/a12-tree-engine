@@ -33,9 +33,8 @@
 import * as React from "react";
 
 import type { RuntimeTreeModel, TreeModel } from "../../../../../models/tree-model.js";
-import { useTreeEngineState } from "../../../../context/tree-engine-context.js";
 import { ModelSelector } from "../../../../../store/selectors/models.js";
-
+import { useTreeEngineState } from "../../../../context/tree-engine-context.js";
 import type { FlattenNodeRow } from "../types.js";
 
 /** @internal */

@@ -32,17 +32,16 @@
 
 import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySagas } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import { DataSelector } from "../../../../core/store/selectors/data.js";
 import { Events } from "../../../../core/store/actions.js";
+import { DataSelector } from "../../../../core/store/selectors/data.js";
 import { TreeEngineActions } from "../../actions.js";
 import type { TreeEngineOperation } from "../../operation.js";
 import { TreeEngineSelectors } from "../../selectors.js";
 import { logger } from "../../utils.js";
-
 import { SagaUtils } from "../saga-utils.js";
 
 import { NodeDeletionUtils } from "./shared.js";

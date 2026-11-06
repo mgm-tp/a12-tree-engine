@@ -2,7 +2,7 @@
 	"header": {
 		"id": "Directory-binding-default-name_RuM",
 		"modelType": "relationship-ui",
-		"modelVersion": "2.0.0",
+		"modelVersion": "2.1.0",
 		"modelReferences": [
 			{
 				"purpose": "availableItems",

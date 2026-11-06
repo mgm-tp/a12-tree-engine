@@ -30,13 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import { type Selector, ModelSelectors } from "@com.mgmtp.a12.client/client-core";
 import {
 	type DocumentJsonRpc2Request,
 	Query,
 	type QueryJsonRpc2Request,
 	type RelationshipJsonRpc2request
 } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { type Selector, ModelSelectors } from "@com.mgmtp.a12.client/client-core";
 
 import { TreeEngineError } from "../../core/error/tree-engine-error.js";
 import { RelationshipModelUtils } from "../../core/models/utils/relationship-utils.js";
@@ -64,6 +64,11 @@ export interface RequestSelectorMap {
 	loadTreeNodes(config: {
 		activityId: string;
 		query: DataOperation.Query.TreeNodes.Query;
+		pageSize: number;
+	}): Selector<QueryJsonRpc2Request>;
+	searchNodes(config: {
+		activityId: string;
+		query: DataOperation.Query.SearchNodes.Query;
 		pageSize: number;
 	}): Selector<QueryJsonRpc2Request>;
 	loadDocument(config: {
@@ -279,6 +284,40 @@ export const DefaultRequestSelectorMap: RequestSelectorMap = {
 							value: source
 						},
 						paging: { pageNumber: 0, pageSize },
+						links
+					}
+				}
+			});
+		},
+	searchNodes:
+		({ query, pageSize }) =>
+		() => {
+			const links = query.links.map(function mapLinkQuery(linkQuery): Query.QueryLink {
+				return {
+					relationshipModel: linkQuery.relationshipModel,
+					targetRole: linkQuery.roles.child,
+					maxDepth: linkQuery.maxDepth,
+					links: linkQuery.childNodes?.map(mapLinkQuery),
+					fields: linkQuery.fields,
+					linkDocumentFields: linkQuery.linkDocumentFields
+				};
+			});
+
+			return JsonRpc.Request.builder.query({
+				id: query.id,
+				params: {
+					query: {
+						targetDocumentModel: query.entry.targetDocumentModel,
+						projectionName: "document",
+						constraint: {
+							operator: Query.OPERATORS.SIMPLE_SEARCH_OPERATOR,
+							value: query.searchTerm,
+							// Which fields the term is matched against — all of them when omitted.
+							fields: query.searchFields
+						},
+						paging: { pageNumber: 0, pageSize },
+						// Which fields of a matched document come back.
+						fields: query.fields,
 						links
 					}
 				}

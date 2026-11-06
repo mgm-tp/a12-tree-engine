@@ -32,6 +32,7 @@
 
 import * as React from "react";
 
+import { addWrapper, type A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core";
 import {
 	defaultDataFormats,
 	defaultLocalizerFactory,
@@ -49,7 +50,6 @@ import {
 	createContext,
 	useContextSelector
 } from "@com.mgmtp.a12.widgets/widgets-core";
-import { addWrapper, type A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core";
 
 import { SHOWCASE_RESOURCES } from "./config/resources.js";
 
@@ -146,4 +146,4 @@ export function useShowcaseContext<T>(selector: (value: ShowcaseContext.Type) =>
 }
 
 export const withShowCaseContext = <T extends A12ApplicationConfig>(cfg: T): T =>
-	addWrapper<T>(ShowcaseContextProvider, "outer")(cfg);
+	addWrapper(ShowcaseContextProvider, "outer")(cfg);

@@ -30,25 +30,25 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect, type Page } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect, type Page } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { cleanDocumentsData, generateNodes } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { CategoriesUtils } from "../utils.js";
 
 test.describe("with relationship engine", () => {
 	let utils: CategoriesUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, invalidateSeed }) => {
 		utils = new CategoriesUtils(page);
 		commands = new PlaywrightCommands(page);
 
 		await cleanDocumentsData({
 			showcases: ["categories"]
 		});
+		invalidateSeed("categories");
 		await generateNodes({ categories: [1, 2, 6], products: 6 });
 
 		await page.goto("");

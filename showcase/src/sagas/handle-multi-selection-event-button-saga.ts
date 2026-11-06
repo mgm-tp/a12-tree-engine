@@ -30,9 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type SagaGenerator, takeEvery, select, all, put } from "typed-redux-saga";
 import { isAction } from "redux";
+import { type SagaGenerator, takeEvery, select, all, put } from "typed-redux-saga";
 
+import { NotificationActions } from "@com.mgmtp.a12.client/client-core";
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	Commands,
@@ -41,10 +42,9 @@ import {
 	TreeEngineActions,
 	TreeEngineSelectors
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { NotificationActions } from "@com.mgmtp.a12.client/client-core";
 
-import { assert, RELOAD_NODES_ENGINE_EVENT } from "../helpers.js";
 import { SHOWCASE_RESOURCE_KEYS } from "../config/resources.js";
+import { assert, RELOAD_NODES_ENGINE_EVENT } from "../helpers.js";
 
 export function* handleMultiSelectionEventButtonSaga(): SagaGenerator<void> {
 	yield* takeEvery((action: unknown) => {

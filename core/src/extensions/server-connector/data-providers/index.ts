@@ -41,6 +41,10 @@ import {
 	ReferencedModel
 } from "@com.mgmtp.a12.client/client-core";
 
+import { TreeEngineError } from "../../../core/error/index.js";
+import { LocalizableFactory, RESOURCE_KEYS } from "../../../core/services/localization/index.js";
+import { Events } from "../../../core/store/actions.js";
+import { UIStateSelector } from "../../../core/store/selectors/ui-state.js";
 import {
 	maybeAsyncFnWrapper,
 	TreeEngineActions,
@@ -49,23 +53,21 @@ import {
 	TreeEngineSelectors
 } from "../../client/index.js";
 import { SagaUtils } from "../../client/shared.js";
-import { TreeEngineError } from "../../../core/error/index.js";
-import { LocalizableFactory, RESOURCE_KEYS } from "../../../core/services/localization/index.js";
-
-import type { TreeEngineServerConnectorFactories } from "../index.js";
-import type { TreeEngineDataLoader } from "../data-loaders/data-loader.js";
 import { createA12DataServiceDataLoader } from "../data-loaders/a12-data-loader.js";
+import type { TreeEngineDataLoader } from "../data-loaders/data-loader.js";
 import { RequestValidator } from "../data-loaders/request-validator.js";
+import type { TreeEngineServerConnectorFactories } from "../index.js";
 import { extractOperationsFromProvideDataConfig } from "../utils.js";
 
-import { handleExpandSubTree, handleExpandWholeTree, handleLoadAllChildNodes, init } from "./load/index.js";
+import { handleExpandToNode } from "./load/handle-expand-to-node.js";
 import { handleLoadAllRows } from "./load/handle-load-all-rows.js";
 import { handleLoadMoreRows } from "./load/handle-load-more-rows.js";
 import { handleReloadNodes } from "./load/handle-reload-nodes.js";
+import { handleClearSearch, handleSearchNodes } from "./load/handle-search.js";
+import { handleExpandSubTree, handleExpandWholeTree, handleLoadAllChildNodes, init } from "./load/index.js";
 import { handleLoad } from "./resolver/handle-load.js";
 import { handleSave } from "./resolver/handle-save.js";
 import type { LoadPayload, SavePayload } from "./utils.js";
-import { handleExpandToNode } from "./load/handle-expand-to-node.js";
 
 /** @internal */
 export function createTreeEngineDataProvider(
@@ -158,16 +160,28 @@ function* handleLoadOperation(params: {
 	dataLoader: TreeEngineDataLoader;
 	moduleSetting?: TreeEngineServerConnectorFactories.ModuleSettings;
 }): SagaGenerator<void> {
-	const { config, activity, operations, dataLoader, moduleSetting } = params;
+	const { config, activity, dataLoader, moduleSetting } = params;
 	const { activityId } = config;
 
 	let updatedDataHolders: TreeEngineDataHolder[] | undefined;
+	let removeUnusedDataHolders = false;
 	const preloadChildNodes = yield* call(getPreloadChildNode, activityId, moduleSetting);
 	const payload: LoadPayload = { config, dataLoader, preloadChildNodes };
 
+	const currentActivity = yield* select(ActivitySelectors.activityById(activityId));
+	const isActivityReload = currentActivity?.lock?.owner === "dataSagas.reload";
+	const operations = yield* call(resolveOperations, activityId, params.operations, isActivityReload);
+
 	if (operations?.length === 1) {
 		const [operation] = operations;
-		if (operation.type === "EXPAND_WHOLE_TREE") {
+		if (operation.type === "SEARCH_NODES") {
+			const searchDataHolders = yield* call(handleSearchNodes, { ...payload, operation });
+			removeUnusedDataHolders = !!searchDataHolders;
+			updatedDataHolders = searchDataHolders ?? [];
+		} else if (operation.type === "CLEAR_SEARCH") {
+			const reloadedDataHolders = yield* call(handleClearSearch, payload);
+			updatedDataHolders = reloadedDataHolders ?? [];
+		} else if (operation.type === "EXPAND_WHOLE_TREE") {
 			updatedDataHolders = yield* call(handleExpandWholeTree, { ...payload });
 		} else if (operation.type === "EXPAND_SUB_TREE") {
 			updatedDataHolders = yield* call(handleExpandSubTree, { ...payload, operation });
@@ -195,7 +209,9 @@ function* handleLoadOperation(params: {
 	}
 
 	if (updatedDataHolders) {
-		yield* put(TreeEngineActions.setDataHolders({ activityId, dataHolders: updatedDataHolders }));
+		yield* put(
+			TreeEngineActions.setDataHolders({ activityId, dataHolders: updatedDataHolders, removeUnusedDataHolders })
+		);
 		return;
 	}
 
@@ -207,13 +223,12 @@ function* handleLoadOperation(params: {
 		reload: config.dataHolders.filter(TreeEngineDataHolder.isAssignableFrom).length === nodesDataHolders?.length
 	});
 
-	const currentActivity = yield* select(ActivitySelectors.activityById(activityId));
 	yield* put(
 		TreeEngineActions.setDataHolders({
 			activityId,
 			dataHolders,
 			// Only remove unused data holders when activity reload
-			removeUnusedDataHolders: currentActivity?.lock?.owner === "dataSagas.reload"
+			removeUnusedDataHolders: isActivityReload
 		})
 	);
 }
@@ -247,7 +262,7 @@ function* handleSaveOperation(params: {
 	}
 
 	const savePayload: SavePayload = { config, dataLoader };
-	const { result, dataHolders, removedDataHolderDescriptors } = yield* call(handleSave, {
+	const { result, dataHolders, removedDataHolderDescriptors, activeSearchTerm } = yield* call(handleSave, {
 		...savePayload,
 		mutations: operations
 	});
@@ -262,6 +277,58 @@ function* handleSaveOperation(params: {
 		})
 	);
 	yield* put(config.details.saving.done(result ?? {}));
+
+	if (activeSearchTerm) {
+		yield* put(
+			TreeEngineActions.event({
+				activityId,
+				engineAction: Events.onSearchQueryChanged({ searchTerm: activeSearchTerm, trigger: "engine" })
+			})
+		);
+	}
+}
+
+/** Whether the load fetches rows that are already on screen again, instead of only adding new ones. */
+function refetchesLoadedRows(operations: TreeEngineOperation[] | undefined, isActivityReload: boolean): boolean {
+	if (isActivityReload) {
+		return true;
+	}
+	if (operations?.length !== 1) {
+		return false;
+	}
+	const [operation] = operations;
+	return (
+		operation.type === "RELOAD_NODES" ||
+		(operation.type === "LOAD_ALL_CHILD_NODES" && !!operation.payload.onlyLoadedNodes)
+	);
+}
+
+/**
+ * The operations to run. A load that refetches rows already on screen becomes an engine-triggered
+ * search: the re-run reloads the tree from the root, as deep as the matches and the open branches
+ * reach, and brings the stored matches up to date with what it loaded.
+ */
+function* resolveOperations(
+	activityId: string,
+	operations: TreeEngineOperation[] | undefined,
+	isActivityReload: boolean
+): SagaGenerator<TreeEngineOperation[] | undefined> {
+	if (!refetchesLoadedRows(operations, isActivityReload)) {
+		return operations;
+	}
+
+	const activeSearchTerm = yield* call(getActiveSearchTerm, activityId);
+	if (!activeSearchTerm) {
+		return operations;
+	}
+
+	return [{ type: "SEARCH_NODES", payload: { searchTerm: activeSearchTerm, trigger: "engine" } }];
+}
+
+/** The active search term, or an empty string when no search is active. */
+function* getActiveSearchTerm(activityId: string): SagaGenerator<string> {
+	const uiState = yield* select(TreeEngineSelectors.uiState(activityId));
+	return UIStateSelector.searchString()(uiState);
 }
 
 function* showLimitErrorNotification(params: {

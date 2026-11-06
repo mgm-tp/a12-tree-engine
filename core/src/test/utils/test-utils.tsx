@@ -30,13 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { renderHook } from "@testing-library/react";
-import * as React from "react";
-import * as Enzyme from "enzyme";
-import { ThemeProvider } from "styled-components";
-import { DndProvider } from "react-dnd";
+import type * as React from "react";
 
-import { defaultTheme, DragAndDropUtils, type Container } from "@com.mgmtp.a12.widgets/widgets-core";
+import { renderHook } from "@testing-library/react";
+import type * as Enzyme from "enzyme";
+
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { DefaultLocalizerContextProvider } from "@com.mgmtp.a12.utils/utils-localization-react";
 
@@ -46,7 +44,6 @@ import {
 	type TreeEngineRowContext,
 	TreeEngineRowContextProvider
 } from "../../core/view/index.js";
-
 import { createContextProps, enLocale, type PartialEventHandlerContextProps } from "../setup/basic.spec.js";
 
 export function testHook<Hook extends (...args: never[]) => any = (...args: never[]) => any>(
@@ -92,40 +89,6 @@ export function testRowHook<Hook extends (...args: never[]) => any = (...args: n
 
 export function testIsNullComponent(component: Enzyme.ReactWrapper) {
 	expect(component.html()).toBe("");
-}
-
-interface WithWrappingComponent<T extends Container = Container> {
-	wrappingComponent?: React.FC<T>;
-	wrappingComponentProps?: T;
-}
-export function mount<T extends Container = Container>(
-	element: React.ReactElement,
-	options?: Omit<Enzyme.MountRendererProps, keyof WithWrappingComponent> & WithWrappingComponent<T>,
-	customLocale?: Locale
-): Enzyme.ReactWrapper {
-	const DefinedWrapper = options?.wrappingComponent;
-	const wrappingComponentProps = options?.wrappingComponentProps;
-
-	const WrappingComponent: React.FC<T> = (props) => {
-		const children = DefinedWrapper ? <DefinedWrapper {...wrappingComponentProps} {...props} /> : props.children;
-
-		return (
-			<DndProvider backend={DragAndDropUtils.DefaultDndBackend} options={DragAndDropUtils.DefaultDndBackendOptions}>
-				<DefaultLocalizerContextProvider locale={customLocale ?? enLocale}>
-					<ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>
-				</DefaultLocalizerContextProvider>
-			</DndProvider>
-		);
-	};
-
-	return Enzyme.mount(element as never, { wrappingComponent: WrappingComponent as never });
-}
-export function getInteractiveElement(wrapper: Enzyme.ReactWrapper<unknown | any>): Enzyme.ReactWrapper {
-	return wrapper
-		.findWhere((item) => {
-			return ["button", "li", "div", "a"].includes(item.getDOMNode()?.tagName?.toLowerCase());
-		})
-		.at(0);
 }
 
 export function cartesianProduct<T>(...groups: Partial<T>[][]): T[] {

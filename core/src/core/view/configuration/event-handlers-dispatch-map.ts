@@ -32,13 +32,12 @@
 
 import type { Dispatch } from "redux";
 
-import type { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
+import type { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { type RuntimeTreeModel, TreeModel } from "../../models/tree-model.js";
 import { Commands, Events } from "../../store/actions.js";
 import type { Identifier, TreeEngineState } from "../../store/store.js";
-
 import { type FlattenNodeRow, RootNodeRow } from "../components/tree-engine/sub-components/types.js";
 
 export interface EventHandlersDispatchMap {
@@ -58,6 +57,7 @@ export interface EventHandlersDispatchMap {
 	onDialogClosed(): void;
 	onDialogConfirmed(params: { payload: Events.DialogConfirmedPayload }): void;
 	onColumnWidthsChanged(params: { changedColumnWidths: TreeEngineState.ColumnWidths }): void;
+	onColumnVisibilityChanged(params: { columnVisibility: TreeEngineState.ColumnVisibility }): void;
 	onDndStarted(params: { draggingNodeRow: FlattenNodeRow }): void;
 	onDndDone(params: {
 		draggedNodeRow: FlattenNodeRow;
@@ -88,6 +88,10 @@ export interface EventHandlersDispatchMap {
 	onScrollToNodeDone(scrollToNode: TreeEngineState.ScrollToNode): void;
 	onLoadMore(params: { nodeIdentifier: Identifier; nodePath: TreeEngineState.NodePath }): void;
 	onLoadAll(params: { nodeIdentifier: Identifier; nodePath: TreeEngineState.NodePath }): void;
+	onSearchQueryChanged(params: { searchTerm: string }): void;
+	onMobileSearchBarToggle(params: { visible: boolean }): void;
+
+	onSearchResultViewChanged(params: { view: TreeModel.SearchResultView }): void;
 	/** @internal */
 	onAddWarning?(params: { message: Localizable }): void;
 }
@@ -180,6 +184,9 @@ export function defaultMapDispatchToEventHandlers(dispatch: Dispatch): EventHand
 		},
 		onDialogConfirmed({ payload }) {
 			dispatch(Events.onDialogConfirmed(payload));
+		},
+		onColumnVisibilityChanged({ columnVisibility }) {
+			dispatch(Events.onColumnVisibilityChanged({ columnVisibility }));
 		},
 		onColumnWidthsChanged({ changedColumnWidths }) {
 			dispatch(Events.onColumnWidthsChanged({ changedColumnWidths }));
@@ -278,6 +285,16 @@ export function defaultMapDispatchToEventHandlers(dispatch: Dispatch): EventHand
 		},
 		onLoadAll(params) {
 			dispatch(Events.onLoadAll(params));
+		},
+		onSearchQueryChanged({ searchTerm }) {
+			// Everything reaching the dispatch map comes from a component the user operates.
+			dispatch(Events.onSearchQueryChanged({ searchTerm, trigger: "user" }));
+		},
+		onSearchResultViewChanged({ view }) {
+			dispatch(Events.onSearchResultViewChanged({ view }));
+		},
+		onMobileSearchBarToggle({ visible }) {
+			dispatch(Events.onMobileSearchBarToggle({ visible }));
 		},
 		onAddWarning(params) {
 			dispatch(Events.onAddWarning(params));

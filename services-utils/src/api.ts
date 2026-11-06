@@ -32,12 +32,12 @@
 
 import * as Fs from "node:fs";
 
-import { updateBaseUrl } from "./utils/index.js";
 import { main as cleanDocuments, type CleanDocParams } from "./commands/clean-documents.js";
 import { main as generate, type GenerateParams } from "./commands/generate.js";
-import { main as seed, type WaitOnParams } from "./commands/seed/index.js";
 import { main as uploadModels, type UploadParams } from "./commands/model/upload.js";
+import { main as seed, type WaitOnParams } from "./commands/seed/index.js";
 import { main as waitOn } from "./commands/wait-on.js";
+import { updateBaseUrl } from "./utils/index.js";
 
 /**
  * Options for seeding data
@@ -46,6 +46,11 @@ export interface SeedOptions {
 	preset?: "default" | "a12-teams" | "categories" | "categories-slim" | "model-editor" | "circular-nodes";
 	variant?: "normal" | "pagination" | "group-management";
 	data?: "simple" | "multiple-pages";
+	/**
+	 * Clean the preset's showcases before seeding them.
+	 * @default true
+	 */
+	clean?: boolean;
 	baseUrl?: string;
 	waitOn?: boolean;
 	whenDirNotFound?: string;
@@ -122,14 +127,39 @@ async function checkPreconditions(options: CommonOptions): Promise<void> {
 }
 
 /**
+ * The showcases a preset writes documents into, so that seeding can clean exactly what it is
+ * about to recreate. Presets that seed no showcase documents map to nothing.
+ */
+/** The showcases each preset writes, and therefore cleans before seeding. */
+export const showcasesByPreset: Record<string, string[]> = {
+	"a12-teams": ["a12-teams"],
+	categories: ["categories"],
+	"categories-slim": ["categories"],
+	"model-editor": ["model-editor"],
+	"circular-nodes": ["model-editor"]
+};
+
+/**
  * Seed data to server using a specific preset
+ *
+ * Cleans the showcases the preset is about to write before recreating them, so that callers do
+ * not have to pair a matching {@link cleanDocumentsData} call by hand. Pass `clean: false` to
+ * seed on top of whatever is already there.
  */
 export async function seedData(options: SeedOptions = {}): Promise<void> {
 	await checkPreconditions(options);
 
+	const preset = options.preset || "default";
+	const variant = options.variant || "normal";
+	const showcases = showcasesByPreset[preset];
+
+	if (options.clean !== false && showcases) {
+		await cleanDocuments({ showcases, variant });
+	}
+
 	const params: WaitOnParams = {
-		preset: options.preset || "default",
-		variant: options.variant || "normal",
+		preset,
+		variant,
 		data: options.data || "simple",
 		waitOn: options.waitOn
 	};

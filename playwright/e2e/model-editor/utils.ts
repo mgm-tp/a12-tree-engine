@@ -67,19 +67,9 @@ export class ModelEditorUtils {
 	}
 
 	/**
-	 * Fill computer form
+	 * Fill the shared name/owner/group form used by computer, drive and directory nodes
 	 */
-	async fillComputerForm([name, owner, group]: string[]): Promise<void> {
-		await this.commands.waitUntilLoaded();
-		await this.page.locator("input[id*=Name]").fill(name);
-		await this.page.locator("input[id*=Owner]").fill(owner);
-		await this.page.locator("input[id*=Group]").fill(group);
-	}
-
-	/**
-	 * Fill drive form
-	 */
-	async fillDriveForm([name, owner, group]: string[]): Promise<void> {
+	async fillNameOwnerGroupForm([name, owner, group]: string[]): Promise<void> {
 		await this.commands.waitUntilLoaded();
 		await this.page.locator("input[id*=Name]").fill(name);
 		await this.page.locator("input[id*=Owner]").fill(owner);

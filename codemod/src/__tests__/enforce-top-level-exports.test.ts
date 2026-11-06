@@ -37,8 +37,8 @@ import { testRecipe } from "@com.mgmtp.a12.devtools/codemod";
 import { enforceTopLevelExportsRecipe } from "../recipes/enforce-top-level-exports.js";
 
 describe("enforceTopLevelExports", () => {
-	it("should migrate deep imports with .js extension", () => {
-		expect(
+	it("should migrate deep imports with .js extension", async () => {
+		await expect(
 			testRecipe(
 				enforceTopLevelExportsRecipe,
 				`import {
@@ -61,8 +61,8 @@ import { TreeDataUtils } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/cor
 		`);
 	});
 
-	it("should migrate deep imports without .js extension", () => {
-		expect(
+	it("should migrate deep imports without .js extension", async () => {
+		await expect(
 			testRecipe(
 				enforceTopLevelExportsRecipe,
 				`import { Commands, Events } from "@com.mgmtp.a12.treeengine/treeengine-core/lib/core/store";
@@ -76,8 +76,8 @@ import { TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core/lib
 		`);
 	});
 
-	it("should not modify already top-level imports", () => {
-		expect(
+	it("should not modify already top-level imports", async () => {
+		await expect(
 			testRecipe(
 				enforceTopLevelExportsRecipe,
 				`import { TreeEngineFactories } from "@com.mgmtp.a12.treeengine/treeengine-core";
@@ -91,8 +91,8 @@ import { TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core/lib
 		`);
 	});
 
-	it("should not modify imports from other packages", () => {
-		expect(
+	it("should not modify imports from other packages", async () => {
+		await expect(
 			testRecipe(
 				enforceTopLevelExportsRecipe,
 				`import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core/lib/core/activity/index.js";

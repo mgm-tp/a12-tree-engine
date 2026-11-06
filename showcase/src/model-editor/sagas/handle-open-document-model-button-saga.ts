@@ -30,11 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 import { isAction } from "redux";
+import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	DataSelector,
 	Events,
@@ -43,7 +43,6 @@ import {
 	TreeEngineSelectors
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
-import { getNodesFromNodePath, getTargetNodePath } from "../../utils.js";
 import {
 	OPEN_DM_NODE_EVENT,
 	OPEN_DM_NODE_EVENT_TWIN,
@@ -53,7 +52,7 @@ import {
 	OPEN_DM_PAGINATED_NODE_EVENT,
 	OPEN_DM_WITH_REPLACEMENT_NODE_EVENT
 } from "../../helpers.js";
-
+import { getNodesFromNodePath, getTargetNodePath } from "../../utils.js";
 import { File } from "../document.js";
 
 import { cancelChildActivities, getInitialExpansionConfig } from "./utils.js";

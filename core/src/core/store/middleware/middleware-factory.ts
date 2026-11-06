@@ -32,19 +32,20 @@
 
 import type { Middleware } from "redux";
 
+import { onColumnVisibilityChangedMiddleware } from "./events/onColumnVisibilityChanged.js";
 import { onColumnWidthsChangedMiddleware } from "./events/onColumnWidthsChanged.js";
 import { onDialogClosedMiddleware } from "./events/onDialogClosed.js";
 import { onDialogConfirmedMiddleware } from "./events/onDialogConfirmed.js";
 import { onDndHoverMiddleware } from "./events/onDndHover.js";
+import { onEventButtonClickedMiddleware } from "./events/onEventButtonClicked.js";
 import { onEventButtonClickedRequestMiddleware } from "./events/onEventButtonClickedRequest.js";
 import { onInsertChildNodeRequestMiddleware } from "./events/onInsertChildNodeRequest.js";
 import { onInsertRootNodeRequestMiddleware } from "./events/onInsertRootNodeRequest.js";
+import { onInsertSiblingNodeRequestMiddleware } from "./events/onInsertSiblingNodeRequest.js";
 import { onMakeRootNodeRequestMiddleware } from "./events/onMakeRootNodeRequest.js";
-import { onNodeEventButtonClickedRequestMiddleware } from "./events/onNodeEventButtonClickedRequest.js";
 import { onMultiSelectionButtonClickedMiddleware } from "./events/onMultiSelectionButtonClicked.js";
 import { onMultiSelectionEventButtonClickedRequestMiddleware } from "./events/onMultiSelectionEventButtonClickedRequest.js";
-import { onEventButtonClickedMiddleware } from "./events/onEventButtonClicked.js";
-import { onInsertSiblingNodeRequestMiddleware } from "./events/onInsertSiblingNodeRequest.js";
+import { onNodeEventButtonClickedRequestMiddleware } from "./events/onNodeEventButtonClickedRequest.js";
 import { onRevalidateClipboard } from "./events/onRevalidateClipboard.js";
 
 export function createEngineMiddlewares(): Middleware[] {
@@ -59,6 +60,7 @@ export function createEngineMiddlewares(): Middleware[] {
 		onDialogClosedMiddleware,
 		onDialogConfirmedMiddleware,
 		onColumnWidthsChangedMiddleware,
+		onColumnVisibilityChangedMiddleware,
 		onDialogConfirmedMiddleware,
 		onMultiSelectionButtonClickedMiddleware,
 		onMultiSelectionEventButtonClickedRequestMiddleware,

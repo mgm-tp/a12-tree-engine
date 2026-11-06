@@ -33,7 +33,6 @@
 import { Query, type QueryJsonRpc2Response, Relationship } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import type { DocumentProcessors } from "../../types.js";
-
 import { DataOperation } from "../data-loader.js";
 
 /** @internal */
@@ -41,6 +40,8 @@ export namespace A12QueryAPIUtils {
 	export const DOCUMENT_REFERENCE_FIELD = "/__meta/docRef";
 
 	export const DEFAULT_PAGE_SIZE = 100;
+
+	export const DEFAULT_MAX_QUERY_DEPTH_HARD_LIMIT = 10;
 
 	export namespace Paging {
 		export function transformPaging(

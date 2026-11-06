@@ -37,11 +37,11 @@ import type { TreeEngineDataHolder } from "../../client/data-holder.js";
 export namespace RequestId {
 	const cleanNonAlphaNumericChars = (id: string) => id.replace(/[^a-zA-Z0-9]/g, "");
 
-	export function createForRootNodes(descriptor: TreeEngineDataHolder.Descriptor.RootNodes): string {
+	export function createForRootNodes(_descriptor: TreeEngineDataHolder.Descriptor.RootNodes): string {
 		return "TreeEngineRoots";
 	}
 
-	export function createForHiddenRootNodes(descriptor: TreeEngineDataHolder.Descriptor.HiddenRootNodes): string {
+	export function createForHiddenRootNodes(_descriptor: TreeEngineDataHolder.Descriptor.HiddenRootNodes): string {
 		return "TreeEngineHiddenRoots";
 	}
 

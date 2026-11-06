@@ -30,8 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { createSelectorCreator, weakMapMemoize, lruMemoize } from "reselect";
 import { shallowEqual } from "react-redux";
+
+import { createSelectorCreator, weakMapMemoize, lruMemoize } from "reselect";
 
 export interface Selector<ReturnType, State = object> {
 	(state: State): ReturnType;
@@ -69,15 +70,40 @@ function extendedShallowEqual(a: unknown, b: unknown): boolean {
 		if (a.length !== b.length) {
 			return false;
 		}
-		return a.every((item, index) => shallowEqualWithDate(item, b[index]));
+		return a.every((item, index) => shallowEqualWithBuiltIns(item, b[index]));
 	}
 
-	return shallowEqualWithDate(a, b);
+	return shallowEqualWithBuiltIns(a, b);
 }
 
-function shallowEqualWithDate(a: unknown, b: unknown): boolean {
+function shallowEqualWithBuiltIns(a: unknown, b: unknown): boolean {
 	if (a instanceof Date && b instanceof Date) {
 		return a.getTime() === b.getTime();
+	}
+
+	// shallowEqual only looks at own keys, and a set or a map keeps its content elsewhere: it would
+	// call two different sets equal, so a selector returning one would never report a change.
+	if (a instanceof Set && b instanceof Set) {
+		if (a.size !== b.size) {
+			return false;
+		}
+		for (const entry of a) {
+			if (!b.has(entry)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	if (a instanceof Map && b instanceof Map) {
+		if (a.size !== b.size) {
+			return false;
+		}
+		for (const [key, value] of a) {
+			if (!b.has(key) || !Object.is(b.get(key), value)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	return shallowEqual(a, b);

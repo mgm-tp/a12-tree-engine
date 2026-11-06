@@ -51,7 +51,7 @@ import { testIsNullComponent } from "../../../../../utils/test-utils.js";
 
 import { BodyCellWrapper } from "./body-cell/shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.row-action-group", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.row-action-group", () => {
 	const basicEngineState = defaultEngineState;
 	const actionA: TreeModel.TreeNodeEventActionButton = {
 		type: "event",

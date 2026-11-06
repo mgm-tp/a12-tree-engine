@@ -32,9 +32,9 @@
 
 import type { DynamicConfiguration } from "@com.mgmtp.a12.client/client-core";
 
+import { menus } from "./menus.js";
 import { extendedPushMiddleware } from "./middlwares/extended-push-middleware.js";
 import { scenes } from "./scenes.js";
-import { menus } from "./menus.js";
 
 export const categoriesModule: DynamicConfiguration = {
 	id: "Categories",

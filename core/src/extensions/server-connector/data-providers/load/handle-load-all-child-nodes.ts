@@ -34,8 +34,10 @@ import { type SagaGenerator, call, select } from "typed-redux-saga";
 
 import { Activity, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 
-import { Identifier, type ModelsState } from "../../../../core/store/store.js";
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
+import { TreeModel } from "../../../../core/models/tree-model.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
+import { Identifier, type ModelsState } from "../../../../core/store/store.js";
 import { TreeEngineDataHolder } from "../../../client/data-holder.js";
 import type { TreeEngineOperation } from "../../../client/operation.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
@@ -46,9 +48,6 @@ import {
 	findRootNodeDataHolder,
 	getRootNodesFromDataHolder
 } from "../../shared.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import { TreeModel } from "../../../../core/models/tree-model.js";
-
 import { handleLoad } from "../resolver/handle-load.js";
 import { type BasePayload, type LoadPayload, mergeDataHolders } from "../utils.js";
 

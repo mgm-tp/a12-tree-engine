@@ -30,20 +30,21 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// oxlint-disable-next-line ban-ts-comment
 // @ts-nocheck
 
-import type * as Enzyme from "enzyme";
 import * as React from "react";
+
+import type * as Enzyme from "enzyme";
 import { vi } from "vitest";
 
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { ModalNotification, Button } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { TreeModel } from "../../../../../../core/models/index.js";
+import type { RESOURCE_KEYS } from "../../../../../../core/services/localization/index.js";
 import { de } from "../../../../../../core/services/localization/languages/de.js";
 import { en } from "../../../../../../core/services/localization/languages/en.js";
-import type { RESOURCE_KEYS } from "../../../../../../core/services/localization/index.js";
 import { TreeEngineState, type Identifier } from "../../../../../../core/store/index.js";
 import {
 	TreeEngineContextProvider,
@@ -52,9 +53,9 @@ import {
 } from "../../../../../../core/view/index.js";
 import { createContextProps, defaultEngineState, deLocale } from "../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
-import { getInteractiveElement } from "../../../../../utils/test-utils.js";
+import { getInteractiveElement } from "../../../../../utils/mount.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.dialogs.sub-components.confirmation-dialog", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.dialogs.sub-components.confirmation-dialog", () => {
 	const basicEngineState = defaultEngineState;
 	const basicConfirmation: TreeModel.ConfirmationText = {
 		title: [
@@ -338,11 +339,9 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.dialogs.sub-compo
 								? (dialogState as TreeEngineState.Dialog.Confirmation.EventButton)
 								: (dialogState as TreeEngineState.Dialog.Confirmation.NodeEventButton);
 
-						expect(
-							expect(onDialogConfirmedSpy).toHaveBeenCalledWith({
-								payload: expectPayload
-							})
-						).toBe(true);
+						expect(onDialogConfirmedSpy).toHaveBeenCalledWith({
+							payload: expectPayload
+						});
 						expect(onEventButtonClickedSpy).not.toHaveBeenCalled();
 					});
 				});

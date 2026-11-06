@@ -81,6 +81,7 @@ export enum TreeEngineErrorCode {
 	SELECT_NODE_ERROR = "SELECT_NODE_ERROR",
 	MULTI_SELECT_NODE_ERROR = "MULTI_SELECT_NODE_ERROR",
 	PAGING_ERROR = "PAGING_ERROR",
+	SEARCH_ERROR = "SEARCH_ERROR",
 
 	/**
 	 * Saving operation errors
@@ -221,6 +222,7 @@ export namespace TreeEngineError {
 		() => "Can not select the desired node(s)"
 	);
 	export const PagingError = createError(TreeEngineErrorCode.PAGING_ERROR, () => "Can not load more page");
+	export const SearchError = createError(TreeEngineErrorCode.SEARCH_ERROR, () => "Can not search nodes");
 
 	/**
 	 * Saving operation errors

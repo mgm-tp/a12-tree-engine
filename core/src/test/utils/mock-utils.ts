@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { Mock } from "vitest";
 import * as TypeMoq from "typemoq";
+import type { Mock } from "vitest";
 
 /** @internal */
 export function mockType<T extends { [key: string]: any }>(config?: RecursivePartial<T>) {

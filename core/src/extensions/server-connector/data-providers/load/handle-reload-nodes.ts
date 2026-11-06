@@ -35,12 +35,11 @@ import { call, type SagaGenerator, select } from "typed-redux-saga";
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { Identifier } from "../../../../core/store/store.js";
 import { TreeDataUtils } from "../../../../core/store/utils.js";
-import { maybeAsyncFnWrapper } from "../../../client/utils.js";
 import { TreeEngineDataHolder } from "../../../client/data-holder.js";
 import type { TreeEngineOperation } from "../../../client/operation.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
+import { maybeAsyncFnWrapper } from "../../../client/utils.js";
 import { DataOperation } from "../../data-loaders/data-loader.js";
-
 import { handleThumbnailUrlResult, hasAttachment } from "../resolver/attachment-utils.js";
 import { getDocumentProcessors, type LoadPayload } from "../utils.js";
 

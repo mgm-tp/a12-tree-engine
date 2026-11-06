@@ -30,17 +30,23 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { get } from "lodash-es";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as KeyCode from "keycode-js";
 
+import * as KeyCode from "keycode-js";
+import { get } from "lodash-es";
+
+import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { NotificationActions, LOCALE_RESOURCE_KEYS } from "@com.mgmtp.a12.client/client-core";
 import {
+	Events,
 	TreeDataUtils,
+	TreeEngineActions,
 	TreeEngineState,
 	type ComponentMap,
 	DefaultComponentMap,
 	DefaultWidgetMap,
+	type EventHandlersDispatchMap,
 	type FlattenNodeRow,
 	RootNodeRow,
 	type RowActionStateGetter,
@@ -65,13 +71,12 @@ import {
 	A11YLanguageContext,
 	type Container
 } from "@com.mgmtp.a12.widgets/widgets-core";
-import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
-import { NotificationActions, LOCALE_RESOURCE_KEYS } from "@com.mgmtp.a12.client/client-core";
 
-import { assert, EDIT_NODE_EVENT, EDIT_ENGINE_EVENT, INFO_NODE_EVENT } from "../helpers.js";
-import { engineShortcuts } from "../utils.js";
+import { persistColumnVisibility } from "../a12team/column-visibility-storage.js";
 import { SHOWCASE_RESOURCE_KEYS } from "../config/resources.js";
 import { useShowcaseContext } from "../context.js";
+import { assert, EDIT_NODE_EVENT, EDIT_ENGINE_EVENT, INFO_NODE_EVENT } from "../helpers.js";
+import { engineShortcuts } from "../utils.js";
 
 export namespace CustomA12TeamTreeEngine {
 	export type Props = TreeEngineFactories.ViewComponentProps;
@@ -311,6 +316,28 @@ export const CustomA12TeamTreeEngine: React.FC<CustomA12TeamTreeEngine.Props> = 
 
 	const enableDnd = useShowcaseContext((context) => (context.enableDnd ? undefined : false));
 
+	const dispatch = useDispatch();
+	const activityId = props.activityId;
+
+	// tag::onColumnVisibilityChanged[]
+	const eventHandlers: Partial<EventHandlersDispatchMap> = React.useMemo(() => {
+		return {
+			onColumnVisibilityChanged({ columnVisibility }) {
+				// This handler replaces the engine's own dispatch, so forward the event on
+				// first — otherwise the panel stops updating the tree.
+				dispatch(
+					TreeEngineActions.event({
+						activityId,
+						engineAction: Events.onColumnVisibilityChanged({ columnVisibility })
+					})
+				);
+
+				persistColumnVisibility(columnVisibility);
+			}
+		};
+	}, [activityId, dispatch]);
+	// end::onColumnVisibilityChanged[]
+
 	return (
 		<CustomA11YLanguageContextProvider>
 			<TreeEngineFactories.ViewComponent
@@ -321,6 +348,7 @@ export const CustomA12TeamTreeEngine: React.FC<CustomA12TeamTreeEngine.Props> = 
 				rowActionStateGetter={rowActionStateGetter}
 				rowStyling={rowStyling}
 				dndConfiguration={enableDnd}
+				eventHandlers={eventHandlers}
 			/>
 		</CustomA11YLanguageContextProvider>
 	);

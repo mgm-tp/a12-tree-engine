@@ -33,10 +33,10 @@
 import { vi } from "vitest";
 
 import { DataSelector, ModelSelector, type TreeEngineState, type Identifier } from "../../../../../core/store/index.js";
+import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
 import { type FlattenNodeRow, RootNodeRow } from "../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { testHook } from "../../../../utils/test-utils.js";
-import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-flatten-rows", () => {
 	const basicEngineState = defaultEngineState;
@@ -434,8 +434,7 @@ describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-flatte
 			       root (= team1)
 			       |-- team2
 			       |   |-- person1
-			       |-- team3
-			      `, () => {
+			       |-- team3`, () => {
 		const identifiedRoot: TreeEngineState.Root = {
 			identifier: { type: "DomainTeam", id: "DomainTeam/1" },
 			children: [

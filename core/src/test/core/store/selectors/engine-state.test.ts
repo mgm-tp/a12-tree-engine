@@ -50,7 +50,7 @@ describe("@com.mgmtp.a12.tree-engine.core.store.selectors.engine-state", () => {
 		];
 		return missingFields.map((field) => {
 			const clonedState: TreeEngineState = { ...basicEngineState };
-			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+			// oxlint-disable-next-line no-dynamic-delete
 			delete clonedState[field];
 			return clonedState;
 		});
@@ -74,12 +74,12 @@ describe("@com.mgmtp.a12.tree-engine.core.store.selectors.engine-state", () => {
 
 	describe("isEngineState", () => {
 		describe("given a valid state", () => {
-			it("it should return true", () => {
+			it("should return true", () => {
 				expect(isEngineState(basicEngineState)).toBe(true);
 			});
 		});
 		describe("given an invalid state", () => {
-			it("it should return false", () => {
+			it("should return false", () => {
 				const invalidStates = getInvalidStates();
 				invalidStates.forEach((invalidState) => {
 					expect(() => engineState(invalidState)).toThrow();

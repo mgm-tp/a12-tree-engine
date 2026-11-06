@@ -30,11 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { Activity } from "@com.mgmtp.a12.client/client-core";
+import type { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type { Identifier, TreeEngineState } from "../../core/store/store.js";
 import type { TreeModel } from "../../core/models/tree-model.js";
+import type { Events } from "../../core/store/actions.js";
+import type { Identifier, TreeEngineState } from "../../core/store/store.js";
 
 export type TreeEngineOperation =
 	| TreeEngineOperation.ExpandWholeTree
@@ -44,6 +45,8 @@ export type TreeEngineOperation =
 	| TreeEngineOperation.LoadMoreNodes
 	| TreeEngineOperation.LoadAllNodes
 	| TreeEngineOperation.ReloadNodes
+	| TreeEngineOperation.SearchNodes
+	| TreeEngineOperation.ClearSearch
 	| TreeEngineOperation.Mutation;
 
 export namespace TreeEngineOperation {
@@ -328,6 +331,29 @@ export namespace TreeEngineOperation {
 			readonly nodePath: TreeEngineState.NodePath;
 			readonly nodesFromNodePath?: Identifier[];
 		}
+	}
+
+	export interface SearchNodes extends Base<SearchNodes.Payload> {
+		readonly type: "SEARCH_NODES";
+	}
+
+	export namespace SearchNodes {
+		export interface Payload extends AffectableDataHolders {
+			readonly searchTerm: string;
+			/**
+			 * Who asked for this search. An `"engine"` re-run refreshes the matches without resetting
+			 * the result view or the selection; a term the user submits resets both.
+			 */
+			readonly trigger: Events.SearchTrigger;
+		}
+	}
+
+	export interface ClearSearch extends Base<ClearSearch.Payload> {
+		readonly type: "CLEAR_SEARCH";
+	}
+
+	export namespace ClearSearch {
+		export type Payload = AffectableDataHolders;
 	}
 
 	export interface LoadMoreNodes extends Base<LoadMoreNodes.Payload> {

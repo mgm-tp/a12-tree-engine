@@ -35,10 +35,6 @@ import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { RuntimeTreeModel } from "../../../../../core/models/index.js";
 import type { Identifier } from "../../../../../core/store/index.js";
-import { type DragObject, type HoveredObject, RootNodeRow } from "../../../../../core/view/index.js";
-import { defaultEngineState } from "../../../../setup/basic.spec.js";
-import { mockType } from "../../../../utils/mock-utils.js";
-import { createEngineState } from "../../../../utils/model-utils.js";
 import {
 	ForbidCreateCircularRule,
 	ForbidDropOnItselfRule,
@@ -48,6 +44,10 @@ import {
 	MakeRootRule,
 	MakeSiblingRule
 } from "../../../../../core/view/configuration/dnd/can-drop-rules.js";
+import { type DragObject, type HoveredObject, RootNodeRow } from "../../../../../core/view/index.js";
+import { defaultEngineState } from "../../../../setup/basic.spec.js";
+import { mockType } from "../../../../utils/mock-utils.js";
+import { createEngineState } from "../../../../utils/model-utils.js";
 
 import { createDragItem, createFlattenNodeRow, createHoveredItem } from "./shared.js";
 

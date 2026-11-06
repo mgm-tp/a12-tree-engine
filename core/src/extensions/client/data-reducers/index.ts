@@ -32,10 +32,10 @@
 
 import type { ActivityReducers } from "@com.mgmtp.a12.client/client-core";
 
+import { addParentNodesDataHolderDataReducer } from "./add-parent-nodes-data-holder.js";
 import { setDataHoldersDataReducer } from "./set-data-holders.js";
 import { setPageSizesReducer } from "./set-page-sizes.js";
 import { uiStateDataReducer } from "./ui-state.js";
-import { addParentNodesDataHolderDataReducer } from "./add-parent-nodes-data-holder.js";
 
 /** @internal */
 export function createTreeEngineClientDataReducers(): ActivityReducers.DataReducer[] {

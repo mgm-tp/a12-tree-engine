@@ -31,8 +31,8 @@
  */
 
 import { Commands } from "../../../../../core/store/index.js";
-import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { handleSetDisabled } from "../../../../../core/store/reducer/handler/setDisabled.js";
+import { defaultEngineState } from "../../../../setup/basic.spec.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.reducer.handler.setDisabled", () => {
 	const engineState = defaultEngineState;

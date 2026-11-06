@@ -1,8 +1,8 @@
 {
   "name": "root",
   "private": true,
-  "version": "11.0.2-SNAPSHOT",
-  "a12Version": "2026.06-ext1",
+  "version": "11.1.1-SNAPSHOT",
+  "a12Version": "2026.06-ext2",
   "type": "module",
   "scripts": {
     "clean": "rimraf */lib/** */dist/** */target/** */build/** *.tsbuildinfo */*.tsbuildinfo",
@@ -16,28 +16,24 @@
     "test:performance": "pnpm -F ./playwright test:performance",
     "dist": "pnpm -r dist",
     "lint": "pnpm \"/lint:/\"",
-    "lint:detect-cycle": "devtools detect-cycles --ignore-type-imports \"./core/src/**/*.@(ts|tsx)\"",
-    "lint:prettier": "prettier . --check",
+    "lint:oxlint": "oxlint --quiet .",
+    "lint:oxfmt": "oxfmt --check .",
     "lint:headers": "node scripts/check-headers.js",
-    "lint:eslint": "pnpm --parallel --no-bail lint:eslint",
     "format": "pnpm \"/format:/\"",
-    "format:eslint": "pnpm lint:eslint --fix",
-    "format:prettier": "prettier . --write"
+    "format:oxlint": "oxlint --fix --quiet .",
+    "format:oxfmt": "oxfmt ."
   },
   "devDependencies": {
-    "@com.mgmtp.a12.devtools/build-tools": "catalog:devLibs",
-    "@com.mgmtp.a12.devtools/eslint-config": "catalog:devLibs",
-    "@com.mgmtp.a12.devtools/prettier-config": "catalog:devLibs",
     "@com.mgmtp.a12.devtools/tsconfig": "catalog:devLibs",
-    "@eslint/compat": "^2.1.0",
     "@jambit/eslint-plugin-typed-redux-saga": "^0.4.0",
     "@microsoft/api-extractor": "catalog:devLibs",
+    "@tony.ganchev/eslint-plugin-header": "^3.4.4",
     "@types/react": "catalog:libs",
     "@types/react-dom": "catalog:libs",
-    "eslint": "^10.4.1",
-    "eslint-plugin-notice": "^1.0.0",
-    "eslint-plugin-unused-imports": "^4.1.4",
-    "prettier": "^3.8.3",
+    "eslint-plugin-check-file": "^3.3.2",
+    "oxfmt": "^0.62.0",
+    "oxlint": "^1.77.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "react": "catalog:libs",
     "react-dom": "catalog:libs",
     "redux-saga": "catalog:libs",
@@ -45,5 +41,5 @@
     "typed-redux-saga": "catalog:libs",
     "typescript": "catalog:libs"
   },
-  "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
+  "packageManager": "pnpm@11.27.1+sha512.a81d4c21b9b09a4b0aebf90ef5e527d4262bdda322d26082978cb549023ac6d9cafc98b19fffaa5c71db438a65f70224edb78d7311187861ff96480d1cdca23c"
 }

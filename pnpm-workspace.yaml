@@ -1,36 +1,45 @@
 packages:
   - ./*
 
+overrides:
+  # The Enzyme React 18 adapter ships with react-is@18, whose isElement() does not recognise the
+  # react.transitional.element symbol React 19 uses, so every mount() is rejected as an invalid
+  # element. Scoped to the adapter so other react-is consumers keep their own versions.
+  "@cfaester/enzyme-adapter-react-18>react-is": "^19.1.1"
+
 patchedDependencies:
+  # The published entry point assigns its exports onto the CommonJS `this`, which the ESM interop of
+  # the browser test runner leaves undefined. typemoq loads it, so every browser suite would break.
+  circular-json@0.3.3: patches/circular-json@0.3.3.patch
   react-dnd@16.0.1: patches/react-dnd@16.0.1.patch
 
 catalogs:
   a12:
-    "@com.mgmtp.a12.base/base-model-api": ^30.0.2
-    "@com.mgmtp.a12.client/client-application-model-migration": ^17.0.1
-    "@com.mgmtp.a12.client/client-core": ^17.0.1
-    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": ^1.0.2
-    "@com.mgmtp.a12.crud/crud-core": ^3.0.1
-    "@com.mgmtp.a12.dataservices/dataservices-access": ^39.0.3
-    "@com.mgmtp.a12.dataservices/dataservices-relationship-model-migration": ^39.0.3
-    "@com.mgmtp.a12.expression/expression-core": ^3.0.1
-    "@com.mgmtp.a12.formengine/formengine-core": ^39.0.1
-    "@com.mgmtp.a12.formengine/formengine-model-migration": ^39.0.1
-    "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": ^31.1.1
-    "@com.mgmtp.a12.kernel/kernel-md-facade": ^31.1.1
-    "@com.mgmtp.a12.migrationtool/migrationtool-core": ^3.0.1
-    "@com.mgmtp.a12.migrationtool/migrationtool-utils": ^3.0.1
-    "@com.mgmtp.a12.overviewengine/overviewengine-core": ^39.0.2
-    "@com.mgmtp.a12.overviewengine/overviewengine-model-migration": ^39.0.2
-    "@com.mgmtp.a12.relationshipengine/relationshipengine-core": ^3.0.1
-    "@com.mgmtp.a12.relationshipengine/relationshipengine-binding-extraction": ^3.0.1
-    "@com.mgmtp.a12.relationshipengine/relationshipengine-model-migration": ^3.0.1
+    "@com.mgmtp.a12.base/base-model-api": ^30.1.0
+    "@com.mgmtp.a12.client/client-application-model-migration": ^17.1.0
+    "@com.mgmtp.a12.client/client-core": ^17.1.0
+    "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat": ^1.0.3
+    "@com.mgmtp.a12.crud/crud-core": ^3.1.0
+    "@com.mgmtp.a12.dataservices/dataservices-access": ^39.1.0
+    "@com.mgmtp.a12.dataservices/dataservices-relationship-model-migration": ^39.1.0
+    "@com.mgmtp.a12.expression/expression-core": ^3.1.0
+    "@com.mgmtp.a12.formengine/formengine-core": ^39.1.0
+    "@com.mgmtp.a12.formengine/formengine-model-migration": ^39.1.0
+    "@com.mgmtp.a12.kernel/kernel-core-runtime-api-ts": ^31.3.0
+    "@com.mgmtp.a12.kernel/kernel-md-facade": ^31.3.0
+    "@com.mgmtp.a12.migrationtool/migrationtool-core": ^3.0.2
+    "@com.mgmtp.a12.migrationtool/migrationtool-utils": ^3.0.2
+    "@com.mgmtp.a12.overviewengine/overviewengine-core": ^39.1.0
+    "@com.mgmtp.a12.overviewengine/overviewengine-model-migration": ^39.1.0
+    "@com.mgmtp.a12.relationshipengine/relationshipengine-core": ^3.1.0
+    "@com.mgmtp.a12.relationshipengine/relationshipengine-binding-extraction": ^3.1.0
+    "@com.mgmtp.a12.relationshipengine/relationshipengine-model-migration": ^3.1.0
     "@com.mgmtp.a12.utils/utils-collections": ^7.0.1
-    "@com.mgmtp.a12.utils/utils-connector": ^9.0.3
-    "@com.mgmtp.a12.utils/utils-localization": ^8.0.2
-    "@com.mgmtp.a12.utils/utils-localization-react": ^8.0.2
-    "@com.mgmtp.a12.utils/utils-logging": ^7.0.2
-    "@com.mgmtp.a12.widgets/widgets-core": ^39.0.3
+    "@com.mgmtp.a12.utils/utils-connector": ^9.0.4
+    "@com.mgmtp.a12.utils/utils-localization": ^8.1.0
+    "@com.mgmtp.a12.utils/utils-localization-react": ^8.1.0
+    "@com.mgmtp.a12.utils/utils-logging": ^7.1.0
+    "@com.mgmtp.a12.widgets/widgets-core": ^39.1.0
   a12ranges:
     "@com.mgmtp.a12.base/base-model-api": ^30.0.1
     "@com.mgmtp.a12.client/client-core": ^17.0.0
@@ -43,29 +52,28 @@ catalogs:
     "@com.mgmtp.a12.utils/utils-localization": ^8.0.1
     "@com.mgmtp.a12.utils/utils-localization-react": ^8.0.1
     "@com.mgmtp.a12.utils/utils-logging": ^7.0.1
-    "@com.mgmtp.a12.widgets/widgets-core": ^39.0.2
+    "@com.mgmtp.a12.widgets/widgets-core": ^39.1.0
   devLibs:
-    "@com.mgmtp.a12.devtools/build-tools": ^1.1.2
-    "@com.mgmtp.a12.devtools/eslint-config": ^4.0.0
-    "@com.mgmtp.a12.devtools/prettier-config": ^1.1.1
     "@com.mgmtp.a12.devtools/tsconfig": ^2.0.1
-    "@microsoft/api-extractor": ^7.58.9
-    "@types/node": ^22.19.20
-    "@vitest/coverage-v8": ^4.1.9
+    "@microsoft/api-extractor": ^7.58.12
+    "@types/node": ^24.13.3
+    "@vitest/browser": ^4.1.10
+    "@vitest/browser-playwright": ^4.1.10
+    "@vitest/coverage-v8": ^4.1.10
     rimraf: ^6.1.3
-    vite: ^8.1.0
-    vitest: ^4.1.9
+    vite: ^8.2.0
+    vitest: ^4.1.10
   libs:
-    "@types/react": ^19.2.17
-    "@types/react-dom": ^19.2.3
-    dayjs: ^1.11.13
-    react: ^19.2.6
+    "@types/react": ^19.2.18
+    "@types/react-dom": ^19.2.4
+    dayjs: ^1.11.21
+    react: ^19.2.8
     react-dnd: ^16.0.0
-    react-dom: ^19.2.6
-    react-redux: ^9.2.0
+    react-dom: ^19.2.8
+    react-redux: ^9.3.0
     redux: ^5.0.1
-    redux-saga: ^1.5.0
-    styled-components: ^6.4.3
+    redux-saga: ^1.5.1
+    styled-components: ^6.4.4
     typed-redux-saga: ^1.5.0
     typescript: 6.0.2
 
@@ -73,7 +81,7 @@ lockfileIncludeTarballUrl: false
 
 loglevel: info
 
-minimumReleaseAge: 1440
+minimumReleaseAge: 10080
 
 minimumReleaseAgeExclude:
   - "@com.mgmtp.a12.*/*"
@@ -82,10 +90,9 @@ strictPeerDependencies: true
 
 peerDependencyRules:
   allowedVersions:
-    # eslint-config@4 plugins declare eslint peer <=9 but work with eslint 10; allow it so strict install passes
-    "eslint-plugin-import>eslint": "10"
-    "eslint-plugin-react>eslint": "10"
-    "eslint-plugin-unused-imports>eslint": "10"
+    # react-shallow-renderer is pulled in by the Enzyme React 18 adapter and caps its react peer at
+    # 18. The tests only use mount(), never shallow(), so running it against React 19 is fine.
+    "react-shallow-renderer>react": "19"
 
 allowBuilds:
   core-js: true

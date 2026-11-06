@@ -34,17 +34,16 @@ import { type SagaGenerator, call, select } from "typed-redux-saga";
 
 import { Activity } from "@com.mgmtp.a12.client/client-core";
 
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
+import { TreeModel } from "../../../../core/models/tree-model.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
 import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
-import { maybeAsyncFnWrapper } from "../../../client/utils.js";
 import { TreeEngineDataHolder } from "../../../client/data-holder.js";
 import type { TreeEngineOperation } from "../../../client/operation.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
+import { maybeAsyncFnWrapper } from "../../../client/utils.js";
 import { DataOperation } from "../../data-loaders/data-loader.js";
 import { getTobeLoadedNodesDataHolders } from "../../utils.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import { TreeModel } from "../../../../core/models/tree-model.js";
-
 import { calculateCurrentExpansionDepths } from "../load/utils.js";
 import { getDocumentProcessors, mergeDataHolders, type SavePayload } from "../utils.js";
 
@@ -58,12 +57,20 @@ export type SaveHandlerReturnType = {
 	result?: (TreeEngineOperation.Done | TreeEngineOperation.Failed)[];
 	dataHolders: TreeEngineDataHolder[];
 	removedDataHolderDescriptors?: Activity.Descriptor[];
+	activeSearchTerm: string;
 };
 
 /** @internal */
-export function* handleSave(
-	params: SavePayload & { mutations: TreeEngineOperation.Mutation[] }
-): SagaGenerator<SaveHandlerReturnType> {
+export interface SaveParams extends SavePayload {
+	readonly mutations: TreeEngineOperation.Mutation[];
+}
+
+/**
+ * Save the mutations and reload the holders they outdate, in a single request.
+ *
+ * @internal
+ */
+export function* handleSave(params: SaveParams): SagaGenerator<SaveHandlerReturnType> {
 	const { mutations, config, dataLoader } = params;
 	const { activityId } = config;
 
@@ -81,53 +88,58 @@ export function* handleSave(
 		.flat();
 
 	const uiModel = ModelSelector.uiModel()(engineState);
-
-	let queries: DataOperation.Query[];
-	let skippedQueries: DataOperation.Query[];
-	let updatedDataHolders: TreeEngineDataHolder[];
-
 	const nodesDataHolders = config.dataHolders.filter(TreeEngineDataHolder.isAssignableFrom);
-	if (TreeModel.ExpansionStrategy.Tree.isAssignableFrom(uiModel.content.configuration.expansionStrategy)) {
-		const allDataHolders = yield* select(TreeEngineSelectors.nodesDataHolders(activityId));
-		if (!allDataHolders) {
-			throw TreeEngineError.NotFoundError("TreeEngine.DataHolder", { activityId });
-		}
-		const createQueriesResult = createTreeQueries([], engineState, {
-			overrideExpansionDepths: calculateCurrentExpansionDepths(allDataHolders, engineState),
-			preloadChildNodes: UIStateSelector.preloadChildNodes()(engineState)
-		});
 
-		updatedDataHolders = getTobeLoadedNodesDataHolders(
-			nodesDataHolders,
-			outDatedDataHolderDescriptors,
-			removedDataHolderDescriptors
-		).map(toEmptyDataHolder);
+	let queries: DataOperation.Query[] = [];
+	let skippedQueries: DataOperation.Query[] = [];
+	let updatedDataHolders: TreeEngineDataHolder[] = [];
 
-		queries = createQueriesResult.queries;
-		skippedQueries = createQueriesResult.skippedQueries;
-	} else {
-		updatedDataHolders = getTobeLoadedNodesDataHolders(
-			nodesDataHolders,
-			outDatedDataHolderDescriptors,
-			removedDataHolderDescriptors
-		);
+	// A search re-run reloads the tree from the root, deep enough for every match, and brings the
+	// stored matches up to date, so during a search the mutations travel without reload queries.
+	const activeSearchTerm = UIStateSelector.searchString()(engineState);
+	if (!activeSearchTerm) {
+		if (TreeModel.ExpansionStrategy.Tree.isAssignableFrom(uiModel.content.configuration.expansionStrategy)) {
+			const allDataHolders = yield* select(TreeEngineSelectors.nodesDataHolders(activityId));
+			if (!allDataHolders) {
+				throw TreeEngineError.NotFoundError("TreeEngine.DataHolder", { activityId });
+			}
+			const createQueriesResult = createTreeQueries([], engineState, {
+				overrideExpansionDepths: calculateCurrentExpansionDepths(allDataHolders, engineState),
+				preloadChildNodes: UIStateSelector.preloadChildNodes()(engineState)
+			});
 
-		const defaultPageSize = uiModel.content.configuration.expansionStrategy.pageSize;
-		if (defaultPageSize) {
-			updatedDataHolders = mutations.reduce(
-				(dataHolders, mutation) => handleMutation(dataHolders, mutation, defaultPageSize),
-				updatedDataHolders
+			updatedDataHolders = getTobeLoadedNodesDataHolders(
+				nodesDataHolders,
+				outDatedDataHolderDescriptors,
+				removedDataHolderDescriptors
+			).map(toEmptyDataHolder);
+
+			queries = createQueriesResult.queries;
+			skippedQueries = createQueriesResult.skippedQueries;
+		} else {
+			updatedDataHolders = getTobeLoadedNodesDataHolders(
+				nodesDataHolders,
+				outDatedDataHolderDescriptors,
+				removedDataHolderDescriptors
 			);
-		}
 
-		const rootNodeDataHolder = extractRootNodesDataHolder(nodesDataHolders, outDatedDataHolderDescriptors);
-		if (rootNodeDataHolder) {
-			updatedDataHolders = mergeDataHolders(updatedDataHolders, [rootNodeDataHolder]);
-		}
+			const defaultPageSize = uiModel.content.configuration.expansionStrategy.pageSize;
+			if (defaultPageSize) {
+				updatedDataHolders = mutations.reduce(
+					(dataHolders, mutation) => handleMutation(dataHolders, mutation, defaultPageSize),
+					updatedDataHolders
+				);
+			}
 
-		const result = createListQueries(updatedDataHolders, engineState, true);
-		queries = result.queries;
-		skippedQueries = result.skippedQueries;
+			const rootNodeDataHolder = extractRootNodesDataHolder(nodesDataHolders, outDatedDataHolderDescriptors);
+			if (rootNodeDataHolder) {
+				updatedDataHolders = mergeDataHolders(updatedDataHolders, [rootNodeDataHolder]);
+			}
+
+			const result = createListQueries(updatedDataHolders, engineState, true);
+			queries = result.queries;
+			skippedQueries = result.skippedQueries;
+		}
 	}
 
 	const resultSet = yield* call(maybeAsyncFnWrapper(dataLoader.provideData), {
@@ -158,7 +170,8 @@ export function* handleSave(
 	return {
 		result: resultSet.mutationResults,
 		dataHolders: updatedDataHolders,
-		removedDataHolderDescriptors
+		removedDataHolderDescriptors,
+		activeSearchTerm
 	};
 }
 

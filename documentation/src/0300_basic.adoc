@@ -45,3 +45,7 @@ include::0312_selector_map.adoc[]
 include::0313_request_selector_map.adoc[]
 
 include::0314_row_activation.adoc[]
+
+include::0315_column_visibility.adoc[]
+
+include::0316_full_text_search.adoc[]

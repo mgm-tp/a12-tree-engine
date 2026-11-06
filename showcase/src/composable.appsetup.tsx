@@ -35,18 +35,15 @@ import "./config/wdyr.js";
 import "./config/reselect.js";
 import "./config/logging.js";
 import "./config/server-connector.js";
-
-import { scan } from "react-scan";
-import * as React from "react";
-import type { Store } from "redux";
-import { Provider } from "react-redux";
-import ReactDOM from "react-dom/client";
-
 import "@com.mgmtp.a12.widgets/widgets-core/styles/basic.css";
 
-import { withOverviewEngine } from "@com.mgmtp.a12.overviewengine/overviewengine-core";
-import { withTreeEngine } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { withRelationshipEngine } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
+import * as React from "react";
+import { Provider } from "react-redux";
+import { scan } from "react-scan";
+
+import ReactDOM from "react-dom/client";
+import type { Store } from "redux";
+
 import {
 	addCustomSagas,
 	addWrapper,
@@ -59,42 +56,42 @@ import {
 	withModel,
 	type A12ApplicationConfig
 } from "@com.mgmtp.a12.client/client-core";
-import { withCRUD } from "@com.mgmtp.a12.crud/crud-core";
-import { withPlatformModelLoader } from "@com.mgmtp.a12.client/client-core/modelLoader";
 import { withDataServicesConfiguration } from "@com.mgmtp.a12.client/client-core/dataServicesAdapter";
-import { withLocalization } from "@com.mgmtp.a12.client/client-core/localization";
-import { withDirtyHandling } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
 import { addDeepLinkingSagas } from "@com.mgmtp.a12.client/client-core/deepLinking";
+import { withDirtyHandling } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
+import { withLocalization } from "@com.mgmtp.a12.client/client-core/localization";
+import { withPlatformModelLoader } from "@com.mgmtp.a12.client/client-core/modelLoader";
+import { withCRUD } from "@com.mgmtp.a12.crud/crud-core";
 import { DataServicesReducerMap } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { platformAttachmentLoader, withFormEngine } from "@com.mgmtp.a12.formengine/formengine-core";
+import { withOverviewEngine } from "@com.mgmtp.a12.overviewengine/overviewengine-core";
+import { withRelationshipEngine } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
+import { withTreeEngine } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
+import { withA11LanguageWrapper } from "./config/a11-language.js";
+import { withDndWrapper } from "./config/dnd.js";
 import { isReactScanEnabled } from "./config/react-scan.js";
+import { fetchModelGraph, loadDSConfigurations, withReduxDevtool } from "./config/redux.js";
+import { SHOWCASE_RESOURCES } from "./config/resources.js";
+import { withSizeDetector } from "./config/size-detector.js";
+import { withTheme } from "./config/theme.js";
+import { withShowCaseContext } from "./context.js";
+import { restoreActivityAction } from "./model-editor/activity-suspending/actions.js";
 import { appCustomSagas } from "./sagas/index.js";
 import {
 	registerApplicationModules,
-	// registerCustomFieldTypes,
+	provideKernelOptions,
 	isLinkAddedByDetailActivity,
 	createCustomSagaRegistrations,
 	getNewLinkPosition,
 	getPreloadChildNodesSetting
 } from "./shared-setup.js";
-import { restoreActivityAction } from "./model-editor/activity-suspending/actions.js";
-import { SHOWCASE_RESOURCES } from "./config/resources.js";
-import { fetchModelGraph, loadDSConfigurations, withReduxDevtool } from "./config/redux.js";
-import { withTheme } from "./config/theme.js";
-import { withSizeDetector } from "./config/size-detector.js";
-import { withShowCaseContext } from "./context.js";
-import { withDndWrapper } from "./config/dnd.js";
-import { withA11LanguageWrapper } from "./config/a11-language.js";
 
-// Register custom field types and modules
-// registerCustomFieldTypes();
 registerApplicationModules();
 
 scan({ enabled: isReactScanEnabled() });
 
-const withNotification = <T extends A12ApplicationConfig>(cfg: T) =>
-	addWrapper<T>(NotificationViews.Frame, "outer")(cfg);
+const withNotification = <T extends A12ApplicationConfig>(cfg: T) => addWrapper(NotificationViews.Frame, "outer")(cfg);
 
 const initialConfig: A12ApplicationConfig = {
 	config: {
@@ -113,7 +110,10 @@ const initialConfig: A12ApplicationConfig = {
 		addLocaleChooser: "never"
 	},
 	deepLinking: { config: { applyTriggers: [ModelActions.setModelGraph] } },
-	formEngine: { sagas: { attachmentLoader: platformAttachmentLoader } },
+	formEngine: {
+		sagas: { attachmentLoader: platformAttachmentLoader },
+		middlewares: { kernelOptionsProvider: provideKernelOptions }
+	},
 	treeEngine: {
 		saga: {
 			linkCreation: { isLinkAddedByDetailActivity },
@@ -130,8 +130,9 @@ const initialConfig: A12ApplicationConfig = {
 const { store, initialActions, Component } = createA12ApplicationSetup(
 	combineFeatures(
 		combineFeatures(
-			withModel(APPLICATION_MODEL_PLACEHOLDER), // not used
-			withDynamicConfig()
+			// Non-generic first step pins the config type, so the engine features' guards can be checked
+			(cfg: A12ApplicationConfig) => withModel(APPLICATION_MODEL_PLACEHOLDER)(cfg), // not used
+			withDynamicConfig
 		),
 		combineFeatures(
 			withDataServicesConfiguration,
@@ -161,7 +162,7 @@ const { store, initialActions, Component } = createA12ApplicationSetup(
 	)(initialConfig)
 );
 
-initialActions().then(() => {
+void initialActions().then(() => {
 	const mountPoint = document.createElement("div");
 	mountPoint.classList.add("base");
 	document.body.appendChild(mountPoint);

@@ -30,18 +30,18 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { cleanDocumentsData } from "../../../services-utils/src/api.js";
-
 import { Selector } from "../selectors.js";
 
 import { A12TeamUtils } from "./utils.js";
 
 test.describe("Prevent link added from tree engine", () => {
-	test.beforeAll(async () => {
+	test.beforeAll(async ({ invalidateSeed }) => {
 		await cleanDocumentsData({ showcases: "a12-teams" });
+		invalidateSeed("a12-teams");
 	});
 
 	test("should not link the new document to A12", async ({ page }) => {

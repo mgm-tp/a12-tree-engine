@@ -30,16 +30,29 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import Fs from "node:fs";
-import Path from "node:path";
+import { type DocumentModel, DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+/**
+ * Browser tests have no filesystem, so the showcase document models are pulled into the module graph
+ * eagerly at build time. Loading them synchronously keeps {@link createDocumentModel} usable from the
+ * top-level constants in `basic.spec.ts`.
+ */
+const DOCUMENT_MODEL_JSONS = import.meta.glob<Record<string, unknown>>(
+	"../../../../showcase/resources/models/*/document-models/*.json",
+	{ eager: true, import: "default" }
+);
 
 export const PATH = {
-	MODELS: Path.join(import.meta.dirname, "..", "..", "..", "..", "showcase", "resources", "models")
+	MODELS: "../../../../showcase/resources/models"
 };
 
-export function createDocumentModel(documentModelFilePath: string) {
-	const documentModelJson = Fs.readFileSync(documentModelFilePath + ".json", "utf8");
-	return new DocumentServiceFactory().getDocumentModelSerializer().deserialize(documentModelJson);
+/** Deserializes a showcase document model, addressed by its path below {@link PATH.MODELS}. */
+export function createDocumentModel(documentModelFilePath: string): DocumentModel {
+	const json = DOCUMENT_MODEL_JSONS[`${documentModelFilePath}.json`];
+
+	if (json === undefined) {
+		throw new Error(`No document model bundled for "${documentModelFilePath}"`);
+	}
+
+	return new DocumentServiceFactory().getDocumentModelSerializer().deserialize(JSON.stringify(json));
 }

@@ -34,13 +34,13 @@ import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
 
+import type { TreeModel } from "../../../../core/models/index.js";
 import {
 	findSuperTypeNode,
 	type MarshallingParams,
 	marshallTreeModel,
 	marshallTreeNode
 } from "../../../../core/models/marshaller.js";
-import type { TreeModel } from "../../../../core/models/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
 

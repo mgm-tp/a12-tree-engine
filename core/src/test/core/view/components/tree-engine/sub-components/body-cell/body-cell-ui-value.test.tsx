@@ -32,13 +32,14 @@
 
 import { vi } from "vitest";
 
+import { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
-import { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { TextOutput, CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { de } from "../../../../../../../core/services/localization/languages/de.js";
 import { en } from "../../../../../../../core/services/localization/languages/en.js";
+import { MultiSelectGroup } from "../../../../../../../core/services/multi-select/index.js";
 import type { TreeEngineState, Models } from "../../../../../../../core/store/index.js";
 import {
 	AttachmentCell,
@@ -52,12 +53,10 @@ import { deLocale, defaultEngineState } from "../../../../../../setup/basic.spec
 import { mockType } from "../../../../../../utils/mock-utils.js";
 import { createDocumentModel, createEngineState, createMultiSelectGroup } from "../../../../../../utils/model-utils.js";
 import { testIsNullComponent } from "../../../../../../utils/test-utils.js";
-import { MultiSelectGroup } from "../../../../../../../core/services/multi-select/index.js";
 
 import { teamCellProps, BodyCellWrapper, CustomWidget } from "./shared.js";
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.body-cell-ui-value", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.body-cell-ui-value", () => {
 	const basicEngineState = defaultEngineState;
 	const basicComponentMap = DefaultComponentMap;
 
@@ -676,7 +675,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 		});
 	});
 
-	describe("given an multi-select ", () => {
+	describe("given an multi-select", () => {
 		const basicMultiSelectCellProps: BodyCellUIValue.Props = {
 			...teamCellProps,
 			element: mockType<DocumentModel.Group>(),

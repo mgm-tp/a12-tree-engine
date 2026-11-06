@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-
-/* eslint-disable notice/notice */
-
 /*
  * SPDX-License-Identifier: EUPL-1.2 OR LicenseRef-commercial
  *

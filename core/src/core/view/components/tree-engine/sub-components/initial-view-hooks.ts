@@ -29,12 +29,13 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
+
 import * as React from "react";
 
-import { useTreeEngineState } from "../../../context/tree-engine-context.js";
-import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
-import { RESOURCE_KEYS } from "../../../../services/localization/languages/keys.js";
 import { TreeModel } from "../../../../models/tree-model.js";
+import { RESOURCE_KEYS } from "../../../../services/localization/languages/keys.js";
+import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
+import { useTreeEngineState } from "../../../context/tree-engine-context.js";
 
 /** @internal */
 export function useLocalizationText() {

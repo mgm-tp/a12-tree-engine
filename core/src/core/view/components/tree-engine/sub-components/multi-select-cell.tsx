@@ -32,17 +32,17 @@
 
 import * as React from "react";
 
-import type { Styleable, Column } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { Styleable, Column } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { TreeModel } from "../../../../models/tree-model.js";
-import { MultiSelect, MultiSelectGroup } from "../../../../services/multi-select/multi-select.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
-import { ModelSelector } from "../../../../store/selectors/models.js";
-import { DocumentModelUtils } from "../../../../models/shared.js";
 import { TreeEngineError } from "../../../../error/tree-engine-error.js";
+import { DocumentModelUtils } from "../../../../models/shared.js";
+import { TreeModel } from "../../../../models/tree-model.js";
 import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
+import { MultiSelect, MultiSelectGroup } from "../../../../services/multi-select/multi-select.js";
+import { ModelSelector } from "../../../../store/selectors/models.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
 
 export namespace MultiSelectCell {
 	export interface Props extends Styleable {

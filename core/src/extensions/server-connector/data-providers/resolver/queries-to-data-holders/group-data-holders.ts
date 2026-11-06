@@ -29,9 +29,9 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
-import { TreeEngineDataHolder } from "../../../../client/data-holder.js";
-import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
 
+import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
+import { TreeEngineDataHolder } from "../../../../client/data-holder.js";
 import { PaginationUtils } from "../pagination-utils.js";
 
 /** @internal */

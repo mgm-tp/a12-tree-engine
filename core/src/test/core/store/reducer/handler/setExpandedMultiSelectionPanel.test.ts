@@ -31,8 +31,8 @@
  */
 
 import { Commands, TreeEngineState } from "../../../../../core/store/index.js";
-import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { handleSetExpandedMultiSelectionPanel } from "../../../../../core/store/reducer/handler/setExpandedMultiSelectionPanel.js";
+import { defaultEngineState } from "../../../../setup/basic.spec.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.reducer.handler.setExpandedMultiSelectionPanel", () => {
 	const basicEngineState = defaultEngineState;

@@ -32,6 +32,7 @@
 
 import { vi } from "vitest";
 
+import { DocumentUtils } from "../../../../../../../core/models/shared.js";
 import {
 	DataSelector,
 	ModelSelector,
@@ -48,11 +49,10 @@ import {
 } from "../../../../../../../core/view/index.js";
 import { mockType } from "../../../../../../utils/mock-utils.js";
 import { testIsNullComponent } from "../../../../../../utils/test-utils.js";
-import { DocumentUtils } from "../../../../../../../core/models/shared.js";
 
 import { teamCellProps, BodyCellWrapper, CustomWidget, teamNodeModel, teamIdentifier } from "./shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.document-body-cell", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.document-body-cell", () => {
 	const basicComponentMap = DefaultComponentMap;
 
 	const basicRowContext: TreeEngineRowContext.Type = {

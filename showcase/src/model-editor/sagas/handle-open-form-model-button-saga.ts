@@ -32,8 +32,8 @@
 
 // tag::CustomTreeInitialization[]
 
-import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 import { isAction } from "redux";
+import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
@@ -44,9 +44,8 @@ import {
 	TreeEngineSelectors
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
-import { getTargetNodePath } from "../../utils.js";
 import { OPEN_FM_NODE_EVENT } from "../../helpers.js";
-
+import { getTargetNodePath } from "../../utils.js";
 import { File } from "../document.js";
 
 import { cancelChildActivities, getInitialExpansionConfig } from "./utils.js";

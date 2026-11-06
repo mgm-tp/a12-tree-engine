@@ -30,18 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/api.js";
 import { Selector } from "../../selectors.js";
-
 import { A12TeamUtils } from "../utils.js";
 
 test.describe("node reveal", () => {
-	test.beforeAll(async () => {
-		await cleanDocumentsData({ showcases: "a12-teams" });
-		await seedData({ preset: "a12-teams" });
+	test.beforeAll(async ({ seed }) => {
+		await seed({ preset: "a12-teams", force: true });
 	});
 
 	test("should be able to reveal a marked node", async ({ page }) => {

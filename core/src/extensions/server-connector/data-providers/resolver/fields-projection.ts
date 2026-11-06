@@ -34,10 +34,10 @@ import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { ModelSelector } from "../../../../core/store/selectors/models.js";
-import type { ModelsState } from "../../../../core/store/store.js";
 import { DocumentModelUtils } from "../../../../core/models/shared.js";
 import type { RuntimeTreeModel } from "../../../../core/models/tree-model.js";
+import { ModelSelector } from "../../../../core/store/selectors/models.js";
+import type { ModelsState } from "../../../../core/store/store.js";
 
 /** @internal */
 export function createFieldsMap(modelsState: ModelsState): Map<string, string[]> {

@@ -34,11 +34,11 @@ import type { DynamicConfiguration } from "@com.mgmtp.a12.client/client-core";
 
 import { handleBackButtonSaga } from "./activity-suspending/handle-back-button-saga.js";
 import { handleOpenDocumentModelTemporaryButtonSaga } from "./activity-suspending/handle-open-document-model-temporary-button-saga.js";
+import { menus } from "./menus.js";
 import { handleEventReloadSaga } from "./sagas/handle-event-reload-saga.js";
 import { handleOpenDocumentModelButtonSaga } from "./sagas/handle-open-document-model-button-saga.js";
 import { handleOpenFormModelButtonSaga } from "./sagas/handle-open-form-model-button-saga.js";
 import { scenes } from "./scenes.js";
-import { menus } from "./menus.js";
 
 export const dataModelerModule: DynamicConfiguration = {
 	id: "DataModelerModule",

@@ -33,12 +33,12 @@
 import * as React from "react";
 
 import type { TreeModel } from "../../../../models/tree-model.js";
-import { useTreeInternalContext } from "../../../context/tree-internal-context-provider.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
 import { UIStateSelector } from "../../../../store/selectors/ui-state.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
+import { useTreeInternalContext } from "../../../context/tree-internal-context-provider.js";
 
-import type { FlattenNodeRow } from "./types.js";
 import { ContextMenuHooks } from "./hooks/context-menu-hooks.js";
+import type { FlattenNodeRow } from "./types.js";
 
 export namespace ContextMenu {
 	export interface Props {

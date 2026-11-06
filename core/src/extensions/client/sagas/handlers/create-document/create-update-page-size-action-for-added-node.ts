@@ -33,12 +33,12 @@
 import { put, select } from "typed-redux-saga";
 
 import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
-import type { Identifier } from "../../../../../core/store/store.js";
+import { TreeModel } from "../../../../../core/models/tree-model.js";
 import { ModelSelector } from "../../../../../core/store/selectors/models.js";
+import type { Identifier } from "../../../../../core/store/store.js";
 import { PaginationUtils } from "../../../../server-connector/shared.js";
 import { TreeEngineActions } from "../../../actions.js";
 import { TreeEngineSelectors } from "../../../selectors.js";
-import { TreeModel } from "../../../../../core/models/tree-model.js";
 
 /** @internal */
 export function* createUpdatePageSizeActionForAddedNode(

@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/api.js";
 import { Selector } from "../../selectors.js";
-
 import { A12TeamUtils } from "../utils.js";
 
 test.describe("with relationship engine", () => {
@@ -46,9 +44,8 @@ test.describe("with relationship engine", () => {
 		utils = new A12TeamUtils(page);
 		await utils.visitA12Team({ pagination: true });
 	});
-	test.beforeAll(async ({ browser }) => {
-		await cleanDocumentsData({ showcases: "a12-teams" });
-		await seedData({ preset: "a12-teams" });
+	test.beforeAll(async ({ browser, seed }) => {
+		await seed({ preset: "a12-teams", force: true });
 
 		// Setup test data
 		const page = await browser.newPage();

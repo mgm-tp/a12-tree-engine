@@ -37,9 +37,6 @@ import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { RelationshipModelUtils } from "../../../../../core/models/index.js";
 import { type Identifier, ModelSelector, type TreeEngineState } from "../../../../../core/store/index.js";
-import { type DragObject, FlattenNodeRow, type HoveredObject, RootNodeRow } from "../../../../../core/view/index.js";
-import { defaultEngineState, defaultRelationshipModels } from "../../../../setup/basic.spec.js";
-import { mockType } from "../../../../utils/mock-utils.js";
 import {
 	type CanDropRule,
 	ForbidOrderBetweenDifferentRelationships,
@@ -47,6 +44,9 @@ import {
 	ForbidOrderTopLevelRule,
 	ReorderRootRule
 } from "../../../../../core/view/configuration/dnd/can-drop-rules.js";
+import { type DragObject, FlattenNodeRow, type HoveredObject, RootNodeRow } from "../../../../../core/view/index.js";
+import { defaultEngineState, defaultRelationshipModels } from "../../../../setup/basic.spec.js";
+import { mockType } from "../../../../utils/mock-utils.js";
 
 import { createDragItem, createHoveredItem } from "./shared.js";
 

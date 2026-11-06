@@ -34,8 +34,10 @@ import { vi, type MockInstance } from "vitest";
 
 import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
+import type { RuntimeTreeModel } from "../../../../core/models/index.js";
 import { ModelSelector } from "../../../../core/store/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
+import { mockType } from "../../../utils/mock-utils.js";
 import { categoryEngineState, dataModelerEngineState } from "../../../utils/model-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.selectors.model", () => {
@@ -162,8 +164,88 @@ describe("@com.mgmtp.a12.tree-engine.core.store.selectors.model", () => {
 		});
 	});
 
-	describe("subtypeModelsByName", () => {
+	describe("isSubtypeOf", () => {
 		const engineState = dataModelerEngineState;
+
+		it("should hold for a direct subtype", () => {
+			expect(ModelSelector.isSubtypeOf("DomainElement", "DomainGroup")(engineState)).toBe(true);
+		});
+
+		it("should hold for a subtype several levels down", () => {
+			expect(ModelSelector.isSubtypeOf("DomainElement", "DomainAttachmentGroup")(engineState)).toBe(true);
+		});
+
+		it("should not hold the other way round", () => {
+			expect(ModelSelector.isSubtypeOf("DomainGroup", "DomainElement")(engineState)).toBe(false);
+		});
+
+		it("should not hold for a document model with itself", () => {
+			expect(ModelSelector.isSubtypeOf("DomainElement", "DomainElement")(engineState)).toBe(false);
+		});
+	});
+
+	describe("isSameOrSubtypeOf", () => {
+		const engineState = dataModelerEngineState;
+
+		it("should hold for the same document model", () => {
+			expect(ModelSelector.isSameOrSubtypeOf("DomainGroup", "DomainGroup")(engineState)).toBe(true);
+		});
+
+		it("should hold for a subtype several levels down", () => {
+			expect(ModelSelector.isSameOrSubtypeOf("DomainElement", "DomainAttachmentGroup")(engineState)).toBe(true);
+		});
+
+		it("should not hold for a supertype", () => {
+			expect(ModelSelector.isSameOrSubtypeOf("DomainGroup", "DomainElement")(engineState)).toBe(false);
+		});
+	});
+
+	describe("areTypeRelated", () => {
+		const engineState = dataModelerEngineState;
+
+		it("should hold for the same document model", () => {
+			expect(ModelSelector.areTypeRelated("DomainElement", "DomainElement")(engineState)).toBe(true);
+		});
+
+		it("should hold for a supertype and its subtype in either order", () => {
+			expect(ModelSelector.areTypeRelated("DomainElement", "DomainAttachmentGroup")(engineState)).toBe(true);
+			expect(ModelSelector.areTypeRelated("DomainAttachmentGroup", "DomainElement")(engineState)).toBe(true);
+		});
+
+		it("should not hold for two subtypes of the same supertype", () => {
+			expect(ModelSelector.areTypeRelated("DomainGroup", "DomainField")(engineState)).toBe(false);
+		});
+	});
+
+	describe("searchableDocumentModels", () => {
+		it("should return the document models the nodes are built on", () => {
+			const result = ModelSelector.searchableDocumentModels()(categoryEngineState);
+			expect(result).toEqual(["DomainCategory", "DomainProduct"]);
+		});
+
+		it("should leave out a node already covered by a supertype node", () => {
+			const { uiModel } = categoryEngineState.models;
+			const bundleNode = mockType<RuntimeTreeModel.TreeNode>({
+				documentModelRef: "DomainBundle",
+				childRelationshipConfigurations: []
+			});
+			const engineState = {
+				...categoryEngineState,
+				models: {
+					...categoryEngineState.models,
+					uiModel: { ...uiModel, content: { ...uiModel.content, nodes: [...uiModel.content.nodes, bundleNode] } }
+				}
+			};
+
+			const result = ModelSelector.searchableDocumentModels()(engineState);
+			expect(result).toEqual(["DomainCategory", "DomainProduct"]);
+		});
+	});
+
+	describe("subtypeModelsByName", () => {
+		// A models reference of its own, so the mocked result below stays out of the memoized selectors
+		// the other suites read.
+		const engineState = { ...dataModelerEngineState, models: { ...dataModelerEngineState.models } };
 		const [elementDm] = engineState.models.modelGraph.documentModels;
 
 		let subtypeModelsStub: MockInstance;

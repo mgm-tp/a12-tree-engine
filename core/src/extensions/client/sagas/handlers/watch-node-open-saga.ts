@@ -34,10 +34,9 @@ import { type SagaGenerator, put, takeLatest } from "typed-redux-saga";
 
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { Events } from "../../../../core/store/actions.js";
 import { TreeEngineActions } from "../../actions.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-
 import { SagaUtils } from "../saga-utils.js";
 
 /** @internal */

@@ -32,26 +32,25 @@
 
 import { all, call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
+import { type Activity, ActivityActions, ActivitySagas } from "@com.mgmtp.a12.client/client-core";
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { type Activity, ActivityActions, ActivitySagas } from "@com.mgmtp.a12.client/client-core";
 import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { RelationshipModelUtils } from "../../../../core/models/utils/relationship-utils.js";
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import type { RuntimeTreeModel } from "../../../../core/models/tree-model.js";
+import { RelationshipModelUtils } from "../../../../core/models/utils/relationship-utils.js";
 import { Commands, Events } from "../../../../core/store/actions.js";
 import { DataSelector } from "../../../../core/store/selectors/data.js";
-import { type DataState, type Identifier, type ModelsState, TreeEngineState } from "../../../../core/store/store.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
 import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
+import { type DataState, type Identifier, type ModelsState, TreeEngineState } from "../../../../core/store/store.js";
+import { PasteEvent } from "../../../../core/view/shared.js";
+import type { BaseNode } from "../../../server-connector/shared.js";
 import { TreeEngineActions } from "../../actions.js";
 import { TreeEngineDataHolder } from "../../data-holder.js";
 import type { TreeEngineOperation } from "../../operation.js";
 import { TreeEngineSelectors } from "../../selectors.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import { PasteEvent } from "../../../../core/view/shared.js";
-import type { BaseNode } from "../../../server-connector/shared.js";
-
 import { SagaUtils } from "../saga-utils.js";
 
 import { MoveNodeOperation } from "./create-move-node-operation.js";
@@ -135,14 +134,19 @@ function* handlePaste(action: EngineAction) {
 			}
 		}
 
+		const targetParent = target ? DataSelector.parent(target)(dataState) : undefined;
+		// Pasting above/below attaches the nodes to the target's parent, not to the target itself.
+		const pasteAsSibling = position === TreeTableNodeDropPosition.TOP || position === TreeTableNodeDropPosition.BOTTOM;
+		const pasteParent = pasteAsSibling ? targetParent : target;
+
 		const preloadChildNodes = UIStateSelector.preloadChildNodes()(uiState);
 		if (preloadChildNodes) {
 			let addedDataHolders: TreeEngineDataHolder[];
 
-			if (target) {
+			if (pasteParent) {
 				addedDataHolders = yield* call(createAddGrandChildDataHolders, {
 					activityId,
-					descriptorPredicate: ({ source }: Activity.DataHolderDescriptor) => source === target?.nodeIdentifier.id
+					descriptorPredicate: ({ source }: Activity.DataHolderDescriptor) => source === pasteParent.nodeIdentifier.id
 				});
 			} else {
 				addedDataHolders = yield* call(createAddGrandChildDataHolders, {
@@ -167,7 +171,6 @@ function* handlePaste(action: EngineAction) {
 		}
 
 		const copyNodeResult = results?.length === 1 && results[0].type === "COPY_NODE" ? results[0] : undefined;
-		const targetParent = target ? DataSelector.parent(target)(dataState) : undefined;
 
 		if (copyNodeResult) {
 			const newLinkIdentifiers = copyNodeResult.payload.newLinkIdentifiers;

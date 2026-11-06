@@ -45,12 +45,12 @@ import {
 } from "@com.mgmtp.a12.client/client-core";
 import { addSupportedModelVersion } from "@com.mgmtp.a12.client/client-core/modelLoader";
 
-import { TreeEngineServerConnectorFactories } from "../extensions/server-connector/index.js";
-import type { TreeEngineSaga } from "../extensions/client/sagas/saga-setting.js";
 import { TreeEngineFactories } from "../extensions/client/index.js";
+import type { TreeEngineSaga } from "../extensions/client/sagas/saga-setting.js";
+import { TreeEngineServerConnectorFactories } from "../extensions/server-connector/index.js";
 
 /** @internal */
-export const SUPPORTED_MODEL_VERSIONS = "^11.0.0";
+export const SUPPORTED_MODEL_VERSIONS = "^11.1.0";
 const MODEL_TYPE = "tree";
 
 /**
@@ -99,7 +99,7 @@ export const withTreeEngineDataHandlers = <T extends ApplicationWithTreeEngineCo
  * @experimental
  */
 export const withTreeEngineDataReducers = <T extends ApplicationWithTreeEngineConfig>(cfg: T) =>
-	addDataReducers<T>(...TreeEngineFactories.createDataReducers())(cfg);
+	addDataReducers(...TreeEngineFactories.createDataReducers())(cfg);
 
 /**
  * @experimental
@@ -109,26 +109,26 @@ export const withTreeEngineSagas = <T extends ApplicationWithTreeEngineConfig>(c
 		...cfg.treeEngine?.saga,
 		newRelationshipEngine: cfg.configured?.newRelationshipEngine
 	};
-	return addCustomSagas<T>(...TreeEngineFactories.createSagas(sagaSetting))(cfg);
+	return addCustomSagas(...TreeEngineFactories.createSagas(sagaSetting))(cfg);
 };
 
 /**
  * @experimental
  */
 export const withTreeEngineMiddlewares = <T extends ApplicationWithTreeEngineConfig>(cfg: T) =>
-	addAdditionalMiddlewares<T>(...TreeEngineFactories.createMiddlewares())(cfg);
+	addAdditionalMiddlewares(...TreeEngineFactories.createMiddlewares())(cfg);
 /**
  * @experimental
  */
 export const withTreeEngineView = <T extends ApplicationWithTreeEngineConfig>(cfg: T) => {
-	return addView<T>("TreeEngine", TreeEngineFactories.ViewComponent)(cfg);
+	return addView("TreeEngine", TreeEngineFactories.ViewComponent)(cfg);
 };
 
 /**
  * @experimental
  */
 export const withConfiguredTreeEngine = <T extends ApplicationWithTreeEngineConfig>(cfg: T) =>
-	modifyView<T>("TreeEngine", (Component) => (props) => <Component {...props} {...cfg.treeEngine?.viewConfig} />)(cfg);
+	modifyView("TreeEngine", (Component) => (props) => <Component {...props} {...cfg.treeEngine?.viewConfig} />)(cfg);
 
 /**
  * @experimental

@@ -30,13 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import * as React from "react";
 import type { DraggableData, DraggableEvent } from "react-draggable";
-import type { ReactWrapper } from "enzyme";
 
+import type { ReactWrapper } from "enzyme";
+import { type Mock, type MockInstance, vi } from "vitest";
+
+import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import {
 	DefaultTreeTableComponentRenderers,
 	TreeTable,
@@ -48,10 +48,12 @@ import {
 	BodyRowTpl,
 	type FlattenTreeTableNode
 } from "@com.mgmtp.a12.widgets/widgets-core";
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 
 import { type RuntimeTreeModel, TreeModel } from "../../../../../core/models/index.js";
 import { type Identifier, TreeEngineState, UIStateSelector } from "../../../../../core/store/index.js";
+import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
+import * as TreeEngineColumnNamespace from "../../../../../core/view/components/tree-engine/use-tree-engine-columns.js";
+import * as TreeEngineDndNamespace from "../../../../../core/view/configuration/dnd/use-dnd-options.js";
 import {
 	BodyRow,
 	VirtualRootRow,
@@ -68,17 +70,34 @@ import {
 	useRowStyling,
 	RowProgressIndicator
 } from "../../../../../core/view/index.js";
-import * as TreeEngineColumnNamespace from "../../../../../core/view/components/tree-engine/use-tree-engine-columns.js";
-import * as TreeEngineDndNamespace from "../../../../../core/view/configuration/dnd/use-dnd-options.js";
-import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
 import { createContextProps, defaultEngineState, deLocale, enLocale } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { cartesianProduct, testHook } from "../../../../utils/test-utils.js";
 import { createEngineState } from "../../../../utils/model-utils.js";
+import { cartesianProduct, testHook } from "../../../../utils/test-utils.js";
 
 import { teamNodeModel } from "./sub-components/body-cell/shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-engine-renderer", () => {
+/*
+ * The two hooks below are only ever asserted to have been called. Browser-mode ESM namespaces are
+ * not configurable, so `vi.spyOn` cannot wrap them - the modules are mocked with spies that keep
+ * delegating to the real implementations instead.
+ */
+vi.mock(
+	import("../../../../../core/view/components/tree-engine/use-tree-engine-columns.js"),
+	async (importOriginal) => {
+		const actual = await importOriginal();
+
+		return { ...actual, useTreeEngineColumns: vi.fn(actual.useTreeEngineColumns) };
+	}
+);
+
+vi.mock(import("../../../../../core/view/configuration/dnd/use-dnd-options.js"), async (importOriginal) => {
+	const actual = await importOriginal();
+
+	return { ...actual, useDndOptions: vi.fn(actual.useDndOptions) };
+});
+
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-engine-renderer", () => {
 	type TreeTableType = TreeTableProps<FlattenNodeRow, TreeEngineColumn>;
 	const basicEngineState = defaultEngineState;
 
@@ -87,28 +106,32 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 		type: "DomainTeam"
 	};
 
-	const eventHandlers: { [event in keyof EventHandlersDispatchMap]: Sinon.SinonSpy } = {
-		onNodeExpansionChanged: Sinon.spy(),
-		onNodeSelectionChanged: Sinon.spy(),
-		onEventButtonClicked: Sinon.spy(),
-		onNodeEventButtonClicked: Sinon.spy(),
-		onInsertChildNodeButtonClicked: Sinon.spy(),
-		onDialogClosed: Sinon.spy(),
-		onDialogConfirmed: Sinon.spy(),
-		onColumnWidthsChanged: Sinon.spy(),
-		onDndStarted: Sinon.spy(),
-		onDndDone: Sinon.spy(),
-		onBulkDndDone: Sinon.spy(),
-		onDndHover: Sinon.spy(),
-		onRowClicked: Sinon.spy(),
-		onMultiSelectionButtonClicked: Sinon.spy(),
-		onNodeMultiSelectionClicked: Sinon.spy(),
-		onOverallMultiSelectionClicked: Sinon.spy(),
-		onNodeRangeSelectionClicked: Sinon.spy(),
-		onMultiSelectionEventButtonClicked: Sinon.spy(),
-		onScrollToNodeDone: Sinon.spy(),
-		onLoadMore: Sinon.spy(),
-		onLoadAll: Sinon.spy()
+	const eventHandlers: { [event in keyof EventHandlersDispatchMap]: Mock } = {
+		onNodeExpansionChanged: vi.fn(),
+		onNodeSelectionChanged: vi.fn(),
+		onEventButtonClicked: vi.fn(),
+		onNodeEventButtonClicked: vi.fn(),
+		onInsertChildNodeButtonClicked: vi.fn(),
+		onDialogClosed: vi.fn(),
+		onDialogConfirmed: vi.fn(),
+		onColumnWidthsChanged: vi.fn(),
+		onColumnVisibilityChanged: vi.fn(),
+		onDndStarted: vi.fn(),
+		onDndDone: vi.fn(),
+		onBulkDndDone: vi.fn(),
+		onDndHover: vi.fn(),
+		onRowClicked: vi.fn(),
+		onMultiSelectionButtonClicked: vi.fn(),
+		onNodeMultiSelectionClicked: vi.fn(),
+		onOverallMultiSelectionClicked: vi.fn(),
+		onNodeRangeSelectionClicked: vi.fn(),
+		onMultiSelectionEventButtonClicked: vi.fn(),
+		onScrollToNodeDone: vi.fn(),
+		onLoadMore: vi.fn(),
+		onLoadAll: vi.fn(),
+		onSearchQueryChanged: vi.fn(),
+		onMobileSearchBarToggle: vi.fn(),
+		onSearchResultViewChanged: vi.fn()
 	};
 
 	function setupTest(
@@ -136,7 +159,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 	}
 
 	afterEach(() => {
-		Object.values(eventHandlers).forEach((spy) => spy.resetHistory());
+		Object.values(eventHandlers).forEach((spy) => spy.mockClear());
 		vi.restoreAllMocks();
 	});
 
@@ -182,12 +205,12 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 
 		describe("bodyRowRenderer", () => {
 			beforeAll(() => {
-				Sinon.stub(UIStateSelector, "nodeState").returns(() => mockType<UIStateSelector.NodeState>());
-				Sinon.stub(DefaultTreeTableComponentRenderers, "bodyRowRenderer").returns(<></>);
+				vi.spyOn(UIStateSelector, "nodeState").mockReturnValue(() => mockType<UIStateSelector.NodeState>());
+				vi.spyOn(DefaultTreeTableComponentRenderers, "bodyRowRenderer").mockReturnValue(<></>);
 			});
 
 			afterAll(() => {
-				Sinon.restore();
+				vi.restoreAllMocks();
 			});
 
 			it("should return BodyRow", () => {
@@ -348,17 +371,17 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 	});
 
 	describe("data", () => {
-		let useFlattenRowsSpy: Sinon.SinonSpy<Parameters<typeof FlattenRowHooks.useFlattenRows>>;
+		let useFlattenRowsSpy: MockInstance<typeof FlattenRowHooks.useFlattenRows>;
 
 		beforeEach(() => {
-			useFlattenRowsSpy = Sinon.spy(FlattenRowHooks, "useFlattenRows");
+			useFlattenRowsSpy = vi.spyOn(FlattenRowHooks, "useFlattenRows");
 		});
 
 		it("should call useFlattenRows", () => {
 			const { data } = setupTest().find(TreeTable).props();
 
 			expect(data).toBeDefined();
-			expect(useFlattenRowsSpy.called).toBe(true);
+			expect(useFlattenRowsSpy).toHaveBeenCalled();
 		});
 	});
 
@@ -369,13 +392,11 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 			{}
 		);
 		it("should call useTreeEngineColumns", () => {
-			const useTreeEngineColumnsSpy = Sinon.spy(TreeEngineColumnNamespace, "useTreeEngineColumns");
+			const useTreeEngineColumnsSpy = vi.mocked(TreeEngineColumnNamespace.useTreeEngineColumns);
 			const { columns } = setupTest({ busy: true }).find(TreeTable).props();
 
 			expect(columns).toBeDefined();
-			expect(useTreeEngineColumnsSpy.called).toBe(true);
-
-			useTreeEngineColumnsSpy.restore();
+			expect(useTreeEngineColumnsSpy).toHaveBeenCalled();
 		});
 
 		describe("resizable columns", () => {
@@ -388,7 +409,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 				const result = setupTest(undefined, customEngineState);
 				const { columns } = result.find<TreeTableType>(TreeTable).props();
 
-				expect(eventHandlers.onColumnWidthsChanged?.notCalled).toBe(true);
+				expect(eventHandlers.onColumnWidthsChanged).not.toHaveBeenCalled();
 				expect(columns.map(({ width }) => width)).toEqual([0.5, 2.5, 1, 1, 1]);
 			});
 
@@ -415,7 +436,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 					});
 					result.update();
 
-					expect(eventHandlers.onColumnWidthsChanged?.notCalled).toBe(true);
+					expect(eventHandlers.onColumnWidthsChanged).not.toHaveBeenCalled();
 				});
 			});
 
@@ -441,11 +462,9 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 					});
 					result.update();
 
-					expect(
-						eventHandlers.onColumnWidthsChanged?.calledOnceWithExactly({
-							changedColumnWidths: { [modelColumns[0].id]: 2 }
-						})
-					).be.true;
+					expect(eventHandlers.onColumnWidthsChanged).toHaveBeenCalledExactlyOnceWith({
+						changedColumnWidths: { [modelColumns[0].id]: 2 }
+					});
 				});
 			});
 		});
@@ -469,11 +488,10 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 				rowEventHandlers?.({ row: { ...basicNodeRow, parent: undefined }, rowIndex: 0 })?.onArrowClick?.();
 
 				Object.entries(eventHandlers).forEach(([eventName, spy]) => {
-					expect(spy?.callCount).toBe(eventName === "onNodeExpansionChanged" ? 1 : 0);
+					expect(spy?.mock.calls.length).toBe(eventName === "onNodeExpansionChanged" ? 1 : 0);
 				});
 
-				expect(eventHandlers.onNodeExpansionChanged.callCount).toBe(1);
-				expect(eventHandlers.onNodeExpansionChanged.calledOnceWithExactly({ ...basicNodeRow.data })).toBe(true);
+				expect(eventHandlers.onNodeExpansionChanged).toHaveBeenCalledExactlyOnceWith({ ...basicNodeRow.data });
 			});
 		});
 
@@ -485,7 +503,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 					rowEventHandlers?.({ row: { ...basicNodeRow, parent: undefined }, rowIndex: 0 }).onClick?.();
 
 					Object.values(eventHandlers).forEach((eventHandler) => {
-						expect(eventHandler.notCalled).toBe(true);
+						expect(eventHandler).not.toHaveBeenCalled();
 					});
 				});
 			});
@@ -498,7 +516,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 					rowEventHandlers?.({ row: { ...basicNodeRow, parent: undefined }, rowIndex: 0 }).onClick?.();
 
 					Object.values(eventHandlers).forEach((eventHandler) => {
-						expect(eventHandler.notCalled).toBe(true);
+						expect(eventHandler).not.toHaveBeenCalled();
 					});
 				});
 			});
@@ -541,7 +559,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 					}).onClick?.();
 
 					Object.values(eventHandlers).forEach((eventHandler) => {
-						expect(eventHandler.notCalled).toBe(true);
+						expect(eventHandler).not.toHaveBeenCalled();
 					});
 				});
 			});
@@ -551,19 +569,28 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 				rowEventHandlers?.({ row: { ...basicNodeRow, parent: undefined }, rowIndex: 0 }).onClick?.();
 
 				Object.entries(eventHandlers).forEach(([eventName, spy]) => {
-					expect(spy.callCount).toBe(eventName === "onRowClicked" ? 1 : 0);
+					expect(spy.mock.calls.length).toBe(eventName === "onRowClicked" ? 1 : 0);
 				});
 
-				expect(
-					eventHandlers.onRowClicked.calledOnceWithExactly({ ...basicNodeRow.data, nodeModel: basicNodeRow.nodeModel })
-				).toBe(true);
+				expect(eventHandlers.onRowClicked).toHaveBeenCalledExactlyOnceWith({
+					...basicNodeRow.data,
+					nodeModel: basicNodeRow.nodeModel
+				});
 			});
 
 			describe("in multi selection", () => {
 				let result: ReactWrapper;
 
 				function clickRow(index: number) {
-					result.find(BodyRowTpl).at(index).find('[data-role="table-body-row"]').at(0).simulate("click");
+					// The widgets' DataRoles are boxed String objects rather than primitives, so an
+					// attribute selector never matches them by strict equality — coerce before comparing.
+					result
+						.find(BodyRowTpl)
+						.at(index)
+						.findWhere((node) => String(node.prop("data-role")) === "table-body-row")
+						.hostNodes()
+						.at(0)
+						.simulate("click");
 				}
 
 				interface TestCase {
@@ -674,11 +701,11 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 							clickRow(0);
 
 							if (expectedTriggerEvent === "onRowClick") {
-								expect(eventHandlers.onRowClicked.called).toBe(true);
-								expect(eventHandlers.onNodeMultiSelectionClicked.notCalled).toBe(true);
+								expect(eventHandlers.onRowClicked).toHaveBeenCalled();
+								expect(eventHandlers.onNodeMultiSelectionClicked).not.toHaveBeenCalled();
 							} else if (expectedTriggerEvent === "onNodeMultiSelectionClicked") {
-								expect(eventHandlers.onRowClicked.notCalled).toBe(true);
-								expect(eventHandlers.onNodeMultiSelectionClicked.called).toBe(true);
+								expect(eventHandlers.onRowClicked).not.toHaveBeenCalled();
+								expect(eventHandlers.onNodeMultiSelectionClicked).toHaveBeenCalled();
 							} else {
 								throw new Error("Unexpected expectedTriggerEvent value");
 							}
@@ -692,13 +719,11 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 	describe("dragDropOptions", () => {
 		describe("when dnd is enable", () => {
 			it("should call useTreeEngineDndConfiguration", () => {
-				const useTreeEngineDndConfigurationSpy = Sinon.spy(TreeEngineDndNamespace, "useDndOptions");
+				const useTreeEngineDndConfigurationSpy = vi.mocked(TreeEngineDndNamespace.useDndOptions);
 				const { dragDropOptions } = setupTest().find(TreeTable).props();
 
 				expect(dragDropOptions).toBeDefined();
-				expect(useTreeEngineDndConfigurationSpy.called).toBe(true);
-
-				useTreeEngineDndConfigurationSpy.restore();
+				expect(useTreeEngineDndConfigurationSpy).toHaveBeenCalled();
 			});
 		});
 		describe("when dnd is disable by tree engine context", () => {
@@ -768,7 +793,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 		describe("selected", () => {
 			describe("when row is selected", () => {
 				beforeAll(() => {
-					Sinon.stub(UIStateSelector, "nodeState").returns(() =>
+					vi.spyOn(UIStateSelector, "nodeState").mockReturnValue(() =>
 						mockType<UIStateSelector.NodeState>({ selected: true })
 					);
 				});
@@ -782,7 +807,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 
 			describe("when row is not selected", () => {
 				beforeAll(() => {
-					Sinon.stub(UIStateSelector, "nodeState").returns(() =>
+					vi.spyOn(UIStateSelector, "nodeState").mockReturnValue(() =>
 						mockType<UIStateSelector.NodeState>({ selected: false })
 					);
 				});
@@ -798,7 +823,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 		describe("collapsed", () => {
 			describe("when row is expanded", () => {
 				beforeAll(() => {
-					Sinon.stub(UIStateSelector, "nodeState").returns(() =>
+					vi.spyOn(UIStateSelector, "nodeState").mockReturnValue(() =>
 						mockType<UIStateSelector.NodeState>({ expanded: true })
 					);
 				});
@@ -812,7 +837,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 
 			describe("when row is collapsed", () => {
 				beforeAll(() => {
-					Sinon.stub(UIStateSelector, "nodeState").returns(() =>
+					vi.spyOn(UIStateSelector, "nodeState").mockReturnValue(() =>
 						mockType<UIStateSelector.NodeState>({ expanded: false })
 					);
 				});
@@ -834,7 +859,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 			testCases.forEach(([rowBusy, expectedBusy]) => {
 				describe(`when row.busy is ${rowBusy}`, () => {
 					beforeEach(() => {
-						Sinon.stub(UIStateSelector, "nodeState").returns(() =>
+						vi.spyOn(UIStateSelector, "nodeState").mockReturnValue(() =>
 							mockType<UIStateSelector.NodeState>({ busy: rowBusy })
 						);
 					});
@@ -859,7 +884,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 			testCases.forEach(([multiSelection, expectedHighlight]) => {
 				describe(`when row.multiSelection is ${multiSelection}`, () => {
 					beforeEach(() => {
-						Sinon.stub(UIStateSelector, "nodeState").returns(() =>
+						vi.spyOn(UIStateSelector, "nodeState").mockReturnValue(() =>
 							mockType<UIStateSelector.NodeState>({ multiSelection })
 						);
 					});
@@ -883,7 +908,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 			testCases.forEach(([styles, level, expectedClassName]) => {
 				describe(`when node styles are ${styles}, row.level is ${level}`, () => {
 					beforeEach(() => {
-						Sinon.stub(UIStateSelector, "nodeState").returns(() => mockType<UIStateSelector.NodeState>());
+						vi.spyOn(UIStateSelector, "nodeState").mockReturnValue(() => mockType<UIStateSelector.NodeState>());
 					});
 
 					it("rowStyling.className should be '" + expectedClassName + "'", () => {
@@ -905,7 +930,6 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 		});
 
 		describe("style", () => {
-			describe("when rowHeight is set", () => {});
 			it("should be applicable for virtual root", () => {
 				const customEngineState = {
 					...basicEngineState,
@@ -939,7 +963,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 
 		describe("when column is not an instance of TreeEngineDataColumn", () => {
 			beforeAll(() => {
-				Sinon.stub(TreeEngineDataColumn, "isInstance").returns(false);
+				vi.spyOn(TreeEngineDataColumn, "isInstance").mockReturnValue(false);
 			});
 
 			it("the classname should be undefined", () => {
@@ -953,7 +977,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 
 		describe("when column is an instance of TreeEngineDataColumn", () => {
 			beforeAll(() => {
-				Sinon.stub(TreeEngineDataColumn, "isInstance").returns(true);
+				vi.spyOn(TreeEngineDataColumn, "isInstance").mockReturnValue(true);
 			});
 
 			it("the className should be taken from content styles of column", () => {
@@ -1007,13 +1031,13 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.tree-
 			it("should render Tree Table with virtual scroll enabled", () => {
 				const result = setupTest(undefined, engineState);
 				const treeTable = result.find(TreeTable);
-				expect(treeTable.props().virtualScrollOptions).toContain({ rowHeight: 80 });
+				expect(treeTable.props().virtualScrollOptions).toMatchObject({ rowHeight: 80 });
 			});
 
 			it("should use the row height in model instead of row style", () => {
 				const result = setupTest(undefined, engineState);
 				const treeTable = result.find(TreeTable);
-				expect(treeTable.props().virtualScrollOptions).toContain({ rowHeight: 80 });
+				expect(treeTable.props().virtualScrollOptions).toMatchObject({ rowHeight: 80 });
 
 				const tableRows = result.find(TableTemplate.BodyRow);
 				tableRows.forEach((tableRow) => {

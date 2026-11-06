@@ -36,7 +36,6 @@ import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { TreeEngineDataHolder } from "../../../client/data-holder.js";
 import type { TreeEngineOperation } from "../../../client/operation.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
-
 import { createListQueries } from "../resolver/create-queries.js";
 import { handleLoad } from "../resolver/handle-load.js";
 import { PaginationUtils } from "../resolver/pagination-utils.js";
@@ -45,7 +44,6 @@ import type { LoadPayload } from "../utils.js";
 /** @internal */
 export function* handleLoadAllRows({
 	config,
-	operation,
 	dataLoader
 }: LoadPayload & { operation: TreeEngineOperation.LoadAllNodes }): SagaGenerator<TreeEngineDataHolder[]> {
 	const { activityId } = config;

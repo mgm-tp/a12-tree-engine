@@ -42,6 +42,8 @@ import {
 	ContentBox,
 	TreeTable,
 	type TreeTableProps,
+	SubActionBarTpl,
+	type SubActionBarTplProps,
 	Button,
 	type ButtonProps,
 	ButtonGroup,
@@ -52,6 +54,8 @@ import {
 	type ModalOverlayProps,
 	ModalNotification,
 	type ModalNotificationProps,
+	ColumnVisibilityPanel,
+	type ColumnVisibilityPanelProps,
 	ProgressIndicator,
 	type ProgressIndicatorProps,
 	TreeNode,
@@ -82,7 +86,11 @@ import {
 	type BulletListProps,
 	BulletList,
 	type HiddenTextProps,
-	HiddenText
+	HiddenText,
+	Badge,
+	type BadgeProps,
+	TextField,
+	type TextFieldProps
 } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import type { FlattenNodeRow, TreeEngineColumn } from "../components/tree-engine/sub-components/types.js";
@@ -93,6 +101,7 @@ export interface WidgetMap {
 	ActionContentBox: React.ComponentType<ActionContentboxProps>;
 	HeadingAddon: React.ComponentType<ContentBoxProps.BaseProps>;
 	SubActionBar: React.ComponentType<ContentBoxProps.BaseProps>;
+	SubActionBarTpl: React.ComponentType<SubActionBarTplProps>;
 	Footer: React.ComponentType<ContentBoxProps.FooterProps>;
 
 	Title: React.ComponentType<ContentBoxProps.TitleProps>;
@@ -109,12 +118,14 @@ export interface WidgetMap {
 	ListSubheader: React.ComponentType<ListSubHeaderProps>;
 	ListItem: React.ComponentType<ListItemProps>;
 	PopUpMenu: React.ComponentType<PopUpMenuProps>;
+	Badge: React.ComponentType<BadgeProps>;
 	Button: React.ComponentType<ButtonProps>;
 	ButtonGroup: React.ComponentType<ButtonGroupProps>;
 	ButtonGroupContainer: React.ComponentType<ButtonGroupContainerProps>;
 
 	ModalNotification: React.ComponentType<ModalNotificationProps>;
 	ModalOverlay: React.ComponentType<ModalOverlayProps>;
+	ColumnVisibilityPanel: React.ComponentType<ColumnVisibilityPanelProps>;
 
 	TreeTable: React.ComponentType<TreeTableProps<FlattenNodeRow, TreeEngineColumn>>;
 	TreeNode: React.ComponentType<TreeNodeProps>;
@@ -123,6 +134,7 @@ export interface WidgetMap {
 	Checkbox: React.ComponentType<CheckboxProps>;
 	IndeterminateCheckbox: React.ComponentType<IndeterminateCheckboxProps>;
 	TextOutput: React.ComponentType<TextOutputProps>;
+	TextField: React.ComponentType<TextFieldProps>;
 	Tooltip: React.ComponentType<TooltipProps>;
 	CssEllipsis: React.ComponentType<CssEllipsisProps>;
 	BulletListItem: React.ComponentType<BulletListProps.ItemProps>;
@@ -142,6 +154,7 @@ export const DefaultWidgetMap: WidgetMap = {
 	ActionContentBox: React.memo(ActionContentbox),
 	HeadingAddon: React.memo(ContentBoxElements.HeadingAddon),
 	SubActionBar: React.memo(ContentBoxElements.SubActionBar),
+	SubActionBarTpl: React.memo(SubActionBarTpl),
 	Footer: React.memo(ContentBoxElements.Footer),
 
 	Title: React.memo(ContentBoxElements.Title),
@@ -160,12 +173,14 @@ export const DefaultWidgetMap: WidgetMap = {
 	ListSubheader: React.memo(List.SubHeader),
 	ListItem: React.memo(List.Item),
 	PopUpMenu: React.memo(PopUpMenu),
+	Badge: React.memo(Badge),
 	Button: React.memo(Button),
 	ButtonGroup: React.memo(ButtonGroup),
 	ButtonGroupContainer: React.memo(ButtonGroupContainer),
 
 	ModalNotification: React.memo(ModalNotification),
 	ModalOverlay: React.memo(ModalOverlay),
+	ColumnVisibilityPanel: React.memo(ColumnVisibilityPanel),
 
 	TreeTable: React.memo<TreeTableProps<FlattenNodeRow, TreeEngineColumn>>(TreeTable, arePropsWithDataEqual),
 	TreeNode: React.memo(TreeNode),
@@ -174,6 +189,7 @@ export const DefaultWidgetMap: WidgetMap = {
 	Checkbox: React.memo(Checkbox),
 	IndeterminateCheckbox: React.memo(Checkbox.Indeterminate),
 	TextOutput: React.memo(TextOutput),
+	TextField: React.memo(TextField),
 	Tooltip: React.memo(Tooltip),
 	CssEllipsis: React.memo(CssEllipsis),
 	UnorderedBulletList: React.memo(BulletList.Unordered),

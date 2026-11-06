@@ -16,6 +16,7 @@ import type { Annotation } from '@com.mgmtp.a12.base/base-model-api';
 import { ApplicationWithConfiguredFeature } from '@com.mgmtp.a12.client/client-core';
 import { AsyncActionCreators } from '@com.mgmtp.a12.client/typescript-fsa-redux-5-compat';
 import type { Attachment } from '@com.mgmtp.a12.dataservices/dataservices-access';
+import { BadgeProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { BaseTreeTableColumnType } from '@com.mgmtp.a12.widgets/widgets-core';
 import type { BaseTreeTableNode } from '@com.mgmtp.a12.widgets/widgets-core';
 import { BulletListProps } from '@com.mgmtp.a12.widgets/widgets-core';
@@ -24,8 +25,9 @@ import { ButtonGroupProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { ButtonProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { CellStyleGetter } from '@com.mgmtp.a12.widgets/widgets-core';
 import { CheckboxProps } from '@com.mgmtp.a12.widgets/widgets-core';
-import type { Column } from '@com.mgmtp.a12.widgets/widgets-core';
+import { Column } from '@com.mgmtp.a12.widgets/widgets-core';
 import { ColumnResizingOptions } from '@com.mgmtp.a12.widgets/widgets-core';
+import { ColumnVisibilityPanelProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { Container } from '@com.mgmtp.a12.widgets/widgets-core';
 import { ContentBoxProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { CounterProps } from '@com.mgmtp.a12.widgets/widgets-core';
@@ -73,7 +75,9 @@ import { ResponsiveImageContainerProps } from '@com.mgmtp.a12.widgets/widgets-co
 import { SagaGenerator } from 'typed-redux-saga';
 import { Selector as Selector_2 } from '@com.mgmtp.a12.client/client-core';
 import { Styleable } from '@com.mgmtp.a12.widgets/widgets-core';
+import { SubActionBarTplProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { TableRenderPropsType } from '@com.mgmtp.a12.widgets/widgets-core';
+import { TextFieldProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { TextOutputProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { TooltipProps } from '@com.mgmtp.a12.widgets/widgets-core';
 import { TreeNodeProps } from '@com.mgmtp.a12.widgets/widgets-core';
@@ -142,6 +146,7 @@ export { Body_2 as Body }
 export namespace BodyCell {
     // (undocumented)
     export interface Props extends Styleable {
+        readonly alignment?: Column.HorizontalAlignment;
         // (undocumented)
         readonly columnRef: string;
         // (undocumented)
@@ -198,6 +203,29 @@ export type CanDropResult = boolean | DndRedirection;
 export namespace CellSelector {
 }
 
+// @public (undocumented)
+export namespace ColumnVisibilityButton {
+    // (undocumented)
+    export interface Props {
+    }
+}
+
+// @public
+export const ColumnVisibilityButton: React_2.FC<ColumnVisibilityButton.Props>;
+
+// @public (undocumented)
+export namespace ColumnVisibilityPanel {
+    // (undocumented)
+    export interface Props {
+        // (undocumented)
+        readonly onClose: NonNullable<ColumnVisibilityPanelProps["onClose"]>;
+        readonly triggerElement: NonNullable<ColumnVisibilityPanelProps["triggerElement"]>;
+    }
+}
+
+// @public
+export const ColumnVisibilityPanel: React_2.FC<ColumnVisibilityPanel.Props>;
+
 // @public
 export namespace Commands {
     const // (undocumented)
@@ -210,40 +238,47 @@ export namespace Commands {
     const // (undocumented)
     setExpandedMultiSelectionPanel: ActionCreator<SetExpandedMultiSelectionPanelPayload>;
     // (undocumented)
+    export interface SetColumnVisibilityPayload {
+        // (undocumented)
+        columnVisibility: TreeEngineState.ColumnVisibility;
+    }
+    const // (undocumented)
+    setMultiSelectionNodes: ActionCreator<SetMultiSelectionNodesPayload>;
+    // (undocumented)
     export interface SetColumnWidthsPayload {
         // (undocumented)
         columnWidths: TreeEngineState.ColumnWidths;
     }
     const // (undocumented)
-    setMultiSelectionNodes: ActionCreator<SetMultiSelectionNodesPayload>;
+    setExpandedNodes: ActionCreator<SetExpandedNodesPayload>;
     // (undocumented)
     export interface SetCopiedNodesPayload {
         // (undocumented)
         copiedNodes: TreeEngineState.Clipboard.Node[] | null;
     }
     const // (undocumented)
-    setExpandedNodes: ActionCreator<SetExpandedNodesPayload>;
+    setScrollToNode: ActionCreator<SetScrollToNodePayload>;
     // (undocumented)
     export interface SetCutNodesPayload {
         // (undocumented)
         cutNodes: TreeEngineState.Clipboard.Node[] | null;
     }
     const // (undocumented)
-    setScrollToNode: ActionCreator<SetScrollToNodePayload>;
+    setDialogState: ActionCreator<SetDialogStatePayload>;
     // (undocumented)
     export interface SetDialogStatePayload {
         // (undocumented)
         state: TreeEngineState.Dialog | null;
     }
     const // (undocumented)
-    setDialogState: ActionCreator<SetDialogStatePayload>;
+    setColumnWidths: ActionCreator<SetColumnWidthsPayload>;
     // (undocumented)
     export interface SetDisabledPayload {
         // (undocumented)
         disabled: boolean | undefined;
     }
     const // (undocumented)
-    setColumnWidths: ActionCreator<SetColumnWidthsPayload>;
+    setColumnVisibility: ActionCreator<SetColumnVisibilityPayload>;
     // (undocumented)
     export interface SetExpandedMultiSelectionPanelPayload {
         // (undocumented)
@@ -270,23 +305,43 @@ export namespace Commands {
         // (undocumented)
         preloadChildNodes: boolean;
     }
-    const // (undocumented)
-    setPreloadChildNodes: ActionCreator<SetPreloadChildNodesPayload>;
+    const setSearchResult: ActionCreator<SetSearchResultPayload>;
     // (undocumented)
     export interface SetReadonlyPayload {
         // (undocumented)
         readonly: boolean | undefined;
     }
-    const // (undocumented)
-    setDisabled: ActionCreator<SetDisabledPayload>;
+    const setShowMobileSearchBar: ActionCreator<SetShowMobileSearchBarPayload>;
     // (undocumented)
     export type SetScrollToNodePayload = TreeEngineState.ScrollToNode | undefined;
+    const setSearchResultView: ActionCreator<SetSearchResultViewPayload>;
+    // (undocumented)
+    export interface SetSearchResultPayload {
+        // (undocumented)
+        matchedNodes: TreeEngineState.MatchedNodes;
+        // (undocumented)
+        searchString: string;
+    }
     const // (undocumented)
-    setReadonly: ActionCreator<SetReadonlyPayload>;
+    setPreloadChildNodes: ActionCreator<SetPreloadChildNodesPayload>;
+    // (undocumented)
+    export interface SetSearchResultViewPayload {
+        // (undocumented)
+        view: TreeModel.SearchResultView;
+    }
+    const // (undocumented)
+    setDisabled: ActionCreator<SetDisabledPayload>;
     // (undocumented)
     export interface SetSelectedNodesPayload {
         // (undocumented)
         nodes: TreeEngineState.SelectedNodes;
+    }
+    const // (undocumented)
+    setReadonly: ActionCreator<SetReadonlyPayload>;
+    // (undocumented)
+    export interface SetShowMobileSearchBarPayload {
+        // (undocumented)
+        visible: boolean;
     }
 }
 
@@ -305,6 +360,10 @@ export interface ComponentMap {
     // (undocumented)
     Button: React_2.ComponentType<Button.Props>;
     // (undocumented)
+    ColumnVisibilityButton: React_2.ComponentType<ColumnVisibilityButton.Props>;
+    // (undocumented)
+    ColumnVisibilityPanel: React_2.ComponentType<ColumnVisibilityPanel.Props>;
+    // (undocumented)
     ConfirmationDialog: React_2.ComponentType<ConfirmationDialog.Props>;
     // (undocumented)
     ContextMenu: React_2.ComponentType<ContextMenu.Props>;
@@ -318,6 +377,8 @@ export interface ComponentMap {
     DocumentBodyCell: React_2.ComponentType<BodyCell.Props>;
     // (undocumented)
     DragSource: React_2.ComponentType<DragSource.Props>;
+    // (undocumented)
+    EmptySearchResultBody: React_2.ComponentType<EmptySearchResultBody.Props>;
     // (undocumented)
     ExpandAllPopUp: React_2.ComponentType<ExpandAllPopUp.Props>;
     // (undocumented)
@@ -334,6 +395,8 @@ export interface ComponentMap {
     InsertSiblingNodeDialog: React_2.ComponentType<InsertSiblingNodeDialog.Props>;
     // (undocumented)
     LinkDocumentBodyCell: React_2.ComponentType<BodyCell.Props>;
+    // (undocumented)
+    MobileSearchBar: React_2.ComponentType;
     // (undocumented)
     MultiSelectCell: React_2.ComponentType<MultiSelectCell.Props>;
     // (undocumented)
@@ -358,6 +421,12 @@ export interface ComponentMap {
     RowCheckbox: React_2.ComponentType<RowCheckbox.Props>;
     // (undocumented)
     RowProgressIndicator: React_2.ComponentType<RowProgressIndicator.Props>;
+    // (undocumented)
+    SearchBar: React_2.ComponentType<SearchBar.Props>;
+    // (undocumented)
+    SearchButton: React_2.ComponentType;
+    // (undocumented)
+    SearchResultViewToggle: React_2.ComponentType<SearchResultViewToggle.Props>;
     // (undocumented)
     SubActionBar: React_2.ComponentType<SubActionBar.Props>;
     // (undocumented)
@@ -436,6 +505,7 @@ export function createDefaultSagasMap(setting: TreeEngineSaga.Setting): {
     watchRootNodeCreation: (activityId: string) => SagaGenerator<void>;
     watchLoadMoreNodesSaga: (activityId: string) => SagaGenerator<void>;
     watchLoadAllNodesSaga: (activityId: string) => SagaGenerator<void>;
+    watchSearchSaga: (activityId: string) => SagaGenerator<void>;
     watchNodeOpen: (activityId: string) => SagaGenerator<void>;
     watchToggleExpansion: (activityId: string) => SagaGenerator<void>;
 };
@@ -475,7 +545,7 @@ export namespace DataOperation {
         export function isAssignableFrom(result: unknown): result is ListQueryResult;
     }
     // (undocumented)
-    export type Query = ListQuery | Query.TreeNodes.Query | Query.GetDocument.Query | Query.LoadThumbnailUrls.Query | Query.BaseQuery;
+    export type Query = ListQuery | Query.TreeNodes.Query | Query.SearchNodes.Query | Query.GetDocument.Query | Query.LoadThumbnailUrls.Query | Query.BaseQuery;
     // (undocumented)
     export namespace Query {
         // (undocumented)
@@ -646,6 +716,35 @@ export namespace DataOperation {
             limit: number;
             // (undocumented)
             offset: number;
+        }
+        export namespace SearchNodes {
+            // (undocumented)
+            export interface Query extends BaseQuery {
+                // (undocumented)
+                entry: {
+                    targetDocumentModel: string;
+                };
+                fields?: string[];
+                // (undocumented)
+                links: TreeNodes.LinkQuery[];
+                searchFields?: string[];
+                // (undocumented)
+                searchTerm: string;
+                // (undocumented)
+                type: "SEARCH_NODES";
+            }
+            // (undocumented)
+            export namespace Query {
+                // (undocumented)
+                export function isAssignableFrom(query: unknown): query is Query;
+            }
+            // (undocumented)
+            export type Result = TreeNodes.Result;
+            // (undocumented)
+            export namespace Result {
+                // (undocumented)
+                export function isAssignableFrom(result: unknown): result is Result;
+            }
         }
         // (undocumented)
         export namespace TreeNodes {
@@ -842,7 +941,7 @@ export interface DataState {
 }
 
 // @public (undocumented)
-export function dataStateReducer(state: DataState | undefined, action: UnknownAction): DataState;
+export function dataStateReducer(state: DataState | undefined, _action: UnknownAction): DataState;
 
 // @public (undocumented)
 export const DefaultComponentMap: ComponentMap;
@@ -924,6 +1023,13 @@ export namespace DragSource {
 export type DropResult = TreeTableRenderPropsType.DropResult<FlattenNodeRow>;
 
 // @public (undocumented)
+export namespace EmptySearchResultBody {
+    // (undocumented)
+    export interface Props {
+    }
+}
+
+// @public (undocumented)
 type ErrorConstructor_2<Code extends TreeEngineErrorCode, Params extends unknown[]> = (...params: Params) => TreeEngineError<Code>;
 export { ErrorConstructor_2 as ErrorConstructor }
 
@@ -940,6 +1046,10 @@ export interface EventHandlersDispatchMap {
         draggedNodeRows: FlattenNodeRow[];
         droppedNodeRow?: FlattenNodeRow;
         position?: TreeTableNodeDropPosition;
+    }): void;
+    // (undocumented)
+    onColumnVisibilityChanged(params: {
+        columnVisibility: TreeEngineState.ColumnVisibility;
     }): void;
     // (undocumented)
     onColumnWidthsChanged(params: {
@@ -989,6 +1099,10 @@ export interface EventHandlersDispatchMap {
         nodePath: TreeEngineState.NodePath;
     }): void;
     // (undocumented)
+    onMobileSearchBarToggle(params: {
+        visible: boolean;
+    }): void;
+    // (undocumented)
     onMultiSelectionButtonClicked(): void;
     // (undocumented)
     onMultiSelectionEventButtonClicked(params: {
@@ -1029,6 +1143,14 @@ export interface EventHandlersDispatchMap {
     }): void;
     // (undocumented)
     onScrollToNodeDone(scrollToNode: TreeEngineState.ScrollToNode): void;
+    // (undocumented)
+    onSearchQueryChanged(params: {
+        searchTerm: string;
+    }): void;
+    // (undocumented)
+    onSearchResultViewChanged(params: {
+        view: TreeModel.SearchResultView;
+    }): void;
 }
 
 // @public
@@ -1054,21 +1176,28 @@ export namespace Events {
     const // (undocumented)
     onNodeSelectionChanged: ActionCreator<NodeSelectionChangedPayload>;
     // (undocumented)
+    export interface ColumnVisibilityChangedPayload {
+        // (undocumented)
+        columnVisibility: TreeEngineState.ColumnVisibility;
+    }
+    const // (undocumented)
+    onInsertChildNodeRequest: AsyncActionCreators<InsertChildNodeRequestPayload.Param, InsertChildNodeRequestPayload.Result, {}>;
+    // (undocumented)
     export interface ColumnWidthsChangedPayload {
         // (undocumented)
         changedColumnWidths: TreeEngineState.ColumnWidths;
     }
     const // (undocumented)
-    onInsertChildNodeRequest: AsyncActionCreators<InsertChildNodeRequestPayload.Param, InsertChildNodeRequestPayload.Result, {}>;
+    onInsertSiblingNodeRequest: AsyncActionCreators<InsertSiblingNodeRequestPayload.Param, InsertSiblingNodeRequestPayload.Result, {}>;
     // (undocumented)
     export interface DialogClosedPayload {
     }
     const // (undocumented)
-    onInsertSiblingNodeRequest: AsyncActionCreators<InsertSiblingNodeRequestPayload.Param, InsertSiblingNodeRequestPayload.Result, {}>;
+    onInsertRootNodeRequest: AsyncActionCreators<InsertRootNodeRequestPayload.Param, InsertRootNodeRequestPayload.Result, {}>;
     // (undocumented)
     export type DialogConfirmedPayload = DialogConfirmedPayload.InsertChildNode | DialogConfirmedPayload.InsertSiblingNode | DialogConfirmedPayload.InsertRootNode | DialogConfirmedPayload.Confirmation;
     const // (undocumented)
-    onInsertRootNodeRequest: AsyncActionCreators<InsertRootNodeRequestPayload.Param, InsertRootNodeRequestPayload.Result, {}>;
+    onMakeRootNodeRequest: AsyncActionCreators<MakeRootRequestPayload.Params, MakeRootRequestPayload.Result, {}>;
     // (undocumented)
     export namespace DialogConfirmedPayload {
         // (undocumented)
@@ -1139,7 +1268,7 @@ export namespace Events {
         export {};
     }
     const // (undocumented)
-    onMakeRootNodeRequest: AsyncActionCreators<MakeRootRequestPayload.Params, MakeRootRequestPayload.Result, {}>;
+    onEventButtonClicked: ActionCreator<EventButtonClickedPayload>;
     // (undocumented)
     export interface DndDonePayload {
         // (undocumented)
@@ -1155,7 +1284,7 @@ export namespace Events {
         };
     }
     const // (undocumented)
-    onEventButtonClicked: ActionCreator<EventButtonClickedPayload>;
+    onEventButtonClickedRequest: ActionCreator<EventButtonClickedRequestPayload>;
     // (undocumented)
     export interface DndHoverPayload {
         // (undocumented)
@@ -1173,7 +1302,7 @@ export namespace Events {
         };
     }
     const // (undocumented)
-    onEventButtonClickedRequest: ActionCreator<EventButtonClickedRequestPayload>;
+    onMultiSelectionButtonClicked: ActionCreator<MultiSelectionButtonClickedPayload>;
     // (undocumented)
     export interface DndStartedPayload {
         // (undocumented)
@@ -1182,21 +1311,21 @@ export namespace Events {
         nodePath: TreeEngineState.NodePath;
     }
     const // (undocumented)
-    onMultiSelectionButtonClicked: ActionCreator<MultiSelectionButtonClickedPayload>;
+    onMultiSelectionEventButtonClicked: ActionCreator<MultiSelectionEventButtonClickedPayload>;
     // (undocumented)
     export interface EventButtonClickedPayload {
         // (undocumented)
         button: TreeModel.ButtonType;
     }
     const // (undocumented)
-    onMultiSelectionEventButtonClicked: ActionCreator<MultiSelectionEventButtonClickedPayload>;
+    onMultiSelectionEventButtonClickedRequest: ActionCreator<MultiSelectionEventButtonClickedRequestPayload>;
     // (undocumented)
     export interface EventButtonClickedRequestPayload extends EventButtonClickedPayload {
         // (undocumented)
         confirmation: TreeModel.ConfirmationText;
     }
     const // (undocumented)
-    onMultiSelectionEventButtonClickedRequest: ActionCreator<MultiSelectionEventButtonClickedRequestPayload>;
+    onOverallMultiSelectionClicked: ActionCreator<OverallMultiSelectionClickedPayload>;
     // (undocumented)
     export namespace InsertChildNodeRequestPayload {
         // (undocumented)
@@ -1217,7 +1346,7 @@ export namespace Events {
         }
     }
     const // (undocumented)
-    onOverallMultiSelectionClicked: ActionCreator<OverallMultiSelectionClickedPayload>;
+    onNodeMultiSelectionClicked: ActionCreator<NodeMultiSelectionClickedPayload>;
     // (undocumented)
     export namespace InsertRootNodeRequestPayload {
         // (undocumented)
@@ -1234,7 +1363,7 @@ export namespace Events {
         }
     }
     const // (undocumented)
-    onNodeMultiSelectionClicked: ActionCreator<NodeMultiSelectionClickedPayload>;
+    onNodeRangeSelectionClicked: ActionCreator<NodeRangeSelectionClickedPayload>;
     // (undocumented)
     export namespace InsertSiblingNodeRequestPayload {
         // (undocumented)
@@ -1255,7 +1384,7 @@ export namespace Events {
         }
     }
     const // (undocumented)
-    onNodeRangeSelectionClicked: ActionCreator<NodeRangeSelectionClickedPayload>;
+    onNodeEventButtonClicked: ActionCreator<NodeEventButtonClickedPayload>;
     // (undocumented)
     export namespace MakeRootRequestPayload {
         // (undocumented)
@@ -1270,26 +1399,31 @@ export namespace Events {
         }
     }
     const // (undocumented)
-    onNodeEventButtonClicked: ActionCreator<NodeEventButtonClickedPayload>;
+    onNodeEventButtonClickedRequest: ActionCreator<NodeEventButtonClickedRequestPayload>;
+    // (undocumented)
+    export interface MobileSearchBarTogglePayload {
+        // (undocumented)
+        visible: boolean;
+    }
+    const // (undocumented)
+    onDialogClosed: ActionCreator<DialogClosedPayload>;
     // (undocumented)
     export interface MultiSelectionButtonClickedPayload {
     }
     const // (undocumented)
-    onNodeEventButtonClickedRequest: ActionCreator<NodeEventButtonClickedRequestPayload>;
+    onDialogConfirmed: ActionCreator<DialogConfirmedPayload>;
     // (undocumented)
     export interface MultiSelectionEventButtonClickedPayload {
         // (undocumented)
         button: TreeModel.ButtonType;
     }
-    const // (undocumented)
-    onDialogClosed: ActionCreator<DialogClosedPayload>;
     // (undocumented)
     export interface MultiSelectionEventButtonClickedRequestPayload extends MultiSelectionEventButtonClickedPayload {
         // (undocumented)
         confirmation: TreeModel.ConfirmationText;
     }
     const // (undocumented)
-    onDialogConfirmed: ActionCreator<DialogConfirmedPayload>;
+    onDndStarted: ActionCreator<DndStartedPayload>;
     // (undocumented)
     export interface NodeEventButtonClickedPayload {
         // (undocumented)
@@ -1299,13 +1433,15 @@ export namespace Events {
         // (undocumented)
         nodePath: TreeEngineState.NodePath;
     }
+    const // (undocumented)
+    onDndDone: ActionCreator<DndDonePayload>;
     // (undocumented)
     export interface NodeEventButtonClickedRequestPayload extends NodeEventButtonClickedPayload {
         // (undocumented)
         confirmation: TreeModel.ConfirmationText;
     }
     const // (undocumented)
-    onDndStarted: ActionCreator<DndStartedPayload>;
+    onBulkDndDone: ActionCreator<BulkDndDonePayload>;
     // (undocumented)
     export interface NodeExpansionChangedPayload {
         // (undocumented)
@@ -1314,7 +1450,7 @@ export namespace Events {
         nodePath: TreeEngineState.NodePath;
     }
     const // (undocumented)
-    onDndDone: ActionCreator<DndDonePayload>;
+    onDndHover: ActionCreator<DndHoverPayload>;
     // (undocumented)
     export interface NodeMultiSelectionClickedPayload {
         // (undocumented)
@@ -1323,14 +1459,14 @@ export namespace Events {
         nodePath: TreeEngineState.NodePath;
     }
     const // (undocumented)
-    onBulkDndDone: ActionCreator<BulkDndDonePayload>;
+    onRowClicked: ActionCreator<RowClickedPayload>;
     // (undocumented)
     export interface NodeRangeSelectionClickedPayload {
         // (undocumented)
         nodePath: TreeEngineState.NodePath;
     }
     const // (undocumented)
-    onDndHover: ActionCreator<DndHoverPayload>;
+    onColumnWidthsChanged: ActionCreator<ColumnWidthsChangedPayload>;
     // (undocumented)
     export interface NodeSelectionChangedPayload {
         // (undocumented)
@@ -1340,8 +1476,7 @@ export namespace Events {
         // (undocumented)
         selected: boolean;
     }
-    const // (undocumented)
-    onRowClicked: ActionCreator<RowClickedPayload>;
+    const onColumnVisibilityChanged: ActionCreator<ColumnVisibilityChangedPayload>;
     // (undocumented)
     export interface OnLoadAllPayload {
         // (undocumented)
@@ -1349,8 +1484,7 @@ export namespace Events {
         // (undocumented)
         nodePath: TreeEngineState.NodePath;
     }
-    const // (undocumented)
-    onColumnWidthsChanged: ActionCreator<ColumnWidthsChangedPayload>;
+    const scrollToNode: ActionCreator<ScrollToNodePayload>;
     // (undocumented)
     export interface OnLoadMorePayload {
         // (undocumented)
@@ -1358,23 +1492,24 @@ export namespace Events {
         // (undocumented)
         nodePath: TreeEngineState.NodePath;
     }
-    const scrollToNode: ActionCreator<ScrollToNodePayload>;
+    const reload: ActionCreator<ReloadPayload>;
     // (undocumented)
     export interface OverallMultiSelectionClickedPayload {
     }
-    const reload: ActionCreator<ReloadPayload>;
+    const reloadAll: ActionCreator<ReloadAllPayload>;
     // (undocumented)
     export interface ReloadAllPayload {
         level?: number;
     }
-    const reloadAll: ActionCreator<ReloadAllPayload>;
+    const // (undocumented)
+    onLoadMore: ActionCreator<OnLoadMorePayload>;
     // (undocumented)
     export interface ReloadPayload {
         level?: number;
         sources: Identifier[];
     }
     const // (undocumented)
-    onLoadMore: ActionCreator<OnLoadMorePayload>;
+    onLoadAll: ActionCreator<OnLoadAllPayload>;
     // (undocumented)
     export interface RevalidateClipboardPayload {
         // (undocumented)
@@ -1382,8 +1517,7 @@ export namespace Events {
         // (undocumented)
         removedNodes?: Identifier[];
     }
-    const // (undocumented)
-    onLoadAll: ActionCreator<OnLoadAllPayload>;
+    const onSearchQueryChanged: ActionCreator<SearchQueryChangedPayload>;
     // (undocumented)
     export namespace RevalidateClipboardPayload {
         // (undocumented)
@@ -1394,8 +1528,6 @@ export namespace Events {
             nodePath: TreeEngineState.NodePath;
         }
     }
-    const // (undocumented)
-    revalidateClipboard: ActionCreator<RevalidateClipboardPayload>;
     // (undocumented)
     export interface RowClickedPayload {
         // (undocumented)
@@ -1405,6 +1537,7 @@ export namespace Events {
         // (undocumented)
         nodePath: TreeEngineState.NodePath;
     }
+    const onMobileSearchBarToggle: ActionCreator<MobileSearchBarTogglePayload>;
     // (undocumented)
     export interface ScrollToNodePayload {
         autoFocus?: boolean;
@@ -1413,6 +1546,21 @@ export namespace Events {
         // (undocumented)
         nodesFromNodePath?: Identifier[];
     }
+    const onSearchResultViewChanged: ActionCreator<SearchResultViewChangedPayload>;
+    // (undocumented)
+    export interface SearchQueryChangedPayload {
+        // (undocumented)
+        searchTerm: string;
+        trigger: SearchTrigger;
+    }
+    const // (undocumented)
+    revalidateClipboard: ActionCreator<RevalidateClipboardPayload>;
+    // (undocumented)
+    export interface SearchResultViewChangedPayload {
+        // (undocumented)
+        view: TreeModel.SearchResultView;
+    }
+    export type SearchTrigger = "engine" | "user";
 }
 
 // @public (undocumented)
@@ -1449,6 +1597,9 @@ export namespace FooterBox {
         readonly ariaLevel?: number;
     }
 }
+
+// @public
+export function getInitialColumnVisibility(uiModel: RuntimeTreeModel): TreeEngineState.ColumnVisibility;
 
 // @public (undocumented)
 export namespace Heading {
@@ -2072,6 +2223,12 @@ export interface RequestSelectorMap {
     relinkDocument(config: {
         activityId: string;
     } & Omit<RelationshipJsonRpc2request.RelinkDocumentJsonRpc2request, OmitProps>): Selector_2<RelationshipJsonRpc2request.RelinkDocumentJsonRpc2request>;
+    // (undocumented)
+    searchNodes(config: {
+        activityId: string;
+        query: DataOperation.Query.SearchNodes.Query;
+        pageSize: number;
+    }): Selector_2<QueryJsonRpc2Request>;
 }
 
 // @public (undocumented)
@@ -2110,6 +2267,14 @@ export const RESOURCE_KEYS: {
                 message: string;
             };
             pageSizeLimitExceeded: {
+                title: string;
+                message: string;
+            };
+            searchError: {
+                title: string;
+                message: string;
+            };
+            searchNotAvailable: {
                 title: string;
                 message: string;
             };
@@ -2155,6 +2320,14 @@ export const RESOURCE_KEYS: {
             expandAll: string;
             collapseAll: string;
         };
+        columnVisibility: {
+            title: string;
+            openColumnVisibility: string;
+            closeColumnVisibility: string;
+            reset: string;
+            closeButtonTitle: string;
+            customizedBadgeTitle: string;
+        };
         multiSelection: {
             multiSelectionButton: {
                 expandTitle: string;
@@ -2165,6 +2338,17 @@ export const RESOURCE_KEYS: {
             summary: string;
         };
         circularWarning: string;
+        search: {
+            placeholder: string;
+            searchButton: string;
+            clearButton: string;
+            emptyResult: string;
+            searchButtonMinLengthTitle: string;
+            resultsOnly: string;
+            showCompleteTree: string;
+            showSearch: string;
+            hideSearch: string;
+        };
         initialView: {
             message: string;
             addButton: {
@@ -2336,6 +2520,20 @@ export namespace RuntimeTreeModel {
 }
 
 // @public (undocumented)
+export namespace SearchBar {
+    // (undocumented)
+    export interface Props {
+    }
+}
+
+// @public (undocumented)
+export namespace SearchResultViewToggle {
+    // (undocumented)
+    export interface Props {
+    }
+}
+
+// @public (undocumented)
 export interface Selector<ReturnType, State = object> {
     // (undocumented)
     (state: State): ReturnType;
@@ -2352,6 +2550,17 @@ export namespace SubActionBar {
     export interface Props {
     }
 }
+
+// @public
+export type TreeBodyState =
+/** A message is due but the data is still moving, so render a placeholder rather than flicker. */
+"pending"
+/** The reduced search view kept nothing. */
+| "empty-search-result"
+/** The tree is empty and the model offers a way to add the first node. */
+| "initial-view"
+/** The rows themselves. */
+| "tree";
 
 // @public (undocumented)
 export namespace TreeDataUtils {
@@ -2391,7 +2600,7 @@ export namespace TreeEngineActions {
     }
     const // (undocumented)
     command: ActionCreator<CommandPayload>;
-    export function createActivity(createActivityPayload: ActivityActions.CreatePayload, initialUiState?: Pick<UiState, "scrollToNode" | "initialExpansion" | "disabled" | "readonly">): Action<ActivityActions.PushPayload>;
+    export function createActivity(createActivityPayload: ActivityActions.CreatePayload, initialUiState?: Pick<UiState, "scrollToNode" | "initialExpansion" | "disabled" | "readonly" | "columnVisibility">): Action<ActivityActions.PushPayload>;
     const // (undocumented)
     event: ActionCreator<EventPayload>;
     // (undocumented)
@@ -2530,6 +2739,7 @@ export namespace TreeEngineContext {
         readonly rowActionStateGetter?: RowActionStateGetter;
         // (undocumented)
         readonly rowStyling?: RowStyleGetter;
+        readonly screenReaderColumnId?: string;
         // (undocumented)
         readonly selectorMap: SelectorMap;
         // (undocumented)
@@ -2750,6 +2960,8 @@ export namespace TreeEngineError {
     MultiSelectNodeError: ErrorConstructor_2<TreeEngineErrorCode.MULTI_SELECT_NODE_ERROR, []> & ErrorTypeGuard<TreeEngineError<TreeEngineErrorCode.MULTI_SELECT_NODE_ERROR>>;
     const // (undocumented)
     PagingError: ErrorConstructor_2<TreeEngineErrorCode.PAGING_ERROR, []> & ErrorTypeGuard<TreeEngineError<TreeEngineErrorCode.PAGING_ERROR>>;
+    const // (undocumented)
+    SearchError: ErrorConstructor_2<TreeEngineErrorCode.SEARCH_ERROR, []> & ErrorTypeGuard<TreeEngineError<TreeEngineErrorCode.SEARCH_ERROR>>;
     const CreateNodeError: ErrorConstructor_2<TreeEngineErrorCode.CREATE_NODE_ERROR, [type: "child" | "root" | "sibling"]> & ErrorTypeGuard<TreeEngineError<TreeEngineErrorCode.CREATE_NODE_ERROR>>;
     const // (undocumented)
     AddLinkError: ErrorConstructor_2<TreeEngineErrorCode.ADD_LINK_ERROR, [actionType: string]> & ErrorTypeGuard<TreeEngineError<TreeEngineErrorCode.ADD_LINK_ERROR>>;
@@ -2806,6 +3018,8 @@ export enum TreeEngineErrorCode {
     // (undocumented)
     SCROLL_TO_NODE_ERROR = "SCROLL_TO_NODE_ERROR",
     // (undocumented)
+    SEARCH_ERROR = "SEARCH_ERROR",
+    // (undocumented)
     SELECT_NODE_ERROR = "SELECT_NODE_ERROR",
     // (undocumented)
     SERVER_ERROR = "SERVER_ERROR",
@@ -2839,7 +3053,7 @@ export namespace TreeEngineFactories {
 }
 
 // @public (undocumented)
-export type TreeEngineOperation = TreeEngineOperation.ExpandWholeTree | TreeEngineOperation.ExpandSubTree | TreeEngineOperation.ExpandToNode | TreeEngineOperation.LoadAllChildNodes | TreeEngineOperation.LoadMoreNodes | TreeEngineOperation.LoadAllNodes | TreeEngineOperation.ReloadNodes | TreeEngineOperation.Mutation;
+export type TreeEngineOperation = TreeEngineOperation.ExpandWholeTree | TreeEngineOperation.ExpandSubTree | TreeEngineOperation.ExpandToNode | TreeEngineOperation.LoadAllChildNodes | TreeEngineOperation.LoadMoreNodes | TreeEngineOperation.LoadAllNodes | TreeEngineOperation.ReloadNodes | TreeEngineOperation.SearchNodes | TreeEngineOperation.ClearSearch | TreeEngineOperation.Mutation;
 
 // @public (undocumented)
 export namespace TreeEngineOperation {
@@ -2901,6 +3115,16 @@ export namespace TreeEngineOperation {
         readonly payload: P;
         // (undocumented)
         readonly type: string;
+    }
+    // (undocumented)
+    export interface ClearSearch extends Base<ClearSearch.Payload> {
+        // (undocumented)
+        readonly type: "CLEAR_SEARCH";
+    }
+    // (undocumented)
+    export namespace ClearSearch {
+        // (undocumented)
+        export type Payload = AffectableDataHolders;
     }
     // (undocumented)
     export interface CopyNode extends Base<CopyNode.Payload> {
@@ -3232,6 +3456,20 @@ export namespace TreeEngineOperation {
             readonly nodes: Identifier[];
         }
     }
+    // (undocumented)
+    export interface SearchNodes extends Base<SearchNodes.Payload> {
+        // (undocumented)
+        readonly type: "SEARCH_NODES";
+    }
+    // (undocumented)
+    export namespace SearchNodes {
+        // (undocumented)
+        export interface Payload extends AffectableDataHolders {
+            // (undocumented)
+            readonly searchTerm: string;
+            readonly trigger: Events.SearchTrigger;
+        }
+    }
     export {};
 }
 
@@ -3371,6 +3609,10 @@ export namespace TreeEngineState {
         }
         // (undocumented)
         export type Node = TopLevelMultiSelectedNode;
+    }
+    export interface ColumnVisibility {
+        // (undocumented)
+        readonly [columnId: string]: boolean | undefined;
     }
     // (undocumented)
     export interface ColumnWidths {
@@ -3606,7 +3848,6 @@ export namespace TreeEngineState {
         // (undocumented)
         matchCount: number;
     }
-    // (undocumented)
     export interface MatchedNodes {
         // (undocumented)
         readonly [type: string]: NodeMap<MatchedNode>;
@@ -3836,6 +4077,7 @@ export namespace TreeModel {
         readonly icon?: Icon;
         // (undocumented)
         readonly id: string;
+        readonly initiallyHidden?: true;
         // (undocumented)
         readonly label: LocalizedModelText;
         // (undocumented)
@@ -3864,6 +4106,16 @@ export namespace TreeModel {
         readonly header?: Styles;
     }
     // (undocumented)
+    export interface ColumnVisibilityElement extends BaseElement {
+        // (undocumented)
+        readonly type: ElementType.COLUMN_VISIBILITY;
+    }
+    // (undocumented)
+    export namespace ColumnVisibilityElement {
+        // (undocumented)
+        export function isAssignableFrom(element: unknown): element is ColumnVisibilityElement;
+    }
+    // (undocumented)
     export interface Configuration {
         // (undocumented)
         readonly actionColumnWidth?: Width;
@@ -3871,6 +4123,7 @@ export namespace TreeModel {
         readonly dnd?: DndConfiguration;
         // (undocumented)
         readonly enableColumnsResize?: true;
+        readonly enableUserDefinedColumnVisibility?: true;
         // (undocumented)
         readonly enableVirtualScroll?: true;
         // (undocumented)
@@ -3886,6 +4139,8 @@ export namespace TreeModel {
         // (undocumented)
         readonly rowHeight?: number;
         readonly screenReaderColumnRef?: string;
+        readonly searchResultViews?: ReadonlyArray<SearchResultView>;
+        readonly showFullTextSearch?: boolean;
         // (undocumented)
         readonly subtitle?: LocalizedModelText;
         // (undocumented)
@@ -3922,15 +4177,19 @@ export namespace TreeModel {
         };
     }
     // (undocumented)
-    export type Element = ButtonElement | MultiSelectionElement | ExpandAllPopUpElement;
+    export type Element = ButtonElement | MultiSelectionElement | ExpandAllPopUpElement | ColumnVisibilityElement | SearchElement;
     // (undocumented)
     export enum ElementType {
         // (undocumented)
         BUTTON = "button",
         // (undocumented)
+        COLUMN_VISIBILITY = "column_visibility",
+        // (undocumented)
         EXPAND_ALL_POPUP = "expand_all_popup",
         // (undocumented)
-        MULTI_SELECTION = "multi_selection"
+        MULTI_SELECTION = "multi_selection",
+        // (undocumented)
+        SEARCH = "search"
     }
     // (undocumented)
     export type EngineEvent = (typeof BUILT_IN_EVENT_NAMES)[number] | (string & {});
@@ -4090,8 +4349,6 @@ export namespace TreeModel {
         // (undocumented)
         readonly value?: string;
     }
-    const // (undocumented)
-    BUILT_IN_EVENT_NAMES: readonly ["event_add_link", "event_delete_node", "event_delete_link", "event_expand_sub_tree", "event_collapse_sub_tree", "event_copy_node", "event_copy_node_and_children", "event_cut_node", "event_paste", "event_paste_above", "event_paste_below", "event_open_node", "event_toggle_expansion"];
     // (undocumented)
     export type ModelReference = ModelReference.DocumentModelForTree | ModelReference.RelationshipModelForTree | ModelReference.DocumentModelForRelationship;
     // (undocumented)
@@ -4118,6 +4375,8 @@ export namespace TreeModel {
             readonly purpose: "relationship-model-for-tree";
         }
     }
+    const // (undocumented)
+    BUILT_IN_EVENT_NAMES: readonly ["event_add_link", "event_delete_node", "event_delete_link", "event_expand_sub_tree", "event_collapse_sub_tree", "event_copy_node", "event_copy_node_and_children", "event_cut_node", "event_paste", "event_paste_above", "event_paste_below", "event_open_node", "event_toggle_expansion"];
     // (undocumented)
     export enum MultiSelectDisplayMode {
         // (undocumented)
@@ -4198,6 +4457,16 @@ export namespace TreeModel {
     }
     // (undocumented)
     export type RowActivation = EventRowActivation | InsertRowActivation | NonInteractiveRowActivation;
+    export interface SearchElement extends BaseElement {
+        // (undocumented)
+        readonly type: ElementType.SEARCH;
+    }
+    // (undocumented)
+    export namespace SearchElement {
+        // (undocumented)
+        export function isAssignableFrom(element: unknown): element is SearchElement;
+    }
+    export type SearchResultView = "reduced" | "complete";
     // (undocumented)
     export type Styles = ReadonlyArray<string>;
     // (undocumented)
@@ -4420,6 +4689,8 @@ export interface UiState {
     // (undocumented)
     readonly clipboard: TreeEngineState.Clipboard | null;
     // (undocumented)
+    readonly columnVisibility?: TreeEngineState.ColumnVisibility;
+    // (undocumented)
     readonly columnWidths?: TreeEngineState.ColumnWidths;
     // (undocumented)
     readonly dialog: TreeEngineState.Dialog;
@@ -4447,8 +4718,11 @@ export interface UiState {
     readonly readonly?: boolean;
     // (undocumented)
     readonly scrollToNode?: TreeEngineState.ScrollToNode;
+    readonly searchResultView?: TreeModel.SearchResultView;
+    readonly searchString?: string;
     // (undocumented)
     readonly selectedNodes: TreeEngineState.SelectedNodes;
+    readonly showMobileSearchBar?: boolean;
 }
 
 // @public (undocumented)
@@ -4464,6 +4738,10 @@ export namespace UIStateSelector {
     export function clipboard(): Selector<TreeEngineState.Clipboard | null, ClipboardInput>;
     // (undocumented)
     export type ClipboardInput = Pick<UiState, "clipboard">;
+    // (undocumented)
+    export function columnVisibility(): Selector<TreeEngineState.ColumnVisibility | undefined, ColumnVisibilityInput>;
+    // (undocumented)
+    export type ColumnVisibilityInput = Pick<UiState, "columnVisibility">;
     // (undocumented)
     export function columnWidths(): Selector<TreeEngineState.ColumnWidths | undefined, ColumnWidthsInput>;
     // (undocumented)
@@ -4515,7 +4793,6 @@ export namespace UIStateSelector {
     export type NodeStateInput = SelectedNodesInput & ExpandedNodesInput & BusyNodesInput & MatchedNodesInput & MultiSelectionNodesInput;
     // (undocumented)
     export function orderedTopLevelMultiSelectedNodes(): Selector<TopLevelNode[], UiState & DataState>;
-    const nodeState: (input: Identifier, nodePath: TreeEngineState.NodePath) => Selector<NodeState, NodeStateInput>;
     // (undocumented)
     export function overallMultiSelection(): Selector<TreeEngineState.MultiSelectionState, TreeEngineState>;
     // (undocumented)
@@ -4524,6 +4801,7 @@ export namespace UIStateSelector {
     export type PageSizeMapInput = Pick<UiState, "pageSizeMap">;
     // (undocumented)
     export function preloadChildNodes(): Selector<boolean, PreloadChildNodesInput>;
+    const nodeState: (input: Identifier, nodePath: TreeEngineState.NodePath) => Selector<NodeState, NodeStateInput>;
     // (undocumented)
     export type PreloadChildNodesInput = Pick<UiState, "preloadChildNodes">;
     // (undocumented)
@@ -4540,10 +4818,21 @@ export namespace UIStateSelector {
     export function scrollToNode(): Selector<TreeEngineState.ScrollToNode | undefined, ScrollToNodeInput>;
     // (undocumented)
     export type ScrollToNodeInput = Pick<UiState, "scrollToNode">;
+    export function searchResultView(): Selector<TreeModel.SearchResultView | undefined, SearchResultViewInput>;
+    // (undocumented)
+    export type SearchResultViewInput = Pick<UiState, "searchResultView">;
+    // (undocumented)
+    export function searchString(): Selector<string, SearchStringInput>;
+    // (undocumented)
+    export type SearchStringInput = Pick<UiState, "searchString">;
     // (undocumented)
     export function selectedNodes(): Selector<TreeEngineState.SelectedNodes, SelectedNodesInput>;
     // (undocumented)
     export type SelectedNodesInput = Pick<UiState, "selectedNodes">;
+    // (undocumented)
+    export function showMobileSearchBar(): Selector<boolean, ShowMobileSearchBarInput>;
+    // (undocumented)
+    export type ShowMobileSearchBarInput = Pick<UiState, "showMobileSearchBar">;
     // (undocumented)
     export function topLevelMultiSelectedNodes(): Selector<TopLevelNode[], MultiSelectionNodesInput>;
     // (undocumented)
@@ -4570,6 +4859,9 @@ export function useInitialViewContextMenuModel(): {
 
 // @public
 export function useRefValue<T>(value: T): React_2.RefObject<T>;
+
+// @public
+export function useTreeBodyState(rowCount: number): TreeBodyState;
 
 // @public (undocumented)
 export function useTreeEngineContext<T>(selector: Selector<T, TreeEngineContext.Type>): T;
@@ -4629,6 +4921,8 @@ export interface WidgetMap {
     // (undocumented)
     ActionContentBox: React_2.ComponentType<ActionContentboxProps>;
     // (undocumented)
+    Badge: React_2.ComponentType<BadgeProps>;
+    // (undocumented)
     BulletListItem: React_2.ComponentType<BulletListProps.ItemProps>;
     // (undocumented)
     Button: React_2.ComponentType<ButtonProps>;
@@ -4638,6 +4932,8 @@ export interface WidgetMap {
     ButtonGroupContainer: React_2.ComponentType<ButtonGroupContainerProps>;
     // (undocumented)
     Checkbox: React_2.ComponentType<CheckboxProps>;
+    // (undocumented)
+    ColumnVisibilityPanel: React_2.ComponentType<ColumnVisibilityPanelProps>;
     // (undocumented)
     ContentBox: React_2.ComponentType<ContentBoxProps>;
     // (undocumented)
@@ -4681,9 +4977,13 @@ export interface WidgetMap {
     // (undocumented)
     SubActionBar: React_2.ComponentType<ContentBoxProps.BaseProps>;
     // (undocumented)
+    SubActionBarTpl: React_2.ComponentType<SubActionBarTplProps>;
+    // (undocumented)
     SubHeading: React_2.ComponentType<ContentBoxProps.BaseProps>;
     // (undocumented)
     Subtitle: React_2.ComponentType<ContentBoxProps.TitleProps>;
+    // (undocumented)
+    TextField: React_2.ComponentType<TextFieldProps>;
     // (undocumented)
     TextOutput: React_2.ComponentType<TextOutputProps>;
     // (undocumented)

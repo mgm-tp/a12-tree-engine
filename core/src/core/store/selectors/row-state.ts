@@ -31,7 +31,6 @@
  */
 
 import type { RuntimeTreeModel } from "../../models/tree-model.js";
-
 import { TreeEngineState } from "../store.js";
 
 import { DataSelector } from "./data.js";

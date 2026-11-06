@@ -33,9 +33,8 @@
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { TreeModel } from "../../models/tree-model.js";
-
-import { type DataState, type Identifier, TreeEngineState, type UiState } from "../store.js";
 import { Events } from "../actions.js";
+import { type DataState, type Identifier, TreeEngineState, type UiState } from "../store.js";
 
 import { DataSelector } from "./data.js";
 import { type Selector, createSelector } from "./selector.js";
@@ -54,9 +53,25 @@ export namespace UIStateSelector {
 		return (state) => state.expandedNodes;
 	}
 
+	type SearchStringInput = Pick<UiState, "searchString">;
+	export function searchString(): Selector<string, SearchStringInput> {
+		return (state) => state.searchString?.trim() ?? "";
+	}
+
 	type QueryInput = Pick<UiState, "query">;
 	export function query(): Selector<string, QueryInput> {
 		return (state) => state.query;
+	}
+
+	type ShowMobileSearchBarInput = Pick<UiState, "showMobileSearchBar">;
+	export function showMobileSearchBar(): Selector<boolean, ShowMobileSearchBarInput> {
+		return (state) => state.showMobileSearchBar ?? false;
+	}
+
+	type SearchResultViewInput = Pick<UiState, "searchResultView">;
+	/** The result view the user picked, if any — ignored when the model does not offer it. */
+	export function searchResultView(): Selector<TreeModel.SearchResultView | undefined, SearchResultViewInput> {
+		return (state) => state.searchResultView;
 	}
 
 	type MatchedNodesInput = Pick<UiState, "matchedNodes">;
@@ -225,6 +240,11 @@ export namespace UIStateSelector {
 	type ColumnWidthsInput = Pick<UiState, "columnWidths">;
 	export function columnWidths(): Selector<TreeEngineState.ColumnWidths | undefined, ColumnWidthsInput> {
 		return (state) => state.columnWidths;
+	}
+
+	type ColumnVisibilityInput = Pick<UiState, "columnVisibility">;
+	export function columnVisibility(): Selector<TreeEngineState.ColumnVisibility | undefined, ColumnVisibilityInput> {
+		return (state) => state.columnVisibility;
 	}
 
 	type ClipboardInput = Pick<UiState, "clipboard">;

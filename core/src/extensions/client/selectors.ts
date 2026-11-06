@@ -30,7 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { weakMapMemoize } from "reselect";
+
+import { isModelInstance } from "@com.mgmtp.a12.base/base-model-api";
 import {
 	Activity,
 	ActivitySelectors,
@@ -39,17 +41,18 @@ import {
 	ModelSelectors,
 	type Selector
 } from "@com.mgmtp.a12.client/client-core";
+import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
-import { isModelInstance } from "@com.mgmtp.a12.base/base-model-api";
 
 import { TreeEngineError } from "../../core/error/tree-engine-error.js";
 import { marshallTreeModel } from "../../core/models/marshaller.js";
 import { TreeModel } from "../../core/models/tree-model.js";
 import { buildInitialUiState } from "../../core/store/reducer/reducer-factory.js";
-import { type DataState, Identifier, type ModelsState, TreeEngineState, type UiState } from "../../core/store/store.js";
 import { ModelSelector } from "../../core/store/selectors/models.js";
-import { TreeDataUtils } from "../../core/store/utils.js";
 import { isUiState, createLruSelector as createSelector } from "../../core/store/shared.js";
+import { type DataState, Identifier, type ModelsState, TreeEngineState, type UiState } from "../../core/store/store.js";
+import { TreeDataUtils } from "../../core/store/utils.js";
+import { getInitialColumnVisibility } from "../../core/view/components/column-visibility/column-visibility.js";
 
 import { TreeEngineDataHolder } from "./data-holder.js";
 import { collectReferencedDocumentModels } from "./referenced-document-models.js";
@@ -217,6 +220,9 @@ export namespace TreeEngineSelectors {
 		}
 	);
 
+	/** Memoized by model identity, so the seeded map keeps its reference and the column assembly stays memoized. */
+	const initialColumnVisibility = weakMapMemoize(getInitialColumnVisibility);
+
 	export function uiState(activityId: string): Selector<UiState> {
 		return (state) => uiStateReselect(state, activityId);
 	}
@@ -224,15 +230,18 @@ export namespace TreeEngineSelectors {
 		[
 			(state, activityId) => dataHolder(activityId)(state)?.slices["uiState"],
 			(state, activityId) => busyDataHolderDescriptors(activityId)(state),
-			(state, activityId) => pageSizeMaps(activityId)(state)
+			(state, activityId) => pageSizeMaps(activityId)(state),
+			(state, activityId) => modelsState(activityId)(state)?.models.uiModel
 		],
-		(uiState, busyDataHolders, pageSizeMap) => {
-			if (!isUiState(uiState) || !busyDataHolders) {
+		(uiState, busyDataHolders, pageSizeMap, uiModel) => {
+			if (!isUiState(uiState) || !busyDataHolders || !uiModel) {
 				return initialUiState;
 			}
 
+			const columnVisibility = uiState.columnVisibility ?? initialColumnVisibility(uiModel);
+
 			if (busyDataHolders.length === 0) {
-				return { ...uiState, pageSizeMap };
+				return { ...uiState, columnVisibility, pageSizeMap };
 			}
 
 			const busyNodes: Mutable<TreeEngineState.BusyNodes> = {};
@@ -247,7 +256,7 @@ export namespace TreeEngineSelectors {
 				busyNodes[identifier.type][identifier.id] = {};
 			});
 
-			return { ...uiState, busyNodes, pageSizeMap };
+			return { ...uiState, columnVisibility, busyNodes, pageSizeMap };
 		}
 	);
 

@@ -30,19 +30,44 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import type { RuntimeTreeModel } from "../../../../models/tree-model.js";
+import type { TreeEngineState } from "../../../../store/store.js";
+import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
+import { isColumnVisible } from "../../column-visibility/column-visibility.js";
+
 /** @internal */
 export function toCellId(rowId: string, columnId: string): string {
 	return `${rowId}_${columnId}`;
 }
 
 /**
+ * The id of `configuration.screenReaderColumnRef`, or of the hierarchical column when unset,
+ * but only while that column is visible.
+ *
  * @internal
- * Fallback to the hierarchical column if no specific screen reader column is defined,
- * as the hierarchical column already contains the most relevant information about the tree node.
- **/
-export function getScreenReaderColumnRef(config: {
-	readonly screenReaderColumnRef?: string;
-	readonly hierarchicalColumnRef: string;
-}): string {
-	return config.screenReaderColumnRef ?? config.hierarchicalColumnRef;
+ */
+export function resolveScreenReaderColumnId(
+	uiModel: RuntimeTreeModel,
+	columnVisibility?: TreeEngineState.ColumnVisibility
+): string | undefined {
+	const { configuration, columns } = uiModel.content;
+	const { screenReaderColumnRef, hierarchicalColumnRef } = configuration;
+
+	if (!screenReaderColumnRef) {
+		return hierarchicalColumnRef;
+	}
+
+	// A hidden or unknown column renders no cell, so its id would dangle in `aria-labelledby`.
+	const column = columns.find(({ id }) => id === screenReaderColumnRef);
+
+	return column && isColumnVisible(column, configuration, columnVisibility) ? screenReaderColumnRef : undefined;
+}
+
+/**
+ * Reads what {@link resolveScreenReaderColumnId} put on the context.
+ *
+ * @internal
+ */
+export function useScreenReaderColumnRef(): string | undefined {
+	return useTreeEngineContext((context) => context.screenReaderColumnId);
 }

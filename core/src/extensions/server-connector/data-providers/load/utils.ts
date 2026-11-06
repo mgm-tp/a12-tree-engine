@@ -34,11 +34,11 @@ import type { Activity } from "@com.mgmtp.a12.client/client-core";
 
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { TreeModel, type RuntimeTreeModel } from "../../../../core/models/tree-model.js";
+import { ModelSelector } from "../../../../core/store/selectors/models.js";
+import { Identifier, type ModelsState, TreeEngineState } from "../../../../core/store/store.js";
 import { TreeEngineActivity, TreeEngineDataHolder } from "../../../client/data-holder.js";
 import { TreeTraverser } from "../../../client/shared.js";
 import { type BaseNode, extractChildNodesFromDataHolder } from "../../shared.js";
-import { Identifier, type ModelsState, TreeEngineState } from "../../../../core/store/store.js";
-import { ModelSelector } from "../../../../core/store/selectors/models.js";
 
 /** @internal */
 export function createRootNodeDataHolder(activity: Activity, uiModel: RuntimeTreeModel): TreeEngineDataHolder {

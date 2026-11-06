@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 test.describe.skip("scroll to node - twin trees", () => {
@@ -44,14 +42,12 @@ test.describe.skip("scroll to node - twin trees", () => {
 
 	test.use({ viewport: { width: 1280, height: 480 } });
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new ModelEditorUtils(page);
-		await cleanDocumentsData({
-			showcases: ["model-editor"],
-			variant: "group-management"
-		});
-		await seedData({
+		// "Mark as target node" resolves to setTargetNodePath, which writes only an in-memory map
+		// and localStorage — no document is touched.
+		await seed({
 			preset: "model-editor",
 			variant: "group-management"
 		});

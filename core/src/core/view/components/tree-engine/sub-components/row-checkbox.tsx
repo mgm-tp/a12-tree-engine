@@ -32,18 +32,17 @@
 
 import * as React from "react";
 
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
-import { ModelSelector } from "../../../../store/selectors/models.js";
-import { TreeEngineState } from "../../../../store/store.js";
-import { UIStateSelector } from "../../../../store/selectors/ui-state.js";
-import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
 import { RESOURCE_KEYS } from "../../../../services/localization/languages/keys.js";
+import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
+import { UIStateSelector } from "../../../../store/selectors/ui-state.js";
+import { TreeEngineState } from "../../../../store/store.js";
+import { useBuiltinShortcut } from "../../../configuration/keyboard-shortcut/hooks.js";
 import { KeyboardShortcut } from "../../../configuration/keyboard-shortcut/types.js";
 import { KeyboardShortcutUtils } from "../../../configuration/keyboard-shortcut/utils.js";
-import { useBuiltinShortcut } from "../../../configuration/keyboard-shortcut/hooks.js";
 import { useTreeEngineRowContext } from "../../../context/row-context.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
 
-import { toCellId, getScreenReaderColumnRef } from "./a11y-utils.js";
+import { toCellId, useScreenReaderColumnRef } from "./a11y-utils.js";
 import type { FlattenNodeRow } from "./types.js";
 
 export namespace RowCheckbox {
@@ -104,14 +103,16 @@ export const RowCheckbox: React.FC<RowCheckbox.Props> = React.memo(function RowC
 		);
 	}, [shortcut, localizedResource]);
 
-	const configuration = useTreeEngineState(ModelSelector.uiModel()).content.configuration;
-	const screenReaderColumnRef = getScreenReaderColumnRef(configuration);
+	const screenReaderColumnRef = useScreenReaderColumnRef();
 	const screenReaderCellId = React.useMemo(
-		() => toCellId(row.id, screenReaderColumnRef),
+		() => (screenReaderColumnRef ? toCellId(row.id, screenReaderColumnRef) : undefined),
 		[row.id, screenReaderColumnRef]
 	);
 	const checkboxId = React.useId();
-	const ariaLabelledBy = React.useMemo(() => `${checkboxId} ${screenReaderCellId}`, [checkboxId, screenReaderCellId]);
+	const ariaLabelledBy = React.useMemo(
+		() => (screenReaderCellId ? `${checkboxId} ${screenReaderCellId}` : undefined),
+		[checkboxId, screenReaderCellId]
+	);
 
 	const inputProps = React.useMemo(
 		() => ({

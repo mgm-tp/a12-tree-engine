@@ -32,11 +32,13 @@
 
 import type { DynamicConfiguration } from "@com.mgmtp.a12.client/client-core";
 
-import { scenes } from "./scenes.js";
 import { menus } from "./menus.js";
+import { columnVisibilityMiddleware } from "./middlewares/column-visibility-middleware.js";
+import { scenes } from "./scenes.js";
 
 export const teamModule: DynamicConfiguration = {
 	id: "A12Team",
+	middlewares: () => [columnVisibilityMiddleware],
 	menus,
 	flows: [
 		{

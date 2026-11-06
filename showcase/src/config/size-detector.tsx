@@ -32,8 +32,8 @@
 
 import React from "react";
 
-import { SizeContext, useWindowSize } from "@com.mgmtp.a12.widgets/widgets-core";
 import { addWrapper, type A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core";
+import { SizeContext, useWindowSize } from "@com.mgmtp.a12.widgets/widgets-core";
 
 interface SizeDetectorProps {
 	children?: React.ReactNode;
@@ -45,4 +45,4 @@ export const SizeDetector: React.FC<SizeDetectorProps> = ({ children }) => {
 	return <SizeContext.Provider value={{ currentSize: breakPoint.size }}>{children}</SizeContext.Provider>;
 };
 
-export const withSizeDetector = <T extends A12ApplicationConfig>(cfg: T) => addWrapper<T>(SizeDetector, "outer")(cfg);
+export const withSizeDetector = <T extends A12ApplicationConfig>(cfg: T) => addWrapper(SizeDetector, "outer")(cfg);

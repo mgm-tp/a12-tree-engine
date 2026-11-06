@@ -45,15 +45,14 @@ import {
 	linkCategoryToCategory,
 	linkProductToBundle
 } from "../../../utils/index.js";
-
+import bundle1Json from "../documents/categories/DomainBundle-1.json" with { type: "json" };
+import bundle2Json from "../documents/categories/DomainBundle-2.json" with { type: "json" };
 import cat1Json from "../documents/categories/DomainCategory-1.json" with { type: "json" };
 import cat2Json from "../documents/categories/DomainCategory-2.json" with { type: "json" };
 import cat3Json from "../documents/categories/DomainCategory-3.json" with { type: "json" };
 import cat4Json from "../documents/categories/DomainCategory-4.json" with { type: "json" };
 import cat5Json from "../documents/categories/DomainCategory-5.json" with { type: "json" };
 import cat6Json from "../documents/categories/DomainCategory-6.json" with { type: "json" };
-import bundle1Json from "../documents/categories/DomainBundle-1.json" with { type: "json" };
-import bundle2Json from "../documents/categories/DomainBundle-2.json" with { type: "json" };
 import product1Json from "../documents/categories/DomainProduct-1.json" with { type: "json" };
 import product2Json from "../documents/categories/DomainProduct-2.json" with { type: "json" };
 import product3Json from "../documents/categories/DomainProduct-3.json" with { type: "json" };

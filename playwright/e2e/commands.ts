@@ -30,12 +30,83 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Page, type Locator, expect } from "@playwright/test";
+import { type Page, type Locator, expect, test as base } from "@playwright/test";
+
+import { type SeedOptions, seedData, showcasesByPreset } from "../../services-utils/src/index.js";
 
 import { Selector } from "./selectors.js";
 import type { MultiSelectionState } from "./types.js";
 
 export type MovePosition = "asChild" | "top" | "bottom" | "asRoot";
+
+/** The dataset a seed request produces. Two requests with the same key produce identical data. */
+type DatasetKey = string;
+
+function datasetKey({ preset = "default", variant = "normal", data = "simple" }: SeedOptions): DatasetKey {
+	return `${preset}/${variant}/${data}`;
+}
+
+export type SeedFn = (options?: SeedOptions & { force?: boolean }) => Promise<void>;
+
+/** Drops every dataset of a showcase from the clean-dataset memo. */
+export type InvalidateSeedFn = (showcase: string) => void;
+
+const test = base.extend<{ seed: SeedFn; invalidateSeed: InvalidateSeedFn }, { cleanDatasets: Set<DatasetKey> }>({
+	/**
+	 * Datasets that are seeded and unmodified in this worker. Seeding cleans and recreates every
+	 * document of a dataset, so calling it per spec costs a full set of round-trips while producing
+	 * byte-identical data; tracking what is already clean collapses those to one seed per dataset.
+	 * Only unforced seeds record a dataset here, so a dataset a mutating spec touched is never
+	 * treated as clean.
+	 */
+	cleanDatasets: [
+		async ({}, use) => {
+			await use(new Set<DatasetKey>());
+		},
+		{ scope: "worker" }
+	],
+	seed: async ({ cleanDatasets }, use) => {
+		const seed: SeedFn = async ({ force, ...options } = {}) => {
+			const key = datasetKey(options);
+
+			if (!force && cleanDatasets.has(key)) {
+				return;
+			}
+
+			// A forced seed announces the spec will mutate the dataset, so it must not stay recorded
+			// as clean once seeded — the next spec requesting it has to seed again.
+			cleanDatasets.delete(key);
+
+			await seedData(options);
+
+			if (!force) {
+				cleanDatasets.add(key);
+			}
+		};
+
+		await use(seed);
+	},
+	/**
+	 * Announces that a showcase's documents were changed outside the {@link SeedFn} fixture, so the
+	 * datasets built on it stop counting as clean. Specs that call `cleanDocumentsData` or
+	 * `generateNodes` directly need this — the memo cannot see those writes, and would otherwise let
+	 * a later spec skip its seed and run against whatever tree they left behind.
+	 */
+	invalidateSeed: async ({ cleanDatasets }, use) => {
+		const invalidateSeed: InvalidateSeedFn = (showcase) => {
+			for (const key of cleanDatasets) {
+				const [preset] = key.split("/");
+				if (showcasesByPreset[preset]?.includes(showcase)) {
+					cleanDatasets.delete(key);
+				}
+			}
+		};
+
+		await use(invalidateSeed);
+	}
+});
+
+export { test };
 
 /**
  * Provides helper methods for common tree engine operations
@@ -587,9 +658,9 @@ export class PlaywrightCommands {
 	async assertExpanded(name: string, expanded: boolean) {
 		const row = this.getRow(name);
 		if (expanded) {
-			await expect(this.findButton(row, "Collapse subitems")).toBeTruthy();
+			expect(this.findButton(row, "Collapse subitems")).toBeTruthy();
 		} else {
-			await expect(this.findButton(row, "Expand subitems")).toBeTruthy();
+			expect(this.findButton(row, "Expand subitems")).toBeTruthy();
 		}
 	}
 
@@ -598,9 +669,9 @@ export class PlaywrightCommands {
 	 */
 	async assertExpandedWithLocator(locator: Locator, expanded: boolean) {
 		if (expanded) {
-			await expect(this.findButton(locator, "Collapse subitems")).toBeTruthy();
+			expect(this.findButton(locator, "Collapse subitems")).toBeTruthy();
 		} else {
-			await expect(this.findButton(locator, "Expand subitems")).toBeTruthy();
+			expect(this.findButton(locator, "Expand subitems")).toBeTruthy();
 		}
 	}
 	/**

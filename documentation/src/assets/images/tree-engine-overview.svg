@@ -1,0 +1,115 @@
+<!--
+  Tree Engine — introduction overview diagram (container level, hand-authored SVG).
+  Location in this bundle: documentation/src/assets/images/tree-engine-overview.svg
+  Embedded from the introduction as image::assets/images/tree-engine-overview.svg[…]
+
+  The bundle has no architecture chapter; this diagram answers where the engine sits, what runs
+  alongside it in the browser, what it interprets, and where its nodes come from.
+  Everything the engine needs runs in the one browser process; nothing here is a service —
+  only Data Services runs elsewhere.
+  Composition and context only — no internal call flow, no consumers.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 620" width="1180" height="620" role="img" aria-labelledby="t d" font-family="'Segoe UI', Inter, system-ui, sans-serif">
+  <title id="t">Tree Engine overview</title>
+  <desc id="d">The Tree Engine is a library inside an A12 client application — one browser process built by the project, into which the engine registers itself as a view. Its own parts are the view, a React component tree built on the Widgets tree table; the store, which holds the loaded nodes together with the expansion, selection, paging, clipboard, and dialog state; the sagas, which carry out expansion, loading, node creation, deletion, moving, copying, and drag and drop; the server connector, which turns the engine's queries and mutations into A12 Data Services requests; and the model conversion and localization, which turn the Tree Model into the runtime model and resolve the rendered texts. In the same process run the A12 libraries the engine builds on — Client for the application frame, the view registration, and the activity handling, Kernel for Document Model access and document services, Data Services Access for building the queries and mutations, Relationship Engine for coordinating the linking of created documents, and Widgets for the tree table and the form controls — and third-party libraries, among them React, Redux, react-dnd, and styled-components, which the application provides as peer dependencies — the Artifacts section lists the full set. The project's own code — custom components, a custom data loader, custom sagas, and configuration — runs there too. The engine works on one model and one kind of data: a Tree Model, which defines the node types, columns, buttons, node actions, context menu, and row activation, authored with the SME; and documents connected by links, which are the nodes of the tree. The documents and links live in Data Services, which runs outside the browser process and answers the engine's queries and mutations over JSON-RPC.</desc>
+
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .zone  { font-size:11px; font-weight:600; letter-spacing:.09em; fill:#94a3b8 }
+      .card  { fill:#f8fafc; stroke:#cbd5e1; stroke-width:1 }
+      .block { fill:#ffffff; stroke:#cbd5e1; stroke-width:1 }
+      .lib   { fill:#eef4ff; stroke:#93b4e8; stroke-width:1 }
+      .tp    { fill:#f1f2f4; stroke:#a9b1bd; stroke-width:1 }
+      .own   { fill:#fffdf5; stroke:#d6b877; stroke-width:1; stroke-dasharray:5 3 }
+      .name  { font-size:14px; fill:#0f172a }
+      .libnm { font-size:14px; fill:#1e3a8a }
+      .tpnm  { font-size:14px; fill:#334155 }
+      .lead  { font-size:15px; font-weight:600; fill:#0f172a }
+      .sub   { font-size:12px; fill:#64748b }
+      .cap   { font-size:11px; fill:#64748b; font-style:italic }
+      .libcp { font-size:11px; fill:#3b6bb5; font-style:italic }
+      .band  { font-size:11px; font-weight:600; letter-spacing:.06em; fill:#94a3b8 }
+      .edge  { stroke:#64748b; stroke-width:1.4; fill:none; marker-end:url(#arw) }
+    </style>
+  </defs>
+
+  <!-- ── what it works on: the model it interprets and the data it operates on ── -->
+  <text class="zone" x="24" y="110">WORKS ON</text>
+  <g class="card"><rect x="24" y="124" width="196" height="66" rx="8"/></g>
+  <text class="name" x="42" y="148">Tree Model</text>
+  <text class="cap"  x="42" y="166">node types, columns, buttons,</text>
+  <text class="cap"  x="42" y="181">node actions, row activation</text>
+  <text class="cap"  x="24" y="210">Authored with the SME.</text>
+  <g class="card"><rect x="24" y="240" width="196" height="66" rx="8"/></g>
+  <text class="name" x="42" y="264">Documents and links</text>
+  <text class="cap"  x="42" y="282">the nodes of the tree and the</text>
+  <text class="cap"  x="42" y="297">connections between them</text>
+
+  <path class="edge" d="M220 157 C 250 157 246 190 274 190"/>
+  <path class="edge" d="M220 273 C 250 273 246 240 274 240"/>
+
+  <!-- ── the browser process ─────────────────────────────────── -->
+  <rect x="278" y="72" width="612" height="472" rx="14" fill="#fcfdfe" stroke="#94a3b8" stroke-width="1.5"/>
+  <text class="lead" x="302" y="106">A12 client application</text>
+  <text class="sub"  x="302" y="126">one browser process — built by the project, with the engine registered as a view</text>
+
+  <text class="band" x="302" y="158">TREE ENGINE</text>
+  <g class="block"><rect x="302" y="166" width="176" height="56" rx="8"/></g>
+  <text class="name" x="320" y="190">View</text>
+  <text class="cap"  x="320" y="207">React components, Widgets</text>
+  <g class="block"><rect x="494" y="166" width="176" height="56" rx="8"/></g>
+  <text class="name" x="512" y="190">Store</text>
+  <text class="cap"  x="512" y="207">nodes, expansion, selection</text>
+  <g class="block"><rect x="686" y="166" width="176" height="56" rx="8"/></g>
+  <text class="name" x="704" y="190">Sagas</text>
+  <text class="cap"  x="704" y="207">loading, creation, drag and drop</text>
+
+  <g class="block"><rect x="302" y="232" width="176" height="56" rx="8"/></g>
+  <text class="name" x="320" y="256">Server connector</text>
+  <text class="cap"  x="320" y="273">queries to Data Services</text>
+  <g class="block"><rect x="494" y="232" width="176" height="56" rx="8"/></g>
+  <text class="name" x="512" y="256">Conversion</text>
+  <text class="cap"  x="512" y="273">runtime model, texts</text>
+
+  <text class="band" x="302" y="314">IN THE SAME PROCESS — THE LIBRARIES NAMED IN ARCHITECTURE</text>
+  <g class="lib"><rect x="302" y="322" width="152" height="56" rx="8"/></g>
+  <text class="libnm" x="320" y="348">Client, Kernel</text>
+  <text class="libcp" x="320" y="365">activities, models</text>
+  <g class="lib"><rect x="470" y="322" width="172" height="56" rx="8"/></g>
+  <text class="libnm" x="488" y="348">Data Services Access</text>
+  <text class="libcp" x="488" y="365">queries and mutations</text>
+  <g class="lib"><rect x="650" y="322" width="212" height="56" rx="8"/></g>
+  <text class="libnm" x="666" y="348">Widgets, Relationship Engine</text>
+  <text class="libcp" x="666" y="365">tree table, linking</text>
+
+  <g class="tp"><rect x="302" y="390" width="560" height="56" rx="8"/></g>
+  <text class="tpnm" x="320" y="414">React, Redux, react-dnd, styled-components</text>
+  <text class="cap"  x="320" y="432">peer dependencies — the full set in Artifacts</text>
+
+  <g class="own"><rect x="302" y="458" width="560" height="56" rx="8"/></g>
+  <text class="name" x="320" y="482">Your project code</text>
+  <text class="cap"  x="320" y="500">custom components, custom data loader, custom sagas, configuration</text>
+
+  <text class="cap" x="302" y="566">Composition and context only: which part calls which is not shown.</text>
+
+  <!-- ── context column, right: what runs elsewhere ── -->
+  <text class="zone" x="922" y="110">EXTERNAL INFRASTRUCTURE</text>
+  <g class="card"><rect x="922" y="124" width="234" height="66" rx="8"/></g>
+  <text class="name" x="940" y="148">Data Services</text>
+  <text class="cap"  x="940" y="166">holds the documents and links,</text>
+  <text class="cap"  x="940" y="181">answers over JSON-RPC</text>
+  <path class="edge" d="M890 210 C 906 210 906 152 920 152"/>
+
+  <!-- ── legend ──────────────────────────────────────────────── -->
+  <g class="block"><rect x="278" y="590" width="14" height="14" rx="3"/></g>
+  <text class="cap" x="300" y="601">Tree Engine</text>
+  <g class="lib"><rect x="386" y="590" width="14" height="14" rx="3"/></g>
+  <text class="cap" x="408" y="601">A12 libraries it builds on</text>
+  <g class="tp"><rect x="556" y="590" width="14" height="14" rx="3"/></g>
+  <text class="cap" x="578" y="601">third-party libraries</text>
+  <g class="own"><rect x="710" y="590" width="14" height="14" rx="3"/></g>
+  <text class="cap" x="732" y="601">the project's own code</text>
+</svg>

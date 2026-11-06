@@ -37,10 +37,9 @@ import {
 	DragAndDropUtils
 } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type { DataState, ModelsState } from "../../../store/store.js";
 import { ModelSelector } from "../../../store/selectors/models.js";
+import type { DataState, ModelsState } from "../../../store/store.js";
 import type { FlattenNodeRow } from "../../components/tree-engine/sub-components/types.js";
-
 import { logger } from "../logger.js";
 
 import { rules, type CanDropRule } from "./can-drop-rules.js";

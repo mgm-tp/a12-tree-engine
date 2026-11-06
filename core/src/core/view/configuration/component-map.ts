@@ -32,18 +32,26 @@
 
 import type * as React from "react";
 
-import { MultiSelectionPanel } from "../components/content-box/sub-components/multi-selection/multi-selection-panel.js";
+import { ColumnVisibilityButton } from "../components/column-visibility/column-visibility-button.js";
+import { ColumnVisibilityPanel } from "../components/column-visibility/column-visibility-panel.js";
+import { Button } from "../components/content-box/sub-components/buttons.js";
+import { ExpandAllPopUp } from "../components/content-box/sub-components/expand-all-pop-up.js";
+import { FooterBox } from "../components/content-box/sub-components/footer-box.js";
+import { Heading } from "../components/content-box/sub-components/heading.js";
+import { MobileSearchBar } from "../components/content-box/sub-components/mobile-search-bar.js";
+import { MultiSelectionActions } from "../components/content-box/sub-components/multi-selection/multi-selection-actions.js";
 import { MultiSelectionButton } from "../components/content-box/sub-components/multi-selection/multi-selection-button.js";
 import { MultiSelectionCounter } from "../components/content-box/sub-components/multi-selection/multi-selection-counter.js";
-import { MultiSelectionActions } from "../components/content-box/sub-components/multi-selection/multi-selection-actions.js";
-import { FooterBox } from "../components/content-box/sub-components/footer-box.js";
+import { MultiSelectionPanel } from "../components/content-box/sub-components/multi-selection/multi-selection-panel.js";
+import { SearchBar } from "../components/content-box/sub-components/search-bar.js";
+import { SearchButton } from "../components/content-box/sub-components/search-button.js";
+import { SearchResultViewToggle } from "../components/content-box/sub-components/search-result-view-toggle.js";
 import { SubActionBar } from "../components/content-box/sub-components/sub-action-bar.js";
-import { ExpandAllPopUp } from "../components/content-box/sub-components/expand-all-pop-up.js";
 import { DialogsRenderer } from "../components/dialogs/dialog-renderer.js";
 import { ConfirmationDialog } from "../components/dialogs/sub-components/confirmation-dialog.js";
 import { InsertChildNodeDialog } from "../components/dialogs/sub-components/insert-child-node-dialog.js";
-import { InsertSiblingNodeDialog } from "../components/dialogs/sub-components/insert-sibling-node-dialog.js";
 import { InsertRootNodeDialog } from "../components/dialogs/sub-components/insert-root-node-dialog.js";
+import { InsertSiblingNodeDialog } from "../components/dialogs/sub-components/insert-sibling-node-dialog.js";
 import { AttachmentCell } from "../components/tree-engine/sub-components/attachment-cell.js";
 import {
 	BodyCell,
@@ -51,31 +59,30 @@ import {
 	DocumentBodyCell,
 	LinkDocumentBodyCell
 } from "../components/tree-engine/sub-components/body-cell.js";
+import { BodyRow } from "../components/tree-engine/sub-components/body-row/body-row.js";
+import { DndBodyRow } from "../components/tree-engine/sub-components/body-row/dnd-body-row.js";
+import { Body, EmptySearchResultBody, InitialViewBody } from "../components/tree-engine/sub-components/body.js";
 import { ContextMenu } from "../components/tree-engine/sub-components/context-menu.js";
+import { CustomFieldTypeCell } from "../components/tree-engine/sub-components/custom-field-type-cell.js";
 import { DragSource } from "../components/tree-engine/sub-components/drag-source.js";
 import { MultiSelectCell } from "../components/tree-engine/sub-components/multi-select-cell.js";
 import { MultiSelectionDragPreview } from "../components/tree-engine/sub-components/multi-selection-drag-preview.js";
-import { RowAction } from "../components/tree-engine/sub-components/row-action.js";
-import { BodyRow } from "../components/tree-engine/sub-components/body-row/body-row.js";
-import { DndBodyRow } from "../components/tree-engine/sub-components/body-row/dnd-body-row.js";
-import { RowActionsGroup } from "../components/tree-engine/sub-components/row-actions-group.js";
-import { RowProgressIndicator } from "../components/tree-engine/sub-components/row-progress-indicator.js";
-import { Heading } from "../components/content-box/sub-components/heading.js";
-import { CustomFieldTypeCell } from "../components/tree-engine/sub-components/custom-field-type-cell.js";
 import { OverallCheckbox } from "../components/tree-engine/sub-components/overall-checkbox.js";
+import { RightClickContextMenu } from "../components/tree-engine/sub-components/right-click-context-menu.js";
+import { RowAction } from "../components/tree-engine/sub-components/row-action.js";
+import { RowActionsGroup } from "../components/tree-engine/sub-components/row-actions-group.js";
 import { RowCheckbox } from "../components/tree-engine/sub-components/row-checkbox.js";
-import { Body, InitialViewBody } from "../components/tree-engine/sub-components/body.js";
+import { RowProgressIndicator } from "../components/tree-engine/sub-components/row-progress-indicator.js";
 import { VirtualRootBodyCell } from "../components/tree-engine/sub-components/virtual-root-body-cell.js";
 import { VirtualRootRowActionsGroup } from "../components/tree-engine/sub-components/virtual-root-row-actions-group.js";
 import { VirtualRootRow } from "../components/tree-engine/sub-components/virtual-root-row.js";
 import { VirtualizedBody } from "../components/tree-engine/sub-components/virtualized-body.js";
-import { RightClickContextMenu } from "../components/tree-engine/sub-components/right-click-context-menu.js";
-import { Button } from "../components/content-box/sub-components/buttons.js";
 
 export interface ComponentMap {
 	Body: React.ComponentType<Body.Props>;
 	VirtualizedBody: React.ComponentType<VirtualizedBody.Props>;
 	InitialViewBody: React.ComponentType<InitialViewBody.Props>;
+	EmptySearchResultBody: React.ComponentType<EmptySearchResultBody.Props>;
 
 	BodyCell: React.ComponentType<BodyCell.Props>;
 	VirtualRootBodyCell: React.ComponentType<VirtualRootBodyCell.Props>;
@@ -99,6 +106,13 @@ export interface ComponentMap {
 	SubActionBar: React.ComponentType<SubActionBar.Props>;
 	FooterBox: React.ComponentType<FooterBox.Props>;
 	ExpandAllPopUp: React.ComponentType<ExpandAllPopUp.Props>;
+	SearchBar: React.ComponentType<SearchBar.Props>;
+	SearchButton: React.ComponentType;
+	SearchResultViewToggle: React.ComponentType<SearchResultViewToggle.Props>;
+	MobileSearchBar: React.ComponentType;
+
+	ColumnVisibilityButton: React.ComponentType<ColumnVisibilityButton.Props>;
+	ColumnVisibilityPanel: React.ComponentType<ColumnVisibilityPanel.Props>;
 
 	DragSource: React.ComponentType<DragSource.Props>;
 
@@ -123,6 +137,7 @@ export const DefaultComponentMap: ComponentMap = {
 	Body: Body,
 	VirtualizedBody: VirtualizedBody,
 	InitialViewBody: InitialViewBody,
+	EmptySearchResultBody: EmptySearchResultBody,
 
 	BodyCell: BodyCell,
 	VirtualRootBodyCell: VirtualRootBodyCell,
@@ -146,6 +161,13 @@ export const DefaultComponentMap: ComponentMap = {
 	SubActionBar: SubActionBar,
 	FooterBox: FooterBox,
 	ExpandAllPopUp: ExpandAllPopUp,
+	SearchBar: SearchBar,
+	SearchButton: SearchButton,
+	SearchResultViewToggle: SearchResultViewToggle,
+	MobileSearchBar: MobileSearchBar,
+
+	ColumnVisibilityButton: ColumnVisibilityButton,
+	ColumnVisibilityPanel: ColumnVisibilityPanel,
 
 	DragSource: DragSource,
 

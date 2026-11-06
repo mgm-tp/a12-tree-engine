@@ -30,15 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import { VirtualRootBodyCell } from "../../../../../../../core/view/components/tree-engine/sub-components/virtual-root-body-cell.js";
 import { RootNodeRow, type TreeEngineRowContext } from "../../../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../../utils/mock-utils.js";
-import { VirtualRootBodyCell } from "../../../../../../../core/view/components/tree-engine/sub-components/virtual-root-body-cell.js";
 import { createEngineState } from "../../../../../../utils/model-utils.js";
 
 import { BodyCellWrapper, teamNodeModel } from "./shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.virtual-root-body-cell", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.virtual-root-body-cell", () => {
 	const hierarchicalColumnRef = "1024";
 	const basicEngineState = createEngineState
 		.from(defaultEngineState)

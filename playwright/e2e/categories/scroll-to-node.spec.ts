@@ -30,10 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/index.js";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { Selector } from "../selectors.js";
 
@@ -43,13 +41,8 @@ test.describe.skip("scroll to node", () => {
 	let utils: CategoriesUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeAll(async () => {
-		await cleanDocumentsData({
-			showcases: ["categories"]
-		});
-		await seedData({
-			preset: "categories"
-		});
+	test.beforeAll(async ({ seed }) => {
+		await seed({ preset: "categories", force: true });
 	});
 
 	test.beforeEach(async ({ page }) => {

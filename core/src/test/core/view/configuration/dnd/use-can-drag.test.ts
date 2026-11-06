@@ -34,13 +34,13 @@ import { vi, expect } from "vitest";
 
 import type { TableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { defaultEngineState, type PartialEventHandlerContextProps } from "../../../../setup/basic.spec.js";
-import { testHook } from "../../../../utils/test-utils.js";
+import { TreeEngineState } from "../../../../../core/store/index.js";
+import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
 import { useCanDrag } from "../../../../../core/view/configuration/dnd/use-can-drag.js";
 import { defaultDndConfiguration, type FlattenNodeRow } from "../../../../../core/view/index.js";
+import { defaultEngineState, type PartialEventHandlerContextProps } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
-import { TreeEngineState } from "../../../../../core/store/index.js";
+import { testHook } from "../../../../utils/test-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.use-can-drag", () => {
 	const basicEngineState = defaultEngineState;

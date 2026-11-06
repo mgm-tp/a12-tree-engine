@@ -36,6 +36,7 @@ import { ContentBox } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeModel } from "../../../../../core/models/index.js";
 import type { TreeEngineState } from "../../../../../core/store/index.js";
+import { Button } from "../../../../../core/view/components/content-box/sub-components/buttons.js";
 import {
 	TreeEngineContextProvider,
 	ContentBoxRenderer,
@@ -43,7 +44,6 @@ import {
 	FooterBox,
 	DefaultComponentMap
 } from "../../../../../core/view/index.js";
-import { Button } from "../../../../../core/view/components/content-box/sub-components/buttons.js";
 import {
 	createContextProps,
 	defaultEngineState,
@@ -51,7 +51,7 @@ import {
 } from "../../../../setup/basic.spec.js";
 import { createEngineState } from "../../../../utils/model-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.content-box-renderer", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.content-box.content-box-renderer", () => {
 	const basicEngineState = defaultEngineState;
 
 	function setupTest(

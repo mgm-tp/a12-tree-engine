@@ -33,16 +33,15 @@
 import * as React from "react";
 
 import type { TreeModel } from "../../../../models/tree-model.js";
-import { ModelSelector } from "../../../../store/selectors/models.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
-import { useTreeEngineRowContext } from "../../../context/row-context.js";
-import { KeyboardShortcutUtils } from "../../../configuration/keyboard-shortcut/utils.js";
 import { useRowActionShortcut } from "../../../configuration/keyboard-shortcut/hooks.js";
+import { KeyboardShortcutUtils } from "../../../configuration/keyboard-shortcut/utils.js";
+import { useTreeEngineRowContext } from "../../../context/row-context.js";
+import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
 import { useButtonA11YProps } from "../../../shared.js";
 
-import { type FlattenNodeRow, RootNodeRow } from "./types.js";
+import { toCellId, useScreenReaderColumnRef } from "./a11y-utils.js";
 import { RowActionHooks } from "./hooks/row-action-hooks.js";
-import { toCellId, getScreenReaderColumnRef } from "./a11y-utils.js";
+import { type FlattenNodeRow, RootNodeRow } from "./types.js";
 
 export namespace RowAction {
 	export interface Props {
@@ -82,14 +81,16 @@ export const RowAction: React.ComponentType<RowAction.Props> = React.memo(functi
 	const className = React.useMemo(() => rowActionModel.styles?.join(" ") ?? undefined, [rowActionModel.styles]);
 	const shortcut = useRowActionShortcut(rowActionModel, isRootNode);
 
-	const configuration = useTreeEngineState(ModelSelector.uiModel()).content.configuration;
-	const screenReaderColumnRef = getScreenReaderColumnRef(configuration);
+	const screenReaderColumnRef = useScreenReaderColumnRef();
 	const screenReaderCellId = React.useMemo(
-		() => toCellId(row.id, screenReaderColumnRef),
+		() => (screenReaderColumnRef ? toCellId(row.id, screenReaderColumnRef) : undefined),
 		[row.id, screenReaderColumnRef]
 	);
 	const buttonId = React.useId();
-	const ariaLabelledBy = React.useMemo(() => `${buttonId} ${screenReaderCellId}`, [buttonId, screenReaderCellId]);
+	const ariaLabelledBy = React.useMemo(
+		() => (screenReaderCellId ? `${buttonId} ${screenReaderCellId}` : undefined),
+		[buttonId, screenReaderCellId]
+	);
 
 	const { label, title, buttonAttributes } = useButtonA11YProps({
 		modelLabel,

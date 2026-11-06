@@ -32,8 +32,8 @@
 
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { TreeModel } from "../../../../core/models/tree-model.js";
-import { Identifier, type ModelsState } from "../../../../core/store/store.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
+import { Identifier, type ModelsState } from "../../../../core/store/store.js";
 import type { TreeEngineDataHolder } from "../../../client/data-holder.js";
 import type { DataOperation } from "../../data-loaders/data-loader.js";
 

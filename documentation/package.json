@@ -1,6 +1,6 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-dev-docs",
-	"version": "11.0.2-SNAPSHOT",
+	"version": "11.1.1-SNAPSHOT",
 	"type": "module",
 	"exports": null,
 	"description": "Tree Engine documentation which includes typedoc and developer documentation",
@@ -12,8 +12,7 @@
 		"dist:docs": "node scripts/compile",
 		"start": "node scripts/start",
 		"pretest": "pnpm dist",
-		"test": "node --test",
-		"lint:eslint": "eslint --quiet"
+		"test": "node --test"
 	},
 	"devDependencies": {
 		"@com.mgmtp.a12.base/base-model-api": "catalog:a12",

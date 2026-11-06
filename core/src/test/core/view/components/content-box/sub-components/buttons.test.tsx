@@ -36,8 +36,10 @@ import { vi } from "vitest";
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { TreeTableNodeDropPosition, Button as ButtonWidget, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import type { TreeModel } from "../../../../../../core/models/index.js";
 import { TreeModelKeys } from "../../../../../../core/services/localization/index.js";
 import { DataSelector, ModelSelector, TreeEngineState } from "../../../../../../core/store/index.js";
+import { Button } from "../../../../../../core/view/components/content-box/sub-components/buttons.js";
 import {
 	type DndConfiguration,
 	type EventHandlersDispatchMap,
@@ -46,7 +48,6 @@ import {
 	RootNodeRow,
 	KeyboardShortcut
 } from "../../../../../../core/view/index.js";
-import { Button } from "../../../../../../core/view/components/content-box/sub-components/buttons.js";
 import {
 	createContextProps,
 	defaultEngineState,
@@ -54,9 +55,8 @@ import {
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
-import type { TreeModel } from "../../../../../../core/models/index.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.buttons", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.buttons", () => {
 	const basicEngineState = defaultEngineState;
 	const basicButtonProps: Button.Props = {
 		element: {

@@ -43,16 +43,8 @@ export function* handleCreateDetailActivitySaga<T>(
 ): SagaGenerator<void> {
 	while (true) {
 		const { cancelled } = yield* race({
-			saveStarted: take(
-				(action: unknown) =>
-					isAction(action) &&
-					(ActivityActions.commit.started.match(action) || ActivityActions.save.started.match(action)) &&
-					action.payload.activityId === detailActivityId
-			),
-			cancelled: take(
-				(action: unknown) =>
-					isAction(action) && ActivityActions.cancel.match(action) && action.payload.activityId === detailActivityId
-			)
+			saveStarted: take(createSaveStartedPredicate(detailActivityId)),
+			cancelled: take(createCancelledPredicate(detailActivityId))
 		});
 		if (cancelled) {
 			break;
@@ -63,4 +55,30 @@ export function* handleCreateDetailActivitySaga<T>(
 			break;
 		}
 	}
+}
+
+/** @internal */
+export function* handleCreateDetailActivitySagaWithSaveInProgress<T>(
+	detailActivityId: string,
+	config: T,
+	handleSaveStarted: (detailActivityId: string, config: T) => SagaGenerator<boolean>
+): SagaGenerator<void> {
+	const saveDone = yield* handleSaveStarted(detailActivityId, config);
+	if (!saveDone) {
+		yield* handleCreateDetailActivitySaga(detailActivityId, config, handleSaveStarted);
+	}
+}
+
+/** @internal */
+export function createSaveStartedPredicate(detailActivityId: string): (action: unknown) => boolean {
+	return (action: unknown) =>
+		isAction(action) &&
+		(ActivityActions.commit.started.match(action) || ActivityActions.save.started.match(action)) &&
+		action.payload.activityId === detailActivityId;
+}
+
+/** @internal */
+export function createCancelledPredicate(detailActivityId: string): (action: unknown) => boolean {
+	return (action: unknown) =>
+		isAction(action) && ActivityActions.cancel.match(action) && action.payload.activityId === detailActivityId;
 }

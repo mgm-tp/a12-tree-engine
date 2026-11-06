@@ -30,10 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { defaultEngineState, defaultRoot } from "../../../setup/basic.spec.js";
 import { DataSelector, Identifier, type TreeEngineState } from "../../../../core/store/index.js";
-import { createMockPerson } from "../../../utils/state-utils.js";
+import { defaultEngineState, defaultRoot } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
+import { createMockPerson } from "../../../utils/state-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.selectors.data.nodePath", () => {
 	const docRef = "DomainTeam/1";

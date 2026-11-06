@@ -33,12 +33,12 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
+import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 import {
 	TreeEngineFactories,
 	type RowActionStateGetter,
 	type RowStyleGetter
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 
 import { useShowcaseContext } from "../context.js";
 import { OPEN_DM_NODE_EVENT_TWIN } from "../helpers.js";

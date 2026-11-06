@@ -32,17 +32,16 @@
 
 import { type SagaGenerator, call, put, takeLatest, select } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySelectors, StoreSagas } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { Commands, Events } from "../../../../core/store/actions.js";
-import { TreeEngineState } from "../../../../core/store/store.js";
 import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
+import { TreeEngineState } from "../../../../core/store/store.js";
 import { TreeEngineActions } from "../../actions.js";
 import { TreeEngineSelectors } from "../../selectors.js";
 import { logger } from "../../utils.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-
 import { SagaUtils } from "../saga-utils.js";
 
 /** @internal */
@@ -94,7 +93,7 @@ function* handle(
 	} else {
 		const uiState = yield* select(TreeEngineSelectors.uiState(activityId));
 		const nodes = { ...UIStateSelector.selectedNodes()(uiState) };
-		// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+		// oxlint-disable-next-line no-dynamic-delete
 		delete nodes[TreeEngineState.NodePath.toString(nodePath)];
 		yield* put(TreeEngineActions.command({ activityId, engineAction: Commands.setSelectedNodes({ nodes }) }));
 	}

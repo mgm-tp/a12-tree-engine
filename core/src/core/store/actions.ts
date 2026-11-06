@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { actionCreatorFactory as actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
+import { actionCreatorFactory } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 import type { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
@@ -334,6 +334,14 @@ export namespace Events {
 	}
 
 	/**
+	 * Triggered when the end user shows or hides a column via the column visibility panel.
+	 */
+	export const onColumnVisibilityChanged = factory<ColumnVisibilityChangedPayload>("onColumnVisibilityChanged");
+	export interface ColumnVisibilityChangedPayload {
+		columnVisibility: TreeEngineState.ColumnVisibility;
+	}
+
+	/**
 	 * Action to scroll to a node by its node path
 	 */
 	export const scrollToNode = factory<ScrollToNodePayload>("scrollToNode");
@@ -396,6 +404,40 @@ export namespace Events {
 	export interface OnLoadAllPayload {
 		nodeIdentifier: Identifier;
 		nodePath: TreeEngineState.NodePath;
+	}
+
+	/**
+	 * Action dispatched when a search term is submitted — by the user, or by the engine re-running
+	 * the term already in the search bar. An empty term clears the search.
+	 */
+	export const onSearchQueryChanged = factory<SearchQueryChangedPayload>("onSearchQueryChanged");
+	export interface SearchQueryChangedPayload {
+		searchTerm: string;
+		/**
+		 * Who asked for this search. `"engine"` is a re-run of the term already in the input, after
+		 * an edit or a reload; it leaves the result view and the selection as they are, while a term
+		 * the user submits resets both.
+		 */
+		trigger: SearchTrigger;
+	}
+
+	/** Who a search came from — see {@link SearchQueryChangedPayload.trigger}. */
+	export type SearchTrigger = "engine" | "user";
+
+	/**
+	 * The user toggled the small-view search bar from the heading.
+	 */
+	export const onMobileSearchBarToggle = factory<MobileSearchBarTogglePayload>("onMobileSearchBarToggle");
+	export interface MobileSearchBarTogglePayload {
+		visible: boolean;
+	}
+
+	/**
+	 * The user switched the search result between the reduced and the complete tree.
+	 */
+	export const onSearchResultViewChanged = factory<SearchResultViewChangedPayload>("onSearchResultViewChanged");
+	export interface SearchResultViewChangedPayload {
+		view: TreeModel.SearchResultView;
 	}
 
 	/**
@@ -479,6 +521,15 @@ export namespace Commands {
 	 *
 	 *
 	 */
+	export const setColumnVisibility = factory<SetColumnVisibilityPayload>("setColumnVisibility");
+	export interface SetColumnVisibilityPayload {
+		columnVisibility: TreeEngineState.ColumnVisibility;
+	}
+
+	/**
+	 *
+	 *
+	 */
 	export const setCopiedNodes = factory<SetCopiedNodesPayload>("setCopiedNodes");
 	export interface SetCopiedNodesPayload {
 		copiedNodes: TreeEngineState.Clipboard.Node[] | null;
@@ -499,6 +550,32 @@ export namespace Commands {
 	 */
 	export const resetClipboard = factory<ResetClipboardPayload>("resetClipboard");
 	export interface ResetClipboardPayload {}
+
+	/**
+	 * Set what a search produced: the term in effect and the nodes it matched. A cleared search
+	 * writes an empty term and no matches.
+	 */
+	export const setSearchResult = factory<SetSearchResultPayload>("setSearchResult");
+	export interface SetSearchResultPayload {
+		searchString: string;
+		matchedNodes: TreeEngineState.MatchedNodes;
+	}
+
+	/**
+	 * Show or hide the small-view search bar.
+	 */
+	export const setShowMobileSearchBar = factory<SetShowMobileSearchBarPayload>("setShowMobileSearchBar");
+	export interface SetShowMobileSearchBarPayload {
+		visible: boolean;
+	}
+
+	/**
+	 * Switch the search result between the reduced and the complete tree.
+	 */
+	export const setSearchResultView = factory<SetSearchResultViewPayload>("setSearchResultView");
+	export interface SetSearchResultViewPayload {
+		view: TreeModel.SearchResultView;
+	}
 
 	/**
 	 *

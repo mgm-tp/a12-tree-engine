@@ -1,0 +1,14 @@
+diff --git a/build/circular-json.node.js b/build/circular-json.node.js
+index 576266fe654539c7accec4f7d7fc6d9dc42bd19d..c50ed1c2e983fc9aa81eaec76e902d9adbaf6bec 100644
+--- a/build/circular-json.node.js
++++ b/build/circular-json.node.js
+@@ -181,5 +181,5 @@ function stringifyRecursion(value, replacer, space, doNotResolve) {
+ function parseRecursion(text, reviver) {
+   return JSON.parse(text, generateReviver(reviver));
+ }
+-this.stringify = stringifyRecursion;
+-this.parse = parseRecursion;
+\ No newline at end of file
++module.exports.stringify = stringifyRecursion;
++module.exports.parse = parseRecursion;
+\ No newline at end of file

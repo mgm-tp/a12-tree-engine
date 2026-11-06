@@ -39,9 +39,9 @@ if (isWdyrEnabled()) {
 	// });
 	//
 	// Object.keys(DefaultComponentMap).forEach((name) => {
-	// 	// @ts-ignore
+	// 	// @ts-expect-error indexing DefaultComponentMap by name
 	// 	if (!DefaultComponentMap[name].whyDidYouRender) {
-	// 		// @ts-ignore
+	// 		// @ts-expect-error indexing DefaultComponentMap by name
 	// 		DefaultComponentMap[name].whyDidYouRender = true;
 	// 	}
 	// });

@@ -29,8 +29,9 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
-import Path from "node:path";
+
 import Fs from "node:fs/promises";
+import Path from "node:path";
 
 const SPDX_MARKER = ["SPDX-License", "Identifier: EUPL-1.2 OR LicenseRef-commercial"].join("-");
 

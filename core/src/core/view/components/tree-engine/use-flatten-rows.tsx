@@ -35,14 +35,15 @@ import * as React from "react";
 import { useTreeTableContext } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeEngineError } from "../../../error/tree-engine-error.js";
-import { DataSelector } from "../../../store/selectors/data.js";
-import { type DataState, type Identifier, type ModelsState, TreeEngineState } from "../../../store/store.js";
-import { ModelSelector } from "../../../store/selectors/models.js";
-import { UIStateSelector } from "../../../store/selectors/ui-state.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../context/tree-engine-context.js";
-import { LinkDescriptorUtils } from "../../../models/utils/relationship-utils.js";
 import { TreeModel } from "../../../models/tree-model.js";
+import { LinkDescriptorUtils } from "../../../models/utils/relationship-utils.js";
+import { DataSelector } from "../../../store/selectors/data.js";
+import { ModelSelector } from "../../../store/selectors/models.js";
+import { SearchSelector } from "../../../store/selectors/search.js";
+import { UIStateSelector } from "../../../store/selectors/ui-state.js";
+import { type DataState, type Identifier, type ModelsState, TreeEngineState } from "../../../store/store.js";
 import { useIdGenerator } from "../../configuration/id-generator.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../context/tree-engine-context.js";
 
 import { FlattenNodeRow, PaginatedRow, RootNodeRow } from "./sub-components/types.js";
 
@@ -63,8 +64,27 @@ export namespace FlattenRowHooks {
 			return { root, data, models };
 		}, [data, root, models]);
 
+		const nodesToKeep = useTreeEngineState(SearchSelector.reducedViewNodes());
+
 		const generateId = useIdGenerator();
 		const createPaginatedRows = useCreatePaginatedRows();
+
+		/** The child links leading to a row that is shown — all of them unless the view is reduced. */
+		const keptChildLinkIdentifiers = React.useCallback(
+			(node: TreeEngineState.Node, nodeIdentifier: Identifier): Identifier[] => {
+				if (!nodesToKeep) {
+					return node.children;
+				}
+				return node.children.filter((childLinkIdentifier) => {
+					const childNodeIdentifier = DataSelector.findNodeIdentifierFromOtherSide(
+						childLinkIdentifier,
+						nodeIdentifier
+					)(engineState);
+					return !!childNodeIdentifier && nodesToKeep.has(childNodeIdentifier.id);
+				});
+			},
+			[nodesToKeep, engineState]
+		);
 
 		/**
 		 * Create a FlattenNodeRow from nodeIdentifier and nodePath
@@ -80,7 +100,7 @@ export namespace FlattenRowHooks {
 				parent?: FlattenNodeRow;
 				level?: number;
 				lastIndex?: boolean;
-			}): FlattenNodeRow => {
+			}): FlattenNodeRow | undefined => {
 				const { flattenNodeRows, nodePath, nodeIdentifier, rowIndex = 0, level = 0, parent, lastIndex } = params;
 				const nodeModel = ModelSelector.nodeModel(nodeIdentifier.type)(engineState);
 				if (!nodeModel) {
@@ -90,10 +110,20 @@ export namespace FlattenRowHooks {
 				if (!node) {
 					throw TreeEngineError.NotFoundError("TreeEngine.Node", nodeIdentifier.id);
 				}
+				// Neither a match nor on the way to one: the reduced view hides it and its whole subtree.
+				if (nodesToKeep && !nodesToKeep.has(nodeIdentifier.id)) {
+					return undefined;
+				}
 
-				const shouldShowArrowButton = preloadChildNodes
-					? node.children.length > 0
-					: nodeModel.childRelationshipConfigurations?.length > 0;
+				const childLinkIdentifiers = keptChildLinkIdentifiers(node, nodeIdentifier);
+
+				// The expander follows the children that are actually shown, so a matched folder whose
+				// contents hold no match is a dead end — it offers no way into the tree.
+				const shouldShowArrowButton = nodesToKeep
+					? childLinkIdentifiers.length > 0
+					: preloadChildNodes
+						? node.children.length > 0
+						: nodeModel.childRelationshipConfigurations?.length > 0;
 
 				const flattenNodeRow: FlattenNodeRow = {
 					id: generateId(TreeEngineState.NodePath.toString(nodePath)),
@@ -108,7 +138,7 @@ export namespace FlattenRowHooks {
 						?.nodePath,
 					successor: DataSelector.successor({ nodeIdentifier, nodePath, nodeIndex: rowIndex })(engineState)?.nodePath,
 					rowIndex: rowIndex,
-					childrenCount: node.children.length,
+					childrenCount: childLinkIdentifiers.length,
 					fullPageSize: 0,
 					lastIndex: lastIndex ?? false
 				};
@@ -132,8 +162,8 @@ export namespace FlattenRowHooks {
 					return flattenNodeRow;
 				}
 
-				node.children.forEach((childLinkIdentifier, index) => {
-					const lastIndex = node.children.length - 1 === index;
+				childLinkIdentifiers.forEach((childLinkIdentifier, index) => {
+					const lastIndex = childLinkIdentifiers.length - 1 === index;
 
 					const childNodeIdentifier = DataSelector.findNodeIdentifierFromOtherSide(
 						childLinkIdentifier,
@@ -165,6 +195,8 @@ export namespace FlattenRowHooks {
 			[
 				engineState,
 				preloadChildNodes,
+				nodesToKeep,
+				keptChildLinkIdentifiers,
 				generateId,
 				Icon,
 				getCachedFlattenRow,
@@ -191,6 +223,9 @@ export namespace FlattenRowHooks {
 						link.linkRef.linkDescriptor,
 						rootIdentifier
 					);
+					if (nodesToKeep && !nodesToKeep.has(nodeIdentifier.id)) {
+						return;
+					}
 
 					makeFlattenNodeRow({
 						flattenNodeRows: flattenRows,
@@ -221,6 +256,7 @@ export namespace FlattenRowHooks {
 			root.children,
 			root.fullSize,
 			root.identifier,
+			nodesToKeep,
 			getCachedFlattenRow,
 			revalidateCaches,
 			engineState,

@@ -35,15 +35,14 @@ import * as React from "react";
 import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
 import type { TreeModel } from "../../../models/tree-model.js";
-import type { TreeEngineState } from "../../../store/store.js";
 import { UIStateSelector } from "../../../store/selectors/ui-state.js";
-import { useTreeInternalContext } from "../../context/tree-internal-context-provider.js";
+import type { TreeEngineState } from "../../../store/store.js";
 import {
 	useTreeEngineContext,
 	useTreeEngineContextRef,
 	useTreeEngineState
 } from "../../context/tree-engine-context.js";
-
+import { useTreeInternalContext } from "../../context/tree-internal-context-provider.js";
 import { useRefValue } from "../use-ref-value.js";
 
 import { KeyboardShortcut } from "./types.js";

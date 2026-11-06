@@ -45,10 +45,9 @@ import {
 	useTreeTableContext
 } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
 import { RESOURCE_KEYS } from "../../../../services/localization/languages/keys.js";
+import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
 import { TreeEngineRowContextProvider, useTreeEngineRowContextProvider } from "../../../context/row-context.js";
-
 import { FlattenRowHooks } from "../use-flatten-rows.js";
 
 import type { FlattenNodeRow, TreeEngineColumn } from "./types.js";
@@ -87,7 +86,7 @@ export namespace MultiSelectionDragPreview {
 
 /** @internal */
 export const MultiSelectionDragPreview: React.FC<MultiSelectionDragPreview.Props> = React.memo(
-	function MultiSelectionDragPreview(props) {
+	function MultiSelectionDragPreview() {
 		const localizedResource = LocalizerHooks.useLocalizedResource();
 		const data = useTreeTableContext<FlattenNodeRow>((c) => c.data);
 		const multiSelectedRows = FlattenRowHooks.useMultiSelectedRows(data);

@@ -34,9 +34,8 @@ import * as Path from "path";
 
 import { defineConfig, type RsbuildConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
-import { IgnorePlugin, SwcJsMinimizerRspackPlugin } from "@rspack/core";
 import { pluginStyledComponents } from "@rsbuild/plugin-styled-components";
-import { pluginBabel } from "@rsbuild/plugin-babel";
+import { IgnorePlugin, SwcJsMinimizerRspackPlugin } from "@rspack/core";
 
 import packageJson from "./package.json" with { type: "json" };
 
@@ -57,24 +56,23 @@ const entries: Record<string, { path: string; title: string }> = {
 	composable: { path: PATH.COMPOSABLE_ENTRY, title: "[Composable] Tree Engine Showcase" }
 };
 
-const config: ReturnType<typeof defineConfig> = defineConfig(({ command, envMode }) => {
-	// eslint-disable-next-line no-console
-	console.log(envMode);
-	const instrument = envMode === "instrument";
-
+const config: ReturnType<typeof defineConfig> = defineConfig(() => {
 	return {
 		server: {
 			port: 15000,
 			publicDir: [{ name: PATH.PUBLIC }],
+			historyApiFallback: {
+				rewrites: [{ from: /^\/composable(\/.*)?$/, to: "/composable.html" }]
+			},
 			proxy: [
 				{
-					context: ["/api", "/cs"],
+					pathFilter: ["/api", "/cs"],
 					target: `http://localhost:15001`,
 					secure: false,
 					changeOrigin: true
 				},
 				{
-					context: ["/composable/api"],
+					pathFilter: ["/composable/api"],
 					target: `http://localhost:15001`,
 					secure: false,
 					changeOrigin: true,
@@ -101,19 +99,7 @@ const config: ReturnType<typeof defineConfig> = defineConfig(({ command, envMode
 			template: PATH.HTML,
 			templateParameters: ({ entryName }) => entries[entryName as any]
 		},
-		plugins: [
-			pluginReact(),
-			pluginStyledComponents(),
-			pluginBabel({
-				include: [PATH.SRC, PATH.CORE],
-				exclude: /node_modules/,
-				babelLoaderOptions: (_config, { addPlugins }) => {
-					if (instrument) {
-						addPlugins([["istanbul", { cwd: Path.join(PATH.CORE), include: ["lib/extensions/**/*"] }]]);
-					}
-				}
-			})
-		],
+		plugins: [pluginReact(), pluginStyledComponents()],
 		tools: {
 			rspack: {
 				plugins: [

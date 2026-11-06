@@ -81,7 +81,7 @@ export async function copySources() {
 		.indent(0, -1)
 		.save();
 
-	await project.getSourceFileOrThrow(contextProviderPath).formatText({ convertTabsToSpaces: false });
+	project.getSourceFileOrThrow(contextProviderPath).formatText({ convertTabsToSpaces: false });
 
 	await project.save();
 

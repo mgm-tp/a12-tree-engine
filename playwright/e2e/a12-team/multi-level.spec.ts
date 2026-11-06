@@ -30,10 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect, type Page } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/api.js";
+import { expect, type Page } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { Selector } from "../selectors.js";
 
@@ -42,11 +40,10 @@ import { A12TeamUtils } from "./utils.js";
 test.describe("multi level tree", () => {
 	let commands: PlaywrightCommands;
 	let utils: A12TeamUtils;
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new A12TeamUtils(page);
-		await cleanDocumentsData({ showcases: "a12-teams" });
-		await seedData({ preset: "a12-teams" });
+		await seed({ preset: "a12-teams", force: true });
 	});
 
 	async function createLocation(page: Page, name: string, parent = "A12") {
@@ -185,7 +182,7 @@ test.describe("multi level tree", () => {
 	 * overrideExpansionDepth matching the currently expanded depth, so L3 appears with the
 	 * correct expander state without a full reload.
 	 */
-	test("should show new child node with expander after creating at deep level", async ({ page }) => {
+	test("should show new child node with expander after creating at deep level", async () => {
 		await utils.visitA12Team({ multiLevel: true });
 
 		await utils.createSubTeam("L1", "UP");

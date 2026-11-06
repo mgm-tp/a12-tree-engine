@@ -49,9 +49,11 @@ import { TreeModel } from "../../../models/tree-model.js";
 import { LocalizerHooks } from "../../../services/localization/localizer-hooks.js";
 import { TreeModelKeys } from "../../../services/localization/tree-model-keys.js";
 import { ModelSelector } from "../../../store/selectors/models.js";
-import { TreeEngineState } from "../../../store/store.js";
 import { UIStateSelector } from "../../../store/selectors/ui-state.js";
+import type { PickStateFromSelectorCreator } from "../../../store/shared.js";
+import { TreeEngineState } from "../../../store/store.js";
 import { useDndOptions } from "../../configuration/dnd/use-dnd-options.js";
+import { DndUtils } from "../../configuration/dnd/utils.js";
 import { useIdGenerator } from "../../configuration/id-generator.js";
 import {
 	useTreeEngineContext,
@@ -59,12 +61,11 @@ import {
 	useTreeEngineState,
 	useTreeEngineStateRef
 } from "../../context/tree-engine-context.js";
-import { DndUtils } from "../../configuration/dnd/utils.js";
-import type { PickStateFromSelectorCreator } from "../../../store/shared.js";
 
+import { toCellId, useScreenReaderColumnRef } from "./sub-components/a11y-utils.js";
+import { PaginatedBodyRow } from "./sub-components/body-row/paginated-body-row.js";
 import { DragPreview } from "./sub-components/drag-preview.js";
 import { RowActionGroupHooks, RowActionHooks } from "./sub-components/hooks/row-action-hooks.js";
-import { toCellId, getScreenReaderColumnRef } from "./sub-components/a11y-utils.js";
 import {
 	FlattenNodeRow,
 	PaginatedRow,
@@ -75,7 +76,6 @@ import {
 } from "./sub-components/types.js";
 import { FlattenRowHooks } from "./use-flatten-rows.js";
 import { useTreeEngineColumns } from "./use-tree-engine-columns.js";
-import { PaginatedBodyRow } from "./sub-components/body-row/paginated-body-row.js";
 
 export namespace TreeEngineRenderer {
 	export interface Props {}
@@ -223,11 +223,12 @@ export function useRowStyling(): TreeTableRowStyling<FlattenNodeRow> {
 				return { selected: false, collapsed: false, disabledRightClickContextMenu, style: rowStyle };
 			}
 			const { nodeModel, level, data } = row;
-			const { expanded, selected, busy, multiSelection } = UIStateSelector.nodeState(
+			const { expanded, selected, busy, multiSelection, matchedCount } = UIStateSelector.nodeState(
 				data.nodeIdentifier,
 				data.nodePath
 			)(nodesState);
 			const className = `${nodeModel.styles?.join(" ") ?? ""} treeEngine__node--level-${level}`.trim();
+			const matched = matchedCount !== null && matchedCount > 0;
 			const highlighted = multiSelection === TreeEngineState.MultiSelectionState.SELECTED;
 			const title = localizedTreeElement([TreeModelKeys.ROWS, TreeModelKeys.TITLE], nodeModel.rowTitle) || undefined;
 
@@ -243,6 +244,7 @@ export function useRowStyling(): TreeTableRowStyling<FlattenNodeRow> {
 				disabledRightClickContextMenu,
 				style: rowStyle,
 				title: readonly || disabled || busy || shouldForceNonInteractive ? undefined : title,
+				highlightVariant: matched ? "success" : undefined,
 				...rowStyling?.({ row })
 			};
 		},
@@ -308,8 +310,7 @@ export function useCellStyling(): CellStyleGetter<FlattenNodeRow, TreeEngineColu
 type Renderers = TreeTableComponentRenderers<FlattenNodeRow, TreeEngineColumn>;
 
 function useComponentRenderers(): Partial<Renderers> {
-	const uiModel = useTreeEngineState(ModelSelector.uiModel());
-	const screenReaderColumnRef = getScreenReaderColumnRef(uiModel.content.configuration);
+	const screenReaderColumnRef = useScreenReaderColumnRef();
 
 	const DndBodyRow = useTreeEngineContext((context) => context.componentMap.DndBodyRow);
 	const BodyRow = useTreeEngineContext((context) => context.componentMap.BodyRow);

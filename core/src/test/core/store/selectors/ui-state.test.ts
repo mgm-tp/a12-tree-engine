@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type Identifier, TreeEngineState, UIStateSelector } from "../../../../core/store/index.js";
 import { TreeModel } from "../../../../core/models/index.js";
+import { type Identifier, TreeEngineState, UIStateSelector } from "../../../../core/store/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.selectors.ui-state", () => {
@@ -62,6 +62,39 @@ describe("@com.mgmtp.a12.tree-engine.core.store.selectors.ui-state", () => {
 		it("should return the correct selector", () => {
 			const matchedNodes = UIStateSelector.matchedNodes()(engineState);
 			expect(matchedNodes).toBe(engineState.matchedNodes);
+		});
+	});
+
+	describe("searchString", () => {
+		it("should return the submitted term", () => {
+			const searchString = UIStateSelector.searchString()({ ...engineState, searchString: "levi" });
+			expect(searchString).toBe("levi");
+		});
+
+		it("should return an empty term when the state carries none", () => {
+			const searchString = UIStateSelector.searchString()({ ...engineState, searchString: undefined });
+			expect(searchString).toBe("");
+		});
+	});
+
+	describe("searchResultView", () => {
+		it("should return the view the user picked", () => {
+			const searchResultView = UIStateSelector.searchResultView()({ ...engineState, searchResultView: "complete" });
+			expect(searchResultView).toBe("complete");
+		});
+
+		it("should return undefined while the user picked none", () => {
+			expect(UIStateSelector.searchResultView()(engineState)).toBeUndefined();
+		});
+	});
+
+	describe("showMobileSearchBar", () => {
+		it("should return whether the small-view search bar is revealed", () => {
+			expect(UIStateSelector.showMobileSearchBar()({ ...engineState, showMobileSearchBar: true })).toBe(true);
+		});
+
+		it("should stay hidden when the state carries no flag", () => {
+			expect(UIStateSelector.showMobileSearchBar()(engineState)).toBe(false);
 		});
 	});
 

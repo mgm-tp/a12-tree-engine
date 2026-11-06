@@ -32,27 +32,30 @@
 
 import { call, put, type SagaGenerator, select } from "typed-redux-saga";
 
-import type { Action, Success } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySagas, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
+import type { Action, Success } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
+import { TreeEngineError } from "../../../../../../core/error/tree-engine-error.js";
 import { Events } from "../../../../../../core/store/actions.js";
-import { Identifier, type TreeEngineState } from "../../../../../../core/store/store.js";
 import { UIStateSelector } from "../../../../../../core/store/selectors/ui-state.js";
+import { Identifier, type TreeEngineState } from "../../../../../../core/store/store.js";
 import { TreeEngineActions } from "../../../../actions.js";
 import { TreeEngineSelectors } from "../../../../selectors.js";
-import { createAddDirectChildDataHolders, expandNode } from "../../watch-node-expansion-saga.js";
+import { maybeAsyncFnWrapper } from "../../../../utils.js";
 import type { TreeEngineSaga } from "../../../saga-setting.js";
 import { SagaUtils } from "../../../saga-utils.js";
-import { maybeAsyncFnWrapper } from "../../../../utils.js";
-import { TreeEngineError } from "../../../../../../core/error/tree-engine-error.js";
-
+import { createAddDirectChildDataHolders, expandNode } from "../../watch-node-expansion-saga.js";
 import { createUpdatePageSizeActionForAddedNode } from "../create-update-page-size-action-for-added-node.js";
+import {
+	handleCreateDetailActivitySaga,
+	handleCreateDetailActivitySagaWithSaveInProgress
+} from "../handle-create-detail-activity-saga.js";
 import { isLinkAddedByDetailActivity } from "../is-link-added-by-detail-activity.js";
 import { linkCreatedDocument } from "../link-created-document.js";
-import { handleCreateDetailActivitySaga } from "../handle-create-detail-activity-saga.js";
+import { refreshActiveSearch } from "../refresh-active-search.js";
 
 /** @internal */
-interface Config {
+export interface Config {
 	relationshipModelRef: string;
 	childRole: string;
 	parentNodeIdentifier: Identifier;
@@ -63,6 +66,14 @@ interface Config {
 /** @internal */
 export function* handleDetailActivitySaga(detailActivityId: string, config: Config): SagaGenerator<void> {
 	yield* handleCreateDetailActivitySaga(detailActivityId, config, handleSaveStarted);
+}
+
+/** @internal */
+export function* handleDetailActivitySagaWithSaveInProgress(
+	detailActivityId: string,
+	config: Config
+): SagaGenerator<void> {
+	yield* handleCreateDetailActivitySagaWithSaveInProgress(detailActivityId, config, handleSaveStarted);
 }
 
 // return true if saving form has been done successfully, otherwise return false
@@ -170,6 +181,8 @@ function* handleSaveStarted(detailActivityId: string, config: Config): SagaGener
 			addedNodes: addedNodes.length > 0 ? addedNodes : undefined
 		});
 		yield* put(TreeEngineActions.event({ activityId: treeEngineActivityId, engineAction }));
+
+		yield* call(refreshActiveSearch, treeEngineActivityId);
 
 		return true;
 	} finally {

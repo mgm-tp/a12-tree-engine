@@ -39,8 +39,8 @@ import {
 	type ResponseFor
 } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { JsonRpc } from "../../extensions/server-connector/data-loaders/json-rpc.js";
 import { type TreeEngineError, TreeEngineErrorCode } from "../../core/error/index.js";
+import { JsonRpc } from "../../extensions/server-connector/data-loaders/json-rpc.js";
 
 describe("JsonRpc", () => {
 	let dispatcherStub: MockInstance;

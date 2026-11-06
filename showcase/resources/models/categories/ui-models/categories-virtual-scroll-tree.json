@@ -2,7 +2,7 @@
 	"header": {
 		"id": "categories-virtual-scroll-tree",
 		"modelType": "tree",
-		"modelVersion": "11.0.0",
+		"modelVersion": "11.1.0",
 		"locales": [
 			{
 				"code": "en"
@@ -63,7 +63,11 @@
 	},
 	"content": {
 		"subHeaderBox": {
-			"rightSlot": [],
+			"rightSlot": [
+				{
+					"type": "column_visibility"
+				}
+			],
 			"leftSlot": [
 				{
 					"type": "multi_selection"
@@ -271,7 +275,8 @@
 					"level": 2,
 					"affectedNodeRefs": ["node-6b202"]
 				}
-			}
+			},
+			"enableUserDefinedColumnVisibility": true
 		},
 		"columns": [
 			{

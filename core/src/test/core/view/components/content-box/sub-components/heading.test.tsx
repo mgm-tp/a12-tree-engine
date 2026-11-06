@@ -30,13 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import Assert from "node:assert";
-
 import * as React from "react";
 
-import { PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
+import { PopUpMenu } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { TreeModel } from "../../../../../../core/models/index.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
+import { Heading } from "../../../../../../core/view/components/content-box/sub-components/heading.js";
 import { DefaultWidgetMap, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import {
 	createContextProps,
@@ -44,12 +45,9 @@ import {
 	type PartialEventHandlerContextProps,
 	enLocale
 } from "../../../../../setup/basic.spec.js";
-import { Heading } from "../../../../../../core/view/components/content-box/sub-components/heading.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
-import { TreeModel } from "../../../../../../core/models/index.js";
-import type { TreeEngineState } from "../../../../../../core/store/index.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.heading", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.heading", () => {
 	const basicEngineState = defaultEngineState;
 	const button1: TreeModel.ButtonElement = { id: "button-1", event: "event-1", type: TreeModel.ElementType.BUTTON };
 
@@ -157,7 +155,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-c
 
 					expect(result.find(DefaultWidgetMap.Title).exists()).toBe(false);
 					expect(result.find(DefaultWidgetMap.Subtitle).exists()).toBe(false);
-					Assert(result.find(DefaultWidgetMap.HiddenText).text() === expectedHiddenText);
+					expect(result.find(DefaultWidgetMap.HiddenText).text()).toBe(expectedHiddenText);
 				});
 			});
 		});

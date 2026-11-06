@@ -30,13 +30,11 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/index.js";
-
-import { CategoriesUtils } from "./utils.js";
 import { A12TeamUtils } from "./../a12-team/utils.js";
+import { CategoriesUtils } from "./utils.js";
 
 test.describe("switch to another tree, test for bug ticket: A12TE-497", () => {
 	let utils: CategoriesUtils;
@@ -44,7 +42,7 @@ test.describe("switch to another tree, test for bug ticket: A12TE-497", () => {
 	let commands: PlaywrightCommands;
 	let consoleErrors: string[] = [];
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		utils = new CategoriesUtils(page);
 		a12Utils = new A12TeamUtils(page);
 		commands = new PlaywrightCommands(page);
@@ -57,10 +55,7 @@ test.describe("switch to another tree, test for bug ticket: A12TE-497", () => {
 			}
 		});
 
-		await cleanDocumentsData({
-			showcases: ["categories"]
-		});
-		await seedData({ preset: "categories" });
+		await seed({ preset: "categories" });
 
 		await page.goto("");
 		await utils.navigate();

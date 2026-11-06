@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { testHook } from "../../../utils/test-utils.js";
-import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { useIdGenerator } from "../../../../core/view/configuration/id-generator.js";
+import { defaultEngineState } from "../../../setup/basic.spec.js";
+import { testHook } from "../../../utils/test-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.id-generator", () => {
-	function setupHook<T>(uiIdPrefix?: string) {
+	function setupHook(uiIdPrefix?: string) {
 		return testHook(useIdGenerator, [], defaultEngineState, { uiIdPrefix });
 	}
 	describe("uiIdGenerator", () => {

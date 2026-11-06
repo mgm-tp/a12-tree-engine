@@ -39,10 +39,11 @@ import {
 } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { arePropsWithDataEqual } from "../../../configuration/are-props-with-data-equal.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
+import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
 
-import type { FlattenNodeRow } from "./types.js";
 import { InitialViewRightClickContextMenuProvider } from "./initial-view-right-click-context-menu-provider.js";
+import { useTreeBodyState } from "./tree-body-state.js";
+import type { FlattenNodeRow } from "./types.js";
 
 export namespace VirtualizedBody {
 	export type Props = TreeTableRenderPropsType.VirtualizedBodyProps<FlattenNodeRow>;
@@ -50,22 +51,23 @@ export namespace VirtualizedBody {
 
 /** @internal */
 export const VirtualizedBody: React.FC<VirtualizedBody.Props> = React.memo(function VirtualizedBody(props) {
-	const busy = useTreeEngineContext((context) => context.busy);
-	const virtualRoot = useTreeEngineState((state) => state.models.uiModel.content.configuration.virtualRoot);
 	const InitialViewBody = useTreeEngineContext((context) => context.componentMap.InitialViewBody);
+	const EmptySearchResultBody = useTreeEngineContext((context) => context.componentMap.EmptySearchResultBody);
+	const bodyState = useTreeBodyState(props.data.length);
 
-	if (virtualRoot && props.data.length === 1) {
-		if (busy) {
-			// return this instead of null to prevent horizontal scroll-bar display on top of body
+	switch (bodyState) {
+		case "pending":
+			// a full-height filler instead of null, or a horizontal scroll-bar shows on top of the body
 			return <div className={addPrefix("-u-height-full")} />;
-		}
-
-		return (
-			<InitialViewRightClickContextMenuProvider>
-				<InitialViewBody />
-			</InitialViewRightClickContextMenuProvider>
-		);
+		case "empty-search-result":
+			return <EmptySearchResultBody />;
+		case "initial-view":
+			return (
+				<InitialViewRightClickContextMenuProvider>
+					<InitialViewBody />
+				</InitialViewRightClickContextMenuProvider>
+			);
+		case "tree":
+			return <>{DefaultTreeTableComponentRenderers.virtualizedBodyRenderer(props)}</>;
 	}
-
-	return <>{DefaultTreeTableComponentRenderers.virtualizedBodyRenderer(props)}</>;
 }, arePropsWithDataEqual);

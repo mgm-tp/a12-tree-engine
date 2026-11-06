@@ -32,9 +32,8 @@
 
 import type { Relationship, LoadThumbnailUrlsJsonRpc2 } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import type { MaybeAsync } from "../../client/utils.js";
 import type { TreeEngineOperation } from "../../client/operation.js";
-
+import type { MaybeAsync } from "../../client/utils.js";
 import type { DocumentProcessors } from "../types.js";
 
 export interface TreeEngineDataLoader {
@@ -59,10 +58,12 @@ export namespace DataOperation {
 	export type Query =
 		| ListQuery
 		| Query.TreeNodes.Query
+		| Query.SearchNodes.Query
 		| Query.GetDocument.Query
 		| Query.LoadThumbnailUrls.Query
 		| Query.BaseQuery;
 
+	// SearchNodes.Result is not listed: it is an alias of TreeNodes.Result and already covered.
 	export type QueryResult =
 		| ListQueryResult
 		| Query.TreeNodes.Result
@@ -201,6 +202,40 @@ export namespace DataOperation {
 			export namespace Result {
 				export function isAssignableFrom(result: unknown): result is Result {
 					return BaseResult.isAssignableFrom(result) && "entries" in result && "links" in result;
+				}
+			}
+		}
+
+		/**
+		 * Search query: matches documents of one document model via a simple_search constraint,
+		 * with reversed links (child -> parent) attaching each match's ancestor chain. The result
+		 * shape is identical to TreeNodes, with the tree inverted.
+		 */
+		export namespace SearchNodes {
+			export interface Query extends BaseQuery {
+				type: "SEARCH_NODES";
+				searchTerm: string;
+				/** Fields evaluated by the search; when omitted, all fields of the document are searched. */
+				searchFields?: string[];
+				/** Fields returned for a match; when omitted, the whole document is returned. */
+				fields?: string[];
+				entry: {
+					targetDocumentModel: string;
+				};
+				links: TreeNodes.LinkQuery[];
+			}
+
+			export namespace Query {
+				export function isAssignableFrom(query: unknown): query is Query {
+					return BaseQuery.isAssignableFrom(query) && query.type === "SEARCH_NODES";
+				}
+			}
+
+			export type Result = TreeNodes.Result;
+
+			export namespace Result {
+				export function isAssignableFrom(result: unknown): result is Result {
+					return TreeNodes.Result.isAssignableFrom(result);
 				}
 			}
 		}

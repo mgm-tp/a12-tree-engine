@@ -30,24 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 test.describe("select range of nodes concerning behaviors consistence with OE", () => {
 	let commands: PlaywrightCommands;
 	let utils: ModelEditorUtils;
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new ModelEditorUtils(page);
 
-		await cleanDocumentsData({ showcases: ["model-editor"] });
-		await seedData({ preset: "model-editor" });
+		await seed({ preset: "model-editor" });
 		await utils.navigateToFileExplorer();
 	});
 

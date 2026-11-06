@@ -32,11 +32,11 @@
 
 import React from "react";
 
-import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
-import type { LocalizableArgs, LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
 import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { FieldInstanceValue } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import type { LocalizableArgs, LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
 import { useTreeEngineState } from "../../view/context/tree-engine-context.js";
 

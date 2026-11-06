@@ -35,24 +35,24 @@ import { type SagaGenerator, call, put, select } from "typed-redux-saga";
 import { Activity, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 import type { Relationship } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
+import { TreeModel } from "../../../../core/models/tree-model.js";
+import { LinkDescriptorUtils } from "../../../../core/models/utils/relationship-utils.js";
+import { Commands } from "../../../../core/store/actions.js";
+import { ModelSelector } from "../../../../core/store/selectors/models.js";
+import { Identifier, TreeEngineState } from "../../../../core/store/store.js";
+import { TreeDataUtils } from "../../../../core/store/utils.js";
 import { TreeEngineActions } from "../../../client/actions.js";
 import { TreeEngineDataHolder } from "../../../client/data-holder.js";
 import type { TreeEngineOperation } from "../../../client/operation.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
-import { Commands } from "../../../../core/store/actions.js";
-import { Identifier, TreeEngineState } from "../../../../core/store/store.js";
-import { ModelSelector } from "../../../../core/store/selectors/models.js";
-import { TreeDataUtils } from "../../../../core/store/utils.js";
 import { findNextNode, getCurrentNode, type Mutable } from "../../../client/shared.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import type { BaseNode } from "../../shared.js";
-import { LinkDescriptorUtils } from "../../../../core/models/utils/relationship-utils.js";
-import { TreeModel } from "../../../../core/models/tree-model.js";
-
 import { createTreeQueries } from "../resolver/create-queries.js";
 import { handleLoad } from "../resolver/handle-load.js";
 import { type BasePayload, type LoadPayload, mergeDataHolders } from "../utils.js";
 
+import { mergeExpansionDepthsFromNodePaths } from "./expansion-depths.js";
 import { createChildNodeDataHolders } from "./utils.js";
 
 /** @internal */
@@ -108,25 +108,12 @@ export function* expandToNode(
 
 	const uiModel = modelsState ? ModelSelector.uiModel()(modelsState) : undefined;
 	if (TreeModel.ExpansionStrategy.Tree.isAssignableFrom(uiModel?.content.configuration.expansionStrategy)) {
-		const expansionDepthsMap = new Map<string, TreeModel.ExpansionStrategy.Tree.ExpansionDepth>();
-
 		const currentPath: TreeEngineState.NodePath = [];
 		for (const linkIdentifier of nodePath) {
 			currentPath.push(linkIdentifier);
 			expandedNodes[TreeEngineState.NodePath.toString(currentPath)] = {};
-
-			if (!ModelSelector.relationshipModelByName(linkIdentifier.type)(modelsState)) {
-				continue;
-			}
-			const currentExpansionDepth = expansionDepthsMap.get(linkIdentifier.type);
-			if (!currentExpansionDepth || currentPath.length > currentExpansionDepth.maxDepth) {
-				expansionDepthsMap.set(linkIdentifier.type, {
-					relationshipModel: linkIdentifier.type,
-					maxDepth: currentPath.length
-				});
-			}
 		}
-		const expansionDepths = Array.from(expansionDepthsMap.values());
+		const expansionDepths = mergeExpansionDepthsFromNodePaths([nodePath], modelsState);
 		const createQueriesResult = createTreeQueries(updatedDataHolders, modelsState, {
 			overrideExpansionDepths: expansionDepths,
 			preloadChildNodes

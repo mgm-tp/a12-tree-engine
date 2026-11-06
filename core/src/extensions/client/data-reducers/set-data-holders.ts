@@ -33,7 +33,6 @@
 import { Activity, type ActivityActions, type ActivityReducers } from "@com.mgmtp.a12.client/client-core";
 
 import { getRootNodesFromDataHolder } from "../../server-connector/shared.js";
-
 import { TreeEngineActions } from "../actions.js";
 import { TreeEngineDataHolder } from "../data-holder.js";
 import { TreeTraverser } from "../utils.js";

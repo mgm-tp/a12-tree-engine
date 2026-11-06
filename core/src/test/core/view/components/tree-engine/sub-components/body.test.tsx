@@ -34,19 +34,19 @@ import { vi } from "vitest";
 
 import { DefaultTreeTableComponentRenderers, Button } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
+import { en } from "../../../../../../core/services/localization/languages/en.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
+import { Body, InitialViewBody } from "../../../../../../core/view/components/tree-engine/sub-components/body.js";
+import { ContextMenu, RootNodeRow, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import {
 	createContextProps,
 	defaultEngineState,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
-import type { TreeEngineState } from "../../../../../../core/store/index.js";
-import { ContextMenu, RootNodeRow, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
-import { Body, InitialViewBody } from "../../../../../../core/view/components/tree-engine/sub-components/body.js";
-import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
-import { en } from "../../../../../../core/services/localization/languages/en.js";
 import { createEngineState } from "../../../../../utils/model-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body", () => {
 	const basicEngineState = defaultEngineState;
 	const basicProps: Body.Props = { data: [] };
 
@@ -111,13 +111,14 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 
 		it("should render using the default renderer", () => {
 			const result = setupTest();
-			expect(stub).toHaveBeenCalledWith(basicProps);
+			// objectContaining: React 19 hands function components a `ref` prop alongside the real props.
+			expect(stub).toHaveBeenCalledWith(expect.objectContaining(basicProps));
 			expect(result.text() === "mock body").toBe(true);
 		});
 	});
 });
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body.InitialViewBody", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body.InitialViewBody", () => {
 	const basicEngineState = createEngineState
 		.from(defaultEngineState)
 		.withConfigurations({

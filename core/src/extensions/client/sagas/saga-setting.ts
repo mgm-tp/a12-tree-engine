@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { ActionCreator } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { Activity } from "@com.mgmtp.a12.client/client-core";
+import type { ActionCreator } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import type { MaybeAsync } from "../utils.js";
 

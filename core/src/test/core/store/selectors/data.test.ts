@@ -31,9 +31,9 @@
  */
 
 import { DataSelector, Identifier, TreeEngineState } from "../../../../core/store/index.js";
+import type { Mutable } from "../../../../extensions/client/shared.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType } from "../../../utils/mock-utils.js";
-import type { Mutable } from "../../../../extensions/client/shared.js";
 import { createMockPerson } from "../../../utils/state-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.selectors.data", () => {

@@ -34,17 +34,17 @@ import { vi } from "vitest";
 
 import { DefaultTreeTableComponentRenderers } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
+import { InitialViewBody } from "../../../../../../core/view/components/tree-engine/sub-components/body.js";
+import { RootNodeRow, TreeEngineContextProvider, VirtualizedBody } from "../../../../../../core/view/index.js";
 import {
 	createContextProps,
 	defaultEngineState,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
-import type { TreeEngineState } from "../../../../../../core/store/index.js";
-import { RootNodeRow, TreeEngineContextProvider, VirtualizedBody } from "../../../../../../core/view/index.js";
-import { InitialViewBody } from "../../../../../../core/view/components/tree-engine/sub-components/body.js";
-import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.virtualized-body", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.virtualized-body", () => {
 	const basicEngineState = defaultEngineState;
 	const basicProps: VirtualizedBody.Props = {
 		data: [],
@@ -118,7 +118,8 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 		it("should render using the default renderer", () => {
 			const result = setupTest();
 
-			expect(stub).toHaveBeenCalledWith(basicProps);
+			// objectContaining: React 19 hands function components a `ref` prop alongside the real props.
+			expect(stub).toHaveBeenCalledWith(expect.objectContaining(basicProps));
 			expect(result.text() === "mock body").toBe(true);
 		});
 	});

@@ -34,12 +34,12 @@ import { type SagaGenerator, select } from "typed-redux-saga";
 
 import { RelationshipSelectors, type Relationship } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
 
+import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
 import { RelationshipModelUtils } from "../../../../../core/models/utils/relationship-utils.js";
-import type { Identifier } from "../../../../../core/store/store.js";
 import { ModelSelector } from "../../../../../core/store/selectors/models.js";
+import type { Identifier } from "../../../../../core/store/store.js";
 import { TreeEngineSelectors } from "../../../selectors.js";
 import type { TreeEngineSaga } from "../../saga-setting.js";
-import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
 
 /** @internal */
 interface IsLinkAddedByDetailActivityParams extends TreeEngineSaga.IsLinkAddedByDetailActivityParams {

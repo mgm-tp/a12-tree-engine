@@ -30,26 +30,21 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 test.describe("advanced tests", () => {
 	let utils: ModelEditorUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeAll(async ({ browser }) => {
+	test.beforeAll(async ({ browser, seed }) => {
 		const context = await browser.newContext();
 		const page = await context.newPage();
 
-		await cleanDocumentsData({
-			showcases: ["model-editor"]
-		});
-		await seedData({ preset: "model-editor" });
+		await seed({ preset: "model-editor", force: true });
 
 		await page.close();
 		await context.close();
@@ -95,7 +90,7 @@ test.describe("advanced tests", () => {
 	});
 
 	test.describe("virtual root", () => {
-		test.beforeEach(async ({ page }) => {
+		test.beforeEach(async () => {
 			await utils.navigateToFileExplorer();
 			await commands.waitUntilLoaded();
 
@@ -156,7 +151,7 @@ test.describe("advanced tests", () => {
 			await commands.waitUntilLoaded();
 		});
 
-		test("expand button should appear correctly", async ({ page }) => {
+		test("expand button should appear correctly", async () => {
 			const rows = commands.getRows();
 			await expect(rows).toHaveCount(1);
 

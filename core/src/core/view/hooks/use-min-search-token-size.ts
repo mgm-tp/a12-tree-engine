@@ -29,13 +29,25 @@
  * NON-INFRINGEMENT, EXCEPT WHERE SUCH DISCLAIMERS ARE HELD TO BE
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
-import a12Config from "@com.mgmtp.a12.devtools/prettier-config";
 
-/** @type {import("prettier").Config} */
-export default {
-	...a12Config,
-	printWidth: 120,
-	semi: true,
-	bracketSameLine: true,
-	arrowParens: "always"
-};
+import * as React from "react";
+import { useSelector } from "react-redux";
+
+import { DataServicesSelectors } from "@com.mgmtp.a12.dataservices/dataservices-access";
+
+import { DS_MIN_SEARCH_TOKEN_SIZE_KEY } from "../../services/search/search-token-validation.js";
+
+/**
+ * Reads the Data Services minimum searchable token size as a positive integer, or
+ * `undefined` when the config key is absent or not a positive number.
+ *
+ * @internal
+ */
+export function useMinSearchTokenSize(): number | undefined {
+	const raw = useSelector(DataServicesSelectors.configurationByKey(DS_MIN_SEARCH_TOKEN_SIZE_KEY));
+
+	return React.useMemo(() => {
+		const parsed = Number(raw);
+		return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+	}, [raw]);
+}

@@ -30,10 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/api.js";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { Selector } from "../selectors.js";
 
@@ -42,11 +40,12 @@ import { A12TeamUtils } from "./utils.js";
 test.describe("Disable drag and drop", () => {
 	let commands: PlaywrightCommands;
 	let utils: A12TeamUtils;
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new A12TeamUtils(page);
-		await cleanDocumentsData({ showcases: "a12-teams" });
-		await seedData({ preset: "a12-teams" });
+		// Both tests drop onto a tree with dnd disabled, so the engine rejects every drop and the
+		// dataset stays pristine. Re-enabling dnd here would make this a mutating spec again.
+		await seed({ preset: "a12-teams" });
 	});
 
 	test.describe("by tree engine context", () => {
@@ -67,9 +66,9 @@ test.describe("Disable drag and drop", () => {
 			const enginesRows = commands.getRows(undefined, "Engines");
 			await expect(enginesRows).toHaveCount(1);
 			await expect(enginesRows).not.toHaveAttribute("aria-expanded", "true");
-			(await commands.getRows().all()).forEach(async (row) => {
+			for (const row of await commands.getRows().all()) {
 				await expect(row).not.toHaveClass(/table__contentDnD/);
-			});
+			}
 			// await expect().not.toHaveClass(/table__contentDnD/);
 			// await expect(commands.getRow( "Engines")).not.toHaveClass(/table__contentDnD/);
 

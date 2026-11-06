@@ -35,13 +35,13 @@ import { vi } from "vitest";
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { BulletList, TextOutput, CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { TreeModel } from "../../../../../../core/models/index.js";
 import type { Models, TreeEngineState } from "../../../../../../core/store/index.js";
 import { TreeEngineContextProvider, MultiSelectCell } from "../../../../../../core/view/index.js";
-import { TreeModel } from "../../../../../../core/models/index.js";
 import { createContextProps, defaultEngineState, deLocale, enLocale } from "../../../../../setup/basic.spec.js";
 import { createDocumentModel, createEngineState, createMultiSelectGroup } from "../../../../../utils/model-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.multi-select-cell", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.multi-select-cell", () => {
 	const basicEngineState = defaultEngineState;
 	const documentModelName = "TestDocumentModel";
 

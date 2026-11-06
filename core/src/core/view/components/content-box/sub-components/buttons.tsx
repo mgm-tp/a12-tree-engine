@@ -32,20 +32,21 @@
 
 import * as React from "react";
 
-import { TreeTableNodeDropPosition, type ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core";
 import { localizableKeyFromSegments } from "@com.mgmtp.a12.utils/utils-localization";
+import { TreeTableNodeDropPosition, type ButtonProps } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import type { TreeModel } from "../../../../models/tree-model.js";
+import { TreeModel } from "../../../../models/tree-model.js";
 import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
 import { TreeModelKeys } from "../../../../services/localization/tree-model-keys.js";
 import { DataSelector } from "../../../../store/selectors/data.js";
 import { ModelSelector } from "../../../../store/selectors/models.js";
+import { SearchSelector } from "../../../../store/selectors/search.js";
 import { UIStateSelector } from "../../../../store/selectors/ui-state.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
-import { FlattenNodeRow, RootNodeRow } from "../../tree-engine/sub-components/types.js";
+import { useIdGenerator } from "../../../configuration/id-generator.js";
 import { KeyboardShortcut } from "../../../configuration/keyboard-shortcut/types.js";
 import { KeyboardShortcutUtils } from "../../../configuration/keyboard-shortcut/utils.js";
-import { useIdGenerator } from "../../../configuration/id-generator.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
+import { FlattenNodeRow, RootNodeRow } from "../../tree-engine/sub-components/types.js";
 
 export namespace Button {
 	export interface Props {
@@ -130,6 +131,7 @@ export function useEngineButtonDisabilityGetter() {
 	const overallMultiSelection = useTreeEngineContext((context) => context.overallMultiSelection);
 	const disabled = useTreeEngineState(UIStateSelector.disabled());
 	const readonly = useTreeEngineState(UIStateSelector.readonly());
+	const bulkExpansionDisabled = useTreeEngineState(SearchSelector.isReducedView());
 	const clipboard = useTreeEngineState(UIStateSelector.clipboard());
 	const data = useTreeEngineState(DataSelector.data());
 	const root = useTreeEngineState(DataSelector.root());
@@ -138,6 +140,10 @@ export function useEngineButtonDisabilityGetter() {
 	return React.useCallback(
 		(event: string, isMultiSelectionAction: boolean) => {
 			if (disabled || readonly) {
+				return true;
+			}
+			// The reduced search result view offers no bulk expansion, at either scope.
+			if (bulkExpansionDisabled && TreeModel.BULK_EXPANSION_EVENT_NAMES.includes(event)) {
 				return true;
 			}
 			if (event === "event_copy_nodes" && !isMultiSelectionAction) {
@@ -168,7 +174,7 @@ export function useEngineButtonDisabilityGetter() {
 
 			return isMultiSelectionAction ? !overallMultiSelection : !!overallMultiSelection;
 		},
-		[disabled, readonly, overallMultiSelection, clipboard, data, root, models, canDrop]
+		[disabled, readonly, bulkExpansionDisabled, overallMultiSelection, clipboard, data, root, models, canDrop]
 	);
 }
 

@@ -38,11 +38,10 @@ import { Commands } from "../../../../core/store/actions.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
 import { type ModelsState, TreeEngineState, type UiState } from "../../../../core/store/store.js";
 import { TreeEngineActions } from "../../../client/actions.js";
-import { TreeEngineSelectors } from "../../../client/selectors.js";
 import type { TreeEngineDataHolder } from "../../../client/data-holder.js";
+import { TreeEngineSelectors } from "../../../client/selectors.js";
 import { type Mutable, TreeTraverser } from "../../../client/shared.js";
 import type { BaseNode } from "../../shared.js";
-
 import type { BasePayload } from "../utils.js";
 
 import { type BaseNodeWithParent, loadAllChildNodes } from "./handle-load-all-child-nodes.js";

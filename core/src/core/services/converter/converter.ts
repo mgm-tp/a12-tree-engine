@@ -32,11 +32,11 @@
 
 import * as React from "react";
 
-import type { FieldInstanceValue } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import type { FieldInstanceValue } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { ValueConversion, ValueConversionConfig } from "@com.mgmtp.a12.utils/utils-localization";
 import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
-import { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { DocumentModelUtils, DocumentUtils } from "../../models/shared.js";
 

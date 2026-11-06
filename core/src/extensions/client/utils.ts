@@ -32,16 +32,15 @@
 
 import type { SagaGenerator } from "typed-redux-saga";
 
+import type { Activity } from "@com.mgmtp.a12.client/client-core";
 import type { Relationship } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { LoggerFactory } from "@com.mgmtp.a12.utils/utils-logging";
-import type { Activity } from "@com.mgmtp.a12.client/client-core";
 
+import { TreeEngineError } from "../../core/error/tree-engine-error.js";
 import { LinkDescriptorUtils } from "../../core/models/utils/relationship-utils.js";
 import { DataSelector } from "../../core/store/selectors/data.js";
 import { Identifier, type TreeEngineState } from "../../core/store/store.js";
 import { TreeDataUtils } from "../../core/store/utils.js";
-import { TreeEngineError } from "../../core/error/tree-engine-error.js";
-
 import { type BaseNode, extractChildNodesFromDataHolder } from "../server-connector/shared.js";
 
 import { TreeEngineActivity, TreeEngineDataHolder } from "./data-holder.js";

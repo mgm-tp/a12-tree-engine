@@ -30,10 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { defaultEngineState } from "../../../../setup/basic.spec.js";
-import { mockType } from "../../../../utils/mock-utils.js";
 import { Commands, type TreeEngineState } from "../../../../../core/store/index.js";
 import { handleSetScrollToNode } from "../../../../../core/store/reducer/handler/setScrollToNode.js";
+import { defaultEngineState } from "../../../../setup/basic.spec.js";
+import { mockType } from "../../../../utils/mock-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.store.reducer.handler.setScrollToNode", () => {
 	const engineState = defaultEngineState;

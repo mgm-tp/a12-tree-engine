@@ -30,15 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { generateUid } from "@com.mgmtp.a12.widgets/widgets-core";
-
-import { Identifier, type ModelsState, type TreeEngineState } from "../../../../../core/store/store.js";
+import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
+import { RelationshipModelUtils } from "../../../../../core/models/utils/relationship-utils.js";
 import { ModelSelector } from "../../../../../core/store/selectors/models.js";
+import { Identifier, type ModelsState, type TreeEngineState } from "../../../../../core/store/store.js";
 import { TreeDataUtils } from "../../../../../core/store/utils.js";
 import { TreeEngineDataHolder } from "../../../../client/data-holder.js";
 import type { DataOperation } from "../../../data-loaders/data-loader.js";
-import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
-import { RelationshipModelUtils } from "../../../../../core/models/utils/relationship-utils.js";
 
 /** @internal */
 export function resolveTreeQueryResults(params: {
@@ -277,7 +275,9 @@ function addHiddenRootNodesToDataHolder(
 			children: []
 		};
 
-		const generatedId = `generated_id_${generateUid()}`;
+		// A hidden root's link has no id of its own, so it is derived from the edge — the same on
+		// every load, since node paths are built from link ids and keep the expansion and selection.
+		const generatedId = `generated_id_${descriptor.relationshipModel}_${entry.docRef}`;
 		const treeEngineLink: TreeEngineState.Link = {
 			identifier: {
 				type: descriptor.relationshipModel,
@@ -328,7 +328,13 @@ function createChildDataHolder(source: string): TreeEngineDataHolder {
 	};
 }
 
-function addChildNodesToDataHolder(
+/**
+ * Add the given links (children of a single parent, grouped by link id) to the data holder
+ * as node and link data plus the child list.
+ *
+ * @internal
+ */
+export function addChildNodesToDataHolder(
 	models: ModelsState,
 	dataHolder: TreeEngineDataHolder,
 	links: DataOperation.Query.TreeNodes.Link[]
@@ -374,7 +380,8 @@ function addChildNodesToDataHolder(
 	};
 }
 
-function createLink(
+/** @internal */
+export function createLink(
 	models: ModelsState,
 	links: DataOperation.Query.TreeNodes.Link[]
 ): [DataOperation.Query.TreeNodes.Link, TreeEngineState.Link] {

@@ -36,7 +36,6 @@ import { shallowEqual } from "react-redux";
 import { type TableRenderPropsType, DefaultTreeTableComponentRenderers } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { TreeEngineRowContextProvider, useTreeEngineRowContextProvider } from "../../../../context/row-context.js";
-
 import type { FlattenNodeRow } from "../types.js";
 
 export namespace DndBodyRow {

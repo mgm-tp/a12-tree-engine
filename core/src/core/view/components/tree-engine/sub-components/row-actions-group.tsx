@@ -32,12 +32,12 @@
 
 import * as React from "react";
 
+import type { TreeModel } from "../../../../models/tree-model.js";
 import { useTreeEngineRowContext } from "../../../context/row-context.js";
 import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
-import type { TreeModel } from "../../../../models/tree-model.js";
 
-import type { FlattenNodeRow } from "./types.js";
 import { RowActionHooks } from "./hooks/row-action-hooks.js";
+import type { FlattenNodeRow } from "./types.js";
 
 export namespace RowActionsGroup {
 	export interface Props {

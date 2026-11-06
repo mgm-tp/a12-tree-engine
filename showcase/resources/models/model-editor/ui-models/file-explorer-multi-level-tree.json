@@ -2,7 +2,7 @@
 	"header": {
 		"id": "file-explorer-multi-level-tree",
 		"modelType": "tree",
-		"modelVersion": "11.0.0",
+		"modelVersion": "11.1.0",
 		"locales": [
 			{
 				"code": "en"
@@ -187,6 +187,7 @@
 			"hierarchicalColumnRef": "column-cda0b",
 			"rootRef": "crc-34adb",
 			"enableColumnsResize": true,
+			"showFullTextSearch": true,
 			"expansionStrategy": {
 				"type": "tree",
 				"expansionDepths": [
@@ -214,7 +215,11 @@
 			}
 		},
 		"subHeaderBox": {
-			"rightSlot": [],
+			"rightSlot": [
+				{
+					"type": "search"
+				}
+			],
 			"leftSlot": [
 				{
 					"type": "multi_selection"

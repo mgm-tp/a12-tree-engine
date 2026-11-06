@@ -30,13 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { renderHook } from "@testing-library/react";
 import * as React from "react";
+
+import { renderHook } from "@testing-library/react";
 import { vi } from "vitest";
 
-import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
+import { DragAndDropUtils } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { type Selector as BaseSelector, TreeEngineState, UIStateSelector } from "../../../../core/store/index.js";
 import {
 	type WidgetMap,
 	type DndConfiguration,
@@ -49,7 +51,6 @@ import {
 } from "../../../../core/view/index.js";
 import { defaultEngineState } from "../../../setup/basic.spec.js";
 import { mockType, type Stub } from "../../../utils/mock-utils.js";
-import { type Selector as BaseSelector, TreeEngineState, UIStateSelector } from "../../../../core/store/index.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.context.context", () => {
 	const basicEngineState = defaultEngineState;

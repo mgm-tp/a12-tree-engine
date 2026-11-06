@@ -30,20 +30,13 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import Path from "node:path";
-import Process from "node:process";
 import ChildProcess from "node:child_process";
+import Process from "node:process";
 
-const isWindows = Process.platform === "win32";
-
-const gradlewPath = Path.resolve(import.meta.dirname, isWindows ? "gradlew.bat" : "gradlew");
-
-const child = ChildProcess.spawn(process.env.CI ? "gradle" : gradlewPath, Process.argv.slice(2), {
-	stdio: "inherit",
-	shell: isWindows
-});
+// Gradle comes from PATH, the way CI invokes it — the repo carries no wrapper.
+const child = ChildProcess.spawn("gradle", Process.argv.slice(2), { stdio: "inherit", shell: true });
 child.on("error", (error) => {
 	// eslint-disable-next-line no-console
-	console.error("Failed to start Gradle wrapper:", error);
+	console.error(`Failed to start Gradle: ${error.message}\nInstall Gradle and make sure it is on PATH.`);
 	Process.exit(1);
 });

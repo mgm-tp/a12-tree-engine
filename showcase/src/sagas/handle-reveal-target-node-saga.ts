@@ -30,15 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type SagaGenerator, put, select, takeEvery } from "typed-redux-saga";
 import { isAction } from "redux";
+import { type SagaGenerator, put, select, takeEvery } from "typed-redux-saga";
 
+import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { TreeEngineActions, Events } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 
-import { getNodesFromNodePath, getTargetNodePath } from "../utils.js";
 import { assert, REVEAL_TARGET_NODE_EVENT, REVEAL_TARGET_NODE_EVENT_NO_AUTOFOCUS } from "../helpers.js";
+import { getNodesFromNodePath, getTargetNodePath } from "../utils.js";
 
 export function* handleRevealTargetNodeSaga(): SagaGenerator<void> {
 	yield* takeEvery(

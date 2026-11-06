@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type SagaGenerator, takeEvery, put } from "typed-redux-saga";
 import { isAction } from "redux";
+import { type SagaGenerator, takeEvery, put } from "typed-redux-saga";
 
+import { NotificationActions } from "@com.mgmtp.a12.client/client-core";
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { Events, TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { NotificationActions } from "@com.mgmtp.a12.client/client-core";
 
 import { SHOWCASE_RESOURCE_KEYS } from "../config/resources.js";
 

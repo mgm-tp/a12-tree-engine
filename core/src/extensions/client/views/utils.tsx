@@ -34,12 +34,12 @@ import * as React from "react";
 
 import type { ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { useTreeEngineContext, useTreeEngineState } from "../../../core/view/context/tree-engine-context.js";
-import { LocalizerHooks } from "../../../core/services/localization/localizer-hooks.js";
+import type { TreeModel } from "../../../core/models/tree-model.js";
 import { RESOURCE_KEYS } from "../../../core/services/localization/languages/keys.js";
+import { LocalizerHooks } from "../../../core/services/localization/localizer-hooks.js";
 import { ModelSelector } from "../../../core/store/selectors/models.js";
 import { TreeEngineState } from "../../../core/store/store.js";
-import type { TreeModel } from "../../../core/models/tree-model.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../core/view/context/tree-engine-context.js";
 
 /** @internal */
 export function useWidgetMapComponents() {

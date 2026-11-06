@@ -50,8 +50,8 @@ import {
 	type TreeEngineRowContext
 } from "../../../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../../../setup/basic.spec.js";
-import { createEngineState } from "../../../../../../utils/model-utils.js";
 import { mockType } from "../../../../../../utils/mock-utils.js";
+import { createEngineState } from "../../../../../../utils/model-utils.js";
 import { testIsNullComponent } from "../../../../../../utils/test-utils.js";
 
 import {
@@ -64,7 +64,7 @@ import {
 	basicParentLink
 } from "./shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.link-document-body-cell", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.link-document-body-cell", () => {
 	const basicEngineState = defaultEngineState;
 	const basicComponentMap = DefaultComponentMap;
 

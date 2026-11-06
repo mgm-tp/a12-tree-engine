@@ -39,12 +39,12 @@ import {
 } from "@com.mgmtp.a12.client/client-core/heterogeneity";
 import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
+import { TreeEngineError } from "../../../core/error/tree-engine-error.js";
 import type { Events } from "../../../core/store/actions.js";
 import { ModelSelector } from "../../../core/store/selectors/models.js";
 import { TreeEngineState } from "../../../core/store/store.js";
 import type { InsertRootNodeDialog } from "../../../core/view/components/dialogs/sub-components/insert-root-node-dialog.js";
 import { useTreeEngineContext, useTreeEngineState } from "../../../core/view/context/tree-engine-context.js";
-import { TreeEngineError } from "../../../core/error/tree-engine-error.js";
 
 import { useDialogInsertTitle, useWidgetMapComponents } from "./utils.js";
 

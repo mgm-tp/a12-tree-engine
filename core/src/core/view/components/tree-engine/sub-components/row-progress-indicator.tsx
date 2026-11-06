@@ -32,8 +32,8 @@
 
 import * as React from "react";
 
-import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
 import { useTreeEngineRowContext } from "../../../context/row-context.js";
+import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
 
 import type { FlattenNodeRow } from "./types.js";
 
@@ -44,17 +44,13 @@ export namespace RowProgressIndicator {
 }
 
 /** @internal */
-export const RowProgressIndicator: React.FC<RowProgressIndicator.Props> = React.memo(
-	function RowProgressIndicator(props) {
-		const ProgressIndicator = useTreeEngineContext((context) => context.widgetMap.ProgressIndicator);
-		const rowContext = useTreeEngineRowContext((context) => context);
+export const RowProgressIndicator: React.FC<RowProgressIndicator.Props> = React.memo(function RowProgressIndicator() {
+	const ProgressIndicator = useTreeEngineContext((context) => context.widgetMap.ProgressIndicator);
+	const rowContext = useTreeEngineRowContext((context) => context);
 
-		if (!rowContext.rowState.uiState?.busy) {
-			return null;
-		}
-
-		return (
-			<ProgressIndicator outerOverlayVariant="bright" innerOverlayVariant="bright" size="small" type="horizontal" />
-		);
+	if (!rowContext.rowState.uiState?.busy) {
+		return null;
 	}
-);
+
+	return <ProgressIndicator outerOverlayVariant="bright" innerOverlayVariant="bright" size="small" type="horizontal" />;
+});

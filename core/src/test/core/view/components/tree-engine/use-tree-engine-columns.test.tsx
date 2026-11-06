@@ -30,29 +30,30 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// oxlint-disable-next-line ban-ts-comment
 // @ts-nocheck
 
-import * as Enzyme from "enzyme";
 import * as React from "react";
+
+import * as Enzyme from "enzyme";
 
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { Icon, HiddenText } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { type RuntimeTreeModel, TreeModel } from "../../../../../core/models/index.js";
-import { type FlattenNodeRow, BodyCell, RowActionsGroup } from "../../../../../core/view/index.js";
+import type { TreeEngineState } from "../../../../../core/store/index.js";
 import {
 	useTreeEngineColumns,
 	isNumberTypeColumn
 } from "../../../../../core/view/components/tree-engine/use-tree-engine-columns.js";
+import { type FlattenNodeRow, BodyCell, RowActionsGroup } from "../../../../../core/view/index.js";
+import { RowCheckbox, OverallCheckbox } from "../../../../../core/view/index.js";
 import { defaultEngineState, deLocale } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
 import { createEngineState } from "../../../../utils/model-utils.js";
 import { testHook } from "../../../../utils/test-utils.js";
-import type { TreeEngineState } from "../../../../../core/store/index.js";
-import { RowCheckbox, OverallCheckbox } from "../../../../../core/view/index.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-tree-engine-columns", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-tree-engine-columns", () => {
 	const basicEngineState = defaultEngineState;
 	const basicModelColumns = basicEngineState.models.uiModel.content.columns;
 	const basicModelNodes = basicEngineState.models.uiModel.content.nodes;
@@ -475,10 +476,6 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-t
 		});
 
 		describe("dataGetter", () => {
-			afterEach(() => {
-				Sinon.restore();
-			});
-
 			it("should return a BodyCell with proper props", () => {
 				const { dataGetter } = setupTest()[COLUMN_INDEX];
 				const row = mockType<FlattenNodeRow>();

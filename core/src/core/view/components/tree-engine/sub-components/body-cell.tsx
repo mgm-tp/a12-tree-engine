@@ -32,30 +32,36 @@
 
 import * as React from "react";
 
+import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
 import { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { useTreeTableContext, addPrefix, type Styleable, type Column } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { FieldInstanceValue, GroupInstance } from "@com.mgmtp.a12.kernel/kernel-md-facade";
-import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { addPrefix, type Styleable, type Column } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { TreeEngineError } from "../../../../error/tree-engine-error.js";
+import { DocumentModelUtils, DocumentUtils, TreeModelUtils } from "../../../../models/shared.js";
+import { TreeModel } from "../../../../models/tree-model.js";
 import { RESOURCE_KEYS } from "../../../../services/localization/languages/keys.js";
 import { LocalizerHooks } from "../../../../services/localization/localizer-hooks.js";
 import { MultiSelect, MultiSelectGroup } from "../../../../services/multi-select/multi-select.js";
-import { ModelSelector } from "../../../../store/selectors/models.js";
 import { CellSelector } from "../../../../store/selectors/cell.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
+import { ModelSelector } from "../../../../store/selectors/models.js";
 import { useTreeEngineRowContext, useEitherRowOrParentRowState } from "../../../context/row-context.js";
-import { DocumentModelUtils, DocumentUtils, TreeModelUtils } from "../../../../models/shared.js";
-import { TreeEngineError } from "../../../../error/tree-engine-error.js";
-import { TreeModel } from "../../../../models/tree-model.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
 
-import type { FlattenNodeRow, TreeEngineDataColumn } from "./types.js";
 import { NodeConfigurationHook } from "./hooks/node-configuration-hook.js";
+import type { FlattenNodeRow } from "./types.js";
 
 export namespace BodyCell {
 	export interface Props extends Styleable {
 		readonly columnRef: string;
 		readonly row: FlattenNodeRow;
+		/**
+		 * Body alignment of the referenced column, resolved by the column assembly. A component
+		 * replacing this one through the `ComponentMap` has to forward it, or the cell falls back
+		 * to the default alignment.
+		 */
+		readonly alignment?: Column.HorizontalAlignment;
 	}
 }
 
@@ -197,7 +203,7 @@ function useElement(documentModel?: DocumentModel, documentModelPath?: ModelPath
 		}
 		try {
 			return DocumentModelUtils.findByPath(documentModel, documentModelPath);
-		} catch (e) {
+		} catch {
 			return undefined;
 		}
 	}, [documentModel, documentModelPath]);
@@ -225,17 +231,8 @@ export const BodyCellUIValue: React.FC<BodyCellUIValue.Props> = React.memo(funct
 		columnRef
 	});
 
-	const columns: TreeEngineDataColumn[] = useTreeTableContext<FlattenNodeRow, TreeEngineDataColumn>(
-		(context) => context.columns
-	);
-	const treeTableColumn = columns.find((col) => col.columnModel?.id === columnRef);
-	if (!treeTableColumn) {
-		throw new Error(`Couldn't find column ${columnRef}`);
-	}
-	const alignment = treeTableColumn?.specificHorizontalAlignment?.body;
-
 	if (element.type === "Field") {
-		return <FieldCell {...props} alignment={alignment} />;
+		return <FieldCell {...props} />;
 	}
 
 	if (DocumentModelUtils.isAttachment(element)) {
@@ -264,7 +261,6 @@ export const BodyCellUIValue: React.FC<BodyCellUIValue.Props> = React.memo(funct
 				<MultiSelectCell
 					{...props}
 					displayMode={displayMode as TreeModel.MultiSelectDisplayMode}
-					alignment={alignment}
 					data={MultiSelect.from(value)}
 					documentModelName={documentModelName}
 					documentModelPath={documentModelPath}
@@ -277,89 +273,87 @@ export const BodyCellUIValue: React.FC<BodyCellUIValue.Props> = React.memo(funct
 	throw TreeEngineError.TypeError("DocumentModel.Element", { expect: "Support element", actual: element });
 });
 
-const FieldCell: React.FC<BodyCellUIValue.Props & { alignment?: Column.HorizontalAlignment }> = React.memo(
-	function FieldCell(props) {
-		const { element, value, documentModelName, documentModelPath, alignment } = props;
+const FieldCell: React.FC<BodyCellUIValue.Props> = React.memo(function FieldCell(props) {
+	const { element, value, documentModelName, documentModelPath, alignment } = props;
 
-		const localizedEnumerationValue = LocalizerHooks.useLocalizedEnumerationValue();
-		const localizedBooleanValue = LocalizerHooks.useLocalizedBooleanValue();
-		const localizedConfirmValue = LocalizerHooks.useLocalizedConfirmValue();
+	const localizedEnumerationValue = LocalizerHooks.useLocalizedEnumerationValue();
+	const localizedBooleanValue = LocalizerHooks.useLocalizedBooleanValue();
+	const localizedConfirmValue = LocalizerHooks.useLocalizedConfirmValue();
 
-		const converter = useTreeEngineContext((context) => context.converter);
-		const rowHeight = useTreeEngineState((state) => state.models.uiModel.content.configuration.rowHeight);
-		const CustomFieldTypeCell = useTreeEngineContext((context) => context.componentMap.CustomFieldTypeCell);
-		const TextOutput = useTreeEngineContext((context) => context.widgetMap.TextOutput);
-		const CssEllipsis = useTreeEngineContext((context) => context.widgetMap.CssEllipsis);
+	const converter = useTreeEngineContext((context) => context.converter);
+	const rowHeight = useTreeEngineState((state) => state.models.uiModel.content.configuration.rowHeight);
+	const CustomFieldTypeCell = useTreeEngineContext((context) => context.componentMap.CustomFieldTypeCell);
+	const TextOutput = useTreeEngineContext((context) => context.widgetMap.TextOutput);
+	const CssEllipsis = useTreeEngineContext((context) => context.widgetMap.CssEllipsis);
 
-		const documentModelSelector = React.useMemo(
-			() => ModelSelector.documentModelByName(props.documentModelName),
-			[props.documentModelName]
-		);
-		const documentModel = useTreeEngineState(documentModelSelector);
+	const documentModelSelector = React.useMemo(
+		() => ModelSelector.documentModelByName(props.documentModelName),
+		[props.documentModelName]
+	);
+	const documentModel = useTreeEngineState(documentModelSelector);
 
-		if (element.type !== "Field" || !DocumentUtils.isFieldInstanceValue(value)) {
-			throw TreeEngineError.TypeError("DocumentModel.Element", { expect: "Field element", actual: element });
-		}
-
-		let uiValue: React.ReactNode = null;
-		try {
-			switch (element.fieldType.type) {
-				case "EnumerationType": {
-					if (typeof value === "string") {
-						const enumValue = element.fieldType.values.find((enumValue) => enumValue.value === value);
-						if (enumValue) {
-							uiValue = localizedEnumerationValue(documentModelName, documentModelPath, enumValue) || value;
-						}
-					}
-					break;
-				}
-				case "BooleanType":
-					uiValue = localizedBooleanValue(documentModelName, documentModelPath, value);
-					break;
-				case "ConfirmType":
-					uiValue = localizedConfirmValue(documentModelName, documentModelPath, value);
-					break;
-				case "StringType": {
-					if (!documentModel) {
-						throw TreeEngineError.NotFoundError("DocumentModel", documentModelName);
-					}
-					const formattedValue = converter.formatValue(documentModel, documentModelPath, value);
-					if (formattedValue && element.fieldType.lineBreaksPermitted) {
-						uiValue = formattedValue.split("\n").map((text, index) => (
-							<React.Fragment key={index}>
-								{text}
-								<br />
-							</React.Fragment>
-						));
-					} else {
-						uiValue = formattedValue;
-					}
-					break;
-				}
-				case "CustomFieldType":
-					if (typeof value === "string" || value === null) {
-						return <CustomFieldTypeCell {...props} value={value} alignment={alignment} />;
-					}
-					break;
-				default: {
-					if (!documentModel) {
-						throw TreeEngineError.NotFoundError("DocumentModel", documentModelName);
-					}
-					uiValue = converter.formatValue(documentModel, documentModelPath, value);
-				}
-			}
-		} catch (e) {
-			// This try-catch is placed to catch any error caused by stale props
-			return uiValue;
-		}
-
-		return (
-			<TextOutput {...props} alignment={alignment} disableParagraphWrapping>
-				{rowHeight ? <CssEllipsis useTooltip>{uiValue}</CssEllipsis> : uiValue}
-			</TextOutput>
-		);
+	if (element.type !== "Field" || !DocumentUtils.isFieldInstanceValue(value)) {
+		throw TreeEngineError.TypeError("DocumentModel.Element", { expect: "Field element", actual: element });
 	}
-);
+
+	let uiValue: React.ReactNode = null;
+	try {
+		switch (element.fieldType.type) {
+			case "EnumerationType": {
+				if (typeof value === "string") {
+					const enumValue = element.fieldType.values.find((enumValue) => enumValue.value === value);
+					if (enumValue) {
+						uiValue = localizedEnumerationValue(documentModelName, documentModelPath, enumValue) || value;
+					}
+				}
+				break;
+			}
+			case "BooleanType":
+				uiValue = localizedBooleanValue(documentModelName, documentModelPath, value);
+				break;
+			case "ConfirmType":
+				uiValue = localizedConfirmValue(documentModelName, documentModelPath, value);
+				break;
+			case "StringType": {
+				if (!documentModel) {
+					throw TreeEngineError.NotFoundError("DocumentModel", documentModelName);
+				}
+				const formattedValue = converter.formatValue(documentModel, documentModelPath, value);
+				if (formattedValue && element.fieldType.lineBreaksPermitted) {
+					uiValue = formattedValue.split("\n").map((text, index) => (
+						<React.Fragment key={index}>
+							{text}
+							<br />
+						</React.Fragment>
+					));
+				} else {
+					uiValue = formattedValue;
+				}
+				break;
+			}
+			case "CustomFieldType":
+				if (typeof value === "string" || value === null) {
+					return <CustomFieldTypeCell {...props} value={value} alignment={alignment} />;
+				}
+				break;
+			default: {
+				if (!documentModel) {
+					throw TreeEngineError.NotFoundError("DocumentModel", documentModelName);
+				}
+				uiValue = converter.formatValue(documentModel, documentModelPath, value);
+			}
+		}
+	} catch {
+		// This try-catch is placed to catch any error caused by stale props
+		return uiValue;
+	}
+
+	return (
+		<TextOutput {...props} alignment={alignment} disableParagraphWrapping>
+			{rowHeight ? <CssEllipsis useTooltip>{uiValue}</CssEllipsis> : uiValue}
+		</TextOutput>
+	);
+});
 
 /** @internal */
 export const InitialExpansionPreventionTooltip: React.ComponentType = () => {

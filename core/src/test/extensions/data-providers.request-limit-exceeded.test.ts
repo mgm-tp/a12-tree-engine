@@ -35,7 +35,6 @@ import { it, expect, describe } from "vitest";
 import type { JsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import { RequestValidator } from "../../extensions/server-connector/data-loaders/request-validator.js";
-
 import {
 	createMockRequest,
 	orphanedRootListQuery,

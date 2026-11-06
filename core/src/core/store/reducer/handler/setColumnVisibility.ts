@@ -30,20 +30,20 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import Enzyme from "enzyme";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
-import * as Utils from "../utils/test-utils.js";
+import type { Commands } from "../../actions.js";
+import type { UiState } from "../../store.js";
 
-Enzyme.configure({ adapter: new Enzyme.EnzymeAdapter() });
-
-declare global {
-	const mount: typeof Utils.mount;
-	const getInteractiveElement: typeof Utils.getInteractiveElement;
+/**
+ * @internal
+ */
+export function handleSetColumnVisibility(
+	state: UiState,
+	action: Action<Commands.SetColumnVisibilityPayload>
+): UiState {
+	return {
+		...state,
+		columnVisibility: action.payload.columnVisibility
+	};
 }
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-global.mount = Utils.mount;
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-global.getInteractiveElement = Utils.getInteractiveElement;

@@ -40,7 +40,6 @@ import type { ModelsState } from "../../../../core/store/store.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
 import type { RequestSelectorMap } from "../../request-selector-map.js";
 import { type DocumentProcessors, JsonRpc } from "../../types.js";
-
 import type { A12DataServicesSetting } from "../a12-data-services-setting.js";
 import { DataOperation } from "../data-loader.js";
 import { RequestValidator } from "../request-validator.js";
@@ -77,9 +76,16 @@ export function* transformQuery(
 		return yield* select(requestSelectorMap.loadTreeNodes({ activityId, query, pageSize }));
 	}
 
+	// Search request (matches + reversed-link ancestor chains).
+	if (DataOperation.Query.SearchNodes.Query.isAssignableFrom(query)) {
+		const pageSize = dataServicesSetting.maximumPageSize ?? A12QueryAPIUtils.DEFAULT_PAGE_SIZE;
+		return yield* select(requestSelectorMap.searchNodes({ activityId, query, pageSize }));
+	}
+
 	throw TreeEngineError.TypeError("TreeEngine.Query", {
 		actual: query.type,
-		expect: "LIST_ROOT_NODES | LIST_CHILD_NODES | GET_DOCUMENT | TREE_NODES | LOAD_THUMBNAIL_URLS_INTERNAL"
+		expect:
+			"LIST_ROOT_NODES | LIST_CHILD_NODES | GET_DOCUMENT | TREE_NODES | SEARCH_NODES | LOAD_THUMBNAIL_URLS_INTERNAL"
 	});
 }
 
@@ -187,5 +193,21 @@ export function* transformQueryResponse(params: {
 		return treeResult;
 	}
 
-	throw TreeEngineError.TypeError("TreeEngine.Query", { actual: query, expect: "ListQuery | GetDocument | TreeNodes" });
+	if (
+		DataOperation.Query.SearchNodes.Query.isAssignableFrom(query) &&
+		JsonRpc.Request.Query.isAssignableFrom(request)
+	) {
+		const response = JsonRpc.Response.get(request, responses);
+		return {
+			id: query.id,
+			fullSize: response.result.fullSize,
+			entries: response.result.entries,
+			links: response.result.links
+		} satisfies DataOperation.Query.SearchNodes.Result;
+	}
+
+	throw TreeEngineError.TypeError("TreeEngine.Query", {
+		actual: query,
+		expect: "ListQuery | GetDocument | TreeNodes | SearchNodes"
+	});
 }

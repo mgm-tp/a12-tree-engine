@@ -30,10 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/api.js";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { Selector } from "../selectors.js";
 
@@ -43,9 +41,8 @@ test.describe("expand/collapse sub-tree during multi-selection", () => {
 	let commands: PlaywrightCommands;
 	let utils: A12TeamUtils;
 
-	test.beforeAll(async () => {
-		await cleanDocumentsData({ showcases: "a12-teams" });
-		await seedData({ preset: "a12-teams" });
+	test.beforeAll(async ({ seed }) => {
+		await seed({ preset: "a12-teams" });
 	});
 
 	test.beforeEach(async ({ page }) => {

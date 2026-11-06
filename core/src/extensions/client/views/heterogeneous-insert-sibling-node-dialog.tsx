@@ -35,10 +35,10 @@ import * as React from "react";
 import { defaultVariantSelectionMapper, VariantSelection } from "@com.mgmtp.a12.client/client-core/heterogeneity";
 import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 
+import { TreeEngineError } from "../../../core/error/tree-engine-error.js";
 import { ModelSelector } from "../../../core/store/selectors/models.js";
 import type { InsertSiblingNodeDialog } from "../../../core/view/components/dialogs/sub-components/insert-sibling-node-dialog.js";
 import { useTreeEngineContext, useTreeEngineState } from "../../../core/view/context/tree-engine-context.js";
-import { TreeEngineError } from "../../../core/error/tree-engine-error.js";
 
 import { useDialogInsertTitle, useInsertOnSelect, useWidgetMapComponents } from "./utils.js";
 

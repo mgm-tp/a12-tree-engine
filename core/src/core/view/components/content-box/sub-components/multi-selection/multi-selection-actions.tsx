@@ -32,8 +32,8 @@
 
 import * as React from "react";
 
-import { useTreeEngineContext } from "../../../../context/tree-engine-context.js";
 import { TreeModelKeys } from "../../../../../services/localization/tree-model-keys.js";
+import { useTreeEngineContext } from "../../../../context/tree-engine-context.js";
 
 import { useMultiSelectionConfig } from "./utils.js";
 

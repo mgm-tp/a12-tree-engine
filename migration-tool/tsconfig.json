@@ -1,4 +1,10 @@
 {
 	"extends": "../tsconfig.json",
-	"include": ["src", "src/**/*.json", "test", "scripts"]
+	"include": ["src", "src/**/*.json", "test", "scripts"],
+	"compilerOptions": {
+		"rootDir": "${configDir}",
+		"noEmit": true,
+		"composite": false,
+		"types": ["node", "vitest/globals"]
+	}
 }

@@ -41,13 +41,13 @@ import {
 	type ApplicationFrameLayoutPropsNG,
 	ApplicationFrameLayoutNGComponent
 } from "@com.mgmtp.a12.client/client-core";
-import { GlobalMessageBox, HeaderTrigger, PopUpMenu, List, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
-import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { Commands, TreeEngineActions } from "@com.mgmtp.a12.treeengine/treeengine-core";
+import { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { GlobalMessageBox, HeaderTrigger, PopUpMenu, List, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { isWdyrEnabled, setWdyr } from "../config/wdyr.js";
 import { isReactScanEnabled, setReactScanEnabled } from "../config/react-scan.js";
+import { isWdyrEnabled, setWdyr } from "../config/wdyr.js";
 import { LOCALE_KEY, THEME_KEY, THEMES, useShowcaseContext } from "../context.js";
 import { getShowcaseDisabled, setShowcaseDisabled } from "../utils.js";
 

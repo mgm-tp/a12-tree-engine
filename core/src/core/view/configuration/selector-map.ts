@@ -34,7 +34,6 @@ import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access
 
 import type { Selector } from "../../store/selectors/selector.js";
 import { createSelector } from "../../store/shared.js";
-
 import type { TreeEngineContext } from "../context/tree-engine-context.js";
 
 /**

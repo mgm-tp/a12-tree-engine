@@ -30,10 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { ModelEditorUtils } from "../utils.js";
 
@@ -41,14 +38,11 @@ test.describe("drag and drop nodes with hidden root node and selectParent mode i
 	let utils: ModelEditorUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		utils = new ModelEditorUtils(page);
 		commands = new PlaywrightCommands(page);
 
-		await cleanDocumentsData({
-			showcases: ["model-editor"]
-		});
-		await seedData({ preset: "model-editor" });
+		await seed({ preset: "model-editor", force: true });
 		await utils.navigateToFileExplorer();
 
 		await commands

@@ -1,3 +1,32 @@
+pluginManagement {
+    def repoUser = providers.environmentVariable("repository_username").orNull
+    def repoPass = providers.environmentVariable("repository_password").orNull
+    def mavenReposUrl = providers.gradleProperty("mavenReposUrl").orNull
+
+    repositories {
+        gradlePluginPortal {
+            content { excludeGroupByRegex('com\\.mgmtp.*') }
+        }
+        if (mavenReposUrl) {
+            maven {
+                name = "mgmart"
+                url = mavenReposUrl
+                credentials { username = repoUser; password = repoPass }
+            }
+        }
+    }
+    resolutionStrategy {
+        eachPlugin {
+            switch (requested.id.id) {
+                case "com.mgmtp.a12.devtools.plugins.integration":
+                    useModule("com.mgmtp.a12.devtools.plugins:integration:${requested.version}"); break
+                case "com.mgmtp.a12.bd.artifact-publish":
+                    useModule("com.mgmtp.a12.bd:publishing-artifacts-gradle-plugin:${requested.version}"); break
+            }
+        }
+    }
+}
+
 rootProject.name = "tree-engine"
 
 include "server"

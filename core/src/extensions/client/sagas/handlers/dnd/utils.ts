@@ -33,15 +33,14 @@
 import { call, put, type SagaGenerator, select } from "typed-redux-saga";
 
 import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
-import { DataSelector } from "../../../../../core/store/selectors/data.js";
 import { Events } from "../../../../../core/store/actions.js";
-import { type Identifier, TreeEngineState } from "../../../../../core/store/store.js";
+import { DataSelector } from "../../../../../core/store/selectors/data.js";
 import { UIStateSelector } from "../../../../../core/store/selectors/ui-state.js";
+import { type Identifier, TreeEngineState } from "../../../../../core/store/store.js";
 import { TreeEngineActions } from "../../../actions.js";
 import { TreeEngineOperation } from "../../../operation.js";
 import { TreeEngineSelectors } from "../../../selectors.js";
 import { SagaUtils } from "../../saga-utils.js";
-
 import { expandNode } from "../watch-node-expansion-saga.js";
 
 /** @internal */
@@ -132,7 +131,7 @@ export namespace DndSagaUtils {
 
 		const newExpandedNodeMap = { ...expandedNodeMap };
 		draggedRowExpandedChildNodePaths.forEach((nodePath) => {
-			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+			// oxlint-disable-next-line no-dynamic-delete
 			delete newExpandedNodeMap[TreeEngineState.NodePath.toString(nodePath)];
 		});
 		newNodePaths.forEach((nodePath) => {

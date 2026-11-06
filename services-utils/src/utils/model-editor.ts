@@ -36,7 +36,7 @@ import {
 	Relationship
 } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { linkEntities } from "./index.js";
+import { linkEntities } from "./common.js";
 
 import LinkPosition = Relationship.LinkPosition;
 

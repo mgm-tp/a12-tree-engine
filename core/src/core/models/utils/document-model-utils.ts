@@ -30,8 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type DocumentModel, DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { ModelPath } from "@com.mgmtp.a12.base/base-model-api";
+import { type DocumentModel, DocumentServiceFactory } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 import type { EntityInstancePath } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
 import { TreeEngineError } from "../../error/tree-engine-error.js";

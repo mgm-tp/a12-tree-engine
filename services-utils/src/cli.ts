@@ -35,12 +35,12 @@ import * as Fs from "node:fs";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
-import { updateBaseUrl } from "./utils/index.js";
 import { main as cleanDocuments, type CleanDocParams } from "./commands/clean-documents.js";
 import { main as generate, type GenerateParams } from "./commands/generate.js";
-import { main as seed, type WaitOnParams } from "./commands/seed/index.js";
 import { main as uploadModels, type UploadParams } from "./commands/model/upload.js";
+import { main as seed, type WaitOnParams } from "./commands/seed/index.js";
 import { main as waitOn } from "./commands/wait-on.js";
+import { updateBaseUrl } from "./utils/index.js";
 
 const argv = yargs(hideBin(process.argv))
 	.usage("Usage: $0 script [options]")

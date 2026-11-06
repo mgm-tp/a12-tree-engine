@@ -34,17 +34,18 @@ import * as React from "react";
 
 import { TreeModel } from "../../../models/tree-model.js";
 import { ModelSelector } from "../../../store/selectors/models.js";
+import { SearchSelector } from "../../../store/selectors/search.js";
 import { ButtonsHooks, useEngineButtonDisabilityGetter } from "../../components/content-box/sub-components/buttons.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../context/tree-engine-context.js";
-import { useMultiSelectionConfig } from "../../components/content-box/sub-components/multi-selection/utils.js";
-import { useFlattenRowActions } from "../../components/tree-engine/sub-components/row-actions-group.js";
-import { RowActionHooks } from "../../components/tree-engine/sub-components/hooks/row-action-hooks.js";
 import { ExpandAllPopUpHooks } from "../../components/content-box/sub-components/expand-all-pop-up.js";
 import { MultiSelectionButtonHooks } from "../../components/content-box/sub-components/multi-selection/multi-selection-button.js";
+import { useMultiSelectionConfig } from "../../components/content-box/sub-components/multi-selection/utils.js";
+import { RowActionHooks } from "../../components/tree-engine/sub-components/hooks/row-action-hooks.js";
 import { OverallCheckboxHooks } from "../../components/tree-engine/sub-components/overall-checkbox.js";
+import { useFlattenRowActions } from "../../components/tree-engine/sub-components/row-actions-group.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../context/tree-engine-context.js";
 
-import { KeyboardShortcut } from "./types.js";
 import type { Controller } from "./hooks.js";
+import { KeyboardShortcut } from "./types.js";
 import { KeyboardShortcutUtils } from "./utils.js";
 
 /** @internal */
@@ -53,6 +54,7 @@ export function useEngineBuiltinActionController(): Controller {
 	const collapseWholeTreeHandler = ExpandAllPopUpHooks.useWholeTreeExpansionHandler("collapse");
 	const overallCheckboxHandler = OverallCheckboxHooks.useOverallCheckboxHandler();
 	const multiSelectionButtonHandler = MultiSelectionButtonHooks.useMultiSelectionButtonHandler();
+	const bulkExpansionDisabled = useTreeEngineState(SearchSelector.isReducedView());
 
 	return React.useMemo(() => {
 		return {
@@ -64,10 +66,11 @@ export function useEngineBuiltinActionController(): Controller {
 
 				const { action } = target;
 				if (action === KeyboardShortcut.EngineBuiltinAction.EXPAND_WHOLE_TREE) {
-					return expandWholeTreeHandler;
+					// The shortcut must not reach past the disabled button.
+					return bulkExpansionDisabled ? undefined : expandWholeTreeHandler;
 				}
 				if (action === KeyboardShortcut.EngineBuiltinAction.COLLAPSE_WHOLE_TREE) {
-					return collapseWholeTreeHandler;
+					return bulkExpansionDisabled ? undefined : collapseWholeTreeHandler;
 				}
 				if (action === KeyboardShortcut.EngineBuiltinAction.TOGGLE_OVERALL_MULTI_SELECTION) {
 					return overallCheckboxHandler;
@@ -79,7 +82,13 @@ export function useEngineBuiltinActionController(): Controller {
 				return undefined;
 			}
 		};
-	}, [expandWholeTreeHandler, collapseWholeTreeHandler, overallCheckboxHandler, multiSelectionButtonHandler]);
+	}, [
+		expandWholeTreeHandler,
+		collapseWholeTreeHandler,
+		overallCheckboxHandler,
+		multiSelectionButtonHandler,
+		bulkExpansionDisabled
+	]);
 }
 
 /** @internal */

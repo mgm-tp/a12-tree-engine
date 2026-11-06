@@ -34,6 +34,7 @@ import type * as Enzyme from "enzyme";
 
 import { ContentBoxElements } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { TreeModel } from "../../../../../../../core/models/index.js";
 import type { TreeEngineState } from "../../../../../../../core/store/index.js";
 import {
 	MultiSelectionActions,
@@ -43,12 +44,11 @@ import {
 	TreeEngineContextProvider
 } from "../../../../../../../core/view/index.js";
 import { createContextProps, defaultEngineState } from "../../../../../../setup/basic.spec.js";
-import { TreeModel } from "../../../../../../../core/models/index.js";
 import { createEngineState } from "../../../../../../utils/model-utils.js";
 
 import { defaultMultiSelectionConfig } from "./utils.test.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.multi-selection.multi-selection-panel", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.multi-selection.multi-selection-panel", () => {
 	const basicEngineState = defaultEngineState;
 	const basicConfiguration = basicEngineState.models.uiModel.content.configuration;
 

@@ -37,9 +37,8 @@ import type {
 } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import type { DocumentModel } from "@com.mgmtp.a12.kernel/kernel-md-facade";
 
-import { RelationshipModelUtils } from "../../models/utils/relationship-utils.js";
 import type { RuntimeTreeModel } from "../../models/tree-model.js";
-
+import { RelationshipModelUtils } from "../../models/utils/relationship-utils.js";
 import type { Models, ModelsState } from "../store.js";
 
 import { type Selector, createSelector } from "./selector.js";
@@ -250,6 +249,54 @@ export namespace ModelSelector {
 	);
 
 	/**
+	 * Whether the document model is a subtype of the other one, however many levels apart.
+	 *
+	 * @internal
+	 */
+	export function isSubtypeOf(superType: string, subType: string): Selector<boolean, ModelsState> {
+		return (state) => ModelSelector.subtypeModelsByName(superType)(state).some(({ modelId }) => modelId === subType);
+	}
+
+	/**
+	 * Whether the document model is the expected one itself or one of its subtypes.
+	 *
+	 * @internal
+	 */
+	export function isSameOrSubtypeOf(expectedType: string, actualType: string): Selector<boolean, ModelsState> {
+		return (state) => expectedType === actualType || ModelSelector.isSubtypeOf(expectedType, actualType)(state);
+	}
+
+	/**
+	 * Whether either document model is the other one or one of its subtypes.
+	 *
+	 * @internal
+	 */
+	export function areTypeRelated(documentModelA: string, documentModelB: string): Selector<boolean, ModelsState> {
+		return (state) =>
+			ModelSelector.isSameOrSubtypeOf(documentModelA, documentModelB)(state) ||
+			ModelSelector.isSameOrSubtypeOf(documentModelB, documentModelA)(state);
+	}
+
+	/**
+	 * The document models the tree's nodes are built on, minus those another node already covers — a
+	 * query on a supertype matches its subtypes too.
+	 *
+	 * @internal
+	 */
+	export function searchableDocumentModels(): Selector<string[], ModelsState> {
+		return (state) => searchableDocumentModelsReselect(state);
+	}
+	const searchableDocumentModelsReselect = createSelector([models(), uiModel()], (models, uiModel) => {
+		const nodeDocumentModels = [...new Set(uiModel.content.nodes.map(({ documentModelRef }) => documentModelRef))];
+		return nodeDocumentModels.filter(
+			(documentModel) =>
+				!nodeDocumentModels.some(
+					(other) => other !== documentModel && ModelSelector.isSubtypeOf(other, documentModel)({ models })
+				)
+		);
+	});
+
+	/**
 	 * @internal
 	 * Identify the supertype of certain document model by searching for its subtype.
 	 * The selector will try to go through each referenced model to narrow down the list of candidates
@@ -359,9 +406,9 @@ export namespace ModelSelector {
 		};
 
 		return (state) => {
-			const superDocumentModels = modelGraph()(state).documentModels.filter((model) => {
-				return subtypeModels(model, true)(state).some(({ modelId }) => modelId === identifierType);
-			});
+			const superDocumentModels = modelGraph()(state).documentModels.filter(({ modelId }) =>
+				ModelSelector.isSubtypeOf(modelId, identifierType)(state)
+			);
 			const acceptableDocumentModels = [identifierType, ...superDocumentModels.map(({ modelId }) => modelId)];
 
 			const results: RuntimeTreeModel.ChildRelationshipConfiguration[] = [];
@@ -409,11 +456,7 @@ export namespace ModelSelector {
 				if (!childDocumentModel) {
 					return false;
 				}
-				if (childDocumentModelId === childDocumentModel) {
-					return true;
-				}
-				const subTypes = subtypeModelsByName(childDocumentModel)(state);
-				return subTypes.some(({ modelId }) => modelId === childDocumentModelId);
+				return ModelSelector.isSameOrSubtypeOf(childDocumentModel, childDocumentModelId)(state);
 			});
 		};
 	}

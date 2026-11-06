@@ -30,10 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test } from "node:test";
-import Path from "node:path";
 import assert from "node:assert";
 import fs from "node:fs/promises";
+import Path from "node:path";
+import { test } from "node:test";
 
 import Config from "./config.js";
 
@@ -41,7 +41,7 @@ const RELATIVE_LINK_REGEX = /link:(?<path>[^#[]+)(?<hash>#[^[]+?)?(?<label>\[[^\
 const TYPEDOC = "./assets/generated/typedoc";
 const ADOC = ".adoc";
 
-test("validate links", async () => {
+void test("validate links", async () => {
 	for (const asciiDocFileName of await fs.readdir(Config.srcDir)) {
 		if (!asciiDocFileName.endsWith(ADOC)) {
 			continue;

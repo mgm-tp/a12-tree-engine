@@ -33,7 +33,6 @@
 import type { Page } from "@playwright/test";
 
 import { seedData } from "../../../../services-utils/src/index.js";
-
 import type { SingleTestConfig } from "../types.js";
 import { PlaywrightUtils } from "../utils.js";
 

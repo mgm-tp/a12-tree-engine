@@ -34,7 +34,7 @@ import { faker } from "@faker-js/faker";
 
 import type { JsonRpc2Request, DocumentJsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { linkEntities } from "./index.js";
+import { linkEntities } from "./common.js";
 
 export function addCategory(suffix: string, document?: object): DocumentJsonRpc2Request.AddJsonRpc2Request {
 	return {

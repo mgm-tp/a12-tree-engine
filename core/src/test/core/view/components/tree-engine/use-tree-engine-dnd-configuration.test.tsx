@@ -34,6 +34,9 @@ import { vi, expect } from "vitest";
 
 import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { type DataState, type ModelsState, TreeEngineState } from "../../../../../core/store/index.js";
+import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
+import { useDndOptions } from "../../../../../core/view/configuration/dnd/use-dnd-options.js";
 import {
 	defaultDndConfiguration,
 	type DragObject,
@@ -43,11 +46,8 @@ import {
 	type DndRedirection
 } from "../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
-import { testHook } from "../../../../utils/test-utils.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { type DataState, type ModelsState, TreeEngineState } from "../../../../../core/store/index.js";
-import { useDndOptions } from "../../../../../core/view/configuration/dnd/use-dnd-options.js";
-import { FlattenRowHooks } from "../../../../../core/view/components/tree-engine/use-flatten-rows.js";
+import { testHook } from "../../../../utils/test-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-tree-engine-dnd-configuration", () => {
 	const basicEngineState = defaultEngineState;
@@ -199,7 +199,7 @@ describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.use-tree-e
 					});
 				});
 
-				describe("when params.hoveredItem is defined, and params.hoveredItem.position = as_child  ", () => {
+				describe("when params.hoveredItem is defined, and params.hoveredItem.position = as_child", () => {
 					it("should call clearTimeout, then setTimeout, then dndConfiguration.onHover", () => {
 						const { onBeginDrag, onHover } = setupTest();
 

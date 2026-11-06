@@ -32,9 +32,9 @@
 
 import type { Activity } from "@com.mgmtp.a12.client/client-core";
 
-import { TreeEngineDataHolder } from "../../data-holder.js";
 import type { Identifier } from "../../../../core/store/store.js";
 import { TreeDataUtils } from "../../../../core/store/utils.js";
+import { TreeEngineDataHolder } from "../../data-holder.js";
 
 /** @internal */
 export namespace NodeDeletionUtils {

@@ -35,21 +35,21 @@ import * as React from "react";
 import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
 import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { useTreeEngineRowContext } from "../../../../context/row-context.js";
+import { TreeEngineError } from "../../../../../error/tree-engine-error.js";
+import { TreeModel } from "../../../../../models/tree-model.js";
 import { LocalizerHooks } from "../../../../../services/localization/localizer-hooks.js";
 import { TreeModelKeys } from "../../../../../services/localization/tree-model-keys.js";
-import { TreeModel } from "../../../../../models/tree-model.js";
 import { DataSelector } from "../../../../../store/selectors/data.js";
 import { ModelSelector } from "../../../../../store/selectors/models.js";
-import type { ModelsState } from "../../../../../store/store.js";
+import { SearchSelector } from "../../../../../store/selectors/search.js";
 import { UIStateSelector } from "../../../../../store/selectors/ui-state.js";
+import type { ModelsState } from "../../../../../store/store.js";
+import { useTreeEngineRowContext } from "../../../../context/row-context.js";
 import { useTreeEngineContext, useTreeEngineState } from "../../../../context/tree-engine-context.js";
 import { useTreeInternalContext } from "../../../../context/tree-internal-context-provider.js";
-import { TreeEngineError } from "../../../../../error/tree-engine-error.js";
-
-import { FlattenNodeRow, RootNodeRow } from "../types.js";
 import type { RowAction } from "../row-action.js";
 import { RowCheckboxHandler } from "../row-checkbox.js";
+import { FlattenNodeRow, RootNodeRow } from "../types.js";
 
 /** @internal */
 export namespace RowActionHooks {
@@ -123,19 +123,13 @@ export namespace RowActionHooks {
 
 	const expandCollapseEventNames = ["event_expand_sub_tree", "event_collapse_sub_tree"];
 
-	const expandCollapseExemptEvents = [
-		"event_expand_whole_tree",
-		"event_collapse_whole_tree",
-		"event_expand_sub_tree",
-		"event_collapse_sub_tree"
-	];
-
 	export function useDisabilityGetter(busy: boolean, isCircular = false) {
 		const rowActionStateGetter = useTreeEngineContext((context) => context.rowActionStateGetter);
 		const canDrop = useTreeEngineContext((context) => context.dndConfiguration.canDrop);
 		const overallMultiSelection = useTreeEngineContext((context) => context.overallMultiSelection);
 
 		const disabled = useTreeEngineState(UIStateSelector.disabled());
+		const bulkExpansionDisabled = useTreeEngineState(SearchSelector.isReducedView());
 		const preloadChildNodes = useTreeEngineState(UIStateSelector.preloadChildNodes());
 		const clipboard = useTreeEngineState(UIStateSelector.clipboard());
 		const data = useTreeEngineState(DataSelector.data());
@@ -158,6 +152,15 @@ export namespace RowActionHooks {
 					row.children === undefined &&
 					rowActionModel.type === "event" &&
 					expandCollapseEventNames.includes(rowActionModel.event)
+				) {
+					return true;
+				}
+
+				// The reduced search result view offers no bulk expansion, at either scope.
+				if (
+					bulkExpansionDisabled &&
+					rowActionModel.type === "event" &&
+					TreeModel.BULK_EXPANSION_EVENT_NAMES.includes(rowActionModel.event)
 				) {
 					return true;
 				}
@@ -196,29 +199,27 @@ export namespace RowActionHooks {
 
 				if (
 					overallMultiSelection &&
-					!(rowActionModel.type === "event" && expandCollapseExemptEvents.includes(rowActionModel.event))
+					!(rowActionModel.type === "event" && TreeModel.BULK_EXPANSION_EVENT_NAMES.includes(rowActionModel.event))
 				) {
 					return true;
 				}
 
 				if (TreeModel.TreeNodeInsertActionButton.isInsertSiblingAction(rowActionModel)) {
 					const rowDocumentModel = row.nodeModel.documentModelRef;
-					const subTypeModels = ModelSelector.subtypeModelsByName(rowDocumentModel)({ models }).map(
-						(model) => model.modelId
-					);
 					const parent = DataSelector.parent(row.data)({ data, root });
 					// Hidden root node
 					if (parent && parent.nodeIdentifier.type !== root.identifier?.type) {
 						return false;
 					}
 
-					return ![...subTypeModels, rowDocumentModel].includes(rowActionModel.documentModelRef || "");
+					return !ModelSelector.isSameOrSubtypeOf(rowDocumentModel, rowActionModel.documentModelRef || "")({ models });
 				}
 
 				return false;
 			},
 			[
 				disabled,
+				bulkExpansionDisabled,
 				busy,
 				rowActionStateGetter,
 				isCircular,
@@ -235,6 +236,7 @@ export namespace RowActionHooks {
 
 	export function useReadonlyGetter(isCircular = false) {
 		const readonly = useTreeEngineState(UIStateSelector.readonly());
+		const bulkExpansionDisabled = useTreeEngineState(SearchSelector.isReducedView());
 		const preloadChildNodes = useTreeEngineState(UIStateSelector.preloadChildNodes());
 
 		return React.useCallback(
@@ -244,12 +246,12 @@ export namespace RowActionHooks {
 				}
 
 				if (rowActionModel.type === "event" && expandCollapseEventNames.includes(rowActionModel.event)) {
-					return preloadChildNodes && row.children === undefined;
+					return !bulkExpansionDisabled && preloadChildNodes && row.children === undefined;
 				}
 
 				return readonly;
 			},
-			[isCircular, preloadChildNodes, readonly]
+			[isCircular, bulkExpansionDisabled, preloadChildNodes, readonly]
 		);
 	}
 

@@ -56,8 +56,8 @@
 				],
 				"linkConstraints": {
 					"multiplicity": {
-						"unbounded": false,
-						"upperLimit": 1
+						"unbounded": true,
+						"upperLimit": null
 					}
 				}
 			},

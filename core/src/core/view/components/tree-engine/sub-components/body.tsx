@@ -38,12 +38,14 @@ import {
 	addPrefix
 } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { LocalizerHooks, RESOURCE_KEYS } from "../../../../services/localization/index.js";
 import { arePropsWithDataEqual } from "../../../configuration/are-props-with-data-equal.js";
-import { useTreeEngineContext, useTreeEngineState } from "../../../context/tree-engine-context.js";
+import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
 
-import { type FlattenNodeRow, RootNodeRow } from "./types.js";
-import { InitialViewRightClickContextMenuProvider } from "./initial-view-right-click-context-menu-provider.js";
 import { useInitialViewContextMenuModel, useLocalizationText } from "./initial-view-hooks.js";
+import { InitialViewRightClickContextMenuProvider } from "./initial-view-right-click-context-menu-provider.js";
+import { useTreeBodyState } from "./tree-body-state.js";
+import { type FlattenNodeRow, RootNodeRow } from "./types.js";
 
 export namespace Body {
 	export type Props = TreeTableRenderPropsType.BodyProps<FlattenNodeRow>;
@@ -51,24 +53,24 @@ export namespace Body {
 
 /** @internal */
 export const Body: React.FC<Body.Props> = React.memo(function Body(props) {
-	const { data } = props;
-	const busy = useTreeEngineContext((context) => context.busy);
-	const virtualRoot = useTreeEngineState((state) => state.models.uiModel.content.configuration.virtualRoot);
 	const InitialViewBody = useTreeEngineContext((context) => context.componentMap.InitialViewBody);
+	const EmptySearchResultBody = useTreeEngineContext((context) => context.componentMap.EmptySearchResultBody);
+	const bodyState = useTreeBodyState(props.data.length);
 
-	if (virtualRoot && data.length === 1) {
-		if (busy) {
+	switch (bodyState) {
+		case "pending":
 			return null;
-		}
-
-		return (
-			<InitialViewRightClickContextMenuProvider>
-				<InitialViewBody />
-			</InitialViewRightClickContextMenuProvider>
-		);
+		case "empty-search-result":
+			return <EmptySearchResultBody />;
+		case "initial-view":
+			return (
+				<InitialViewRightClickContextMenuProvider>
+					<InitialViewBody />
+				</InitialViewRightClickContextMenuProvider>
+			);
+		case "tree":
+			return <>{DefaultTreeTableComponentRenderers.bodyRenderer(props)}</>;
 	}
-
-	return <>{DefaultTreeTableComponentRenderers.bodyRenderer(props)}</>;
 }, arePropsWithDataEqual);
 
 export namespace InitialViewBody {
@@ -100,5 +102,27 @@ export const InitialViewBody: React.FC<InitialViewBody.Props> = React.memo(funct
 		</Message>
 	);
 });
+
+export namespace EmptySearchResultBody {
+	export interface Props {}
+}
+
+/** @internal */
+export const EmptySearchResultBody: React.FC<EmptySearchResultBody.Props> = React.memo(
+	function EmptySearchResultBody() {
+		const Message = useTreeEngineContext((context) => context.widgetMap.Message);
+		const localizedResource = LocalizerHooks.useLocalizedResource();
+		const emptyResultMessage = React.useMemo(
+			() => localizedResource(RESOURCE_KEYS.treeEngine.search.emptyResult),
+			[localizedResource]
+		);
+
+		return (
+			<Message className={addPrefix("-u-height-full -u-flex -u-flex-col -u-items-center")}>
+				{emptyResultMessage}
+			</Message>
+		);
+	}
+);
 
 /** @internal */

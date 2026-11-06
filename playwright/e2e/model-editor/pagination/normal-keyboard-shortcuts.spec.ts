@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 /*
@@ -57,18 +55,15 @@ test.describe("keyboard shortcuts", () => {
 		insertChild: "ControlOrMeta+Shift+I"
 	};
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, seed }) => {
 		commands = new PlaywrightCommands(page);
 		utils = new ModelEditorUtils(page);
 
-		await cleanDocumentsData({
-			showcases: ["model-editor"],
-			variant: "pagination"
-		});
-		await seedData({
+		await seed({
 			preset: "model-editor",
 			variant: "pagination",
-			data: "simple"
+			data: "simple",
+			force: true
 		});
 		await utils.navigateToFileExplorer("Pagination");
 	});
@@ -77,7 +72,7 @@ test.describe("keyboard shortcuts", () => {
 		// Use node insert action shortcut
 		await commands.pressRowShortcut("My Computer", shortcuts.insertChild);
 		await page.locator(Selector.DIALOG_NODE_TITLE).filter({ hasText: "DomainDrive" }).click();
-		await utils.fillDriveForm(["F:", "sa", "sa"]);
+		await utils.fillNameOwnerGroupForm(["F:", "sa", "sa"]);
 		await page.getByRole("button", { name: "Save" }).click();
 		await commands.waitUntilLoaded();
 		await expect(commands.getRow("F:")).toBeVisible();

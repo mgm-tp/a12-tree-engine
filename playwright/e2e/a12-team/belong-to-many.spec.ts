@@ -30,20 +30,17 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/api.js";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { Selector } from "../selectors.js";
 
 import { A12TeamUtils } from "./utils.js";
 
 test.describe("A person can belong to more than 1 team", () => {
-	test.beforeAll(async () => {
+	test.beforeAll(async ({ seed }) => {
 		// Clean and seed data using services-utils API
-		await cleanDocumentsData({ showcases: "a12-teams" });
-		await seedData({ preset: "a12-teams" });
+		await seed({ preset: "a12-teams", force: true });
 	});
 
 	test("should work", async ({ page }) => {

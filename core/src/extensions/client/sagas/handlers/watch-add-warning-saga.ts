@@ -32,13 +32,13 @@
 
 import { put, type SagaGenerator, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { NotificationActions } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
+import { RESOURCE_KEYS } from "../../../../core/services/localization/languages/keys.js";
+import { LocalizableFactory } from "../../../../core/services/localization/localizable-factory.js";
 import { Events } from "../../../../core/store/actions.js";
 import { TreeEngineActions } from "../../actions.js";
-import { LocalizableFactory } from "../../../../core/services/localization/localizable-factory.js";
-import { RESOURCE_KEYS } from "../../../../core/services/localization/languages/keys.js";
 
 /** @internal */
 export function* watchAddWarningSaga(activityId: string): SagaGenerator<void> {

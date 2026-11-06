@@ -33,11 +33,10 @@
 import { isAction } from "redux";
 import { type SagaGenerator, put, race, select, take, takeEvery } from "typed-redux-saga";
 
-import type { Action, Success } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySelectors, NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core";
+import type { Action, Success } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { TreeEngineError } from "../../../core/error/tree-engine-error.js";
-
 import { TreeEngineActions } from "../actions.js";
 
 /** @internal */

@@ -34,7 +34,6 @@ import { type Page, expect } from "@playwright/test";
 import { PlaywrightCommands } from "playwright-commands";
 
 import { generateNodes } from "../../../../services-utils/src/index.js";
-
 import { ExecutionType, type GroupTestConfig } from "../types.js";
 import { PlaywrightUtils } from "../utils.js";
 

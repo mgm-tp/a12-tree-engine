@@ -35,16 +35,15 @@ import { inspect } from "node:util";
 import { type JsonRpc2Request, JsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import { rpcRequest, addPerson, addTeam, linkPersonToTeam, linkTeamToTeam } from "../../../utils/index.js";
-
-import team1Json from "../documents/a12-teams/DomainTeam-1.json" with { type: "json" };
-import team2Json from "../documents/a12-teams/DomainTeam-2.json" with { type: "json" };
-import team3Json from "../documents/a12-teams/DomainTeam-3.json" with { type: "json" };
 import person1Json from "../documents/a12-teams/DomainPerson-1.json" with { type: "json" };
 import person2Json from "../documents/a12-teams/DomainPerson-2.json" with { type: "json" };
 import person3Json from "../documents/a12-teams/DomainPerson-3.json" with { type: "json" };
 import person4Json from "../documents/a12-teams/DomainPerson-4.json" with { type: "json" };
 import person5Json from "../documents/a12-teams/DomainPerson-5.json" with { type: "json" };
 import person6Json from "../documents/a12-teams/DomainPerson-6.json" with { type: "json" };
+import team1Json from "../documents/a12-teams/DomainTeam-1.json" with { type: "json" };
+import team2Json from "../documents/a12-teams/DomainTeam-2.json" with { type: "json" };
+import team3Json from "../documents/a12-teams/DomainTeam-3.json" with { type: "json" };
 
 export async function main() {
 	const team1 = addTeam("Team1", team1Json);

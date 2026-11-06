@@ -30,11 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { cleanDocumentsData, generateNodes } from "../../../services-utils/src/index.js";
-
 import { Selector } from "../selectors.js";
 
 import { CategoriesUtils } from "./utils.js";
@@ -43,13 +42,14 @@ test.describe("drag and drop", () => {
 	let utils: CategoriesUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, invalidateSeed }) => {
 		utils = new CategoriesUtils(page);
 		commands = new PlaywrightCommands(page);
 
 		await cleanDocumentsData({
 			showcases: ["categories"]
 		});
+		invalidateSeed("categories");
 
 		await page.goto("");
 	});

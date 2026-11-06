@@ -41,6 +41,11 @@ import {
 import { DocumentUtils } from "../../../../../../core/models/utils/document-utils.js";
 import { DataSelector, type TreeEngineState, UIStateSelector } from "../../../../../../core/store/index.js";
 import {
+	PaginatedBodyRow,
+	PaginationButtons,
+	RootPaginationButtons
+} from "../../../../../../core/view/components/tree-engine/sub-components/body-row/paginated-body-row.js";
+import {
 	type BodyRow,
 	DefaultWidgetMap,
 	type FlattenNodeRow,
@@ -48,18 +53,13 @@ import {
 	TreeEngineContextProvider
 } from "../../../../../../core/view/index.js";
 import {
-	PaginatedBodyRow,
-	PaginationButtons,
-	RootPaginationButtons
-} from "../../../../../../core/view/components/tree-engine/sub-components/body-row/paginated-body-row.js";
-import {
 	createContextProps,
 	defaultEngineState,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.paginated-body-row", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.paginated-body-row", () => {
 	let nodeStateStub: ReturnType<typeof vi.spyOn>;
 
 	const basicEngineState = defaultEngineState;

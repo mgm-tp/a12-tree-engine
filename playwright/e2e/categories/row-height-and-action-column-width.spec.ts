@@ -30,10 +30,8 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
-
-import { cleanDocumentsData, seedData } from "../../../services-utils/src/index.js";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { Selector } from "../selectors.js";
 
@@ -43,12 +41,9 @@ test.describe("rowHeight and actionColumnWidth", () => {
 	let utils: CategoriesUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeAll(async () => {
+	test.beforeAll(async ({ seed }) => {
 		// Setup test data once for all tests
-		await cleanDocumentsData({
-			showcases: ["categories"]
-		});
-		await seedData({
+		await seed({
 			preset: "categories"
 		});
 	});
@@ -62,6 +57,16 @@ test.describe("rowHeight and actionColumnWidth", () => {
 	});
 
 	test("should work properly", async ({ page }) => {
+		// The Description column is modelled initially hidden; reveal it through the column
+		// manager, since its ellipsized text is what the tooltip check below hovers.
+		await page.locator(`${Selector.SUB_HEADER} button`).filter({ hasText: "view_column" }).click();
+		await page
+			.locator(Selector.COLUMN_VISIBILITY_ITEM)
+			.filter({ hasText: "Description" })
+			.locator(Selector.CHECKBOX_INPUT)
+			.click();
+		await page.keyboard.press("Escape");
+
 		// Find Nokia row
 		const nokiaRow = commands.getRow("Nokia");
 		await expect(nokiaRow).toBeVisible();

@@ -33,14 +33,13 @@
 import { type SagaGenerator, call, select } from "typed-redux-saga";
 
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
+import { TreeModel } from "../../../../core/models/tree-model.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
 import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
 import { TreeEngineDataHolder } from "../../../client/data-holder.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
 import { maybeAsyncFnWrapper } from "../../../client/utils.js";
 import { DataOperation } from "../../data-loaders/data-loader.js";
-import { TreeModel } from "../../../../core/models/tree-model.js";
-
 import { calculateCurrentExpansionDepths } from "../load/utils.js";
 import { type BasePayload, getDocumentProcessors } from "../utils.js";
 

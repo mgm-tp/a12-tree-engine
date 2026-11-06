@@ -33,19 +33,17 @@
 import type { Store } from "redux";
 
 import {
-	TreeEngineFactories,
-	type TreeEngineSaga,
-	TreeEngineServerConnectorFactories
-} from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { DataServicesReducerMap } from "@com.mgmtp.a12.dataservices/dataservices-access";
-import { DeepLinkingFactories } from "@com.mgmtp.a12.client/client-core/deepLinking";
-import {
 	ActivitySelectors,
 	APPLICATION_MODEL_PLACEHOLDER,
 	ApplicationFactories,
 	type ApplicationSetup,
 	ModelActions
 } from "@com.mgmtp.a12.client/client-core";
+import { DeepLinkingFactories } from "@com.mgmtp.a12.client/client-core/deepLinking";
+import { DirtyHandlingFactories } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
+import { createPlatformServerModelLoader } from "@com.mgmtp.a12.client/client-core/modelLoader";
+import { CRUDFactories } from "@com.mgmtp.a12.crud/crud-core";
+import { DataServicesReducerMap } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import {
 	createEmptyDocumentDataProvider,
 	createFormEngineMiddlewares,
@@ -55,27 +53,27 @@ import {
 	platformAttachmentLoader,
 	platformSingleDocumentDataProvider
 } from "@com.mgmtp.a12.formengine/formengine-core";
-import { CRUDFactories } from "@com.mgmtp.a12.crud/crud-core";
-import { DirtyHandlingFactories } from "@com.mgmtp.a12.client/client-core/dirtyHandling";
-import { RelationshipEngineFactories } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
 import { OverviewEngineFactories } from "@com.mgmtp.a12.overviewengine/overviewengine-core";
-import { createPlatformServerModelLoader } from "@com.mgmtp.a12.client/client-core/modelLoader";
+import { RelationshipEngineFactories } from "@com.mgmtp.a12.relationshipengine/relationshipengine-core";
+import {
+	TreeEngineFactories,
+	type TreeEngineSaga,
+	TreeEngineServerConnectorFactories
+} from "@com.mgmtp.a12.treeengine/treeengine-core";
 
-import { appCustomSagas } from "./sagas/index.js";
+import { createComposeEnhancer, fetchModelGraph, loadDSConfigurations } from "./config/redux.js";
 import { restoreActivityAction } from "./model-editor/activity-suspending/actions.js";
+import { appCustomSagas } from "./sagas/index.js";
 import {
 	registerApplicationModules,
-	// registerCustomFieldTypes,
+	provideKernelOptions,
 	isLinkAddedByDetailActivity,
 	createCustomSagaRegistrations,
 	getNewLinkPosition,
 	getPreloadChildNodesSetting
 } from "./shared-setup.js";
-import { createComposeEnhancer, fetchModelGraph, loadDSConfigurations } from "./config/redux.js";
 
 let config: ApplicationSetup | undefined;
-
-// registerCustomFieldTypes();
 
 export function setup(): {
 	config: ApplicationSetup;
@@ -128,9 +126,9 @@ export function setup(): {
 			// Tree Engine middlewares
 			...TreeEngineFactories.createMiddlewares(),
 
-			...RelationshipEngineFactories.createMiddlewares(),
+			...RelationshipEngineFactories.createMiddlewares({ kernelOptionsProvider: provideKernelOptions }),
 
-			...createFormEngineMiddlewares(),
+			...createFormEngineMiddlewares({ kernelOptionsProvider: provideKernelOptions }),
 			...OverviewEngineFactories.createMiddlewares(),
 			CRUDFactories.createCRUDMiddleware()
 		],

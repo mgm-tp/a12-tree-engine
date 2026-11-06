@@ -33,13 +33,13 @@
 import { isAction } from "redux";
 import { type SagaGenerator, takeEvery, put, all } from "typed-redux-saga";
 
+import { ActivityActions, NotificationActions } from "@com.mgmtp.a12.client/client-core";
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { JsonRpc2Response } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { TreeEngineError } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { ActivityActions, NotificationActions } from "@com.mgmtp.a12.client/client-core";
 
-import { toCapitalize } from "../utils.js";
 import { SHOWCASE_RESOURCE_KEYS } from "../config/resources.js";
+import { toCapitalize } from "../utils.js";
 
 // tag::handleErrorSaga[]
 export function* handleErrorSaga(): SagaGenerator<void> {

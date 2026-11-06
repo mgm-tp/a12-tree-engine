@@ -35,11 +35,41 @@ import type { RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices
 import { TreeEngineError } from "../../error/tree-engine-error.js";
 import { ModelSelector } from "../../store/selectors/models.js";
 import type { ModelsState } from "../../store/store.js";
-
-import type { RuntimeTreeModel } from "../tree-model.js";
+import type { RuntimeTreeModel, TreeModel } from "../tree-model.js";
 
 /** @internal */
 export namespace TreeModelUtils {
+	/**
+	 * The search result views the model offers, duplicates dropped. A model that names none offers
+	 * both; the order carries no meaning — which view a search opens in is decided by
+	 * {@link resolveSearchResultView}.
+	 *
+	 * @internal
+	 */
+	export function getSearchResultViews(configuration: TreeModel.Configuration): TreeModel.SearchResultView[] {
+		const views = configuration.searchResultViews?.filter((view, index, all) => all.indexOf(view) === index) ?? [];
+		return views.length > 0 ? views : ["reduced", "complete"];
+	}
+
+	/**
+	 * The view a search runs in: the one the user picked while the model still offers it, otherwise
+	 * reduced — or the only named view when reduced is not offered.
+	 *
+	 * @internal
+	 */
+	export function resolveSearchResultView(
+		configuration: TreeModel.Configuration,
+		chosenView: TreeModel.SearchResultView | undefined
+	): TreeModel.SearchResultView {
+		const views = getSearchResultViews(configuration);
+		if (chosenView && views.includes(chosenView)) {
+			return chosenView;
+		}
+		// The order the modeler wrote carries no meaning: a search opens reduced whenever that view is
+		// on offer, and a single-entry list pins the tree to whichever view it names.
+		return views.includes("reduced") ? "reduced" : views[0];
+	}
+
 	/** @internal */
 	export function findColumnById(
 		columns: RuntimeTreeModel.TreeNodeColumn[] | undefined,

@@ -30,15 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
+import type { TreeModel } from "../../../../../../core/models/index.js";
+import { AttachmentIcon } from "../../../../../../core/view/components/tree-engine/sub-components/attachment-cell-content.js";
 import { AttachmentCell, type TreeEngineRowContext } from "../../../../../../core/view/index.js";
 import { createContextProps } from "../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
-import type { TreeModel } from "../../../../../../core/models/index.js";
-import { AttachmentIcon } from "../../../../../../core/view/components/tree-engine/sub-components/attachment-cell-content.js";
 
 import { BodyCellWrapper } from "./body-cell/shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.attachment-cell", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.attachment-cell", () => {
 	const basicAttachmentCellProps: AttachmentCell.Props = {
 		documentId: "1024",
 		attachment: {
@@ -107,31 +107,37 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 				[attachmentIdWithThumbnails]: "./cs/download/d6a5adbe-48e6-49ed-8fa8-1cf7f6f3b61d"
 			};
 
-			const testCases = [
-				{
-					description: "with attachment_id, with thumbnailUrl",
-					attachment: { ...image, attachment_id: attachmentIdWithThumbnails },
-					imgSrc: "./cs/download/d6a5adbe-48e6-49ed-8fa8-1cf7f6f3b61d"
-				},
+			describe("with attachment_id, with thumbnailUrl", () => {
+				it("should render image tag instead of icon", () => {
+					const result = setupTest({ attachment: { ...image, attachment_id: attachmentIdWithThumbnails } }, thumbnails);
+
+					expect(result.find("img")).toHaveLength(1);
+					expect(result.find("img").prop("src")).toBe("./cs/download/d6a5adbe-48e6-49ed-8fa8-1cf7f6f3b61d");
+					expect(result.find(AttachmentIcon)).toHaveLength(0);
+				});
+			});
+
+			/**
+			 * A12TE-948 removed the embedded attachment API, so a preview is rendered only from a
+			 * thumbnail resolved through the selector map — the attachment's own content is never a source.
+			 */
+			const withoutThumbnailCases = [
 				{
 					description: "with attachment_id, without thumbnailUrl",
-					attachment: { ...image, attachment_id: "defc13ef" },
-					imgSrc: ""
+					attachment: { ...image, attachment_id: "defc13ef" }
 				},
 				{
 					description: "with valid content",
-					attachment: { ...image, content: "data:abcdef" },
-					imgSrc: "data:abcdef"
+					attachment: { ...image, content: "data:abcdef" }
 				}
 			];
 
-			testCases.forEach((testCase) => {
+			withoutThumbnailCases.forEach((testCase) => {
 				describe(`${testCase.description}`, () => {
-					it("should render image tag instead of icon", () => {
+					it("should render neither image tag nor icon", () => {
 						const result = setupTest({ attachment: { ...testCase.attachment } }, thumbnails);
 
-						expect(result.find("img")).toHaveLength(1);
-						expect(result.find("img").prop("src")).toBe(testCase.imgSrc);
+						expect(result.find("img")).toHaveLength(0);
 						expect(result.find(AttachmentIcon)).toHaveLength(0);
 					});
 				});
@@ -158,11 +164,12 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 			];
 			testCases.forEach((testCase) => {
 				describe(`${testCase.description}`, () => {
-					it("should not render img tag and icon", () => {
+					/** A non-image attachment is represented by its file type icon, which needs no source. */
+					it("should render the type icon but no img tag", () => {
 						const result = setupTest({ attachment: { ...testCase.attachment } });
 
 						expect(result.find("img")).toHaveLength(0);
-						expect(result.find(AttachmentIcon)).toHaveLength(0);
+						expect(result.find(AttachmentIcon)).toHaveLength(1);
 					});
 				});
 			});

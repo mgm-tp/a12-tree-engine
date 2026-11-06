@@ -31,10 +31,11 @@
  */
 
 import React from "react";
+
 import { StyleSheetManager, ThemeProvider } from "styled-components";
 
-import { GlobalStyles, shouldForwardProp } from "@com.mgmtp.a12.widgets/widgets-core";
 import { addWrapper, type A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core";
+import { GlobalStyles, shouldForwardProp } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import { THEMES, useShowcaseContext } from "../context.js";
 
@@ -55,4 +56,4 @@ export const ThemeWrapper: React.FC<ThemeWrapperProps> = ({ children }) => {
 	);
 };
 
-export const withTheme = <T extends A12ApplicationConfig>(cfg: T) => addWrapper<T>(ThemeWrapper, "outer")(cfg);
+export const withTheme = <T extends A12ApplicationConfig>(cfg: T) => addWrapper(ThemeWrapper, "outer")(cfg);

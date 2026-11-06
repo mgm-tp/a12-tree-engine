@@ -38,8 +38,8 @@ import {
 	type TreeTableRenderPropsType
 } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { useTreeEngineContext } from "../../context/tree-engine-context.js";
 import { FlattenNodeRow, RootNodeRow } from "../../components/tree-engine/sub-components/types.js";
+import { useTreeEngineContext } from "../../context/tree-engine-context.js";
 
 import type { DndConfiguration, DragObject, DropResult } from "./configuration.js";
 

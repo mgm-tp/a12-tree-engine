@@ -47,7 +47,7 @@ import { testIsNullComponent } from "../../../../../utils/test-utils.js";
 
 import { BodyCellWrapper, teamIdentifier, teamNodeModel } from "./body-cell/shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.context-menu", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.context-menu", () => {
 	const basicNodeIdentifier = {
 		id: "DomainTeam/1",
 		type: "DomainTeam"

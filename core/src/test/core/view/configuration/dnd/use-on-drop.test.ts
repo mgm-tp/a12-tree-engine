@@ -34,8 +34,7 @@ import { vi } from "vitest";
 
 import { TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { defaultEngineState } from "../../../../setup/basic.spec.js";
-import { testHook } from "../../../../utils/test-utils.js";
+import { useBulkDndHandler, useSingleDndHandler } from "../../../../../core/view/configuration/dnd/use-on-drop.js";
 import {
 	defaultDndConfiguration,
 	type DndConfiguration,
@@ -44,8 +43,9 @@ import {
 	type DropResult,
 	type FlattenNodeRow
 } from "../../../../../core/view/index.js";
+import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import { useBulkDndHandler, useSingleDndHandler } from "../../../../../core/view/configuration/dnd/use-on-drop.js";
+import { testHook } from "../../../../utils/test-utils.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.use-on-drop", () => {
 	const basicEngineState = defaultEngineState;

@@ -30,7 +30,7 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// oxlint-disable-next-line ban-ts-comment
 // @ts-nocheck
 
 import type { DataOperation } from "@com.mgmtp.a12.treeengine/treeengine-core";

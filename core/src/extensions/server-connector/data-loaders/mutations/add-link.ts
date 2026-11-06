@@ -39,13 +39,12 @@ import {
 } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import { TreeModel } from "../../../../core/models/tree-model.js";
 import { DocumentUtils } from "../../../../core/models/shared.js";
+import { TreeModel } from "../../../../core/models/tree-model.js";
 import type { TreeEngineOperation } from "../../../client/operation.js";
 import { TreeEngineSelectors } from "../../../client/selectors.js";
 import type { RequestSelectorMap } from "../../request-selector-map.js";
 import type { DocumentProcessors } from "../../types.js";
-
 import type { A12DataServicesSetting } from "../a12-data-services-setting.js";
 import { JsonRpc } from "../json-rpc.js";
 import { RequestId } from "../request-id.js";

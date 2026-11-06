@@ -34,8 +34,8 @@ import type { Middleware } from "redux";
 
 import { TreeEngineError } from "../../../error/tree-engine-error.js";
 import { Commands, Events } from "../../actions.js";
-import { ModelSelector } from "../../selectors/models.js";
 import { DataSelector } from "../../selectors/data.js";
+import { ModelSelector } from "../../selectors/models.js";
 import { TreeEngineState } from "../../store.js";
 
 /**

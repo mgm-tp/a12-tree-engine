@@ -38,11 +38,7 @@ import { MultiSelectGroup } from "../../../../core/services/multi-select/index.j
 describe("@com.mgmtp.a12.tree-engine.core.models.utils.document-model-utils", () => {
 	function createFactory() {
 		return {
-			createGroup(
-				id: string,
-				elements: ReadonlyArray<DocumentModel.Element>,
-				usageType?: string | undefined
-			): DocumentModel.Group {
+			createGroup(id: string, elements: ReadonlyArray<DocumentModel.Element>, usageType?: string): DocumentModel.Group {
 				return {
 					type: "Group",
 					id,

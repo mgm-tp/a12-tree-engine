@@ -32,16 +32,15 @@
 
 import { type SagaGenerator, call, put, select, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import type { Activity } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { Commands, Events } from "../../../../core/store/actions.js";
-import { type Identifier, TreeEngineState } from "../../../../core/store/store.js";
 import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
+import { type Identifier, TreeEngineState } from "../../../../core/store/store.js";
 import { TreeEngineActions } from "../../actions.js";
 import { TreeEngineSelectors } from "../../selectors.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-
 import { SagaUtils } from "../saga-utils.js";
 
 import {
@@ -94,7 +93,7 @@ export function* expandNode(params: {
 		yield* put(TreeEngineActions.command({ activityId, engineAction: Commands.setExpandedNodes({ nodes }) }));
 	} else {
 		const nodes = { ...expandedNodes };
-		// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+		// oxlint-disable-next-line no-dynamic-delete
 		delete nodes[pathString];
 		yield* put(TreeEngineActions.command({ activityId, engineAction: Commands.setExpandedNodes({ nodes }) }));
 	}

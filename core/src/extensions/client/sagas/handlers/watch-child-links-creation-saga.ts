@@ -32,13 +32,12 @@
 
 import { type SagaGenerator, call, put, select, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { Events } from "../../../../core/store/actions.js";
 import { TreeEngineActions } from "../../actions.js";
 import { logger } from "../../utils.js";
-
 import { SagaUtils } from "../saga-utils.js";
 
 /** @internal */

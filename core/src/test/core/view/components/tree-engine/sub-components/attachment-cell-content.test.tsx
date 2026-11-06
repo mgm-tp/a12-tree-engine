@@ -32,15 +32,15 @@
 
 import type * as Enzyme from "enzyme";
 
-import { ResponsiveImageContainer, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
 import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
+import { ResponsiveImageContainer, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { TreeModel } from "../../../../../../core/models/index.js";
 import {
 	AttachmentCellContent,
 	AttachmentIcon
 } from "../../../../../../core/view/components/tree-engine/sub-components/attachment-cell-content.js";
 import { type FlattenNodeRow, TreeEngineContextProvider } from "../../../../../../core/view/index.js";
-import { TreeModel } from "../../../../../../core/models/index.js";
 import {
 	createContextProps,
 	defaultEngineState,
@@ -48,7 +48,7 @@ import {
 } from "../../../../../setup/basic.spec.js";
 import { mockType } from "../../../../../utils/mock-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.attachment-cell-content", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.attachment-cell-content", () => {
 	const basicEngineState = defaultEngineState;
 	const basicAttachment: Attachment = {
 		internal_filename: "internal_filename.jpg",
@@ -203,7 +203,11 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 				];
 
 				testCases.forEach(([mime_type, expectedIcon]) => {
-					const attachmentIcon = mount(<AttachmentIcon attachment={{ ...basicAttachment, mime_type }} />);
+					// AttachmentIcon resolves its Icon widget from the engine context, so it needs the provider.
+					const attachmentIcon = mount(<AttachmentIcon attachment={{ ...basicAttachment, mime_type }} />, {
+						wrappingComponent: TreeEngineContextProvider,
+						wrappingComponentProps: createContextProps(basicEngineState)
+					});
 
 					const icon = attachmentIcon.find(Icon);
 					expect(icon.props()).toMatchObject({ size: "big", iconTheme: "custom" });

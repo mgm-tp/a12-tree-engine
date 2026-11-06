@@ -30,11 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
 import { cleanDocumentsData, generateNodes } from "../../../services-utils/src/index.js";
-
 import { Selector } from "../selectors.js";
 
 import { CategoriesUtils } from "./utils.js";
@@ -43,12 +42,13 @@ test.describe("multi-selection", () => {
 	let utils: CategoriesUtils;
 	let commands: PlaywrightCommands;
 
-	test.beforeEach(async ({ page }) => {
+	test.beforeEach(async ({ page, invalidateSeed }) => {
 		utils = new CategoriesUtils(page);
 		commands = new PlaywrightCommands(page);
 		await cleanDocumentsData({
 			showcases: ["categories"]
 		});
+		invalidateSeed("categories");
 
 		await page.goto("");
 	});
@@ -58,7 +58,9 @@ test.describe("multi-selection", () => {
 		await utils.navigate();
 
 		// Initially, multi-selection buttons should be disabled
-		(await page.locator(Selector.MULTI_SELECTION_BUTTONS).all()).forEach((button) => expect(button).toBeDisabled());
+		for (const button of await page.locator(Selector.MULTI_SELECTION_BUTTONS).all()) {
+			await expect(button).toBeDisabled();
+		}
 		await expect(page.locator(Selector.SUB_HEADER_BUTTONS).first()).toBeEnabled();
 		await expect(page.locator(Selector.ROW_BUTTONS).first()).toBeEnabled();
 

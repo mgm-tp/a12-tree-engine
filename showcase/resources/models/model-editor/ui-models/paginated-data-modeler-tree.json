@@ -2,7 +2,7 @@
 	"header": {
 		"id": "paginated-data-modeler-tree",
 		"modelType": "tree",
-		"modelVersion": "11.0.0",
+		"modelVersion": "11.1.0",
 		"locales": [
 			{
 				"code": "en"

@@ -31,23 +31,24 @@
  */
 
 import type * as React from "react";
+
 import * as KeyCode from "keycode-js";
 import { vi } from "vitest";
 
 import type { Localizable } from "@com.mgmtp.a12.utils/utils-localization";
 
-import { defaultEngineState, type PartialEventHandlerContextProps } from "../../../../setup/basic.spec.js";
-import { testHook } from "../../../../utils/test-utils.js";
-import { KeyboardShortcut } from "../../../../../core/view/index.js";
-import { mockType } from "../../../../utils/mock-utils.js";
+import { TreeModel } from "../../../../../core/models/index.js";
+import type { TreeEngineState } from "../../../../../core/store/index.js";
 import {
 	type Controller,
 	useBuiltinShortcut,
 	useKeyDown,
 	useRowActionShortcut
 } from "../../../../../core/view/configuration/keyboard-shortcut/hooks.js";
-import { TreeModel } from "../../../../../core/models/index.js";
-import type { TreeEngineState } from "../../../../../core/store/index.js";
+import { KeyboardShortcut } from "../../../../../core/view/index.js";
+import { defaultEngineState, type PartialEventHandlerContextProps } from "../../../../setup/basic.spec.js";
+import { mockType } from "../../../../utils/mock-utils.js";
+import { testHook } from "../../../../utils/test-utils.js";
 
 import InsertPosition = TreeModel.InsertPosition;
 

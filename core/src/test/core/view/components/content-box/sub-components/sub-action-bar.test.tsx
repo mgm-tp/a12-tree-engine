@@ -41,7 +41,7 @@ import { createEngineState } from "../../../../../utils/model-utils.js";
 
 import { defaultMultiSelectionConfig } from "./multi-selection/utils.test.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.sub-action-bar", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.sub-action-bar", () => {
 	const basicEngineState = defaultEngineState;
 	const basicConfiguration = basicEngineState.models.uiModel.content.configuration;
 

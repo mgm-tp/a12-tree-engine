@@ -30,15 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 import { isAction } from "redux";
+import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { Events, TreeEngineActions, type TreeEngineActivity } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 import { assert, OPEN_DM_WITH_TEMPORARY_REPLACEMENT_NODE_EVENT } from "../../helpers.js";
-
 import { cancelChildActivities } from "../sagas/utils.js";
 
 import { hideActivityAction } from "./actions.js";

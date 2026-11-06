@@ -39,10 +39,11 @@ import {
 } from "@com.mgmtp.a12.widgets/widgets-core";
 
 import {
-	createContextProps,
-	defaultEngineState,
-	type PartialEventHandlerContextProps
-} from "../../../../../setup/basic.spec.js";
+	type Identifier,
+	type RowState,
+	RowStateSelector,
+	type TreeEngineState
+} from "../../../../../../core/store/index.js";
 import {
 	BodyRow,
 	type DndBodyRow,
@@ -50,16 +51,15 @@ import {
 	TreeEngineContextProvider,
 	TreeEngineRowContextProvider
 } from "../../../../../../core/view/index.js";
-import { mockType, type Stub } from "../../../../../utils/mock-utils.js";
 import {
-	type Identifier,
-	type RowState,
-	RowStateSelector,
-	type TreeEngineState
-} from "../../../../../../core/store/index.js";
+	createContextProps,
+	defaultEngineState,
+	type PartialEventHandlerContextProps
+} from "../../../../../setup/basic.spec.js";
+import { mockType, type Stub } from "../../../../../utils/mock-utils.js";
 import { testIsNullComponent } from "../../../../../utils/test-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-row", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-row", () => {
 	const basicEngineState = defaultEngineState;
 	const teamNodeModel = basicEngineState.models.uiModel.content.nodes[0];
 	const basicNodeIdentifier = {

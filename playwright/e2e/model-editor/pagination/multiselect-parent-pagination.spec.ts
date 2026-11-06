@@ -30,12 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { test, expect, type Locator, type Page } from "@playwright/test";
-import { PlaywrightCommands } from "playwright-commands";
+import { expect, type Locator, type Page } from "@playwright/test";
+import { PlaywrightCommands, test } from "playwright-commands";
 
-import { cleanDocumentsData, seedData } from "../../../../services-utils/src/index.js";
 import { Selector } from "../../selectors.js";
-
 import { ModelEditorUtils } from "../utils.js";
 
 type MultiSelectionState = "selected" | "partlySelected" | "deselected";
@@ -144,15 +142,12 @@ test.describe("select parent node when all child nodes are shown and selected", 
 	let utils: ModelEditorUtils;
 	let multiSelectHelper: MultiSelectionTestHelper;
 
-	test.beforeAll(async () => {
-		await cleanDocumentsData({
-			showcases: ["model-editor"],
-			variant: "pagination"
-		});
-		await seedData({
+	test.beforeAll(async ({ seed }) => {
+		await seed({
 			preset: "model-editor",
 			variant: "pagination",
-			data: "simple"
+			data: "simple",
+			force: true
 		});
 	});
 

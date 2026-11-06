@@ -30,9 +30,10 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 import { isAction } from "redux";
+import { type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
+import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	TreeEngineActions,
@@ -40,10 +41,9 @@ import {
 	Events,
 	DataSelector
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 
-import { setNodesFromNodePath, setTargetNodePath } from "../utils.js";
 import { assert, MARK_AS_TARGET_NODE_EVENT } from "../helpers.js";
+import { setNodesFromNodePath, setTargetNodePath } from "../utils.js";
 
 export function* handleMarkAsTargetNodeSaga(): SagaGenerator<void> {
 	yield* takeLatest((action: unknown) => {

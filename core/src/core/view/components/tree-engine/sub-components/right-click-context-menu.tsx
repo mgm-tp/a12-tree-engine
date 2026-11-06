@@ -34,12 +34,12 @@ import * as React from "react";
 
 import type { TableRenderPropsType } from "@com.mgmtp.a12.widgets/widgets-core";
 
-import { useTreeInternalContext } from "../../../context/tree-internal-context-provider.js";
 import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
+import { useTreeInternalContext } from "../../../context/tree-internal-context-provider.js";
 
-import type { FlattenNodeRow } from "./types.js";
 import { ContextMenuHooks } from "./hooks/context-menu-hooks.js";
 import { RowActionGroupHooks } from "./hooks/row-action-hooks.js";
+import type { FlattenNodeRow } from "./types.js";
 
 export namespace RightClickContextMenu {
 	export interface Props extends TableRenderPropsType.ContextMenuProps<FlattenNodeRow> {

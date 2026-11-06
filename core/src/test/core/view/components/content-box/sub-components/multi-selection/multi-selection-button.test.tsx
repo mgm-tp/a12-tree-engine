@@ -30,12 +30,15 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { vi } from "vitest";
 import type * as Enzyme from "enzyme";
+import { vi } from "vitest";
 
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { Button, Icon } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { TreeModel } from "../../../../../../../core/models/index.js";
+import { de } from "../../../../../../../core/services/localization/languages/de.js";
+import { en } from "../../../../../../../core/services/localization/languages/en.js";
 import type { TreeEngineState } from "../../../../../../../core/store/index.js";
 import { MultiSelectionButton, TreeEngineContextProvider } from "../../../../../../../core/view/index.js";
 import {
@@ -45,15 +48,12 @@ import {
 	type PartialEventHandlerContextProps,
 	enLocale
 } from "../../../../../../setup/basic.spec.js";
-import { TreeModel } from "../../../../../../../core/models/index.js";
 import { createEngineState } from "../../../../../../utils/model-utils.js";
 import { testIsNullComponent } from "../../../../../../utils/test-utils.js";
-import { en } from "../../../../../../../core/services/localization/languages/en.js";
-import { de } from "../../../../../../../core/services/localization/languages/de.js";
 
 import { defaultMultiSelectionConfig } from "./utils.test.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.multi-selection.multi-selection-button", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.content-box.sub-components.multi-selection.multi-selection-button", () => {
 	const basicEngineState = defaultEngineState;
 	const basicConfiguration = basicEngineState.models.uiModel.content.configuration;
 

@@ -30,14 +30,14 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
-import type { IconTheme } from "@com.mgmtp.a12.widgets/widgets-core";
 import type {
 	Annotation as BaseAnnotation,
 	Header as BaseHeader,
 	ModelReference as BaseModelReference,
 	ModelPath
 } from "@com.mgmtp.a12.base/base-model-api";
+import type { LocalizedModelText } from "@com.mgmtp.a12.utils/utils-localization";
+import type { IconTheme } from "@com.mgmtp.a12.widgets/widgets-core";
 
 export interface TreeModel {
 	readonly header: TreeModel.Header;
@@ -69,7 +69,12 @@ export namespace TreeModel {
 		readonly rightSlot: ReadonlyArray<ButtonElement>;
 	}
 
-	export type Element = ButtonElement | MultiSelectionElement | ExpandAllPopUpElement;
+	export type Element =
+		| ButtonElement
+		| MultiSelectionElement
+		| ExpandAllPopUpElement
+		| ColumnVisibilityElement
+		| SearchElement;
 
 	export interface BaseElement {
 		readonly type: ElementType;
@@ -107,10 +112,34 @@ export namespace TreeModel {
 		}
 	}
 
+	export interface ColumnVisibilityElement extends BaseElement {
+		readonly type: ElementType.COLUMN_VISIBILITY;
+	}
+	export namespace ColumnVisibilityElement {
+		export function isAssignableFrom(element: unknown): element is ColumnVisibilityElement {
+			return BaseElement.isAssignableFrom(element) && element.type === ElementType.COLUMN_VISIBILITY;
+		}
+	}
+
+	/**
+	 * Places the search bar in a sub-header slot. It only renders when
+	 * {@link Configuration.showFullTextSearch} is set and the expansion strategy is `tree`.
+	 */
+	export interface SearchElement extends BaseElement {
+		readonly type: ElementType.SEARCH;
+	}
+	export namespace SearchElement {
+		export function isAssignableFrom(element: unknown): element is SearchElement {
+			return BaseElement.isAssignableFrom(element) && element.type === ElementType.SEARCH;
+		}
+	}
+
 	export enum ElementType {
 		BUTTON = "button",
 		MULTI_SELECTION = "multi_selection",
-		EXPAND_ALL_POPUP = "expand_all_popup"
+		EXPAND_ALL_POPUP = "expand_all_popup",
+		COLUMN_VISIBILITY = "column_visibility",
+		SEARCH = "search"
 	}
 
 	export interface Column {
@@ -119,6 +148,13 @@ export namespace TreeModel {
 		readonly label: LocalizedModelText;
 		readonly icon?: Icon;
 		readonly labelHidden?: true;
+		/**
+		 * Hides the column on load; the end user can show it again at runtime.
+		 *
+		 * Has no effect on the column referenced by {@link Configuration.hierarchicalColumnRef},
+		 * which is always visible.
+		 */
+		readonly initiallyHidden?: true;
 
 		readonly pinDirection?: PinDirection;
 		readonly width: Width;
@@ -327,6 +363,14 @@ export namespace TreeModel {
 		"event_toggle_expansion"
 	] as const;
 
+	/** The bulk expand and collapse events, at whole-tree and at sub-tree scope. @internal */
+	export const BULK_EXPANSION_EVENT_NAMES: readonly string[] = [
+		"event_expand_whole_tree",
+		"event_collapse_whole_tree",
+		"event_expand_sub_tree",
+		"event_collapse_sub_tree"
+	];
+
 	export type EngineEvent = (typeof BUILT_IN_EVENT_NAMES)[number] | (string & {});
 
 	export interface EventRowActivation {
@@ -361,12 +405,33 @@ export namespace TreeModel {
 
 	export type RowActivation = EventRowActivation | InsertRowActivation | NonInteractiveRowActivation;
 
+	/**
+	 * How a search result is presented: `reduced` keeps only the matches and the paths to them,
+	 * `complete` keeps the whole tree and merely reveals and highlights the matches.
+	 */
+	export type SearchResultView = "reduced" | "complete";
+
 	export interface Configuration {
 		readonly rootRef: string;
 		readonly hierarchicalColumnRef: string;
 		readonly labelHidden?: true;
 		readonly wholeTreeExpansion?: true;
 		readonly enableColumnsResize?: true;
+		/**
+		 * Lets end users show and hide columns at runtime via a {@link ColumnVisibilityElement}
+		 * placed in the {@link Content.subHeaderBox}.
+		 */
+		readonly enableUserDefinedColumnVisibility?: true;
+		/**
+		 * Enables the full-text search bar placed by a {@link SearchElement}. Without it the element
+		 * renders nothing. Only effective for the `tree` expansion strategy.
+		 */
+		readonly showFullTextSearch?: boolean;
+		/**
+		 * The result views a search offers. A single entry fixes the view and hides the switch; the
+		 * order carries no meaning and it defaults to both.
+		 */
+		readonly searchResultViews?: ReadonlyArray<SearchResultView>;
 		readonly dnd?: DndConfiguration;
 		readonly multiSelection?: MultiSelectionConfiguration;
 		readonly virtualRoot?: VirtualRootConfiguration;

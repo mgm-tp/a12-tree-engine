@@ -32,8 +32,8 @@
 
 import * as React from "react";
 
-import { TreeEngineState } from "../../../store/store.js";
 import { UIStateSelector } from "../../../store/selectors/ui-state.js";
+import { TreeEngineState } from "../../../store/store.js";
 import { useTreeEngineContext, useTreeEngineState } from "../../context/tree-engine-context.js";
 
 export namespace DialogsRenderer {

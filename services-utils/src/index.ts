@@ -45,6 +45,7 @@ export {
 	uploadModelsData,
 	waitOnServer,
 	executeCommand,
+	showcasesByPreset,
 
 	// Fluent API
 	ServicesUtils,

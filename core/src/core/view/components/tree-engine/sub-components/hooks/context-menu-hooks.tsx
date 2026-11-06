@@ -33,11 +33,10 @@
 import * as React from "react";
 
 import type { TreeModel } from "../../../../../models/tree-model.js";
-import { type TreeEngineRowContext, useTreeEngineRowContext } from "../../../../context/row-context.js";
-import { TreeModelKeys } from "../../../../../services/localization/tree-model-keys.js";
 import { LocalizerHooks } from "../../../../../services/localization/localizer-hooks.js";
+import { TreeModelKeys } from "../../../../../services/localization/tree-model-keys.js";
+import { type TreeEngineRowContext, useTreeEngineRowContext } from "../../../../context/row-context.js";
 import { useTreeEngineContext } from "../../../../context/tree-engine-context.js";
-
 import { type FlattenNodeRow, RootNodeRow } from "../types.js";
 
 import { RowActionGroupHooks, RowActionHooks } from "./row-action-hooks.js";
@@ -81,6 +80,9 @@ export namespace ContextMenuHooks {
 
 			const paddedLeft =
 				params.paddedLeft ??
+				// React 19's ReactNode union includes Promise<AwaitedReactNode>, so no-misused-promises cannot
+				// tell that iconGetter never returns a promise. It only ever returns an element or undefined.
+				// oxlint-disable-next-line no-misused-promises
 				visibleGroups.some(({ actions }) => actions.some((rowActionModel) => iconGetter({ row, rowActionModel })));
 
 			return { menuItems, paddedLeft };

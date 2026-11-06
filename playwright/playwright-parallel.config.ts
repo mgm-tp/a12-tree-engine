@@ -32,6 +32,15 @@
 
 import { defineConfig, devices } from "@playwright/test";
 
+/*
+ * `devices["Desktop Chrome"]` hard-codes a Windows user agent. The showcase picks Meta vs Ctrl by
+ * sniffing that user agent, while Playwright's "ControlOrMeta" resolves against the host OS, so the
+ * two disagree on macOS and every modifier shortcut silently matches nothing. Keep the rest of the
+ * descriptor (screen, scale factor) — the pagination tests are layout-sensitive — and drop only the
+ * user agent so the real per-host one is reported.
+ */
+const { userAgent: _emulatedUserAgent, ...desktopChrome } = devices["Desktop Chrome"];
+
 export default defineConfig({
 	testDir: "./e2e",
 	fullyParallel: false,
@@ -59,31 +68,31 @@ export default defineConfig({
 	projects: [
 		{
 			name: "a12-team",
-			use: { ...devices["Desktop Chrome"], viewport: { width: 1920, height: 1080 } },
+			use: { ...desktopChrome, viewport: { width: 1920, height: 1080 } },
 			testDir: "e2e/a12-team",
 			workers: 1
 		},
 		{
 			name: "categories",
-			use: { ...devices["Desktop Chrome"], viewport: { width: 1920, height: 1080 } },
+			use: { ...desktopChrome, viewport: { width: 1920, height: 1080 } },
 			testDir: "e2e/categories",
 			workers: 1
 		},
 		{
 			name: "modelEditor-normal",
-			use: { ...devices["Desktop Chrome"], viewport: { width: 1920, height: 1080 } },
+			use: { ...desktopChrome, viewport: { width: 1920, height: 1080 } },
 			testDir: "e2e/model-editor/normal",
 			workers: 1
 		},
 		{
 			name: "modelEditor-pagination",
-			use: { ...devices["Desktop Chrome"], viewport: { width: 1920, height: 1080 } },
+			use: { ...desktopChrome, viewport: { width: 1920, height: 1080 } },
 			testDir: "e2e/model-editor/pagination",
 			workers: 1
 		},
 		{
 			name: "performance",
-			use: { ...devices["Desktop Chrome"], viewport: { width: 1920, height: 1080 } },
+			use: { ...desktopChrome, viewport: { width: 1920, height: 1080 } },
 			testDir: "e2e/performance",
 			workers: 1,
 			timeout: 120000 // 2 minutes for performance tests

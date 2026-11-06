@@ -31,16 +31,16 @@
  */
 
 import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import { RelationshipModelUtils } from "../../../../core/models/utils/relationship-utils.js";
 import { TreeModel } from "../../../../core/models/tree-model.js";
-import { Identifier, type ModelsState } from "../../../../core/store/store.js";
+import { RelationshipModelUtils } from "../../../../core/models/utils/relationship-utils.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
+import { Identifier, type ModelsState } from "../../../../core/store/store.js";
 import { TreeEngineDataHolder } from "../../../client/data-holder.js";
 import { DataOperation } from "../../data-loaders/data-loader.js";
 
-import { PaginationUtils } from "./pagination-utils.js";
 import { hasAttachment } from "./attachment-utils.js";
 import { collectFieldsProjection, createFieldsMap } from "./fields-projection.js";
+import { PaginationUtils } from "./pagination-utils.js";
 
 export interface CreateQueriesResult {
 	queries: DataOperation.Query[];
@@ -319,7 +319,8 @@ function createTreeLinkQueries(
 	}
 }
 
-function createRelationshipModelUtils(models: ModelsState) {
+/** @internal */
+export function createRelationshipModelUtils(models: ModelsState) {
 	function getChildEntity(rmRef: string, parent: string) {
 		const rm = ModelSelector.relationshipModelByName(rmRef)(models);
 		const childEntity = rm ? RelationshipModelUtils.getEntityCharacteristicByReversedRole(rm, parent) : undefined;

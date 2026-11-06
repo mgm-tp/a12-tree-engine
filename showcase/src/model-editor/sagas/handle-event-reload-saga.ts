@@ -32,8 +32,8 @@
 
 // tag::CustomTreeInitialization[]
 
-import { put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 import { isAction } from "redux";
+import { put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
 import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {

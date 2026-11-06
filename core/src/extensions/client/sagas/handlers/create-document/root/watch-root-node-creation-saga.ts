@@ -32,25 +32,25 @@
 
 import { all, call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	type Activity,
 	ActivityActions,
 	ActivitySelectors,
 	NEW_INSTANCE_IDENTIFIER
 } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
+import { TreeEngineError } from "../../../../../../core/error/tree-engine-error.js";
 import { RelationshipModelUtils } from "../../../../../../core/models/utils/relationship-utils.js";
 import { Events } from "../../../../../../core/store/actions.js";
-import { Identifier, type ModelsState } from "../../../../../../core/store/store.js";
 import { ModelSelector } from "../../../../../../core/store/selectors/models.js";
+import { Identifier, type ModelsState } from "../../../../../../core/store/store.js";
 import { TreeEngineActions } from "../../../../actions.js";
 import { TreeEngineActivity } from "../../../../data-holder.js";
 import { TreeEngineSelectors } from "../../../../selectors.js";
+import { logger } from "../../../../utils.js";
 import type { TreeEngineSaga } from "../../../saga-setting.js";
 import { SagaUtils } from "../../../saga-utils.js";
-import { TreeEngineError } from "../../../../../../core/error/tree-engine-error.js";
-import { logger } from "../../../../utils.js";
 
 import { type Config, handleDetailActivitySaga } from "./handle-detail-activity-saga.js";
 

@@ -32,22 +32,25 @@
 
 import { type SagaGenerator, call, put, select, takeLatest } from "typed-redux-saga";
 
-import type { Action, Success } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySelectors, NEW_INSTANCE_IDENTIFIER } from "@com.mgmtp.a12.client/client-core";
+import type { Action, Success } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
+import { TreeEngineError } from "../../../../../../core/error/tree-engine-error.js";
+import { RelationshipModelUtils } from "../../../../../../core/models/utils/relationship-utils.js";
 import { Events } from "../../../../../../core/store/actions.js";
 import { ModelSelector } from "../../../../../../core/store/selectors/models.js";
-import { RelationshipModelUtils } from "../../../../../../core/models/utils/relationship-utils.js";
 import { TreeEngineActions } from "../../../../actions.js";
 import { TreeEngineSelectors } from "../../../../selectors.js";
 import { logger } from "../../../../utils.js";
 import type { TreeEngineSaga } from "../../../saga-setting.js";
 import { SagaUtils } from "../../../saga-utils.js";
-import { TreeEngineError } from "../../../../../../core/error/tree-engine-error.js";
+import { determineDetailActivityLinkOwnership } from "../determine-detail-activity-link-ownership.js";
 
-import { waitForRelationshipChangelogOrFormEngineFallback } from "../wait-for-relationship-changelog-or-form-engine-fallback.js";
-
-import { handleDetailActivitySaga } from "./handle-detail-activity-saga.js";
+import {
+	type Config,
+	handleDetailActivitySaga,
+	handleDetailActivitySagaWithSaveInProgress
+} from "./handle-detail-activity-saga.js";
 
 /** @internal */
 export function* watchChildNodeCreationSaga(
@@ -199,15 +202,25 @@ function* createNewChildDocumentWithNewRelationshipEngine(
 
 	const detailActivityId = createDetailActivityAction.payload.activity.id;
 
-	const useFallback = yield* call(waitForRelationshipChangelogOrFormEngineFallback, detailActivityId);
+	const ownership = yield* call(determineDetailActivityLinkOwnership, detailActivityId);
 
-	if (useFallback) {
-		yield* call(handleDetailActivitySaga, detailActivityId, {
-			relationshipModelRef,
-			childRole: childEntityCharacteristic.role,
-			parentNodeIdentifier: insertPosition.target.nodeIdentifier,
-			parentNodePath: insertPosition.target.nodePath,
-			linkCreationSetting
-		});
+	const config: Config = {
+		relationshipModelRef,
+		childRole: childEntityCharacteristic.role,
+		parentNodeIdentifier: insertPosition.target.nodeIdentifier,
+		parentNodePath: insertPosition.target.nodePath,
+		linkCreationSetting
+	};
+	switch (ownership) {
+		case "tree-engine":
+			yield* call(handleDetailActivitySaga, detailActivityId, config);
+			break;
+		case "tree-engine-save-in-progress":
+			yield* call(handleDetailActivitySagaWithSaveInProgress, detailActivityId, config);
+			break;
+		case "relationship-engine":
+			break;
+		case "cancelled":
+			break;
 	}
 }

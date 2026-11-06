@@ -34,13 +34,20 @@ import { vi } from "vitest";
 
 import { DragAndDropUtils, TreeTableNodeDropPosition } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import type { RuntimeTreeModel } from "../../../../../core/models/index.js";
 import { ModelSelector, type TreeEngineState } from "../../../../../core/store/index.js";
-import { defaultDndConfiguration, type DragObject, type FlattenNodeRow } from "../../../../../core/view/index.js";
+import { ForbidCreateCircularRule, MakeRootRule } from "../../../../../core/view/configuration/dnd/can-drop-rules.js";
+import { type HoveredObject, stringify } from "../../../../../core/view/configuration/dnd/configuration.js";
+import {
+	defaultDndConfiguration,
+	type DragObject,
+	type FlattenNodeRow,
+	RootNodeRow
+} from "../../../../../core/view/index.js";
 import { defaultEngineState } from "../../../../setup/basic.spec.js";
 import { mockType } from "../../../../utils/mock-utils.js";
-import type { RuntimeTreeModel } from "../../../../../core/models/index.js";
-import { type HoveredObject, stringify } from "../../../../../core/view/configuration/dnd/configuration.js";
-import { ForbidCreateCircularRule, MakeRootRule } from "../../../../../core/view/configuration/dnd/can-drop-rules.js";
+
+import { createDragItem, createHoveredItem } from "./shared.js";
 
 describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.configuration", () => {
 	const basicEngineState = defaultEngineState;
@@ -138,6 +145,41 @@ describe("@com.mgmtp.a12.tree-engine.core.view.configuration.dnd.configuration",
 	});
 
 	// NOTE: canDrop function will be tested in integration test
+
+	describe("canDrop ordering drops", () => {
+		const rootHoveredItem = mockType<HoveredObject>({ row: RootNodeRow.create() });
+		const rootDragItem = createDragItem({
+			identifier: { type: "DomainPerson", id: "DomainPerson/164" },
+			parent: RootNodeRow.create()
+		});
+		const engineStateWithRoots = {
+			...basicEngineState,
+			root: {
+				identifier: { id: "DomainTeam/2", type: "DomainTeam" },
+				children: [
+					{ id: "166", type: "TeamPerson" },
+					{ id: "167", type: "TeamPerson" }
+				]
+			}
+		};
+
+		// The store always holds the real tree with its real sibling order — a search included, so
+		// an ordering drop stays available and writes the same position it would without one.
+		it("should allow a drop that orders the node next to a sibling", () => {
+			const result = defaultDndConfiguration(engineStateWithRoots).canDrop?.({
+				dragItem: rootDragItem,
+				hoveredItem: rootHoveredItem
+			});
+			expect(result).toMatchObject({ position: TreeTableNodeDropPosition.BOTTOM });
+		});
+
+		it("should allow a drop into another node", () => {
+			const dragItem = createDragItem({ identifier: { type: "DomainTeam", id: "DomainTeam/1" } });
+			const hoveredItem = createHoveredItem({ position: TreeTableNodeDropPosition.AS_CHILD });
+
+			expect(defaultDndConfiguration(basicEngineState).canDrop?.({ dragItem, hoveredItem })).toBe(true);
+		});
+	});
 
 	describe("stringify", () => {
 		const dragItem = mockType<DragObject>({

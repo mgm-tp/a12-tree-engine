@@ -67,7 +67,7 @@ import {
 	teamNodeModel
 } from "./shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.body-cell", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.body-cell.body-cell", () => {
 	const basicComponentMap = DefaultComponentMap;
 	const basicEngineState = defaultEngineState;
 

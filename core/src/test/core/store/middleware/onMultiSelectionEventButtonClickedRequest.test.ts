@@ -30,12 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { Commands, Events, TreeEngineState } from "../../../../core/store/index.js";
-import { defaultEngineState } from "../../../setup/basic.spec.js";
-import { setupMiddleware } from "../../../utils/store-utils.js";
-import { mockType } from "../../../utils/mock-utils.js";
 import type { TreeModel } from "../../../../core/models/index.js";
+import { Commands, Events, TreeEngineState } from "../../../../core/store/index.js";
 import { onMultiSelectionEventButtonClickedRequestMiddleware } from "../../../../core/store/middleware/events/onMultiSelectionEventButtonClickedRequest.js";
+import { defaultEngineState } from "../../../setup/basic.spec.js";
+import { mockType } from "../../../utils/mock-utils.js";
+import { setupMiddleware } from "../../../utils/store-utils.js";
 
 import { nonMatchedAction, shouldCallNextMiddlewareAndReturnResultedAction } from "./shared.js";
 

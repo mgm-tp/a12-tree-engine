@@ -32,26 +32,26 @@
 
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import type { Dispatch } from "redux";
 
 import { type View, ViewViews, Activity, ActivitySelectors } from "@com.mgmtp.a12.client/client-core";
 
-import { type ComponentMap, DefaultComponentMap } from "../../../core/view/configuration/component-map.js";
 import { ContentBoxRenderer } from "../../../core/view/components/content-box/content-box-renderer.js";
+import { TreeEngineRenderer } from "../../../core/view/components/tree-engine/tree-engine-renderer.js";
+import { type ComponentMap, DefaultComponentMap } from "../../../core/view/configuration/component-map.js";
 import {
 	defaultMapDispatchToEventHandlers,
 	type EventHandlersDispatchMap
 } from "../../../core/view/configuration/event-handlers-dispatch-map.js";
 import { DefaultWidgetMap, type WidgetMap } from "../../../core/view/configuration/widget-map.js";
 import { TreeEngineContextProvider } from "../../../core/view/context/tree-engine-context-provider.js";
-import { TreeEngineRenderer } from "../../../core/view/components/tree-engine/tree-engine-renderer.js";
-
 import { TreeEngineActions } from "../actions.js";
 import { TreeEngineSelectors } from "../selectors.js";
 
 import { HeterogeneousInsertChildNodeDialog } from "./heterogeneous-insert-child-node-dialog.js";
-import { HeterogeneousInsertSiblingNodeDialog } from "./heterogeneous-insert-sibling-node-dialog.js";
 import { HeterogeneousInsertRootNodeDialog } from "./heterogeneous-insert-root-node-dialog.js";
+import { HeterogeneousInsertSiblingNodeDialog } from "./heterogeneous-insert-sibling-node-dialog.js";
 
 /** @internal */
 export function treeEngineClientViewComponentProvider(componentName: string): React.ComponentType<View> | undefined {

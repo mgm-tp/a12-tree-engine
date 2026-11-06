@@ -30,10 +30,9 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import { type SagaGenerator, call, put, race, select, take, all } from "typed-redux-saga";
 import { isAction, type UnknownAction } from "redux";
+import { type SagaGenerator, call, put, race, select, take, all } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import {
 	type Selector,
 	type Activity,
@@ -42,14 +41,14 @@ import {
 	ActivitySagas,
 	ActivitySelectors
 } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
 import { TreeEngineError } from "../../../core/error/tree-engine-error.js";
-import { DataSelector } from "../../../core/store/selectors/data.js";
 import { Events } from "../../../core/store/actions.js";
-import { Identifier, TreeEngineState } from "../../../core/store/store.js";
+import { DataSelector } from "../../../core/store/selectors/data.js";
 import { UIStateSelector } from "../../../core/store/selectors/ui-state.js";
+import { Identifier, TreeEngineState } from "../../../core/store/store.js";
 import type { BaseNode } from "../../server-connector/shared.js";
-
 import { TreeEngineActions } from "../actions.js";
 import type { TreeEngineDataHolder } from "../data-holder.js";
 import type { TreeEngineOperation } from "../operation.js";
@@ -260,6 +259,11 @@ export namespace SagaUtils {
 		if (!UIStateSelector.preloadChildNodes()(uiState)) {
 			return;
 		}
+		// While a search is active the grandchildren are already fetched: the search load adds one
+		// level for exactly this purpose, so a separate preload round would only repeat that work.
+		if (UIStateSelector.searchString()(uiState)) {
+			return;
+		}
 		const loadedNodeIds = yield* call(getLoadedNodeIds, { activityId });
 		const dataHolders: TreeEngineDataHolder[] = yield* call(createAddGrandChildDataHolders, {
 			activityId,
@@ -361,4 +365,6 @@ export type LoadOperation =
 	| TreeEngineOperation.ReloadNodes
 	| TreeEngineOperation.LoadAllChildNodes
 	| TreeEngineOperation.LoadMoreNodes
-	| TreeEngineOperation.LoadAllNodes;
+	| TreeEngineOperation.LoadAllNodes
+	| TreeEngineOperation.SearchNodes
+	| TreeEngineOperation.ClearSearch;

@@ -49,6 +49,9 @@ const config: ReturnType<typeof defineConfig> = defineConfig({
 		distPath: { root: PATH.OUTPUT },
 		sourceMap: { js: "source-map" } as const,
 		target: "node" as const,
+		// The Dockerfile copies the bundle to a bare /usr/bin/services-utils.js, outside
+		// any package, so Node reads it as CommonJS. rsbuild 2.x defaults node targets to ESM.
+		module: false,
 		filename: { js: "services-utils.js" } as const,
 		filenameHash: false
 	}

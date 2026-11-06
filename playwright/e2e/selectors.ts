@@ -61,6 +61,10 @@ export namespace Selector {
 
 	export const ATTACHED_PORTAL = `[data-role="attached-portal"]`;
 
+	export const COLUMN_VISIBILITY_PANEL = `[data-role="column-visibility-panel"]`;
+	export const COLUMN_VISIBILITY_ITEM = `[data-role="column-visibility-panel"] [data-role="dropdown-item"]`;
+	export const COLUMN_VISIBILITY_RESET = `[data-role="column-visibility-panel-reset-button"]`;
+
 	export const POPUP = '[data-role="popup"]';
 	export const POPUP_MENU = '[data-role="popup-menu"]';
 	export const POPUP_ITEM = '[data-role="popup-item"]';

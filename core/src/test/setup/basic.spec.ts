@@ -30,9 +30,6 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-import * as Path from "node:path";
-
-import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { type ModelGraph, Relationship, type RelationshipModel } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
 import { type RuntimeTreeModel, TreeModel } from "../../core/models/index.js";
@@ -44,13 +41,12 @@ import {
 	type EventHandlersDispatchMap,
 	type TreeEngineContextProvider
 } from "../../core/view/index.js";
-
 import { mockType } from "../utils/mock-utils.js";
 
+import { deLocale, enLocale } from "./locales.js";
 import { createDocumentModel, PATH } from "./utils.js";
 
-export const enLocale: Locale = { language: "en", country: "US" };
-export const deLocale: Locale = { language: "de", country: "DE" };
+export { deLocale, enLocale };
 
 export const defaultRoot: TreeEngineState.Root = {
 	children: [
@@ -675,7 +671,7 @@ export const defaultEngineState: TreeEngineState = {
 	data,
 	models: {
 		documentModels: DOCUMENT_MODEL_NAMES.map((modelName) =>
-			createDocumentModel(Path.join(PATH.MODELS, "a12-teams", "document-models", modelName))
+			createDocumentModel(`${PATH.MODELS}/a12-teams/document-models/${modelName}`)
 		),
 		uiModel,
 		modelGraph: mockType<ModelGraph>({
@@ -698,6 +694,7 @@ export const defaultEngineState: TreeEngineState = {
 	},
 	expandedNodes: {},
 	matchedNodes: {},
+	searchString: "",
 	query: "",
 	selectedNodes: {},
 	busyNodes: {},

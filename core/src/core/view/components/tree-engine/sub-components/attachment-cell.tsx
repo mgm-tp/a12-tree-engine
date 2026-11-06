@@ -34,8 +34,8 @@ import * as React from "react";
 
 import type { Attachment } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
 import type { TreeModel } from "../../../../models/tree-model.js";
+import { useTreeEngineContext } from "../../../context/tree-engine-context.js";
 
 import { AttachmentCellContent } from "./attachment-cell-content.js";
 import type { FlattenNodeRow } from "./types.js";

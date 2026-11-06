@@ -32,23 +32,23 @@
 
 import { call, put, type SagaGenerator, select, takeLatest } from "typed-redux-saga";
 
-import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 import { ActivityActions, ActivitySagas } from "@com.mgmtp.a12.client/client-core";
+import type { Action } from "@com.mgmtp.a12.client/typescript-fsa-redux-5-compat";
 
-import { TreeEngineActions } from "../../actions.js";
+import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
 import { Commands, Events } from "../../../../core/store/actions.js";
 import { DataSelector } from "../../../../core/store/selectors/data.js";
 import { ModelSelector } from "../../../../core/store/selectors/models.js";
-import { TreeEngineState } from "../../../../core/store/store.js";
+import { SearchSelector } from "../../../../core/store/selectors/search.js";
 import { UIStateSelector } from "../../../../core/store/selectors/ui-state.js";
+import { TreeEngineState } from "../../../../core/store/store.js";
+import { type BaseNode, PaginationUtils } from "../../../server-connector/shared.js";
+import { TreeEngineActions } from "../../actions.js";
+import type { TreeEngineDataHolder } from "../../data-holder.js";
+import type { TreeEngineOperation } from "../../operation.js";
 import { TreeEngineSelectors } from "../../selectors.js";
 import type { Mutable } from "../../shared.js";
-import type { TreeEngineOperation } from "../../operation.js";
-import { type BaseNode, PaginationUtils } from "../../../server-connector/shared.js";
 import { TreeTraverser } from "../../utils.js";
-import { TreeEngineError } from "../../../../core/error/tree-engine-error.js";
-import type { TreeEngineDataHolder } from "../../data-holder.js";
-
 import { SagaUtils } from "../saga-utils.js";
 
 /** @internal */
@@ -132,10 +132,17 @@ export function* handleMultiSelection(
 	nodes: BaseNode[],
 	multiSelectionNodes?: TreeEngineState.MultiSelectionNodes
 ): SagaGenerator<void> {
-	const shouldLoad = yield* call(shouldLoadNodes, activityId, nodes);
+	// Multi-selection covers only what is displayed: rows the reduced search result view hides are
+	// dropped up front, so neither the load below nor the selection ever reaches them.
+	const targetNodes = yield* call(filterDisplayedNodes, activityId, nodes);
+	if (targetNodes.length === 0) {
+		return;
+	}
+
+	const shouldLoad = yield* call(shouldLoadNodes, activityId, targetNodes);
 
 	if (!shouldLoad) {
-		yield* call(setNextMultiSelectionState, { activityId, nodes, multiSelectionNodes });
+		yield* call(setNextMultiSelectionState, { activityId, nodes: targetNodes, multiSelectionNodes });
 		return;
 	}
 
@@ -143,18 +150,29 @@ export function* handleMultiSelection(
 	try {
 		const operation: TreeEngineOperation.LoadAllChildNodes = {
 			type: "LOAD_ALL_CHILD_NODES",
-			payload: { nodes, ignorePagination: true }
+			payload: { nodes: targetNodes, ignorePagination: true }
 		};
 		lockId = yield* call(ActivitySagas.acquireActivityLock, activityId, "TreeEngine", {});
 
 		yield* call(SagaUtils.loadActivityData, activityId, { operations: [operation] });
 
-		yield* call(setNextMultiSelectionState, { activityId, nodes, multiSelectionNodes });
+		yield* call(setNextMultiSelectionState, { activityId, nodes: targetNodes, multiSelectionNodes });
 	} finally {
 		if (lockId) {
 			yield* put(ActivityActions.unlock({ activityId, lockId }));
 		}
 	}
+}
+
+/** The given nodes minus those the reduced search result view hides. */
+function* filterDisplayedNodes(activityId: string, nodes: BaseNode[]): SagaGenerator<BaseNode[]> {
+	const engineState = yield* select(TreeEngineSelectors.engineState(activityId));
+	if (!engineState) {
+		throw TreeEngineError.NotFoundError("TreeEngine.State", { activityId });
+	}
+
+	const visibleNodes = SearchSelector.reducedViewNodes()(engineState);
+	return visibleNodes ? nodes.filter((node) => visibleNodes.has(node.nodeIdentifier.id)) : nodes;
 }
 
 function* shouldLoadNodes(activityId: string, nodes: BaseNode[]): SagaGenerator<boolean> {
@@ -257,19 +275,27 @@ export function* getNextMultiSelectionNodesValues(params: {
 	);
 	const { getState, setState, value } = multiSelectionContext;
 
+	// The store holds the whole tree, so the rows the reduced view hides are filtered out here and
+	// when walking the children below — a selection must never pick a row the user cannot see.
+	const visibleNodes = SearchSelector.reducedViewNodes()(engineState);
+	const targetNodes = visibleNodes ? nodes.filter((node) => visibleNodes.has(node.nodeIdentifier.id)) : nodes;
+
 	const nextState =
 		(nextMultiSelectionState ??
-		nodes.every(({ nodePath }) => getState(nodePath) === TreeEngineState.MultiSelectionState.SELECTED))
+		targetNodes.every(({ nodePath }) => getState(nodePath) === TreeEngineState.MultiSelectionState.SELECTED))
 			? TreeEngineState.MultiSelectionState.DESELECTED
 			: TreeEngineState.MultiSelectionState.SELECTED;
 
 	const traverser = new TreeTraverser(dataHolders);
 
-	nodes.forEach((node) => {
+	targetNodes.forEach((node) => {
 		setState(node.nodePath, nextState);
 
 		traverser.traverse(node, (child) => setState(child.nodePath, nextState), {
 			shouldVisit: (child) => {
+				if (visibleNodes && !visibleNodes.has(child.nodeIdentifier.id)) {
+					return false;
+				}
 				const parentNodePath = TreeEngineState.NodePath.getParentNodePath(child.nodePath);
 				return !parentNodePath || !DataSelector.isCircularPath(parentNodePath)(engineState);
 			}

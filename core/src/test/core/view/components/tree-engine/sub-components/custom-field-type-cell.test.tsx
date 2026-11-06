@@ -32,13 +32,13 @@
 
 import { TextOutput, type Column, type Styleable, CssEllipsis } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
+import type { TreeEngineState } from "../../../../../../core/store/index.js";
+import { CustomFieldTypeCell } from "../../../../../../core/view/components/tree-engine/sub-components/custom-field-type-cell.js";
 import { TreeEngineContextProvider } from "../../../../../../core/view/index.js";
 import { createContextProps, defaultEngineState } from "../../../../../setup/basic.spec.js";
-import { CustomFieldTypeCell } from "../../../../../../core/view/components/tree-engine/sub-components/custom-field-type-cell.js";
-import type { TreeEngineState } from "../../../../../../core/store/index.js";
-import type { RuntimeTreeModel } from "../../../../../../core/models/index.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.custom-field-type-cell", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.custom-field-type-cell", () => {
 	const basicProps: CustomFieldTypeCell.Props = {
 		documentModelName: "TestDocumentModel",
 		documentModelPath: [{ elementName: "Root" }, { elementName: "CustomFieldType" }],
@@ -117,7 +117,7 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 		it("should pass the props down to TextOutput", () => {
 			const result = setupTest({ ...styleableProps });
 			const textOutput = result.find(TextOutput);
-			expect(textOutput.props()).toContain(styleableProps);
+			expect(textOutput.props()).toMatchObject(styleableProps);
 		});
 	});
 });

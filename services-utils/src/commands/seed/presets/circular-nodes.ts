@@ -46,13 +46,12 @@ import {
 	linkDirectoryToDrive,
 	linkDirectoryToDirectory
 } from "../../../utils/index.js";
-
-import drive1Json from "../documents/model-editor/DomainDrive-1.json" with { type: "json" };
-import drive2Json from "../documents/model-editor/DomainDrive-2.json" with { type: "json" };
 import computerJson from "../documents/model-editor/DomainComputer-1.json" with { type: "json" };
 import dir1Json from "../documents/model-editor/DomainDirectory-1.json" with { type: "json" };
 import dir2Json from "../documents/model-editor/DomainDirectory-2.json" with { type: "json" };
 import dir3Json from "../documents/model-editor/DomainDirectory-3.json" with { type: "json" };
+import drive1Json from "../documents/model-editor/DomainDrive-1.json" with { type: "json" };
+import drive2Json from "../documents/model-editor/DomainDrive-2.json" with { type: "json" };
 import file1Json from "../documents/model-editor/DomainFile-1.json" with { type: "json" };
 import file2Json from "../documents/model-editor/DomainFile-2.json" with { type: "json" };
 import file3Json from "../documents/model-editor/DomainFile-3.json" with { type: "json" };

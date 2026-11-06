@@ -37,9 +37,9 @@ import { CRUDViews } from "@com.mgmtp.a12.crud/crud-core";
 import { DefaultSelectorMap, type SelectorMap } from "@com.mgmtp.a12.treeengine/treeengine-core";
 
 import { CustomA12TeamTreeEngine } from "./views/custom-a12-team-tree-engine.js";
-import { ModelEditorTreeEngine } from "./views/model-editor-tree-engine.js";
-import { FileExplorerTreeEngine } from "./views/file-explorer-tree-engine.js";
 import { CustomTreeEngine } from "./views/custom-tree-engine.js";
+import { FileExplorerTreeEngine } from "./views/file-explorer-tree-engine.js";
+import { ModelEditorTreeEngine } from "./views/model-editor-tree-engine.js";
 
 // tag::SetupViewProvider[]
 export const viewComponents = {

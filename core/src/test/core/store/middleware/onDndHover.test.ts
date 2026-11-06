@@ -93,7 +93,7 @@ describe("@com.mgmtp.a12.tree-engine.core.store.middleware.events.onDndHover", (
 				}));
 			});
 
-			it("it should dispatch an expanding action", () => {
+			it("should dispatch an expanding action", () => {
 				const { store, invoke } = setupTest();
 				invoke(hoverTeamAction);
 
@@ -142,7 +142,7 @@ describe("@com.mgmtp.a12.tree-engine.core.store.middleware.events.onDndHover", (
 				}));
 			});
 
-			it("it should not dispatch anything", () => {
+			it("should not dispatch anything", () => {
 				const { store, invoke } = setupTest();
 				invoke(hoverTeamAction);
 				expect(store.dispatch).not.toHaveBeenCalled();

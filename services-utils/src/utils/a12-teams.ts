@@ -32,7 +32,7 @@
 
 import type { DocumentJsonRpc2Request, JsonRpc2Request } from "@com.mgmtp.a12.dataservices/dataservices-access";
 
-import { linkEntities } from "./index.js";
+import { linkEntities } from "./common.js";
 
 export function addTeam(suffix: string, document: object): DocumentJsonRpc2Request.AddJsonRpc2Request {
 	return {

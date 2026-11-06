@@ -32,9 +32,9 @@
 
 import * as React from "react";
 
-import { useTreeEngineContext, useTreeEngineState } from "../../../../context/tree-engine-context.js";
 import { TreeModel } from "../../../../../models/tree-model.js";
 import { UIStateSelector } from "../../../../../store/selectors/ui-state.js";
+import { useTreeEngineContext, useTreeEngineState } from "../../../../context/tree-engine-context.js";
 
 import { useMultiSelectionConfig } from "./utils.js";
 

@@ -35,18 +35,18 @@ import { vi } from "vitest";
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { Checkbox } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { de } from "../../../../../../core/services/localization/languages/de.js";
+import { en } from "../../../../../../core/services/localization/languages/en.js";
 import { Events, TreeEngineState, type UIStateSelector } from "../../../../../../core/store/index.js";
 import type { FlattenNodeRow, TreeEngineRowContext } from "../../../../../../core/view/index.js";
-import { defaultEngineState, deLocale, type PartialEventHandlerContextProps } from "../../../../../setup/basic.spec.js";
-import { en } from "../../../../../../core/services/localization/languages/en.js";
-import { de } from "../../../../../../core/services/localization/languages/de.js";
-import { mockType } from "../../../../../utils/mock-utils.js";
 import { RowCheckbox } from "../../../../../../core/view/index.js";
+import { defaultEngineState, deLocale, type PartialEventHandlerContextProps } from "../../../../../setup/basic.spec.js";
+import { mockType } from "../../../../../utils/mock-utils.js";
 import { testIsNullComponent } from "../../../../../utils/test-utils.js";
 
 import { BodyCellWrapper, teamIdentifier, teamNodeModel } from "./body-cell/shared.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.row-checkbox", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.row-checkbox", () => {
 	const basicNodeIdentifier = {
 		id: "DomainTeam/1",
 		type: "DomainTeam"
@@ -174,12 +174,10 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 				);
 				result.find("button").simulate("click");
 
-				expect(
-					expect(spy).toHaveBeenCalledWith({
-						nodeIdentifier: basicNodeIdentifier,
-						nodePath: [basicNodeIdentifier]
-					})
-				).toBe(true);
+				expect(spy).toHaveBeenCalledWith({
+					nodeIdentifier: basicNodeIdentifier,
+					nodePath: [basicNodeIdentifier]
+				});
 			});
 		});
 
@@ -193,11 +191,9 @@ describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-c
 				);
 				result.find("button").simulate("click", { shiftKey: true });
 
-				expect(
-					expect(spy).toHaveBeenCalledWith({
-						nodePath: [basicNodeIdentifier]
-					})
-				).toBe(true);
+				expect(spy).toHaveBeenCalledWith({
+					nodePath: [basicNodeIdentifier]
+				});
 			});
 		});
 

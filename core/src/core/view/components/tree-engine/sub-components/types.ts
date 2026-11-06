@@ -39,8 +39,8 @@ import type {
 
 import type { RuntimeTreeModel, TreeModel } from "../../../../models/tree-model.js";
 import { DataSelector } from "../../../../store/selectors/data.js";
-import { type DataState, Identifier, type ModelsState, TreeEngineState } from "../../../../store/store.js";
 import { ModelSelector } from "../../../../store/selectors/models.js";
+import { type DataState, Identifier, type ModelsState, TreeEngineState } from "../../../../store/store.js";
 
 export interface BaseNodeRow extends BaseTreeTableNode {
 	children?: NodeRow[];

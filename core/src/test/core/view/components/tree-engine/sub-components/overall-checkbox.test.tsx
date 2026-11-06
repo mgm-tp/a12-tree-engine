@@ -35,8 +35,11 @@ import { vi } from "vitest";
 import type { Locale } from "@com.mgmtp.a12.utils/utils-localization";
 import { Checkbox } from "@com.mgmtp.a12.widgets/widgets-core";
 
+import { de } from "../../../../../../core/services/localization/languages/de.js";
+import { en } from "../../../../../../core/services/localization/languages/en.js";
 import { TreeEngineState, UIStateSelector } from "../../../../../../core/store/index.js";
 import { TreeEngineContextProvider } from "../../../../../../core/view/index.js";
+import { OverallCheckbox } from "../../../../../../core/view/index.js";
 import {
 	createContextProps,
 	defaultEngineState,
@@ -44,12 +47,9 @@ import {
 	enLocale,
 	type PartialEventHandlerContextProps
 } from "../../../../../setup/basic.spec.js";
-import { en } from "../../../../../../core/services/localization/languages/en.js";
-import { de } from "../../../../../../core/services/localization/languages/de.js";
-import { OverallCheckbox } from "../../../../../../core/view/index.js";
 import type { Stub } from "../../../../../utils/mock-utils.js";
 
-describe.skip("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.overall-checkbox", () => {
+describe("@com.mgmtp.a12.tree-engine.core.view.components.tree-engine.sub-components.overall-checkbox", () => {
 	const basicEngineState = defaultEngineState;
 
 	function setupTest(

@@ -44,4 +44,4 @@ export const DndWrapper: React.FC<{ children?: React.ReactNode }> = ({ children 
 	);
 };
 
-export const withDndWrapper = <T extends A12ApplicationConfig>(cfg: T): T => addWrapper<T>(DndWrapper, "outer")(cfg);
+export const withDndWrapper = <T extends A12ApplicationConfig>(cfg: T): T => addWrapper(DndWrapper, "outer")(cfg);

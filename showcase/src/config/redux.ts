@@ -32,7 +32,6 @@
 
 import { compose, type Dispatch, type Store } from "redux";
 
-import { loadDataServicesConfiguration, ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import {
 	ModelActions,
 	NotificationActions,
@@ -41,6 +40,7 @@ import {
 	type ComposeEnhancer,
 	type A12ApplicationConfig
 } from "@com.mgmtp.a12.client/client-core";
+import { loadDataServicesConfiguration, ModelGraph } from "@com.mgmtp.a12.dataservices/dataservices-access";
 import { ConnectorLocator, type RestServerConnector } from "@com.mgmtp.a12.utils/utils-connector";
 
 export async function loadDSConfigurations(store: Store): Promise<void> {

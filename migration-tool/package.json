@@ -1,6 +1,6 @@
 {
 	"name": "@com.mgmtp.a12.treeengine/treeengine-model-migration",
-	"version": "11.0.2-SNAPSHOT",
+	"version": "11.1.1-SNAPSHOT",
 	"type": "module",
 	"description": "Tree Model Migration Tool",
 	"author": "mgm technology partners",
@@ -9,7 +9,6 @@
 		"test": "pnpm \"/test:/\"",
 		"test:steps": "vitest run",
 		"test:consistency": "migration-tool-utils validate-consistency",
-		"lint:eslint": "eslint --quiet",
 		"update": "vitest run --update",
 		"generate-step": "migration-tool-utils generate-step",
 		"generate-schema": "migration-tool-utils compile",
@@ -23,8 +22,8 @@
 		"@com.mgmtp.a12.migrationtool/migrationtool-utils": "catalog:a12",
 		"@com.mgmtp.a12.utils/utils-localization": "catalog:a12",
 		"@types/node": "catalog:devLibs",
-		"@types/semver": "^7.7.1",
-		"semver": "^7.7.3",
+		"@types/semver": "^7.8.0",
+		"semver": "^7.8.5",
 		"vite": "catalog:devLibs",
 		"vitest": "catalog:devLibs"
 	},

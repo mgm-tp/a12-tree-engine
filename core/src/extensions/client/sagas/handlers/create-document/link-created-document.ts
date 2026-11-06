@@ -33,10 +33,10 @@
 import { call, type SagaGenerator, select } from "typed-redux-saga";
 
 import { TreeEngineError } from "../../../../../core/error/tree-engine-error.js";
-import { RelationshipModelUtils } from "../../../../../core/models/utils/relationship-utils.js";
 import type { TreeModel } from "../../../../../core/models/tree-model.js";
-import type { Identifier } from "../../../../../core/store/store.js";
+import { RelationshipModelUtils } from "../../../../../core/models/utils/relationship-utils.js";
 import { ModelSelector } from "../../../../../core/store/selectors/models.js";
+import type { Identifier } from "../../../../../core/store/store.js";
 import type { TreeEngineOperation } from "../../../operation.js";
 import { TreeEngineSelectors } from "../../../selectors.js";
 import { SagaUtils } from "../../saga-utils.js";

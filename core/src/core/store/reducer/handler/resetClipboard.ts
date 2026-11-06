@@ -38,7 +38,7 @@ import type { UiState } from "../../store.js";
 /**
  * @internal
  */
-export function handleResetClipboard(state: UiState, action: Action<Commands.ResetClipboardPayload>): UiState {
+export function handleResetClipboard(state: UiState, _action: Action<Commands.ResetClipboardPayload>): UiState {
 	return {
 		...state,
 		clipboard: null

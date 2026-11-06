@@ -32,9 +32,9 @@
 
 import * as React from "react";
 
-import { A11YLanguageContext, getA11yResource, type A11yDefinition } from "@com.mgmtp.a12.widgets/widgets-core";
-import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
 import { addWrapper, type A12ApplicationConfig } from "@com.mgmtp.a12.client/client-core";
+import { LocalizerContext } from "@com.mgmtp.a12.utils/utils-localization-react";
+import { A11YLanguageContext, getA11yResource, type A11yDefinition } from "@com.mgmtp.a12.widgets/widgets-core";
 
 export const A11LanguageWrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
 	const { locale } = React.useContext(LocalizerContext);
@@ -48,4 +48,4 @@ export const A11LanguageWrapper: React.FC<{ children?: React.ReactNode }> = ({ c
 };
 
 export const withA11LanguageWrapper = <T extends A12ApplicationConfig>(cfg: T): T =>
-	addWrapper<T>(A11LanguageWrapper, "inner")(cfg);
+	addWrapper(A11LanguageWrapper, "inner")(cfg);

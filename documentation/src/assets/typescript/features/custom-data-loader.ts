@@ -30,11 +30,12 @@
  * LEGALLY INVALID. SEE THE RESPECTIVE LICENSE TEXT FOR DETAILS.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// oxlint-disable-next-line ban-ts-comment
 // @ts-nocheck
 
 import { call } from "typed-redux-saga";
 
+import { ModuleRegistryProvider } from "@com.mgmtp.a12.client/client-core";
 import {
 	maybeAsyncFnWrapper,
 	createA12DataServiceDataLoader,
@@ -42,7 +43,6 @@ import {
 	DataOperation,
 	TreeEngineServerConnectorFactories
 } from "@com.mgmtp.a12.treeengine/treeengine-core";
-import { ModuleRegistryProvider } from "@com.mgmtp.a12.client/client-core";
 
 const defaultDataLoader: TreeEngineDataLoader = createA12DataServiceDataLoader({});
 

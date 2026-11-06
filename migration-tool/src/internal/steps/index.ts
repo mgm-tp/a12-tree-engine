@@ -25,24 +25,52 @@ import Transform_11_0_0_pre_3 from "./version-11.0.0-pre.3/transform.js";
 import Schema_11_0_0_pre_4 from "./version-11.0.0-pre.4/schema.json" with { type: "json" };
 import Schema_11_0_0 from "./version-11.0.0/schema.json" with { type: "json" };
 
+import Schema_11_1_0_pre_1 from "./version-11.1.0-pre.1/schema.json" with { type: "json" };
+import Schema_11_1_0_pre_2 from "./version-11.1.0-pre.2/schema.json" with { type: "json" };
+import Schema_11_1_0 from "./version-11.1.0/schema.json" with { type: "json" };
+
 export const MIGRATION_STEPS: MigrationStep[] = [
-	{ version: "9.0.0", schema: Schema_9_0_0 },
+  { version: "9.0.0", schema: Schema_9_0_0 },
 
-	{ version: "10.0.0-pre.1", schema: Schema_10_0_0_pre_1 },
-	{ version: "10.0.0-pre.2", schema: Schema_10_0_0_pre_2, transform: Transform_10_0_0_pre_2 },
-	{ version: "10.0.0-pre.3", schema: Schema_10_0_0_pre_3, transform: Transform_10_0_0_pre_3 },
-	{ version: "10.0.0", schema: Schema_10_0_0 },
+  { version: "10.0.0-pre.1", schema: Schema_10_0_0_pre_1 },
+  {
+    version: "10.0.0-pre.2",
+    schema: Schema_10_0_0_pre_2,
+    transform: Transform_10_0_0_pre_2,
+  },
+  {
+    version: "10.0.0-pre.3",
+    schema: Schema_10_0_0_pre_3,
+    transform: Transform_10_0_0_pre_3,
+  },
+  { version: "10.0.0", schema: Schema_10_0_0 },
 
-	{ version: "10.1.0-pre.1", schema: Schema_10_1_0_pre_1 },
-	{ version: "10.1.0-pre.2", schema: Schema_10_1_0_pre_2 },
-	{ version: "10.1.0", schema: Schema_10_1_0 },
+  { version: "10.1.0-pre.1", schema: Schema_10_1_0_pre_1 },
+  { version: "10.1.0-pre.2", schema: Schema_10_1_0_pre_2 },
+  { version: "10.1.0", schema: Schema_10_1_0 },
 
-	{ version: "10.2.0-pre.1", schema: Schema_10_2_0_pre_1 },
-	{ version: "10.2.0", schema: Schema_10_2_0 },
+  { version: "10.2.0-pre.1", schema: Schema_10_2_0_pre_1 },
+  { version: "10.2.0", schema: Schema_10_2_0 },
 
-	{ version: "11.0.0-pre.1", schema: Schema_11_0_0_pre_1, transform: Transform_11_0_0_pre_1 },
-	{ version: "11.0.0-pre.2", schema: Schema_11_0_0_pre_2, transform: Transform_11_0_0_pre_2 },
-	{ version: "11.0.0-pre.3", schema: Schema_11_0_0_pre_3, transform: Transform_11_0_0_pre_3 },
-	{ version: "11.0.0-pre.4", schema: Schema_11_0_0_pre_4 },
-	{ version: "11.0.0", schema: Schema_11_0_0 }
+  {
+    version: "11.0.0-pre.1",
+    schema: Schema_11_0_0_pre_1,
+    transform: Transform_11_0_0_pre_1,
+  },
+  {
+    version: "11.0.0-pre.2",
+    schema: Schema_11_0_0_pre_2,
+    transform: Transform_11_0_0_pre_2,
+  },
+  {
+    version: "11.0.0-pre.3",
+    schema: Schema_11_0_0_pre_3,
+    transform: Transform_11_0_0_pre_3,
+  },
+  { version: "11.0.0-pre.4", schema: Schema_11_0_0_pre_4 },
+  { version: "11.0.0", schema: Schema_11_0_0 },
+
+  { version: "11.1.0-pre.1", schema: Schema_11_1_0_pre_1 },
+  { version: "11.1.0-pre.2", schema: Schema_11_1_0_pre_2 },
+  { version: "11.1.0", schema: Schema_11_1_0 },
 ];
